@@ -1,17 +1,13 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
-title: "[FEATURE]"
+about: Suggest an idea
+title: ''
 labels: enhancement
 assignees: ''
 
 ---
 
-### Description
+Start by telling us what problem you’re trying to solve. Often a solution already exists!
 
-Describe your request here.
-
-### Requirements (place an `x` in each of the `[ ]`)
-* [ ] I've read and understood the [Contributing guidelines](../CONTRIBUTING.md) and have done my best effort to follow them.
-* [ ] I've read and agree to the [Code of Conduct](https://slackhq.github.io/code-of-conduct).
-* [ ] I've searched for any related issues and avoided creating a duplicate issue.
+Don’t send pull requests to implement significant new features without first getting our support.
+Sometimes we leave features out on purpose to keep the project small.

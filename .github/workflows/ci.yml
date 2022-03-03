@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  # Only run push on main
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+  # Always run on PRs
+  pull_request:
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Gradle Wrapper Validation
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Install JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Build and test
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: check
+
+      - name: Upload snapshot (main only)
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SonatypeUsername }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SonatypePassword }}
+        run: |
+          ./publish.sh --snapshot
+        if: success() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
