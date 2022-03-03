@@ -1,36 +1,32 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: "[BUG]"
+about: A reproducible problem
+title: ''
 labels: bug
 assignees: ''
 
 ---
 
-### Describe the bug
-A clear and concise description of what the bug is.
+**KCU version:** _input version here_
 
-### Requirements (place an `x` in each of the `[ ]`)**
-* [ ] I've read and understood the [Contributing guidelines](../CONTRIBUTING.md) and have done my best effort to follow them.
-* [ ] I've read and agree to the [Code of Conduct](https://slackhq.github.io/code-of-conduct).
-* [ ] I've searched for any related issues and avoided creating a duplicate issue.
+Good bug reports include a failing test! Writing a test helps you to isolate and describe the
+problem, and it helps us to fix it fast. Bug reports without a failing test or reproduction steps
+are likely to be closed.
 
-### To Reproduce
-Steps to reproduce the behavior:
+#### Steps to reproduce:
 
-### Expected behavior
-A clear and concise description of what you expected to happen.
+1.
+2.
+3.
 
-#### Screenshots
-If applicable, add screenshots to help explain your problem.
+#### Expected result:
 
-#### Reproducible in:
+What you expected to happen
 
-{project_name} version:
+#### Actual result:
 
-{platform_name} version:
+What actually happened
 
-OS version(s):
+#### Attachments:
 
-#### Additional context
-Add any other context about the problem here.
+Logs, screenshots, screencast, sample project, funny gif, etc.
