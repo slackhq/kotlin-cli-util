@@ -79,6 +79,10 @@ tasks.withType<DokkaTask>().configureEach {
   }
 }
 
+kotlin {
+  explicitApi()
+}
+
 dependencies {
   api(libs.clikt)
 }

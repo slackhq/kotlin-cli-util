@@ -22,21 +22,21 @@ import java.io.File
 /**
  * Skips `build` and cache directories (starting with `.`, like `.gradle`) in [FileTreeWalks][FileTreeWalk].
  */
-fun FileTreeWalk.skipBuildAndCacheDirs(): FileTreeWalk {
+public fun FileTreeWalk.skipBuildAndCacheDirs(): FileTreeWalk {
   return onEnter { dir -> !dir.name.startsWith(".") && dir.name != "build" }
 }
 
 /**
  * Filters by a specific [extension].
  */
-fun Sequence<File>.filterByExtension(extension: String): Sequence<File> {
+public fun Sequence<File>.filterByExtension(extension: String): Sequence<File> {
   return filter { it.extension == extension }
 }
 
 /**
  * Filters by a specific [name].
  */
-fun Sequence<File>.filterByName(name: String, withoutExtension: Boolean = true): Sequence<File> {
+public fun Sequence<File>.filterByName(name: String, withoutExtension: Boolean = true): Sequence<File> {
   return if (withoutExtension) {
     filter { it.nameWithoutExtension == name }
   } else {
@@ -44,7 +44,7 @@ fun Sequence<File>.filterByName(name: String, withoutExtension: Boolean = true):
   }
 }
 
-fun List<String>.cleanLineFormatting(): List<String> {
+public fun List<String>.cleanLineFormatting(): List<String> {
   val cleanedBlankLines = mutableListOf<String>()
   var blankLineCount = 0
   for (newLine in this) {

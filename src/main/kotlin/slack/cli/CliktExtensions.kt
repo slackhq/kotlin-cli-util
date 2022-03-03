@@ -34,7 +34,7 @@ import java.nio.file.Paths
 /**
  * A dry run option for [clikt commands][CliktCommand].
  */
-fun CliktCommand.dryRunOption(
+public fun CliktCommand.dryRunOption(
   vararg names: String = arrayOf("--dry-run"),
   help: String = "Runs this as a dry run, no modifications."
 ): FlagOption<Boolean> = option(
@@ -46,7 +46,7 @@ fun CliktCommand.dryRunOption(
 /**
  * A project dir option for [clikt commands][CliktCommand].
  */
-fun CliktCommand.projectDirOption(
+public fun CliktCommand.projectDirOption(
   vararg names: String = arrayOf("--project-dir"),
   help: String = "The project directory. Defaults to the current working directory."
 ): OptionDelegate<File> = option(
