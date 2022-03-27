@@ -85,4 +85,6 @@ kotlin {
 
 dependencies {
   api(libs.clikt)
+  testImplementation(libs.junit)
+  testImplementation(libs.truth)
 }
