@@ -31,6 +31,7 @@ public object AppleSiliconCompat {
    *
    * Peephole: https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment#Determine-Whether-Your-App-Is-Running-as-a-Translated-Binary
    */
+  @Suppress("ReturnCount")
   @OptIn(ExperimentalCoroutinesApi::class)
   public fun validate(
     errorMessage: () -> String
@@ -65,6 +66,7 @@ public object AppleSiliconCompat {
       if (isTranslated.trim() == "1") {
         error(errorMessage)
       } else if (isTranslated.trim() != "0") {
+        @Suppress("MaxLineLength") // It's a string, Detekt. A STRING
         error("Could not determine if Rosetta is running. Please ensure that sysctl is available on your PATH env. It is normally available under /usr/sbin or /sbin.")
       }
     }
