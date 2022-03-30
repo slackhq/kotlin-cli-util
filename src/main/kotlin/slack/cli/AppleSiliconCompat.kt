@@ -18,6 +18,8 @@ package slack.cli
 import eu.jrie.jetbrains.kotlinshell.shell.shell
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okio.Buffer
+import slack.cli.AppleSiliconCompat.Arch.ARM64
+import slack.cli.AppleSiliconCompat.Arch.X86_64
 
 public object AppleSiliconCompat {
   /**
@@ -41,18 +43,18 @@ public object AppleSiliconCompat {
       return
     }
 
-    if (System.getProperty("os.name") != "Mac OS X") {
+    if (!isMacOS()) {
       // Not a macOS device, move on!
       return
     }
 
-    val arch = System.getProperty("os.arch")
-    if (arch == "aarch64") {
+    val arch = Arch.get()
+    if (arch == ARM64) {
       // Already running on an arm64 JDK, we're good
       return
     }
 
-    check(arch == "x86_64") {
+    check(arch == X86_64) {
       "Unsupported architecture: $arch"
     }
 
@@ -68,6 +70,27 @@ public object AppleSiliconCompat {
       } else if (isTranslated.trim() != "0") {
         @Suppress("MaxLineLength") // It's a string, Detekt. A STRING
         error("Could not determine if Rosetta is running. Please ensure that sysctl is available on your PATH env. It is normally available under /usr/sbin or /sbin.")
+      }
+    }
+  }
+
+  public fun isMacOS(): Boolean = System.getProperty("os.name") == "Mac OS X"
+
+  public enum class Arch {
+    X86_64,
+    ARM64;
+
+    public companion object {
+      // Null indicates unknown arch. Not necessarily bad, but we also don't have anything to say
+      // about it.
+      private val CURRENT by lazy { from(System.getProperty("os.arch")) }
+
+      public fun get(): Arch? = CURRENT
+
+      private fun from(arch: String) = when (arch) {
+        "x86_64" -> X86_64
+        "aarch64" -> ARM64
+        else -> null
       }
     }
   }
