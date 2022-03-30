@@ -32,33 +32,29 @@ spotless {
     trimTrailingWhitespace()
     endWithNewline()
   }
-  val ktlintVersion = libs.versions.ktlint.get()
-  val ktlintUserData = mapOf("indent_size" to "2", "continuation_indent_size" to "2")
+  val ktfmtVersion = libs.versions.ktfmt.get()
   kotlin {
     target("**/*.kt")
-    ktlint(ktlintVersion).userData(ktlintUserData)
+    ktfmt(ktfmtVersion).googleStyle()
     trimTrailingWhitespace()
     endWithNewline()
     licenseHeaderFile("spotless/spotless.kt")
     targetExclude("**/spotless.kt")
   }
   kotlinGradle {
-    ktlint(ktlintVersion).userData(ktlintUserData)
+    ktfmt(ktfmtVersion).googleStyle()
     trimTrailingWhitespace()
     endWithNewline()
-    licenseHeaderFile("spotless/spotless.kt", "(import|plugins|buildscript|dependencies|pluginManagement)")
+    licenseHeaderFile(
+      "spotless/spotless.kt",
+      "(import|plugins|buildscript|dependencies|pluginManagement)"
+    )
   }
 }
 
-configure<JavaPluginExtension> {
-  toolchain {
-    languageVersion.set(JavaLanguageVersion.of(17))
-  }
-}
+configure<JavaPluginExtension> { toolchain { languageVersion.set(JavaLanguageVersion.of(17)) } }
 
-tasks.withType<JavaCompile>().configureEach {
-  options.release.set(8)
-}
+tasks.withType<JavaCompile>().configureEach { options.release.set(8) }
 
 tasks.withType<KotlinCompile>().configureEach {
   kotlinOptions {
@@ -68,20 +64,14 @@ tasks.withType<KotlinCompile>().configureEach {
   }
 }
 
-tasks.withType<Detekt>().configureEach {
-  jvmTarget = "1.8"
-}
+tasks.withType<Detekt>().configureEach { jvmTarget = "1.8" }
 
 tasks.withType<DokkaTask>().configureEach {
   outputDirectory.set(rootDir.resolve("../docs/0.x"))
-  dokkaSourceSets.configureEach {
-    skipDeprecated.set(true)
-  }
+  dokkaSourceSets.configureEach { skipDeprecated.set(true) }
 }
 
-kotlin {
-  explicitApi()
-}
+kotlin { explicitApi() }
 
 dependencies {
   api(libs.clikt)

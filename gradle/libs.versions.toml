@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.6.10"
-ktlint = "0.44.0"
+ktfmt = "0.34"
 jvmTarget = "1.8"
 
 [plugins]

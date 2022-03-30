@@ -25,19 +25,18 @@ public object AppleSiliconCompat {
   /**
    * Validates that the current process is not running under Rosetta.
    *
-   * If the current process is running under Rosetta, it (Java in this case) will think it's
-   * running x86 but Rosetta leaves a peephole to check if the current process is running as a
-   * translated binary.
+   * If the current process is running under Rosetta, it (Java in this case) will think it's running
+   * x86 but Rosetta leaves a peephole to check if the current process is running as a translated
+   * binary.
    *
    * We do this to ensure that folks are using arm64 JDK builds for native performance.
    *
-   * Peephole: https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment#Determine-Whether-Your-App-Is-Running-as-a-Translated-Binary
+   * Peephole:
+   * https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment#Determine-Whether-Your-App-Is-Running-as-a-Translated-Binary
    */
   @Suppress("ReturnCount")
   @OptIn(ExperimentalCoroutinesApi::class)
-  public fun validate(
-    errorMessage: () -> String
-  ) {
+  public fun validate(errorMessage: () -> String) {
     if (System.getenv("SLACK_SKIP_APPLE_SILICON_CHECK")?.toBoolean() == true) {
       // Toe-hold to skip this check if anything goes wrong.
       return
@@ -54,9 +53,7 @@ public object AppleSiliconCompat {
       return
     }
 
-    check(arch == X86_64) {
-      "Unsupported architecture: $arch"
-    }
+    check(arch == X86_64) { "Unsupported architecture: $arch" }
 
     shell {
       val buffer = Buffer()
@@ -69,7 +66,9 @@ public object AppleSiliconCompat {
         error(errorMessage)
       } else if (isTranslated.trim() != "0") {
         @Suppress("MaxLineLength") // It's a string, Detekt. A STRING
-        error("Could not determine if Rosetta is running. Please ensure that sysctl is available on your PATH env. It is normally available under /usr/sbin or /sbin.")
+        error(
+          "Could not determine if Rosetta is running. Please ensure that sysctl is available on your PATH env. It is normally available under /usr/sbin or /sbin."
+        )
       }
     }
   }
@@ -87,11 +86,12 @@ public object AppleSiliconCompat {
 
       public fun get(): Arch? = CURRENT
 
-      private fun from(arch: String) = when (arch) {
-        "x86_64" -> X86_64
-        "aarch64" -> ARM64
-        else -> null
-      }
+      private fun from(arch: String) =
+        when (arch) {
+          "x86_64" -> X86_64
+          "aarch64" -> ARM64
+          else -> null
+        }
     }
   }
 }

@@ -31,27 +31,17 @@ import com.github.ajalt.clikt.parameters.types.file
 import java.io.File
 import java.nio.file.Paths
 
-/**
- * A dry run option for [clikt commands][CliktCommand].
- */
+/** A dry run option for [clikt commands][CliktCommand]. */
 public fun CliktCommand.dryRunOption(
   vararg names: String = arrayOf("--dry-run"),
   help: String = "Runs this as a dry run, no modifications."
-): FlagOption<Boolean> = option(
-  names = names,
-  help = help
-)
-  .flag(default = false)
+): FlagOption<Boolean> = option(names = names, help = help).flag(default = false)
 
-/**
- * A project dir option for [clikt commands][CliktCommand].
- */
+/** A project dir option for [clikt commands][CliktCommand]. */
 public fun CliktCommand.projectDirOption(
   vararg names: String = arrayOf("--project-dir"),
   help: String = "The project directory. Defaults to the current working directory."
-): OptionDelegate<File> = option(
-  names = names,
-  help = help
-)
-  .file(mustExist = true, canBeFile = false)
-  .defaultLazy { Paths.get("").toFile().canonicalFile }
+): OptionDelegate<File> =
+  option(names = names, help = help).file(mustExist = true, canBeFile = false).defaultLazy {
+    Paths.get("").toFile().canonicalFile
+  }

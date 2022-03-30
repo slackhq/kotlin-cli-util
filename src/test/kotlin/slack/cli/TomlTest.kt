@@ -21,8 +21,9 @@ import org.junit.Test
 class TomlTest {
   @Test
   fun simple() {
-    //language=toml
-    val toml = """
+    // language=toml
+    val toml =
+      """
       [versions]
       kotlin = "1.6.10" # Trailing comment is skipped
       # Skipped
@@ -34,8 +35,9 @@ class TomlTest {
 
   @Test
   fun everythingAfterPluginsIsSkipped() {
-    //language=toml
-    val toml = """
+    // language=toml
+    val toml =
+      """
       [versions]
       kotlin = "1.6.10"
       jvmTarget = "1.8"
