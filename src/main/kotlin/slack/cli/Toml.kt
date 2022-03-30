@@ -18,8 +18,8 @@ package slack.cli
 import java.io.File
 
 public object Toml {
-  private val IGNORED_BLOCKS = sequenceOf("plugins", "libraries", "bundles")
-    .mapTo(LinkedHashSet()) { "[$it]" }
+  private val IGNORED_BLOCKS =
+    sequenceOf("plugins", "libraries", "bundles").mapTo(LinkedHashSet()) { "[$it]" }
 
   /**
    * Parses the version declarations out of a given Gradle versions TOML file. This tries to be
@@ -31,14 +31,12 @@ public object Toml {
   }
 
   internal fun parseVersion(lines: Sequence<String>): Map<String, String> {
-    return lines.filterNot { it.startsWith('#') || it.trim() == "[versions]" }
+    return lines
+      .filterNot { it.startsWith('#') || it.trim() == "[versions]" }
       .takeWhile { it.trim() !in IGNORED_BLOCKS }
       .filterNot { it.isBlank() }
       .associate { line ->
-        val (k, v) = line
-          .substringBefore("#")
-          .split("=")
-          .map { it.trim().removeSurrounding("\"") }
+        val (k, v) = line.substringBefore("#").split("=").map { it.trim().removeSurrounding("\"") }
         k to v
       }
   }
