@@ -64,7 +64,7 @@ tasks.withType<KotlinCompile>().configureEach {
   kotlinOptions {
     jvmTarget = "1.8"
     allWarningsAsErrors = true
-    freeCompilerArgs = freeCompilerArgs + listOf("-progressive")
+    freeCompilerArgs = freeCompilerArgs + listOf("-progressive", "-opt-in=kotlin.RequiresOptIn")
   }
 }
 
@@ -85,6 +85,8 @@ kotlin {
 
 dependencies {
   api(libs.clikt)
+  implementation(libs.kotlinShell)
+  implementation(libs.okio)
   testImplementation(libs.junit)
   testImplementation(libs.truth)
 }
