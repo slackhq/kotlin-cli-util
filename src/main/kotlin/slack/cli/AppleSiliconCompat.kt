@@ -63,7 +63,7 @@ public object AppleSiliconCompat {
       pipeline.join()
       val isTranslated = buffer.readUtf8()
       if (isTranslated.trim() == "1") {
-        error(errorMessage)
+        error(errorMessage())
       } else if (isTranslated.trim() != "0") {
         @Suppress("MaxLineLength") // It's a string, Detekt. A STRING
         error(
