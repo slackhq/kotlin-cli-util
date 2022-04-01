@@ -1,0 +1,38 @@
+public final class slack/cli/AppleSiliconCompat {
+	public static final field INSTANCE Lslack/cli/AppleSiliconCompat;
+	public final fun isMacOS ()Z
+	public final fun validate (Lkotlin/jvm/functions/Function0;)V
+}
+
+public final class slack/cli/AppleSiliconCompat$Arch : java/lang/Enum {
+	public static final field ARM64 Lslack/cli/AppleSiliconCompat$Arch;
+	public static final field Companion Lslack/cli/AppleSiliconCompat$Arch$Companion;
+	public static final field X86_64 Lslack/cli/AppleSiliconCompat$Arch;
+	public static fun valueOf (Ljava/lang/String;)Lslack/cli/AppleSiliconCompat$Arch;
+	public static fun values ()[Lslack/cli/AppleSiliconCompat$Arch;
+}
+
+public final class slack/cli/AppleSiliconCompat$Arch$Companion {
+	public final fun get ()Lslack/cli/AppleSiliconCompat$Arch;
+}
+
+public final class slack/cli/CliUtilKt {
+	public static final fun cleanLineFormatting (Ljava/util/List;)Ljava/util/List;
+	public static final fun filterByExtension (Lkotlin/sequences/Sequence;Ljava/lang/String;)Lkotlin/sequences/Sequence;
+	public static final fun filterByName (Lkotlin/sequences/Sequence;Ljava/lang/String;Z)Lkotlin/sequences/Sequence;
+	public static synthetic fun filterByName$default (Lkotlin/sequences/Sequence;Ljava/lang/String;ZILjava/lang/Object;)Lkotlin/sequences/Sequence;
+	public static final fun skipBuildAndCacheDirs (Lkotlin/io/FileTreeWalk;)Lkotlin/io/FileTreeWalk;
+}
+
+public final class slack/cli/CliktExtensionsKt {
+	public static final fun dryRunOption (Lcom/github/ajalt/clikt/core/CliktCommand;[Ljava/lang/String;Ljava/lang/String;)Lcom/github/ajalt/clikt/parameters/options/FlagOption;
+	public static synthetic fun dryRunOption$default (Lcom/github/ajalt/clikt/core/CliktCommand;[Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/github/ajalt/clikt/parameters/options/FlagOption;
+	public static final fun projectDirOption (Lcom/github/ajalt/clikt/core/CliktCommand;[Ljava/lang/String;Ljava/lang/String;)Lcom/github/ajalt/clikt/parameters/options/OptionDelegate;
+	public static synthetic fun projectDirOption$default (Lcom/github/ajalt/clikt/core/CliktCommand;[Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/github/ajalt/clikt/parameters/options/OptionDelegate;
+}
+
+public final class slack/cli/Toml {
+	public static final field INSTANCE Lslack/cli/Toml;
+	public final fun parseVersion (Ljava/io/File;)Ljava/util/Map;
+}
+

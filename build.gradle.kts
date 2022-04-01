@@ -24,6 +24,7 @@ plugins {
   alias(libs.plugins.lint)
   alias(libs.plugins.mavenPublish)
   alias(libs.plugins.spotless)
+  alias(libs.plugins.binaryCompatibilityValidator)
 }
 
 spotless {
