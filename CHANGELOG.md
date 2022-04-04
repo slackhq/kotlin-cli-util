@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.1.1
+-----
+
+_2022-04-04_
+
+* Fix: Rosetta checks incorrectly assumed `0` responses on x86 when it's actually going to be an empty string.
+
 1.1.0
 -----
 
