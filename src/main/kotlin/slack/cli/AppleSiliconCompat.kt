@@ -61,14 +61,20 @@ public object AppleSiliconCompat {
         "sysctl -in sysctl.proc_translated".process() pipe buffer.outputStream()
       }
       pipeline.join()
-      val isTranslated = buffer.readUtf8()
-      if (isTranslated.trim() == "1") {
-        error(errorMessage())
-      } else if (isTranslated.trim() != "0") {
-        @Suppress("MaxLineLength") // It's a string, Detekt. A STRING
-        error(
-          "Could not determine if Rosetta is running. Please ensure that sysctl is available on your PATH env. It is normally available under /usr/sbin or /sbin."
-        )
+      val isTranslated = buffer.readUtf8().trim()
+      when {
+        isTranslated.isEmpty() -> {
+          // True x86 device! Move on
+        }
+        isTranslated == "1" -> {
+          error(errorMessage())
+        }
+        isTranslated != "0" -> {
+          @Suppress("MaxLineLength") // It's a string, Detekt. A STRING
+          error(
+            "Could not determine if Rosetta is running (translated value was '$isTranslated'). Please ensure that sysctl is available on your PATH env. It is normally available under /usr/sbin or /sbin."
+          )
+        }
       }
     }
   }
