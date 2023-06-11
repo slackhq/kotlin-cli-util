@@ -16,7 +16,6 @@
 package slack.cli
 
 import eu.jrie.jetbrains.kotlinshell.shell.shell
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okio.Buffer
 import slack.cli.AppleSiliconCompat.Arch.ARM64
 import slack.cli.AppleSiliconCompat.Arch.X86_64
