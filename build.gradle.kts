@@ -15,10 +15,11 @@
  */
 import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version libs.versions.kotlin.get()
+  alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.dokka)
   alias(libs.plugins.detekt)
   alias(libs.plugins.lint)
@@ -53,19 +54,21 @@ spotless {
   }
 }
 
-configure<JavaPluginExtension> { toolchain { languageVersion.set(JavaLanguageVersion.of(17)) } }
+configure<JavaPluginExtension> { toolchain { languageVersion.set(JavaLanguageVersion.of(19)) } }
 
-tasks.withType<JavaCompile>().configureEach { options.release.set(8) }
+tasks.withType<JavaCompile>().configureEach {
+  options.release.set(libs.versions.jvmTarget.get().toInt())
+}
 
 tasks.withType<KotlinCompile>().configureEach {
-  kotlinOptions {
-    jvmTarget = "1.8"
-    allWarningsAsErrors = true
-    freeCompilerArgs = freeCompilerArgs + listOf("-progressive", "-opt-in=kotlin.RequiresOptIn")
+  compilerOptions {
+    jvmTarget.set(JvmTarget.fromTarget(libs.versions.jvmTarget.get()))
+    allWarningsAsErrors.set(true)
+    freeCompilerArgs.add("-progressive")
   }
 }
 
-tasks.withType<Detekt>().configureEach { jvmTarget = "1.8" }
+tasks.withType<Detekt>().configureEach { jvmTarget = libs.versions.jvmTarget.get() }
 
 tasks.withType<DokkaTask>().configureEach {
   outputDirectory.set(rootDir.resolve("../docs/0.x"))

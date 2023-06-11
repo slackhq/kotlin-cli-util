@@ -28,7 +28,8 @@ class TomlTest {
       kotlin = "1.6.10" # Trailing comment is skipped
       # Skipped
       jvmTarget = "1.8"
-    """.trimIndent()
+    """
+        .trimIndent()
     val versions = Toml.parseVersion(toml.lineSequence())
     assertThat(versions).containsExactly("kotlin", "1.6.10", "jvmTarget", "1.8")
   }
@@ -45,7 +46,8 @@ class TomlTest {
       [libraries]
       # Skipped
       jvmTarget = "17"
-    """.trimIndent()
+    """
+        .trimIndent()
     val versions = Toml.parseVersion(toml.lineSequence())
     assertThat(versions).containsExactly("kotlin", "1.6.10", "jvmTarget", "1.8")
   }
