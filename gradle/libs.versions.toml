@@ -1,20 +1,19 @@
 [versions]
-kotlin = "1.8.22"
-ktfmt = "0.43"
-jvmTarget = "17"
+kotlin = "1.6.10"
+ktfmt = "0.34"
+jvmTarget = "1.8"
 
 [plugins]
-detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.0" }
-dokka = { id = "org.jetbrains.dokka", version = "1.8.20" }
-lint = { id = "com.android.lint", version = "8.0.2" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.19.0" }
+dokka = { id = "org.jetbrains.dokka", version = "1.6.10" }
+lint = { id = "com.android.lint", version = "7.1.2" }
 mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.25.2" }
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-spotless = { id = "com.diffplug.spotless", version = "6.19.0" }
-binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.13.2" }
+spotless = { id = "com.diffplug.spotless", version = "6.3.0" }
+binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.8.0" }
 
 [libraries]
 clikt = "com.github.ajalt.clikt:clikt:3.4.0"
 kotlinShell = "eu.jrie.jetbrains:kotlin-shell-core:0.2.1"
 okio = "com.squareup.okio:okio:3.0.0"
 junit = "junit:junit:4.13.2"
-truth = "com.google.truth:truth:1.1.4"
+truth = "com.google.truth:truth:1.1.3"
