@@ -12,8 +12,8 @@ spotless = { id = "com.diffplug.spotless", version = "6.3.0" }
 binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.8.0" }
 
 [libraries]
-clikt = "com.github.ajalt.clikt:clikt:3.4.0"
+clikt = "com.github.ajalt.clikt:clikt:3.5.2"
 kotlinShell = "eu.jrie.jetbrains:kotlin-shell-core:0.2.1"
-okio = "com.squareup.okio:okio:3.0.0"
+okio = "com.squareup.okio:okio:3.3.0"
 junit = "junit:junit:4.13.2"
 truth = "com.google.truth:truth:1.1.3"
