@@ -16,7 +16,6 @@
 package slack.cli
 
 import eu.jrie.jetbrains.kotlinshell.shell.shell
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okio.Buffer
 import slack.cli.AppleSiliconCompat.Arch.ARM64
 import slack.cli.AppleSiliconCompat.Arch.X86_64
@@ -35,7 +34,6 @@ public object AppleSiliconCompat {
    * https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment#Determine-Whether-Your-App-Is-Running-as-a-Translated-Binary
    */
   @Suppress("ReturnCount")
-  @OptIn(ExperimentalCoroutinesApi::class)
   public fun validate(errorMessage: () -> String) {
     if (System.getenv("SLACK_SKIP_APPLE_SILICON_CHECK")?.toBoolean() == true) {
       // Toe-hold to skip this check if anything goes wrong.
