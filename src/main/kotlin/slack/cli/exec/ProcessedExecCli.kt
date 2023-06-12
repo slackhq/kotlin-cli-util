@@ -46,9 +46,9 @@ public class ProcessedExecCli :
 
   private val projectDir by projectDirOption()
   private val verbose by option("--verbose", "-v").flag()
-  private val bugsnagKey by option("--bugsnag-key", envvar = "BUGSNAG_KEY")
+  private val bugsnagKey by option("--bugsnag-key", envvar = "PE_BUGSNAG_KEY")
   private val configurationFile by
-    option("--config", envvar = "CONFIGURATION_FILE")
+    option("--config", envvar = "PE_CONFIGURATION_FILE")
       .path(mustExist = true, canBeFile = true, canBeDir = false)
 
   private val args by argument().multiple()
