@@ -34,5 +34,8 @@ internal sealed interface RetrySignal {
   /** Indicates this issue should be retried after a [delay]. */
   @TypeLabel("delayed")
   @JsonClass(generateAdapter = true)
-  data class RetryDelayed(val delay: Duration) : RetrySignal
+  data class RetryDelayed(
+    // Can't default to 1.minutes due to https://github.com/ZacSweers/MoshiX/issues/442
+    val delay: Duration
+  ) : RetrySignal
 }
