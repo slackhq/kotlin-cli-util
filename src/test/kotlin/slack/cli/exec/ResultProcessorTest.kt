@@ -58,46 +58,53 @@ class ResultProcessorTest {
         .trimIndent()
         .padWithTestLogs()
     )
-    val signal =
-      ResultProcessor(verbose = true, bugsnagKey = null, echo = logs::add)
-        .process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Unknown)
   }
 
   @Test
   fun retryDelayed() {
     val outputFile = tmpFolder.newFile("logs.txt")
-    outputFile.writeText("""
-      429 Too Many Requests
-      """.trimIndent().padWithTestLogs())
-    val signal =
-      ResultProcessor(verbose = true, bugsnagKey = null, echo = logs::add)
-        .process(outputFile.toPath(), isAfterRetry = false)
+    outputFile.writeText(
+      """
+      ${KnownIssues.ftlRateLimit.matchingText}
+      """.trimIndent().padWithTestLogs()
+    )
+    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.RetryDelayed)
   }
 
   @Test
   fun retryImmediately() {
     val outputFile = tmpFolder.newFile("logs.txt")
-    outputFile.writeText("""
-      Java heap space
-      """.trimIndent().padWithTestLogs())
-    val signal =
-      ResultProcessor(verbose = true, bugsnagKey = null, echo = logs::add)
-        .process(outputFile.toPath(), isAfterRetry = false)
+    outputFile.writeText(
+      """
+      ${KnownIssues.oom.matchingText}
+      """.trimIndent().padWithTestLogs()
+    )
+    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.RetryImmediately)
   }
 
   @Test
   fun ack() {
     val outputFile = tmpFolder.newFile("logs.txt")
-    outputFile.writeText("""
-      FAKE FAILURE NOT REAL
-      """.trimIndent().padWithTestLogs())
-    val signal =
-      ResultProcessor(verbose = true, bugsnagKey = null, echo = logs::add)
-        .process(outputFile.toPath(), isAfterRetry = false)
+    outputFile.writeText(
+      """
+      ${KnownIssues.fakeFailure.matchingText}
+      """.trimIndent().padWithTestLogs()
+    )
+    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Ack)
+  }
+
+  private fun newProcessor(): ResultProcessor {
+    return ResultProcessor(
+      verbose = true,
+      bugsnagKey = null,
+      config = ProcessedExecConfig(),
+      echo = logs::add
+    )
   }
 
   // Helper to ensure we're parsing logs from within the test output

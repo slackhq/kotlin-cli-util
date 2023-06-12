@@ -26,6 +26,7 @@ plugins {
   alias(libs.plugins.mavenPublish)
   alias(libs.plugins.spotless)
   alias(libs.plugins.binaryCompatibilityValidator)
+  alias(libs.plugins.moshix)
 }
 
 spotless {
@@ -77,12 +78,18 @@ tasks.withType<DokkaTask>().configureEach {
 
 kotlin { explicitApi() }
 
+moshi {
+  enableSealed.set(true)
+  generateProguardRules.set(false)
+}
+
 dependencies {
   api(libs.clikt)
   implementation(libs.kotlinShell)
   implementation(libs.okio)
   implementation(libs.okhttp)
   implementation(libs.bugsnag)
+  implementation(libs.moshi)
   implementation(libs.kotlin.reflect)
   testImplementation(libs.junit)
   testImplementation(libs.truth)

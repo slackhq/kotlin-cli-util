@@ -15,24 +15,24 @@
  */
 package slack.cli.exec
 
+import com.squareup.moshi.JsonClass
+import dev.zacsweers.moshix.sealed.annotations.TypeLabel
 import kotlin.time.Duration
-import kotlin.time.Duration.Companion.minutes
 
+@JsonClass(generateAdapter = true, generator = "sealed:type")
 internal sealed interface RetrySignal {
-  val issue: Issue
 
   /** Unknown issue. */
-  object Unknown : RetrySignal {
-    override val issue: Issue
-      get() = throw IllegalStateException("No issue for RetrySignal.Unknown")
-  }
+  @TypeLabel("unknown") object Unknown : RetrySignal
 
   /** Indicates an issue that is recognized but cannot be retried. */
-  data class Ack(override val issue: Issue) : RetrySignal
+  @TypeLabel("ack") object Ack : RetrySignal
 
   /** Indicates this issue should be retried immediately. */
-  data class RetryImmediately(override val issue: Issue) : RetrySignal
+  @TypeLabel("immediate") object RetryImmediately : RetrySignal
 
   /** Indicates this issue should be retried after a [delay]. */
-  data class RetryDelayed(override val issue: Issue, val delay: Duration = 1.minutes) : RetrySignal
+  @TypeLabel("delayed")
+  @JsonClass(generateAdapter = true)
+  data class RetryDelayed(val delay: Duration) : RetrySignal
 }

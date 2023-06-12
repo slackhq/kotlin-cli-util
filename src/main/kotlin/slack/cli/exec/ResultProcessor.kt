@@ -44,10 +44,9 @@ import kotlin.io.path.readLines
 internal class ResultProcessor(
   private val verbose: Boolean,
   private val bugsnagKey: String?,
+  private val config: ProcessedExecConfig,
   private val echo: (String) -> Unit,
 ) {
-
-  private val issues = KnownIssue::class.sealedSubclasses.map { it.objectInstance as Issue }
 
   fun process(logFile: Path, isAfterRetry: Boolean): RetrySignal {
     echo("Processing CI log from ${logFile.absolutePathString()}")
@@ -55,16 +54,16 @@ internal class ResultProcessor(
     val bugsnag: Bugsnag? by lazy { bugsnagKey?.let { key -> createBugsnag(key) } }
 
     val logLinesReversed = logFile.readLines().asReversed()
-    for (issue in issues) {
-      val retrySignal = issue.check(logLinesReversed) { message -> echo(message) }
+    for (issue in config.issues) {
+      val retrySignal = issue.check(logLinesReversed, echo)
 
       if (retrySignal != RetrySignal.Unknown) {
         // Report to bugsnag. Shared common Throwable but with different messages.
         bugsnag?.apply {
           verboseEcho("Reporting to bugsnag: $retrySignal")
-          notify(retrySignal.issue, Severity.ERROR) { report ->
+          notify(IssueThrowable(issue), Severity.ERROR) { report ->
             // Group by the throwable message
-            report.setGroupingHash(retrySignal.issue.message)
+            report.setGroupingHash(issue.groupingHash)
             report.addToTab("Run Info", "After-Retry", isAfterRetry)
             logLinesReversed.parseBuildScan()?.let { scanLink ->
               report.addToTab("Run Info", "Build-Scan", scanLink)
@@ -73,7 +72,7 @@ internal class ResultProcessor(
         }
 
         if (retrySignal is RetrySignal.Ack) {
-          echo("Recognized known issue but cannot retry: ${retrySignal.issue.message}")
+          echo("Recognized known issue but cannot retry: ${issue.message}")
         } else {
           echo("Found retry signal: $retrySignal")
         }

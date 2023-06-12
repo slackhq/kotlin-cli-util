@@ -20,6 +20,8 @@ import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.multiple
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.types.path
+import com.squareup.moshi.adapter
 import eu.jrie.jetbrains.kotlinshell.shell.shell
 import java.nio.file.Path
 import kotlin.io.path.ExperimentalPathApi
@@ -27,6 +29,8 @@ import kotlin.io.path.createDirectories
 import kotlin.io.path.createTempFile
 import kotlin.io.path.deleteRecursively
 import kotlin.system.exitProcess
+import okio.buffer
+import okio.source
 import slack.cli.projectDirOption
 
 /**
@@ -34,7 +38,7 @@ import slack.cli.projectDirOption
  *
  * Example:
  * ```
- * $ ./<binary> --bugsnag-key=1234 --verbose ./gradlew build
+ * $ ./<binary> --bugsnag-key=1234 --verbose --configurationFile config.json ./gradlew build
  * ```
  */
 public class ProcessedExecCli :
@@ -43,11 +47,21 @@ public class ProcessedExecCli :
   private val projectDir by projectDirOption()
   private val verbose by option("--verbose", "-v").flag()
   private val bugsnagKey by option("--bugsnag-key", envvar = "BUGSNAG_KEY")
+  private val configurationFile by
+    option("--config", envvar = "CONFIGURATION_FILE")
+      .path(mustExist = true, canBeFile = true, canBeDir = false)
 
   private val args by argument().multiple()
 
-  @OptIn(ExperimentalPathApi::class)
+  @OptIn(ExperimentalStdlibApi::class, ExperimentalPathApi::class)
   override fun run() {
+    val moshi = ProcessingUtil.newMoshi()
+    val config =
+      configurationFile?.let {
+        echo("Parsing config file '$it'")
+        it.source().buffer().use { source -> moshi.adapter<ProcessedExecConfig>().fromJson(source) }
+      }
+        ?: ProcessedExecConfig()
     // The command to be executed
     val cmd = args.joinToString(" ")
 
@@ -61,7 +75,7 @@ public class ProcessedExecCli :
       echo("Command failed with exit code $exitStatus. Running processor script...")
 
       echo("Processing CI failure")
-      val resultProcessor = ResultProcessor(verbose, bugsnagKey, ::echo)
+      val resultProcessor = ResultProcessor(verbose, bugsnagKey, config, ::echo)
 
       when (val retrySignal = resultProcessor.process(logFile, false)) {
         is RetrySignal.Ack,
