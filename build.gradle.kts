@@ -81,6 +81,9 @@ dependencies {
   api(libs.clikt)
   implementation(libs.kotlinShell)
   implementation(libs.okio)
+  implementation(libs.okhttp)
+  implementation(libs.bugsnag)
+  implementation(libs.kotlin.reflect)
   testImplementation(libs.junit)
   testImplementation(libs.truth)
 }
