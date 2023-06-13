@@ -30,13 +30,13 @@ class ProcessedExecConfigTest {
       """
       {
         "version": 1,
-        "issues": [
+        "known_issues": [
           {
             "message": "${KnownIssues.ftlRateLimit.message}",
-            "logMessage": "${KnownIssues.ftlRateLimit.logMessage}",
-            "matchingText": "${KnownIssues.ftlRateLimit.matchingText}",
-            "groupingHash": "${KnownIssues.ftlRateLimit.groupingHash}",
-            "retrySignal": {
+            "log_message": "${KnownIssues.ftlRateLimit.logMessage}",
+            "matching_text": "${KnownIssues.ftlRateLimit.matchingText}",
+            "grouping_hash": "${KnownIssues.ftlRateLimit.groupingHash}",
+            "retry_signal": {
               "type": "delayed",
               "delay": ${1.minutes.inWholeMilliseconds}
             }
@@ -53,6 +53,6 @@ class ProcessedExecConfigTest {
   @Test
   fun defaults() {
     val defaultConfig = ProcessedExecConfig()
-    assertThat(defaultConfig.issues).isNotEmpty()
+    assertThat(defaultConfig.knownIssues).isNotEmpty()
   }
 }

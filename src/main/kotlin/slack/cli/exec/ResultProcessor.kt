@@ -54,7 +54,7 @@ internal class ResultProcessor(
     val bugsnag: Bugsnag? by lazy { bugsnagKey?.let { key -> createBugsnag(key) } }
 
     val logLinesReversed = logFile.readLines().asReversed()
-    for (issue in config.issues) {
+    for (issue in config.knownIssues) {
       val retrySignal = issue.check(logLinesReversed, echo)
 
       if (retrySignal != RetrySignal.Unknown) {

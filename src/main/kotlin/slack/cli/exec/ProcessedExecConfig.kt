@@ -15,6 +15,7 @@
  */
 package slack.cli.exec
 
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlin.reflect.full.declaredMemberProperties
 
@@ -24,7 +25,8 @@ private const val CURRENT_VERSION = 1
 @JsonClass(generateAdapter = true)
 internal data class ProcessedExecConfig(
   val version: Int = CURRENT_VERSION,
-  val issues: List<Issue> =
+  @Json(name = "known_issues")
+  val knownIssues: List<Issue> =
     KnownIssues::class.declaredMemberProperties.map { it.get(KnownIssues) as Issue },
 ) {
   init {

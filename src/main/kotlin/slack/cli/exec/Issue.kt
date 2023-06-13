@@ -15,6 +15,7 @@
  */
 package slack.cli.exec
 
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
@@ -30,10 +31,10 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 internal data class Issue(
   val message: String,
-  val logMessage: String,
-  val matchingText: String,
-  val groupingHash: String,
-  val retrySignal: RetrySignal
+  @Json(name = "log_message") val logMessage: String,
+  @Json(name = "matching_text") val matchingText: String,
+  @Json(name = "grouping_hash") val groupingHash: String,
+  @Json(name = "retry_signal") val retrySignal: RetrySignal
 ) {
 
   private fun List<String>.checkContains(errorText: String): Boolean {
