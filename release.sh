@@ -49,7 +49,7 @@ git commit -am "Prepare for release $NEW_VERSION."
 git tag -a "$NEW_VERSION" -m "Version $NEW_VERSION"
 
 # Publish
-./gradlew publish -x dokkaHt .ml
+./gradlew publish -x dokkaHtml
 
 # Prepare next snapshot
 echo "Updating snapshot version to $NEXT_VERSION"

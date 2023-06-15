@@ -76,6 +76,10 @@ tasks.withType<DokkaTask>().configureEach {
   dokkaSourceSets.configureEach { skipDeprecated.set(true) }
 }
 
+mavenPublishing {
+  publishToMavenCentral(automaticRelease = true)
+}
+
 kotlin { explicitApi() }
 
 moshi {
