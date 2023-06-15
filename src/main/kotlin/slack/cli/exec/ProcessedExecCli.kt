@@ -84,7 +84,9 @@ public class ProcessedExecCli :
           break
         }
         is RetrySignal.RetryDelayed -> {
-          echo("Processor script exited with 2, rerunning the command after ${retrySignal.delay}...")
+          echo(
+            "Processor script exited with 2, rerunning the command after ${retrySignal.delay}..."
+          )
           // TODO add option to reclaim memory?
           Thread.sleep(retrySignal.delay.inWholeMilliseconds)
           val secondResult = executeCommand(cmd, tmpDir)
