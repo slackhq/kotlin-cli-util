@@ -70,9 +70,9 @@ public class ProcessedExecCli :
     tmpDir.createDirectories()
 
     // Initial command execution
-    val (exitStatus, logFile) = executeCommand(cmd, tmpDir)
-    while (exitStatus != 0) {
-      echo("Command failed with exit code $exitStatus. Running processor script...")
+    val (exitCode, logFile) = executeCommand(cmd, tmpDir)
+    while (exitCode != 0) {
+      echo("Command failed with exit code $exitCode. Running processor script...")
 
       echo("Processing CI failure")
       val resultProcessor = ResultProcessor(verbose, bugsnagKey, config, ::echo)
@@ -108,7 +108,7 @@ public class ProcessedExecCli :
     // If we got here, all is well
     // Delete the tmp files
     tmpDir.deleteRecursively()
-    exitProcess(0)
+    exitProcess(exitCode)
   }
 
   // Function to execute command and capture output. Shorthand to the testable top-level function.
