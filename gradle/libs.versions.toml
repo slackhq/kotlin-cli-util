@@ -2,19 +2,26 @@
 kotlin = "1.8.22"
 ktfmt = "0.43"
 jvmTarget = "17"
+moshix = "0.22.1"
+moshi = "1.15.0"
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.0" }
 dokka = { id = "org.jetbrains.dokka", version = "1.8.20" }
 lint = { id = "com.android.lint", version = "8.0.2" }
 mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.25.2" }
+moshix = { id = "dev.zacsweers.moshix", version.ref = "moshix" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 spotless = { id = "com.diffplug.spotless", version = "6.19.0" }
 binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.13.2" }
 
 [libraries]
+bugsnag = "com.bugsnag:bugsnag:3.6.4"
 clikt = "com.github.ajalt.clikt:clikt:3.5.2"
 kotlinShell = "eu.jrie.jetbrains:kotlin-shell-core:0.2.1"
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+okhttp = "com.squareup.okhttp3:okhttp:4.11.0"
 okio = "com.squareup.okio:okio:3.3.0"
 junit = "junit:junit:4.13.2"
 truth = "com.google.truth:truth:1.1.4"
