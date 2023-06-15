@@ -78,6 +78,7 @@ tasks.withType<DokkaTask>().configureEach {
 
 mavenPublishing {
   publishToMavenCentral(automaticRelease = true)
+  signAllPublications()
 }
 
 kotlin { explicitApi() }
