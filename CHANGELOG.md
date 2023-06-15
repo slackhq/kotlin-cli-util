@@ -1,6 +1,17 @@
 Changelog
 =========
 
+1.2.0
+-----
+
+_2023-06-15_
+
+Happy new year!
+
+- Introduce new `ProcessedExecCli` for post-processing and retrying commands.
+- Change `projectDirOption` to use `Path` instead of `File`.
+- Update all dependencies (Kotlin 1.8.22, Clikt 3.5.2, Okio 3.3.0).
+
 1.1.1
 -----
 
