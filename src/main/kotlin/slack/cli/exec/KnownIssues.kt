@@ -85,4 +85,13 @@ internal object KnownIssues {
       logMessage = "Detected a OOM that was killed by the kernel. Retrying immediately.",
       retrySignal = RetrySignal.RetryImmediately
     )
+
+  val bugsnagUploadFailed =
+    Issue(
+      message = "Bugsnag artifact upload failure",
+      groupingHash = "bugsnag-upload-failure",
+      matchingText = "Bugsnag request failed to complete",
+      logMessage = "Detected bugsnag failed to upload. Retrying immediately.",
+      retrySignal = RetrySignal.RetryImmediately
+    )
 }
