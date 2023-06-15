@@ -98,6 +98,22 @@ class ResultProcessorTest {
     check(signal is RetrySignal.Ack)
   }
 
+  @Test
+  fun parseBuildScan() {
+    val url = "https://gradle-enterprise.example.com"
+    val scanUrl = "$url/s/ueizlbptdqv6q"
+    val log =
+      """
+      Publishing build scan...
+      $scanUrl
+
+    """.trimIndent().padWithTestLogs()
+
+    // Assert in both directions they match
+    assertThat(log.lines().parseBuildScan(url)).isEqualTo(scanUrl)
+    assertThat(log.lines().reversed().parseBuildScan(url)).isEqualTo(scanUrl)
+  }
+
   private fun newProcessor(): ResultProcessor {
     return ResultProcessor(
       verbose = true,

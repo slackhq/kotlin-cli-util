@@ -30,6 +30,7 @@ class ProcessedExecConfigTest {
       """
       {
         "version": 1,
+        "gradle_enterprise_server": "https://gradle-enterprise.example.com",
         "known_issues": [
           {
             "message": "${KnownIssues.ftlRateLimit.message}",
@@ -47,7 +48,14 @@ class ProcessedExecConfigTest {
         .trimIndent()
 
     val issue = adapter.fromJson(json)!!
-    assertThat(issue).isEqualTo(ProcessedExecConfig(1, listOf(KnownIssues.ftlRateLimit)))
+    assertThat(issue)
+      .isEqualTo(
+        ProcessedExecConfig(
+          1,
+          "https://gradle-enterprise.example.com",
+          listOf(KnownIssues.ftlRateLimit)
+        )
+      )
   }
 
   @Test

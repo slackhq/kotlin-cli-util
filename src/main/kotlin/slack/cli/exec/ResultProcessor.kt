@@ -65,7 +65,7 @@ internal class ResultProcessor(
             // Group by the throwable message
             report.setGroupingHash(issue.groupingHash)
             report.addToTab("Run Info", "After-Retry", isAfterRetry)
-            logLinesReversed.parseBuildScan()?.let { scanLink ->
+            config.gradleEnterpriseServer?.let(logLinesReversed::parseBuildScan)?.let { scanLink ->
               report.addToTab("Run Info", "Build-Scan", scanLink)
             }
           }
@@ -83,19 +83,6 @@ internal class ResultProcessor(
     // TODO some day log these into bugsnag too?
     echo("No actionable items found in ${logFile.name}")
     return RetrySignal.Unknown
-  }
-
-  // TODO test this
-  private fun List<String>.parseBuildScan(): String? {
-    // Find a build scan URL like so
-    // Publishing build scan...
-    // https://some-server.com/s/ueizlbptdqv6q
-
-    // Index of the publish log. Scan link should be above or below this.
-    val indexOfBuildScan = indexOfFirst { it.contains("Publishing build scan...") }
-    // Note the lines may be in reverse order here, so try both above and below
-    return get(indexOfBuildScan - 1).trim().takeUnless { "https" !in it }
-      ?: get(indexOfBuildScan + 1).trim().takeUnless { "https" !in it }
   }
 
   private fun verboseEcho(message: String) {
@@ -158,3 +145,15 @@ private fun Report.populateBuildKiteTab() {
 }
 
 private fun envOrNull(envKey: String) = System.getenv(envKey)?.takeUnless { it.isBlank() }
+
+internal fun List<String>.parseBuildScan(serverUrl: String): String? {
+  // Find a build scan URL like so
+  // Publishing build scan...
+  // https://some-server.com/s/ueizlbptdqv6q
+
+  // Index of the publish log. Scan link should be above or below this.
+  val indexOfBuildScan = indexOfFirst { it.contains("Publishing build scan...") }
+  // Note the lines may be in reverse order here, so try both above and below
+  return get(indexOfBuildScan - 1).trim().takeIf { serverUrl in it }
+    ?: get(indexOfBuildScan + 1).trim().takeIf { serverUrl in it }
+}

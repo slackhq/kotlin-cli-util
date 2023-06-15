@@ -25,6 +25,7 @@ private const val CURRENT_VERSION = 1
 @JsonClass(generateAdapter = true)
 internal data class ProcessedExecConfig(
   val version: Int = CURRENT_VERSION,
+  @Json(name = "gradle_enterprise_server") val gradleEnterpriseServer: String? = null,
   @Json(name = "known_issues")
   val knownIssues: List<Issue> =
     KnownIssues::class.declaredMemberProperties.map { it.get(KnownIssues) as Issue },
