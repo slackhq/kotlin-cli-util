@@ -31,6 +31,7 @@ import kotlin.io.path.deleteRecursively
 import kotlin.system.exitProcess
 import okio.buffer
 import okio.source
+import org.jetbrains.annotations.TestOnly
 import slack.cli.projectDirOption
 
 /**
@@ -44,17 +45,21 @@ import slack.cli.projectDirOption
 public class ProcessedExecCli :
   CliktCommand("Executes a command with Bugsnag tracing and retries as needed.") {
 
-  private val projectDir by projectDirOption()
-  private val verbose by option("--verbose", "-v").flag()
-  private val bugsnagKey by option("--bugsnag-key", envvar = "PE_BUGSNAG_KEY")
-  private val configurationFile by
+  internal val projectDir by projectDirOption()
+  internal val verbose by option("--verbose", "-v").flag()
+  internal val bugsnagKey by option("--bugsnag-key", envvar = "PE_BUGSNAG_KEY")
+  internal val configurationFile by
     option("--config", envvar = "PE_CONFIGURATION_FILE")
       .path(mustExist = true, canBeFile = true, canBeDir = false)
 
-  private val args by argument().multiple()
+  @get:TestOnly internal val parseOnly by option("--parse-only").flag(default = false)
+
+  internal val args by argument().multiple()
 
   @OptIn(ExperimentalStdlibApi::class, ExperimentalPathApi::class)
   override fun run() {
+    if (parseOnly) return
+
     val moshi = ProcessingUtil.newMoshi()
     val config =
       configurationFile?.let {
