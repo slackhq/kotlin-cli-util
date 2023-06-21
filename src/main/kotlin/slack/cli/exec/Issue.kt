@@ -27,6 +27,9 @@ import com.squareup.moshi.JsonClass
  * @property matchingText the matching text to look for in the log.
  * @property groupingHash grouping hash for reporting to bugsnag. This should usually be unique, but
  *   can also be reused across issues that are part of the same general issue.
+ * @property retrySignal the [RetrySignal] to use when this issue is found.
+ * @property description an optional description of the issue. Not used in the CLI, just there for
+ *   documentation in the config.
  */
 @JsonClass(generateAdapter = true)
 internal data class Issue(
@@ -34,7 +37,8 @@ internal data class Issue(
   @Json(name = "log_message") val logMessage: String,
   @Json(name = "matching_text") val matchingText: String,
   @Json(name = "grouping_hash") val groupingHash: String,
-  @Json(name = "retry_signal") val retrySignal: RetrySignal
+  @Json(name = "retry_signal") val retrySignal: RetrySignal,
+  val description: String? = null,
 ) {
 
   private fun List<String>.checkContains(errorText: String): Boolean {
