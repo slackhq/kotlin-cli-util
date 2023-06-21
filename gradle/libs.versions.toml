@@ -16,7 +16,7 @@ spotless = { id = "com.diffplug.spotless", version = "6.19.0" }
 binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.13.2" }
 
 [libraries]
-bugsnag = "com.bugsnag:bugsnag:3.6.4"
+bugsnag = "com.bugsnag:bugsnag:3.7.0"
 clikt = "com.github.ajalt.clikt:clikt:3.5.4"
 kotlinShell = "eu.jrie.jetbrains:kotlin-shell-core:0.2.1"
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
@@ -24,4 +24,4 @@ moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 okhttp = "com.squareup.okhttp3:okhttp:4.11.0"
 okio = "com.squareup.okio:okio:3.3.0"
 junit = "junit:junit:4.13.2"
-truth = "com.google.truth:truth:1.1.4"
+truth = "com.google.truth:truth:1.1.5"
