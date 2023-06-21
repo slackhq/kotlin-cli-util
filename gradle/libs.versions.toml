@@ -24,4 +24,4 @@ moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 okhttp = "com.squareup.okhttp3:okhttp:4.11.0"
 okio = "com.squareup.okio:okio:3.3.0"
 junit = "junit:junit:4.13.2"
-truth = "com.google.truth:truth:1.1.4"
+truth = "com.google.truth:truth:1.1.5"
