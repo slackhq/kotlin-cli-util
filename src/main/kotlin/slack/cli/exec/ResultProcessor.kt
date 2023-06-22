@@ -70,9 +70,8 @@ internal class ResultProcessor(
               report.addToTab("Run Info", "Build-Scan", scanLink)
             }
           }
-        } ?: run {
-          verboseEcho("Skipping bugsnag reporting: $retrySignal")
         }
+          ?: run { verboseEcho("Skipping bugsnag reporting: $retrySignal") }
 
         if (retrySignal is RetrySignal.Ack) {
           echo("Recognized known issue but cannot retry: ${issue.message}")
