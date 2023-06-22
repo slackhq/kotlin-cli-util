@@ -49,6 +49,38 @@ class ResultProcessorTest {
   }
 
   @Test
+  fun testExecuteCommandWithStderr() {
+    val script =
+      """
+      #!/bin/bash
+
+      >&2 echo "Error text"
+    """
+        .trimIndent()
+    val scriptFile =
+      tmpFolder.newFile("script.sh").apply {
+        writeText(script)
+        setExecutable(true)
+      }
+    tmpFolder.newFile("test.txt")
+    val tmpDir = tmpFolder.newFolder("tmp/processed_exec")
+    val (exitCode, outputFile) =
+      executeCommand(tmpFolder.root.toPath(), scriptFile.absolutePath, tmpDir.toPath(), logs::add)
+    assertThat(exitCode).isEqualTo(0)
+
+    val expectedOutput =
+      """
+      Error text
+    """
+        .trimIndent()
+
+    assertThat(outputFile.readText().trim()).isEqualTo(expectedOutput)
+
+    // Note we use "contains" here because our script may output additional logs
+    assertThat(logs.joinToString("\n").trim()).contains(expectedOutput)
+  }
+
+  @Test
   fun unknownIssue() {
     val outputFile = tmpFolder.newFile("logs.txt")
     outputFile.writeText(
