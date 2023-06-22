@@ -85,8 +85,10 @@ public class ProcessedExecCli :
 
     // Initial command execution
     val (exitCode, logFile) = executeCommand(cmd, tmpDir)
-    while (exitCode != 0) {
-      echo("Command failed with exit code $exitCode. Running processor script...")
+    var attempts = 0
+    while (exitCode != 0 && attempts < 1) {
+      attempts++
+      echo("Command failed with exit code $exitCode. Running processor script (attempt $attempts)...")
 
       echo("Processing CI failure")
       val resultProcessor = ResultProcessor(verbose, bugsnagKey, config, ::echo)
