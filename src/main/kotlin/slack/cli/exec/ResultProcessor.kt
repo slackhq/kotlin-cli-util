@@ -59,9 +59,9 @@ internal class ResultProcessor(
 
       if (retrySignal != RetrySignal.Unknown) {
         // Report to bugsnag. Shared common Throwable but with different messages.
-        bugsnag?.apply {
+        bugsnag?.let {
           verboseEcho("Reporting to bugsnag: $retrySignal")
-          notify(IssueThrowable(issue), Severity.ERROR) { report ->
+          it.notify(IssueThrowable(issue), Severity.ERROR) { report ->
             // Group by the throwable message
             report.setGroupingHash(issue.groupingHash)
             report.addToTab("Run Info", "After-Retry", isAfterRetry)
@@ -69,6 +69,8 @@ internal class ResultProcessor(
               report.addToTab("Run Info", "Build-Scan", scanLink)
             }
           }
+        } ?: run {
+          verboseEcho("Skipping bugsnag reporting: $retrySignal")
         }
 
         if (retrySignal is RetrySignal.Ack) {
