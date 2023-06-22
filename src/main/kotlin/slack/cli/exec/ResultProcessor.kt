@@ -83,7 +83,7 @@ internal class ResultProcessor(
     }
 
     // TODO some day log these into bugsnag too?
-    echo("No actionable items found in ${logFile.absolutePathString()}")
+    echo("No actionable items found in ${logFile.name}")
     return RetrySignal.Unknown
   }
 
