@@ -52,6 +52,8 @@ public class ProcessedExecCli :
     option("--config", envvar = "PE_CONFIGURATION_FILE")
       .path(mustExist = true, canBeFile = true, canBeDir = false)
 
+  private val debug by option("--debug", "-d").flag()
+
   @get:TestOnly internal val parseOnly by option("--parse-only").flag(default = false)
 
   internal val args by argument().multiple()
@@ -114,7 +116,9 @@ public class ProcessedExecCli :
 
     // If we got here, all is well
     // Delete the tmp files
-    tmpDir.deleteRecursively()
+    if (!debug) {
+      tmpDir.deleteRecursively()
+    }
     exitProcess(exitCode)
   }
 
