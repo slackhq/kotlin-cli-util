@@ -88,7 +88,9 @@ public class ProcessedExecCli :
     var attempts = 0
     while (exitCode != 0 && attempts < 1) {
       attempts++
-      echo("Command failed with exit code $exitCode. Running processor script (attempt $attempts)...")
+      echo(
+        "Command failed with exit code $exitCode. Running processor script (attempt $attempts)..."
+      )
 
       echo("Processing CI failure")
       val resultProcessor = ResultProcessor(verbose, bugsnagKey, config, ::echo)
