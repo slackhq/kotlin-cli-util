@@ -54,6 +54,13 @@ public class ProcessedExecCli :
 
   private val debug by option("--debug", "-d").flag()
 
+  @get:TestOnly
+  private val noExit by
+    option(
+        "--no-exit",
+        help = "Instructs this CLI to not exit the process with the status code. Test only!"
+      )
+      .flag()
   @get:TestOnly internal val parseOnly by option("--parse-only").flag(default = false)
 
   internal val args by argument().multiple()
@@ -119,7 +126,11 @@ public class ProcessedExecCli :
     if (!debug) {
       tmpDir.deleteRecursively()
     }
-    exitProcess(exitCode)
+
+    echo("Exiting with code $exitCode")
+    if (!noExit) {
+      exitProcess(exitCode)
+    }
   }
 
   // Function to execute command and capture output. Shorthand to the testable top-level function.
@@ -152,7 +163,7 @@ internal fun executeCommand(
         // Pass the line through unmodified
         line to ""
       }
-      val process = command.process()
+      val process = command.process() forkErr { it pipe echoHandler pipe tmpFile.toFile() }
       pipeline { process pipe echoHandler pipe tmpFile.toFile() }.join()
       exitCode = process.process.pcb.exitCode
     }
