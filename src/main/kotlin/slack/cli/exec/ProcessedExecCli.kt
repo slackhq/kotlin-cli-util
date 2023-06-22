@@ -65,6 +65,7 @@ public class ProcessedExecCli :
 
   internal val args by argument().multiple()
 
+  @Suppress("CyclomaticComplexMethod")
   @OptIn(ExperimentalStdlibApi::class, ExperimentalPathApi::class)
   override fun run() {
     if (parseOnly) return
