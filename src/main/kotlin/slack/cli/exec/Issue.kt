@@ -33,7 +33,7 @@ import com.squareup.moshi.JsonClass
  */
 @JsonClass(generateAdapter = true)
 internal data class Issue(
-  val message: String? = null,
+  val message: String,
   @Json(name = "log_message") val logMessage: String,
   @Json(name = "matching_text") val matchingText: String,
   @Json(name = "grouping_hash") val groupingHash: String,
