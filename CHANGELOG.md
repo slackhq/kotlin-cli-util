@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.2.1
+-----
+
+_2023-06-23_
+
+- Fix `ProcessedExecCli` not reading stderr correctly.
+- Add more logging controls to processed exec, namely via `--debug` and `--verbose`.
+
 1.2.0
 -----
 
