@@ -54,7 +54,7 @@ class ResultProcessorTest {
       """
       #!/bin/bash
 
-      echo "Error text" >&2 
+      echo "Error text" >&2
     """
         .trimIndent()
     val scriptFile =
