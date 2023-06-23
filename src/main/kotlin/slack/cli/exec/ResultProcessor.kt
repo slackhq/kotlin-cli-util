@@ -54,14 +54,15 @@ internal class ResultProcessor(
     val bugsnag: Bugsnag? by lazy { bugsnagKey?.let { key -> createBugsnag(key) } }
 
     val logLinesReversed = logFile.readLines().asReversed()
+    echo("Checking ${config.knownIssues.size} known issues")
     for (issue in config.knownIssues) {
       val retrySignal = issue.check(logLinesReversed, echo)
 
       if (retrySignal != RetrySignal.Unknown) {
         // Report to bugsnag. Shared common Throwable but with different messages.
-        bugsnag?.apply {
+        bugsnag?.let {
           verboseEcho("Reporting to bugsnag: $retrySignal")
-          notify(IssueThrowable(issue), Severity.ERROR) { report ->
+          it.notify(IssueThrowable(issue), Severity.ERROR) { report ->
             // Group by the throwable message
             report.setGroupingHash(issue.groupingHash)
             report.addToTab("Run Info", "After-Retry", isAfterRetry)
@@ -70,6 +71,7 @@ internal class ResultProcessor(
             }
           }
         }
+          ?: run { verboseEcho("Skipping bugsnag reporting: $retrySignal") }
 
         if (retrySignal is RetrySignal.Ack) {
           echo("Recognized known issue but cannot retry: ${issue.message}")

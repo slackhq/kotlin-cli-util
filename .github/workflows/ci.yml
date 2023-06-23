@@ -13,7 +13,8 @@ on:
 
 jobs:
   build:
-    runs-on: 'ubuntu-latest'
+    # Necessary for ResultProcessorTest.testExecuteCommandWithStderr
+    runs-on: 'macos-latest'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -31,6 +32,14 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: check
+
+      - name: (Fail-only) Upload build reports
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: reports
+          path: |
+            **/build/reports/**
 
       - name: Upload snapshot (main only)
         env:

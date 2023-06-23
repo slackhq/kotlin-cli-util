@@ -52,10 +52,20 @@ public class ProcessedExecCli :
     option("--config", envvar = "PE_CONFIGURATION_FILE")
       .path(mustExist = true, canBeFile = true, canBeDir = false)
 
+  private val debug by option("--debug", "-d").flag()
+
+  @get:TestOnly
+  private val noExit by
+    option(
+        "--no-exit",
+        help = "Instructs this CLI to not exit the process with the status code. Test only!"
+      )
+      .flag()
   @get:TestOnly internal val parseOnly by option("--parse-only").flag(default = false)
 
   internal val args by argument().multiple()
 
+  @Suppress("CyclomaticComplexMethod")
   @OptIn(ExperimentalStdlibApi::class, ExperimentalPathApi::class)
   override fun run() {
     if (parseOnly) return
@@ -76,8 +86,12 @@ public class ProcessedExecCli :
 
     // Initial command execution
     val (exitCode, logFile) = executeCommand(cmd, tmpDir)
-    while (exitCode != 0) {
-      echo("Command failed with exit code $exitCode. Running processor script...")
+    var attempts = 0
+    while (exitCode != 0 && attempts < 1) {
+      attempts++
+      echo(
+        "Command failed with exit code $exitCode. Running processor script (attempt $attempts)..."
+      )
 
       echo("Processing CI failure")
       val resultProcessor = ResultProcessor(verbose, bugsnagKey, config, ::echo)
@@ -114,8 +128,14 @@ public class ProcessedExecCli :
 
     // If we got here, all is well
     // Delete the tmp files
-    tmpDir.deleteRecursively()
-    exitProcess(exitCode)
+    if (!debug) {
+      tmpDir.deleteRecursively()
+    }
+
+    echo("Exiting with code $exitCode")
+    if (!noExit) {
+      exitProcess(exitCode)
+    }
   }
 
   // Function to execute command and capture output. Shorthand to the testable top-level function.
@@ -148,7 +168,7 @@ internal fun executeCommand(
         // Pass the line through unmodified
         line to ""
       }
-      val process = command.process()
+      val process = command.process() forkErr { it pipe echoHandler pipe tmpFile.toFile() }
       pipeline { process pipe echoHandler pipe tmpFile.toFile() }.join()
       exitCode = process.process.pcb.exitCode
     }

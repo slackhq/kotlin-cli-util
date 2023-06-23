@@ -23,13 +23,25 @@ import kotlin.time.Duration
 internal sealed interface RetrySignal {
 
   /** Unknown issue. */
-  @TypeLabel("unknown") object Unknown : RetrySignal
+  @TypeLabel("unknown")
+  object Unknown : RetrySignal {
+    // TODO remove when we have data objects in Kotlin 1.9
+    override fun toString() = this::class.simpleName!!
+  }
 
   /** Indicates an issue that is recognized but cannot be retried. */
-  @TypeLabel("ack") object Ack : RetrySignal
+  @TypeLabel("ack")
+  object Ack : RetrySignal {
+    // TODO remove when we have data objects in Kotlin 1.9
+    override fun toString() = this::class.simpleName!!
+  }
 
   /** Indicates this issue should be retried immediately. */
-  @TypeLabel("immediate") object RetryImmediately : RetrySignal
+  @TypeLabel("immediate")
+  object RetryImmediately : RetrySignal {
+    // TODO remove when we have data objects in Kotlin 1.9
+    override fun toString() = this::class.simpleName!!
+  }
 
   /** Indicates this issue should be retried after a [delay]. */
   @TypeLabel("delayed")
