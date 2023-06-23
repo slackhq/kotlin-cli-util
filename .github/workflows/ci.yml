@@ -32,6 +32,14 @@ jobs:
         with:
           arguments: check
 
+      - name: (Fail-only) Upload build reports
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: reports
+          path: |
+            **/build/reports/**
+
       - name: Upload snapshot (main only)
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SonatypeUsername }}
