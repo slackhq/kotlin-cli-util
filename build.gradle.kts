@@ -55,7 +55,7 @@ spotless {
   }
 }
 
-configure<JavaPluginExtension> { toolchain { languageVersion.set(JavaLanguageVersion.of(19)) } }
+configure<JavaPluginExtension> { toolchain { languageVersion.set(JavaLanguageVersion.of(20)) } }
 
 tasks.withType<JavaCompile>().configureEach {
   options.release.set(libs.versions.jvmTarget.get().toInt())
