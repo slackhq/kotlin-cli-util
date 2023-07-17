@@ -17,7 +17,7 @@ binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibilit
 
 [libraries]
 bugsnag = "com.bugsnag:bugsnag:3.7.0"
-clikt = "com.github.ajalt.clikt:clikt:3.5.4"
+clikt = "com.github.ajalt.clikt:clikt:4.1.0"
 kotlinShell = "eu.jrie.jetbrains:kotlin-shell-core:0.2.1"
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
