@@ -6,7 +6,7 @@ moshix = "0.22.1"
 moshi = "1.15.0"
 
 [plugins]
-detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.0" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.1" }
 dokka = { id = "org.jetbrains.dokka", version = "1.8.20" }
 lint = { id = "com.android.lint", version = "8.0.2" }
 mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.25.2" }
