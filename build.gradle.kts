@@ -83,10 +83,7 @@ mavenPublishing {
 
 kotlin { explicitApi() }
 
-moshi {
-  enableSealed.set(true)
-  generateProguardRules.set(false)
-}
+moshi { enableSealed.set(true) }
 
 dependencies {
   api(libs.clikt)
