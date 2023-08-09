@@ -1,6 +1,16 @@
 Changelog
 =========
 
+2.0.0
+-----
+
+_2023-08-09_
+
+- Update to Clikt 4.1.0. This incurs some breaking API changes, this updates a major version to match.
+- Rename "ProcessedExec*" APIs to "ShellSentry*", as this is the name we've decided to give it.
+- Update Kotlin to `1.9.0`.
+- Update Okio to `3.5.0`.
+
 1.2.3
 -----
 
