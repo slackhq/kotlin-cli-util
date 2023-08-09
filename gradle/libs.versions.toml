@@ -9,7 +9,7 @@ moshi = "1.15.0"
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.0" }
 dokka = { id = "org.jetbrains.dokka", version = "1.8.20" }
 lint = { id = "com.android.lint", version = "8.0.2" }
-mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.25.2" }
+mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.25.3" }
 moshix = { id = "dev.zacsweers.moshix", version.ref = "moshix" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 spotless = { id = "com.diffplug.spotless", version = "6.19.0" }
