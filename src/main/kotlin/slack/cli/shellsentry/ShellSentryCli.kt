@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package slack.cli.exec
+package slack.cli.shellsentry
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
@@ -42,7 +42,7 @@ import slack.cli.projectDirOption
  * $ ./<binary> --bugsnag-key=1234 --verbose --configurationFile config.json ./gradlew build
  * ```
  */
-public class ProcessedExecCli :
+public class ShellSentryCli :
   CliktCommand("Executes a command with Bugsnag tracing and retries as needed.") {
 
   internal val projectDir by projectDirOption()
@@ -74,14 +74,14 @@ public class ProcessedExecCli :
     val config =
       configurationFile?.let {
         echo("Parsing config file '$it'")
-        it.source().buffer().use { source -> moshi.adapter<ProcessedExecConfig>().fromJson(source) }
+        it.source().buffer().use { source -> moshi.adapter<ShellSentryConfig>().fromJson(source) }
       }
-        ?: ProcessedExecConfig()
+        ?: ShellSentryConfig()
     // The command to be executed
     val cmd = args.joinToString(" ")
 
     // Temporary file for command output
-    val tmpDir = projectDir.resolve("tmp/processed_exec")
+    val tmpDir = projectDir.resolve("tmp/shellsentry")
     tmpDir.createDirectories()
 
     // Initial command execution
@@ -160,7 +160,7 @@ internal fun executeCommand(
 ): ProcessResult {
   echo("Running command: '$command'")
 
-  val tmpFile = createTempFile(tmpDir, "processed_exec", ".txt").toAbsolutePath()
+  val tmpFile = createTempFile(tmpDir, "shellsentry", ".txt").toAbsolutePath()
 
   var exitCode = 0
   shell {

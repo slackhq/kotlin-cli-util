@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package slack.cli.exec
+package slack.cli.shellsentry
 
 import com.google.common.truth.Truth.assertThat
 import kotlin.io.path.readText
@@ -30,7 +30,7 @@ class ResultProcessorTest {
   @Test
   fun testExecuteCommand() {
     tmpFolder.newFile("test.txt")
-    val tmpDir = tmpFolder.newFolder("tmp/processed_exec")
+    val tmpDir = tmpFolder.newFolder("tmp/shellsentry")
     val (exitCode, outputFile) =
       executeCommand(tmpFolder.root.toPath(), "ls -1", tmpDir.toPath(), logs::add)
     assertThat(exitCode).isEqualTo(0)
@@ -63,7 +63,7 @@ class ResultProcessorTest {
         setExecutable(true)
       }
     tmpFolder.newFile("test.txt")
-    val tmpDir = tmpFolder.newFolder("tmp/processed_exec")
+    val tmpDir = tmpFolder.newFolder("tmp/shellsentry")
     val (exitCode, outputFile) =
       executeCommand(tmpFolder.root.toPath(), scriptFile.absolutePath, tmpDir.toPath(), logs::add)
     assertThat(exitCode).isEqualTo(0)
@@ -150,7 +150,7 @@ class ResultProcessorTest {
     return ResultProcessor(
       verbose = true,
       bugsnagKey = null,
-      config = ProcessedExecConfig(),
+      config = ShellSentryConfig(),
       echo = logs::add
     )
   }

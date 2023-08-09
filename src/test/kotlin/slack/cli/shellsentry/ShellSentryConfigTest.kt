@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package slack.cli.exec
+package slack.cli.shellsentry
 
 import com.google.common.truth.Truth.assertThat
 import com.squareup.moshi.adapter
 import kotlin.time.Duration.Companion.minutes
 import org.junit.Test
 
-class ProcessedExecConfigTest {
+class ShellSentryConfigTest {
   @OptIn(ExperimentalStdlibApi::class)
   @Test
   fun simpleParse() {
-    val adapter = ProcessingUtil.newMoshi().adapter<ProcessedExecConfig>()
+    val adapter = ProcessingUtil.newMoshi().adapter<ShellSentryConfig>()
     // language=json
     val json =
       """
@@ -50,7 +50,7 @@ class ProcessedExecConfigTest {
     val issue = adapter.fromJson(json)!!
     assertThat(issue)
       .isEqualTo(
-        ProcessedExecConfig(
+        ShellSentryConfig(
           1,
           "https://gradle-enterprise.example.com",
           listOf(KnownIssues.ftlRateLimit)
@@ -60,7 +60,7 @@ class ProcessedExecConfigTest {
 
   @Test
   fun defaults() {
-    val defaultConfig = ProcessedExecConfig()
+    val defaultConfig = ShellSentryConfig()
     assertThat(defaultConfig.knownIssues).isNotEmpty()
   }
 }

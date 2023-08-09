@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package slack.cli.exec
+package slack.cli.shellsentry
 
 import com.bugsnag.Bugsnag
 import com.bugsnag.Report
@@ -44,7 +44,7 @@ import kotlin.io.path.readLines
 internal class ResultProcessor(
   private val verbose: Boolean,
   private val bugsnagKey: String?,
-  private val config: ProcessedExecConfig,
+  private val config: ShellSentryConfig,
   private val echo: (String) -> Unit,
 ) {
 

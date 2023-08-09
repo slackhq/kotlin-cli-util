@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package slack.cli.exec
+package slack.cli.shellsentry
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
 
-class ProcessedExecCliTest {
+class ShellSentryCliTest {
 
   @JvmField @Rule val temporaryFolder = TemporaryFolder()
 
@@ -29,7 +29,7 @@ class ProcessedExecCliTest {
     val configFile = temporaryFolder.newFile("config.json")
     val args = "./gradlew build -Pvariant=debug"
     val parsed =
-      ProcessedExecCli().apply {
+      ShellSentryCli().apply {
         parse(
           arrayOf(
             "--project-dir",

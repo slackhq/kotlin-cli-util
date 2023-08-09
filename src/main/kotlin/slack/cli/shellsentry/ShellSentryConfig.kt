@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package slack.cli.exec
+package slack.cli.shellsentry
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -21,9 +21,9 @@ import kotlin.reflect.full.declaredMemberProperties
 
 private const val CURRENT_VERSION = 1
 
-/** Represents a configuration for a processed exec. */
+/** Represents a configuration for [ShellSentryCli]. */
 @JsonClass(generateAdapter = true)
-internal data class ProcessedExecConfig(
+internal data class ShellSentryConfig(
   val version: Int = CURRENT_VERSION,
   @Json(name = "gradle_enterprise_server") val gradleEnterpriseServer: String? = null,
   @Json(name = "known_issues")
