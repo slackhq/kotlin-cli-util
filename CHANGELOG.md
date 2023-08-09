@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.2.3
+-----
+
+_2023-07-17_
+
+- Fix retried exit codes not being propagated.
+
 1.2.2
 -----
 

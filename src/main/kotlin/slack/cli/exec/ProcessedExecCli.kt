@@ -65,7 +65,7 @@ public class ProcessedExecCli :
 
   internal val args by argument().multiple()
 
-  @Suppress("CyclomaticComplexMethod")
+  @Suppress("CyclomaticComplexMethod", "LongMethod")
   @OptIn(ExperimentalStdlibApi::class, ExperimentalPathApi::class)
   override fun run() {
     if (parseOnly) return
@@ -85,7 +85,9 @@ public class ProcessedExecCli :
     tmpDir.createDirectories()
 
     // Initial command execution
-    val (exitCode, logFile) = executeCommand(cmd, tmpDir)
+    val (initialExitCode, initialLogFile) = executeCommand(cmd, tmpDir)
+    var exitCode = initialExitCode
+    var logFile = initialLogFile
     var attempts = 0
     while (exitCode != 0 && attempts < 1) {
       attempts++
@@ -109,6 +111,8 @@ public class ProcessedExecCli :
           // TODO add option to reclaim memory?
           Thread.sleep(retrySignal.delay.inWholeMilliseconds)
           val secondResult = executeCommand(cmd, tmpDir)
+          exitCode = secondResult.exitCode
+          logFile = secondResult.outputFile
           if (secondResult.exitCode != 0) {
             // Process the second failure, then bounce out
             resultProcessor.process(secondResult.outputFile, isAfterRetry = true)
@@ -118,6 +122,8 @@ public class ProcessedExecCli :
           echo("Processor script exited with 1, rerunning the command immediately...")
           // TODO add option to reclaim memory?
           val secondResult = executeCommand(cmd, tmpDir)
+          exitCode = secondResult.exitCode
+          logFile = secondResult.outputFile
           if (secondResult.exitCode != 0) {
             // Process the second failure, then bounce out
             resultProcessor.process(secondResult.outputFile, isAfterRetry = true)
