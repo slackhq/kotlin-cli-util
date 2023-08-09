@@ -26,8 +26,8 @@ public final class slack/cli/CliUtilKt {
 }
 
 public final class slack/cli/CliktExtensionsKt {
-	public static final fun dryRunOption (Lcom/github/ajalt/clikt/core/CliktCommand;[Ljava/lang/String;Ljava/lang/String;)Lcom/github/ajalt/clikt/parameters/options/FlagOption;
-	public static synthetic fun dryRunOption$default (Lcom/github/ajalt/clikt/core/CliktCommand;[Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/github/ajalt/clikt/parameters/options/FlagOption;
+	public static final fun dryRunOption (Lcom/github/ajalt/clikt/core/CliktCommand;[Ljava/lang/String;Ljava/lang/String;)Lcom/github/ajalt/clikt/parameters/options/OptionWithValues;
+	public static synthetic fun dryRunOption$default (Lcom/github/ajalt/clikt/core/CliktCommand;[Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/github/ajalt/clikt/parameters/options/OptionWithValues;
 	public static final fun projectDirOption (Lcom/github/ajalt/clikt/core/CliktCommand;[Ljava/lang/String;Ljava/lang/String;)Lcom/github/ajalt/clikt/parameters/options/OptionDelegate;
 	public static synthetic fun projectDirOption$default (Lcom/github/ajalt/clikt/core/CliktCommand;[Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/github/ajalt/clikt/parameters/options/OptionDelegate;
 }

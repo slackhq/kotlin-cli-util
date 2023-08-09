@@ -22,8 +22,8 @@
 package slack.cli
 
 import com.github.ajalt.clikt.core.CliktCommand
-import com.github.ajalt.clikt.parameters.options.FlagOption
 import com.github.ajalt.clikt.parameters.options.OptionDelegate
+import com.github.ajalt.clikt.parameters.options.OptionWithValues
 import com.github.ajalt.clikt.parameters.options.defaultLazy
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
@@ -35,7 +35,8 @@ import java.nio.file.Paths
 public fun CliktCommand.dryRunOption(
   vararg names: String = arrayOf("--dry-run"),
   help: String = "Runs this as a dry run, no modifications."
-): FlagOption<Boolean> = option(names = names, help = help).flag(default = false)
+): OptionWithValues<Boolean, Boolean, Boolean> =
+  option(names = names, help = help).flag(default = false)
 
 /** A project dir option for [clikt commands][CliktCommand]. */
 public fun CliktCommand.projectDirOption(
