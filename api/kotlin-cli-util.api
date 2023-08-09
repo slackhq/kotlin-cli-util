@@ -8,6 +8,7 @@ public final class slack/cli/AppleSiliconCompat$Arch : java/lang/Enum {
 	public static final field ARM64 Lslack/cli/AppleSiliconCompat$Arch;
 	public static final field Companion Lslack/cli/AppleSiliconCompat$Arch$Companion;
 	public static final field X86_64 Lslack/cli/AppleSiliconCompat$Arch;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lslack/cli/AppleSiliconCompat$Arch;
 	public static fun values ()[Lslack/cli/AppleSiliconCompat$Arch;
 }
