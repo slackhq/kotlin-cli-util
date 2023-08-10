@@ -19,7 +19,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlin.reflect.full.declaredMemberProperties
 
-private const val CURRENT_VERSION = 1
+internal const val CURRENT_VERSION = 2
 
 /** Represents a configuration for [ShellSentryCli]. */
 @JsonClass(generateAdapter = true)
