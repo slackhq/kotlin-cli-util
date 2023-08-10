@@ -27,6 +27,7 @@ import java.lang.reflect.Type
 
 /** Decodes a List<T> that could also come down the wire as a single element. */
 internal class SingleItemListJsonAdapterFactory : JsonAdapter.Factory {
+  @Suppress("ReturnCount")
   override fun create(type: Type, annotations: Set<Annotation>, moshi: Moshi): JsonAdapter<*>? {
     if (annotations.isNotEmpty()) return null
 
