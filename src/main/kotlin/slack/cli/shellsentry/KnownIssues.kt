@@ -27,7 +27,8 @@ internal object KnownIssues {
     Issue(
       message = "Fake failure",
       logMessage = "Detected fake failure. Beep boop.",
-      matchingText = "FAKE FAILURE NOT REAL",
+      matchingText = listOf("FAKE FAILURE NOT REAL"),
+      matchingPatterns = listOf(".*FAKE_FAILURE_[a-zA-Z].*".toRegex()),
       groupingHash = "fake-failure",
       retrySignal = RetrySignal.Ack
     )
@@ -35,7 +36,7 @@ internal object KnownIssues {
   val ftlRateLimit =
     Issue(
       message = "FTL rate limit",
-      matchingText = "429 Too Many Requests",
+      matchingText = listOf("429 Too Many Requests"),
       logMessage = "Detected FTL rate limit. Retrying in 1 minute.",
       groupingHash = "ftl-rate-limit",
       retrySignal = RetrySignal.RetryDelayed(1.minutes)
@@ -44,7 +45,7 @@ internal object KnownIssues {
   val oom =
     Issue(
       message = "Generic OOM",
-      matchingText = "Java heap space",
+      matchingText = listOf("Java heap space"),
       logMessage = "Detected OOM. Retrying immediately.",
       groupingHash = OOM_GROUPING_HASH,
       retrySignal = RetrySignal.RetryImmediately
@@ -53,7 +54,7 @@ internal object KnownIssues {
   val ftlInfrastructureFailure =
     Issue(
       message = "Inconclusive FTL infrastructure failure",
-      matchingText = "Infrastructure failure",
+      matchingText = listOf("Infrastructure failure"),
       logMessage = "Detected inconclusive FTL infrastructure failure. Retrying immediately.",
       groupingHash = "ftl-infrastructure-failure",
       retrySignal = RetrySignal.RetryImmediately
@@ -63,7 +64,7 @@ internal object KnownIssues {
     Issue(
       message = "Flank timeout",
       groupingHash = "flank-timeout",
-      matchingText = "Canceling flank due to timeout",
+      matchingText = listOf("Canceling flank due to timeout"),
       logMessage = "Detected a flank timeout. Retrying immediately.",
       retrySignal = RetrySignal.RetryImmediately
     )
@@ -71,7 +72,7 @@ internal object KnownIssues {
   val r8Oom =
     Issue(
       message = "R8 OOM",
-      matchingText = "Out of space in CodeCache",
+      matchingText = listOf("Out of space in CodeCache"),
       logMessage = "Detected a OOM in R8. Retrying immediately.",
       groupingHash = OOM_GROUPING_HASH,
       retrySignal = RetrySignal.RetryImmediately
@@ -81,7 +82,7 @@ internal object KnownIssues {
     Issue(
       message = "OOM killed by kernel",
       groupingHash = OOM_GROUPING_HASH,
-      matchingText = "Gradle build daemon disappeared unexpectedly",
+      matchingText = listOf("Gradle build daemon disappeared unexpectedly"),
       logMessage = "Detected a OOM that was killed by the kernel. Retrying immediately.",
       retrySignal = RetrySignal.RetryImmediately
     )
@@ -90,7 +91,7 @@ internal object KnownIssues {
     Issue(
       message = "Bugsnag artifact upload failure",
       groupingHash = "bugsnag-upload-failure",
-      matchingText = "Bugsnag request failed to complete",
+      matchingText = listOf("Bugsnag request failed to complete"),
       logMessage = "Detected bugsnag failed to upload. Retrying immediately.",
       retrySignal = RetrySignal.RetryImmediately
     )

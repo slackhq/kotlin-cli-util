@@ -131,6 +131,26 @@ class ResultProcessorTest {
   }
 
   @Test
+  fun matchingPattern_matches() {
+    val outputFile = tmpFolder.newFile("logs.txt")
+    outputFile.writeText("""
+      FAKE_FAILURE_a
+      """.trimIndent().padWithTestLogs())
+    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    check(signal is RetrySignal.Ack)
+  }
+
+  @Test
+  fun matchingPattern_doesNotMatch() {
+    val outputFile = tmpFolder.newFile("logs.txt")
+    outputFile.writeText("""
+      FAKE_FAILURE-a
+      """.trimIndent().padWithTestLogs())
+    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    check(signal is RetrySignal.Unknown)
+  }
+
+  @Test
   fun parseBuildScan() {
     val url = "https://gradle-enterprise.example.com"
     val scanUrl = "$url/s/ueizlbptdqv6q"
