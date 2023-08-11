@@ -1,6 +1,16 @@
 Changelog
 =========
 
+2.1.0
+-----
+
+_2023-08-10_
+
+- **New**: Add `Issue.matching_patterns` to ShellSentry's config. This allows you to specify a list of regexs to match again instead of just text.
+- **Enhancement**: Support multiple matching text inputs to ShellSentry's config. This is a JSON-source-compatible change, single-entry inputs will be wrapped in a list.
+
+These technically introduce breaking changes to `Issue`, but we are currently considering this class to be read-only.
+
 2.0.0
 -----
 
