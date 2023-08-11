@@ -29,13 +29,13 @@ class ShellSentryConfigTest {
     val json =
       """
       {
-        "version": 1,
+        "version": $CURRENT_VERSION,
         "gradle_enterprise_server": "https://gradle-enterprise.example.com",
         "known_issues": [
           {
             "message": "${KnownIssues.ftlRateLimit.message}",
             "log_message": "${KnownIssues.ftlRateLimit.logMessage}",
-            "matching_text": "${KnownIssues.ftlRateLimit.matchingText}",
+            "matching_text": "${KnownIssues.ftlRateLimit.matchingText[0]}",
             "grouping_hash": "${KnownIssues.ftlRateLimit.groupingHash}",
             "retry_signal": {
               "type": "delayed",
@@ -51,7 +51,7 @@ class ShellSentryConfigTest {
     assertThat(issue)
       .isEqualTo(
         ShellSentryConfig(
-          1,
+          CURRENT_VERSION,
           "https://gradle-enterprise.example.com",
           listOf(KnownIssues.ftlRateLimit)
         )

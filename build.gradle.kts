@@ -16,7 +16,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   alias(libs.plugins.kotlin.jvm)
@@ -61,14 +60,6 @@ tasks.withType<JavaCompile>().configureEach {
   options.release.set(libs.versions.jvmTarget.get().toInt())
 }
 
-tasks.withType<KotlinCompile>().configureEach {
-  compilerOptions {
-    jvmTarget.set(JvmTarget.fromTarget(libs.versions.jvmTarget.get()))
-    allWarningsAsErrors.set(true)
-    freeCompilerArgs.add("-progressive")
-  }
-}
-
 tasks.withType<Detekt>().configureEach { jvmTarget = libs.versions.jvmTarget.get() }
 
 tasks.withType<DokkaTask>().configureEach {
@@ -81,7 +72,15 @@ mavenPublishing {
   signAllPublications()
 }
 
-kotlin { explicitApi() }
+kotlin {
+  explicitApi()
+  compilerOptions {
+    jvmTarget.set(libs.versions.jvmTarget.map(JvmTarget::fromTarget))
+    allWarningsAsErrors.set(true)
+    progressiveMode.set(true)
+    optIn.add("kotlin.ExperimentalStdlibApi")
+  }
+}
 
 moshi { enableSealed.set(true) }
 

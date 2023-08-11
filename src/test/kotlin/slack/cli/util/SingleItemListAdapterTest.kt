@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package slack.cli.shellsentry
+package slack.cli.util
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.addAdapter
-import slack.cli.util.DurationJsonAdapter
-import slack.cli.util.RegexJsonAdapter
-import slack.cli.util.SingleItemListJsonAdapterFactory
+import com.squareup.moshi.adapter
+import org.junit.Test
+import slack.cli.shellsentry.ProcessingUtil
 
-internal object ProcessingUtil {
-  fun newMoshi(): Moshi {
-    return Moshi.Builder()
-      .add(SingleItemListJsonAdapterFactory())
-      .addAdapter(DurationJsonAdapter())
-      .add(RegexJsonAdapter.Factory())
-      .build()
+class SingleItemListAdapterTest {
+  @Test
+  fun singleItem() {
+    val moshi = ProcessingUtil.newMoshi()
+
+    val list = moshi.adapter<List<String>>().fromJson(""""foo"""")!!
+    assert(list.size == 1)
+    assert(list[0] == "foo")
   }
 }
