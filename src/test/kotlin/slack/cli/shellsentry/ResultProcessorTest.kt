@@ -90,7 +90,7 @@ class ResultProcessorTest {
         .trimIndent()
         .padWithTestLogs()
     )
-    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Unknown)
   }
 
@@ -102,7 +102,7 @@ class ResultProcessorTest {
       ${KnownIssues.ftlRateLimit.matchingText}
       """.trimIndent().padWithTestLogs()
     )
-    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.RetryDelayed)
   }
 
@@ -114,7 +114,7 @@ class ResultProcessorTest {
       ${KnownIssues.oom.matchingText}
       """.trimIndent().padWithTestLogs()
     )
-    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.RetryImmediately)
   }
 
@@ -126,7 +126,7 @@ class ResultProcessorTest {
       ${KnownIssues.fakeFailure.matchingText}
       """.trimIndent().padWithTestLogs()
     )
-    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Ack)
   }
 
@@ -136,7 +136,7 @@ class ResultProcessorTest {
     outputFile.writeText("""
       FAKE_FAILURE_a
       """.trimIndent().padWithTestLogs())
-    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Ack)
   }
 
@@ -146,7 +146,7 @@ class ResultProcessorTest {
     outputFile.writeText("""
       FAKE_FAILURE-a
       """.trimIndent().padWithTestLogs())
-    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Unknown)
   }
 
