@@ -37,7 +37,7 @@ import java.nio.file.Path
  * }
  * ```
  */
-public interface ShellSentryExtension {
+public fun interface ShellSentryExtension {
   /**
    * Returns a result of this extension's analysis. Returns null if this extension could not handle
    * failure.

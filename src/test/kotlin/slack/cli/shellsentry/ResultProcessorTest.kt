@@ -16,16 +16,47 @@
 package slack.cli.shellsentry
 
 import com.google.common.truth.Truth.assertThat
+import kotlin.io.path.readLines
 import kotlin.io.path.readText
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
+import org.junit.runners.Parameterized.Parameters
 
-class ResultProcessorTest {
+@RunWith(Parameterized::class)
+class ResultProcessorTest(
+  private val useExtensions: Boolean,
+) {
+
+  companion object {
+    @Parameters(name = "useExtensions = {0}")
+    @JvmStatic
+    fun data(): List<Array<Any>> {
+      return listOf(
+        arrayOf(true),
+        arrayOf(false),
+      )
+    }
+  }
 
   @JvmField @Rule val tmpFolder = TemporaryFolder()
 
   private val logs = ArrayDeque<String>()
+
+  private val testExtensions =
+    listOf(
+        KnownIssues.ftlRateLimit,
+        KnownIssues.oom,
+        KnownIssues.fakeFailure,
+      )
+      .map { issue ->
+        ShellSentryExtension { _, _, _, consoleOutput ->
+          val signal = issue.check(consoleOutput.readLines(), logs::add)
+          AnalysisResult(issue.message, issue.logMessage, signal, 100) { KnownIssue(issue) }
+        }
+      }
 
   @Test
   fun testExecuteCommand() {
@@ -166,12 +197,16 @@ class ResultProcessorTest {
     assertThat(log.lines().reversed().parseBuildScan(url)).isEqualTo(scanUrl)
   }
 
-  private fun newProcessor(): ResultProcessor {
+  private fun newProcessor(
+    useIssues: Boolean = !useExtensions,
+    extensions: List<ShellSentryExtension> = if (useExtensions) testExtensions else emptyList()
+  ): ResultProcessor {
     return ResultProcessor(
       verbose = true,
       bugsnagKey = null,
-      config = ShellSentryConfig(),
-      echo = logs::add
+      config = if (useIssues) ShellSentryConfig() else ShellSentryConfig(knownIssues = emptyList()),
+      echo = logs::add,
+      extensions = extensions,
     )
   }
 
