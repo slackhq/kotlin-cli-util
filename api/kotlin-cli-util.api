@@ -37,10 +37,72 @@ public final class slack/cli/Toml {
 	public final fun parseVersion (Ljava/io/File;)Ljava/util/Map;
 }
 
+public final class slack/cli/shellsentry/Issue {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/shellsentry/RetrySignal;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/shellsentry/RetrySignal;Ljava/lang/String;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/shellsentry/RetrySignal;Ljava/lang/String;Ljava/util/List;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/shellsentry/RetrySignal;Ljava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/shellsentry/RetrySignal;Ljava/lang/String;Ljava/util/List;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Lslack/cli/shellsentry/RetrySignal;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/shellsentry/RetrySignal;Ljava/lang/String;Ljava/util/List;Ljava/util/List;)Lslack/cli/shellsentry/Issue;
+	public static synthetic fun copy$default (Lslack/cli/shellsentry/Issue;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/shellsentry/RetrySignal;Ljava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lslack/cli/shellsentry/Issue;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getGroupingHash ()Ljava/lang/String;
+	public final fun getLogMessage ()Ljava/lang/String;
+	public final fun getMatchingPatterns ()Ljava/util/List;
+	public final fun getMatchingText ()Ljava/util/List;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getRetrySignal ()Lslack/cli/shellsentry/RetrySignal;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class slack/cli/shellsentry/IssueJsonAdapter : com/squareup/moshi/JsonAdapter {
 	public fun <init> (Lcom/squareup/moshi/Moshi;)V
 	public fun fromJson (Lcom/squareup/moshi/JsonReader;)Ljava/lang/Object;
 	public fun toJson (Lcom/squareup/moshi/JsonWriter;Ljava/lang/Object;)V
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class slack/cli/shellsentry/RetrySignal {
+}
+
+public final class slack/cli/shellsentry/RetrySignal$Ack : slack/cli/shellsentry/RetrySignal {
+	public static final field INSTANCE Lslack/cli/shellsentry/RetrySignal$Ack;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class slack/cli/shellsentry/RetrySignal$RetryDelayed : slack/cli/shellsentry/RetrySignal {
+	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-UwyO8pc ()J
+	public final fun copy-LRDsOJo (J)Lslack/cli/shellsentry/RetrySignal$RetryDelayed;
+	public static synthetic fun copy-LRDsOJo$default (Lslack/cli/shellsentry/RetrySignal$RetryDelayed;JILjava/lang/Object;)Lslack/cli/shellsentry/RetrySignal$RetryDelayed;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDelay-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class slack/cli/shellsentry/RetrySignal$RetryImmediately : slack/cli/shellsentry/RetrySignal {
+	public static final field INSTANCE Lslack/cli/shellsentry/RetrySignal$RetryImmediately;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class slack/cli/shellsentry/RetrySignal$Unknown : slack/cli/shellsentry/RetrySignal {
+	public static final field INSTANCE Lslack/cli/shellsentry/RetrySignal$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -58,9 +120,42 @@ public final class slack/cli/shellsentry/RetrySignal_RetryDelayedJsonAdapter : c
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class slack/cli/shellsentry/ShellSentry {
+	public static final field Companion Lslack/cli/shellsentry/ShellSentry$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/lang/String;Lslack/cli/shellsentry/ShellSentryConfig;ZZZLkotlin/jvm/functions/Function1;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/lang/String;Lslack/cli/shellsentry/ShellSentryConfig;ZZZLkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun copy (Ljava/lang/String;Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/lang/String;Lslack/cli/shellsentry/ShellSentryConfig;ZZZLkotlin/jvm/functions/Function1;)Lslack/cli/shellsentry/ShellSentry;
+	public static synthetic fun copy$default (Lslack/cli/shellsentry/ShellSentry;Ljava/lang/String;Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/lang/String;Lslack/cli/shellsentry/ShellSentryConfig;ZZZLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lslack/cli/shellsentry/ShellSentry;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun exec ()V
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class slack/cli/shellsentry/ShellSentry$Companion {
+	public final fun create ([Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lslack/cli/shellsentry/ShellSentry;
+}
+
 public final class slack/cli/shellsentry/ShellSentryCli : com/github/ajalt/clikt/core/CliktCommand {
 	public fun <init> ()V
 	public fun run ()V
+}
+
+public final class slack/cli/shellsentry/ShellSentryConfig {
+	public fun <init> ()V
+	public fun <init> (ILjava/lang/String;Ljava/util/List;)V
+	public synthetic fun <init> (ILjava/lang/String;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun copy (ILjava/lang/String;Ljava/util/List;)Lslack/cli/shellsentry/ShellSentryConfig;
+	public static synthetic fun copy$default (Lslack/cli/shellsentry/ShellSentryConfig;ILjava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lslack/cli/shellsentry/ShellSentryConfig;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getGradleEnterpriseServer ()Ljava/lang/String;
+	public final fun getKnownIssues ()Ljava/util/List;
+	public final fun getVersion ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class slack/cli/shellsentry/ShellSentryConfigJsonAdapter : com/squareup/moshi/JsonAdapter {

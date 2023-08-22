@@ -20,33 +20,21 @@ import dev.zacsweers.moshix.sealed.annotations.TypeLabel
 import kotlin.time.Duration
 
 @JsonClass(generateAdapter = true, generator = "sealed:type")
-internal sealed interface RetrySignal {
+public sealed interface RetrySignal {
 
   /** Unknown issue. */
-  @TypeLabel("unknown")
-  object Unknown : RetrySignal {
-    // TODO remove when we have data objects in Kotlin 1.9
-    override fun toString() = this::class.simpleName!!
-  }
+  @TypeLabel("unknown") public data object Unknown : RetrySignal
 
   /** Indicates an issue that is recognized but cannot be retried. */
-  @TypeLabel("ack")
-  object Ack : RetrySignal {
-    // TODO remove when we have data objects in Kotlin 1.9
-    override fun toString() = this::class.simpleName!!
-  }
+  @TypeLabel("ack") public data object Ack : RetrySignal
 
   /** Indicates this issue should be retried immediately. */
-  @TypeLabel("immediate")
-  object RetryImmediately : RetrySignal {
-    // TODO remove when we have data objects in Kotlin 1.9
-    override fun toString() = this::class.simpleName!!
-  }
+  @TypeLabel("immediate") public data object RetryImmediately : RetrySignal
 
   /** Indicates this issue should be retried after a [delay]. */
   @TypeLabel("delayed")
   @JsonClass(generateAdapter = true)
-  data class RetryDelayed(
+  public data class RetryDelayed(
     // Can't default to 1.minutes due to https://github.com/ZacSweers/MoshiX/issues/442
     val delay: Duration
   ) : RetrySignal

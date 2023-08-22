@@ -33,7 +33,7 @@ import com.squareup.moshi.JsonClass
  * @property retrySignal the [RetrySignal] to use when this issue is found.
  */
 @JsonClass(generateAdapter = true)
-internal data class Issue
+public data class Issue
 @JvmOverloads
 constructor(
   val message: String,
@@ -57,7 +57,7 @@ constructor(
 
   /** Checks the log for this issue and returns a [RetrySignal] if it should be retried. */
   @Suppress("ReturnCount")
-  fun check(lines: List<String>, log: (String) -> Unit): RetrySignal {
+  internal fun check(lines: List<String>, log: (String) -> Unit): RetrySignal {
     if (matchingText.isNotEmpty()) {
       for (matchingText in matchingText) {
         if (lines.checkMatches { it.contains(matchingText, ignoreCase = true) }) {
@@ -85,7 +85,6 @@ constructor(
  * purposes but doesn't fill in a stacktrace.
  */
 internal class IssueThrowable(issue: Issue) : Throwable(issue.message) {
-
   override fun fillInStackTrace(): Throwable {
     // Do nothing, the stacktrace isn't relevant for these!
     return this
