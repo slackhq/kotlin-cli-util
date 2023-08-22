@@ -49,6 +49,7 @@ internal class ResultProcessor(
   private val extensions: List<ShellSentryExtension> = emptyList(),
 ) {
 
+  @Suppress("LongMethod", "CyclomaticComplexMethod", "NestedBlockDepth", "ReturnCount")
   fun process(command: String, exitCode: Int, logFile: Path, isAfterRetry: Boolean): RetrySignal {
     echo("Processing CI log from ${logFile.absolutePathString()}")
 
