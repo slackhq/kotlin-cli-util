@@ -15,13 +15,17 @@
  */
 package slack.cli.shellsentry
 
+import com.squareup.moshi.adapter
 import eu.jrie.jetbrains.kotlinshell.shell.shell
 import java.nio.file.Path
 import kotlin.io.path.ExperimentalPathApi
+import kotlin.io.path.createDirectories
 import kotlin.io.path.createTempDirectory
 import kotlin.io.path.createTempFile
 import kotlin.io.path.deleteRecursively
 import kotlin.system.exitProcess
+import okio.buffer
+import okio.source
 
 /**
  * Executes a command with Bugsnag tracing and retries as needed.
@@ -36,10 +40,10 @@ import kotlin.system.exitProcess
  * @property debug whether to keep the cache directory around for debugging. Otherwise, it will be
  *   deleted at the end.
  * @property noExit whether to exit the process with the exit code. This is useful for testing.
- * @property echo a function to echo output to. Defaults to [println].
+ * @property logger a function to log output to. Defaults to [println].
  */
 @Suppress("LongParameterList")
-public class ShellSentry(
+public data class ShellSentry(
   private val command: String,
   private val workingDir: Path,
   private val cacheDir: Path = createTempDirectory("shellsentry"),
@@ -48,7 +52,7 @@ public class ShellSentry(
   private val verbose: Boolean = false,
   private val debug: Boolean = false,
   private val noExit: Boolean = false,
-  private val echo: (String) -> Unit = ::println,
+  private val logger: (String) -> Unit = ::println,
 ) {
 
   @Suppress("CyclomaticComplexMethod", "LongMethod")
@@ -61,21 +65,21 @@ public class ShellSentry(
     var attempts = 0
     while (exitCode != 0 && attempts < 1) {
       attempts++
-      echo(
+      logger(
         "Command failed with exit code $exitCode. Running processor script (attempt $attempts)..."
       )
 
-      echo("Processing CI failure")
-      val resultProcessor = ResultProcessor(verbose, bugsnagKey, config, echo)
+      logger("Processing CI failure")
+      val resultProcessor = ResultProcessor(verbose, bugsnagKey, config, logger)
 
       when (val retrySignal = resultProcessor.process(logFile, false)) {
         is RetrySignal.Ack,
         RetrySignal.Unknown -> {
-          echo("Processor exited with 0, exiting with original exit code...")
+          logger("Processor exited with 0, exiting with original exit code...")
           break
         }
         is RetrySignal.RetryDelayed -> {
-          echo(
+          logger(
             "Processor script exited with 2, rerunning the command after ${retrySignal.delay}..."
           )
           // TODO add option to reclaim memory?
@@ -89,7 +93,7 @@ public class ShellSentry(
           }
         }
         is RetrySignal.RetryImmediately -> {
-          echo("Processor script exited with 1, rerunning the command immediately...")
+          logger("Processor script exited with 1, rerunning the command immediately...")
           // TODO add option to reclaim memory?
           val secondResult = executeCommand(command, cacheDir)
           exitCode = secondResult.exitCode
@@ -108,7 +112,7 @@ public class ShellSentry(
       cacheDir.deleteRecursively()
     }
 
-    echo("Exiting with code $exitCode")
+    logger("Exiting with code $exitCode")
     if (!noExit) {
       exitProcess(exitCode)
     }
@@ -116,7 +120,45 @@ public class ShellSentry(
 
   // Function to execute command and capture output. Shorthand to the testable top-level function.
   private fun executeCommand(command: String, tmpDir: Path) =
-    executeCommand(workingDir, command, tmpDir, echo)
+    executeCommand(workingDir, command, tmpDir, logger)
+
+  public companion object {
+    /** Creates a new instance with the given [argv] command line args as input. */
+    public fun create(argv: Array<String>, echo: (String) -> Unit): ShellSentry {
+      val cli = ShellSentryCli().apply { main(argv + "--parse-only") }
+      return create(cli, echo)
+    }
+
+    /** Internal function to consolidate CLI args -> [ShellSentry] creation logic. */
+    internal fun create(
+      cli: ShellSentryCli,
+      logger: (String) -> Unit = { cli.echo(it) }
+    ): ShellSentry {
+      val moshi = ProcessingUtil.newMoshi()
+      val config =
+        cli.configurationFile?.let {
+          logger("Parsing config file '$it'")
+          it.source().buffer().use { source -> moshi.adapter<ShellSentryConfig>().fromJson(source) }
+        }
+          ?: ShellSentryConfig()
+
+      // Temporary dir for command output
+      val cacheDir = cli.projectDir.resolve("tmp/shellsentry")
+      cacheDir.createDirectories()
+
+      return ShellSentry(
+        command = cli.args.joinToString(" "),
+        workingDir = cli.projectDir,
+        cacheDir = cacheDir,
+        config = config,
+        verbose = cli.verbose,
+        bugsnagKey = cli.bugsnagKey,
+        debug = cli.debug,
+        noExit = cli.noExit,
+        logger = logger
+      )
+    }
+  }
 }
 
 internal data class ProcessResult(val exitCode: Int, val outputFile: Path)

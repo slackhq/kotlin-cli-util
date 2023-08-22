@@ -21,10 +21,6 @@ import com.github.ajalt.clikt.parameters.arguments.multiple
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.path
-import com.squareup.moshi.adapter
-import kotlin.io.path.createDirectories
-import okio.buffer
-import okio.source
 import org.jetbrains.annotations.TestOnly
 import slack.cli.projectDirOption
 
@@ -50,10 +46,10 @@ public class ShellSentryCli :
     option("--config", envvar = "PE_CONFIGURATION_FILE")
       .path(mustExist = true, canBeFile = true, canBeDir = false)
 
-  private val debug by option("--debug", "-d").flag()
+  internal val debug by option("--debug", "-d").flag()
 
   @get:TestOnly
-  private val noExit by
+  internal val noExit by
     option(
         "--no-exit",
         help = "Instructs this CLI to not exit the process with the status code. Test only!"
@@ -67,29 +63,6 @@ public class ShellSentryCli :
   override fun run() {
     if (parseOnly) return
 
-    val moshi = ProcessingUtil.newMoshi()
-    val config =
-      configurationFile?.let {
-        echo("Parsing config file '$it'")
-        it.source().buffer().use { source -> moshi.adapter<ShellSentryConfig>().fromJson(source) }
-      }
-        ?: ShellSentryConfig()
-
-    // Temporary dir for command output
-    val cacheDir = projectDir.resolve("tmp/shellsentry")
-    cacheDir.createDirectories()
-
-    ShellSentry(
-        command = args.joinToString(" "),
-        workingDir = projectDir,
-        cacheDir = cacheDir,
-        config = config,
-        verbose = verbose,
-        bugsnagKey = bugsnagKey,
-        debug = debug,
-        noExit = noExit,
-        echo = ::echo
-      )
-      .exec()
+    return ShellSentry.create(this).exec()
   }
 }
