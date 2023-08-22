@@ -23,7 +23,7 @@ internal const val CURRENT_VERSION = 2
 
 /** Represents a configuration for [ShellSentryCli]. */
 @JsonClass(generateAdapter = true)
-internal data class ShellSentryConfig(
+public data class ShellSentryConfig(
   val version: Int = CURRENT_VERSION,
   @Json(name = "gradle_enterprise_server") val gradleEnterpriseServer: String? = null,
   @Json(name = "known_issues")
