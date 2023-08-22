@@ -18,6 +18,7 @@ package slack.cli.shellsentry
 import com.google.common.truth.Truth.assertThat
 import kotlin.io.path.readLines
 import kotlin.io.path.readText
+import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
@@ -54,7 +55,9 @@ class ResultProcessorTest(
       .map { issue ->
         ShellSentryExtension { _, _, _, consoleOutput ->
           val signal = issue.check(consoleOutput.readLines(), logs::add)
-          AnalysisResult(issue.message, issue.logMessage, signal, 100) { KnownIssue(issue) }
+          // Give all these 75% confidence. Higher than the default, but not 100 so we can test
+          // higher confidence later
+          AnalysisResult(issue.message, issue.logMessage, signal, 75) { KnownIssue(issue) }
         }
       }
 
@@ -197,14 +200,30 @@ class ResultProcessorTest(
     assertThat(log.lines().reversed().parseBuildScan(url)).isEqualTo(scanUrl)
   }
 
+  @Test
+  fun lowConfidenceMatch_isSkipped() {
+    assumeTrue(useExtensions)
+    val outputFile = tmpFolder.newFile("logs.txt")
+    outputFile.writeText("""
+      FAKE_FAILURE_a
+      """.trimIndent().padWithTestLogs())
+    val signal =
+      newProcessor(
+          config = ShellSentryConfig(knownIssues = emptyList(), minConfidence = 100),
+        )
+        .process("", 1, outputFile.toPath(), isAfterRetry = false)
+    check(signal is RetrySignal.Unknown)
+  }
+
   private fun newProcessor(
-    useIssues: Boolean = !useExtensions,
-    extensions: List<ShellSentryExtension> = if (useExtensions) testExtensions else emptyList()
+    extensions: List<ShellSentryExtension> = if (useExtensions) testExtensions else emptyList(),
+    config: ShellSentryConfig =
+      if (!useExtensions) ShellSentryConfig() else ShellSentryConfig(knownIssues = emptyList()),
   ): ResultProcessor {
     return ResultProcessor(
       verbose = true,
       bugsnagKey = null,
-      config = if (useIssues) ShellSentryConfig() else ShellSentryConfig(knownIssues = emptyList()),
+      config = config,
       echo = logs::add,
       extensions = extensions,
     )
