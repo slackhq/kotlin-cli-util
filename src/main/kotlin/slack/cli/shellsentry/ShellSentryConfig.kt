@@ -29,6 +29,11 @@ public data class ShellSentryConfig(
   @Json(name = "known_issues")
   val knownIssues: List<Issue> =
     KnownIssues::class.declaredMemberProperties.map { it.get(KnownIssues) as Issue },
+  /**
+   * A minimum confidence level on a scale of [0-100] to accept. [AnalysisResult]s from
+   * [ShellSentryExtension]s with lower confidence than this will be discarded.
+   */
+  @Json(name = "min_confidence") val minConfidence: Int = 75
 ) {
   init {
     check(version == CURRENT_VERSION) {

@@ -53,6 +53,7 @@ public data class ShellSentry(
   private val debug: Boolean = false,
   private val noExit: Boolean = false,
   private val logger: (String) -> Unit = ::println,
+  private val extensions: List<ShellSentryExtension> = emptyList()
 ) {
 
   @Suppress("CyclomaticComplexMethod", "LongMethod")
@@ -70,9 +71,9 @@ public data class ShellSentry(
       )
 
       logger("Processing CI failure")
-      val resultProcessor = ResultProcessor(verbose, bugsnagKey, config, logger)
+      val resultProcessor = ResultProcessor(verbose, bugsnagKey, config, logger, extensions)
 
-      when (val retrySignal = resultProcessor.process(logFile, false)) {
+      when (val retrySignal = resultProcessor.process(command, exitCode, logFile, false)) {
         is RetrySignal.Ack,
         RetrySignal.Unknown -> {
           logger("Processor exited with 0, exiting with original exit code...")
@@ -89,7 +90,12 @@ public data class ShellSentry(
           logFile = secondResult.outputFile
           if (secondResult.exitCode != 0) {
             // Process the second failure, then bounce out
-            resultProcessor.process(secondResult.outputFile, isAfterRetry = true)
+            resultProcessor.process(
+              command,
+              secondResult.exitCode,
+              secondResult.outputFile,
+              isAfterRetry = true
+            )
           }
         }
         is RetrySignal.RetryImmediately -> {
@@ -100,7 +106,12 @@ public data class ShellSentry(
           logFile = secondResult.outputFile
           if (secondResult.exitCode != 0) {
             // Process the second failure, then bounce out
-            resultProcessor.process(secondResult.outputFile, isAfterRetry = true)
+            resultProcessor.process(
+              command,
+              secondResult.exitCode,
+              secondResult.outputFile,
+              isAfterRetry = true
+            )
           }
         }
       }

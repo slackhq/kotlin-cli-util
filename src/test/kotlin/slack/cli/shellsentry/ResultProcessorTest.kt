@@ -16,16 +16,50 @@
 package slack.cli.shellsentry
 
 import com.google.common.truth.Truth.assertThat
+import kotlin.io.path.readLines
 import kotlin.io.path.readText
+import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
+import org.junit.runners.Parameterized.Parameters
 
-class ResultProcessorTest {
+@RunWith(Parameterized::class)
+class ResultProcessorTest(
+  private val useExtensions: Boolean,
+) {
+
+  companion object {
+    @Parameters(name = "useExtensions = {0}")
+    @JvmStatic
+    fun data(): List<Array<Any>> {
+      return listOf(
+        arrayOf(true),
+        arrayOf(false),
+      )
+    }
+  }
 
   @JvmField @Rule val tmpFolder = TemporaryFolder()
 
   private val logs = ArrayDeque<String>()
+
+  private val testExtensions =
+    listOf(
+        KnownIssues.ftlRateLimit,
+        KnownIssues.oom,
+        KnownIssues.fakeFailure,
+      )
+      .map { issue ->
+        ShellSentryExtension { _, _, _, consoleOutput ->
+          val signal = issue.check(consoleOutput.readLines(), logs::add)
+          // Give all these 75% confidence. Higher than the default, but not 100 so we can test
+          // higher confidence later
+          AnalysisResult(issue.message, issue.logMessage, signal, 75) { KnownIssue(issue) }
+        }
+      }
 
   @Test
   fun testExecuteCommand() {
@@ -90,7 +124,7 @@ class ResultProcessorTest {
         .trimIndent()
         .padWithTestLogs()
     )
-    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Unknown)
   }
 
@@ -102,7 +136,7 @@ class ResultProcessorTest {
       ${KnownIssues.ftlRateLimit.matchingText}
       """.trimIndent().padWithTestLogs()
     )
-    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.RetryDelayed)
   }
 
@@ -114,7 +148,7 @@ class ResultProcessorTest {
       ${KnownIssues.oom.matchingText}
       """.trimIndent().padWithTestLogs()
     )
-    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.RetryImmediately)
   }
 
@@ -126,7 +160,7 @@ class ResultProcessorTest {
       ${KnownIssues.fakeFailure.matchingText}
       """.trimIndent().padWithTestLogs()
     )
-    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Ack)
   }
 
@@ -136,7 +170,7 @@ class ResultProcessorTest {
     outputFile.writeText("""
       FAKE_FAILURE_a
       """.trimIndent().padWithTestLogs())
-    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Ack)
   }
 
@@ -146,7 +180,7 @@ class ResultProcessorTest {
     outputFile.writeText("""
       FAKE_FAILURE-a
       """.trimIndent().padWithTestLogs())
-    val signal = newProcessor().process(outputFile.toPath(), isAfterRetry = false)
+    val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Unknown)
   }
 
@@ -166,12 +200,32 @@ class ResultProcessorTest {
     assertThat(log.lines().reversed().parseBuildScan(url)).isEqualTo(scanUrl)
   }
 
-  private fun newProcessor(): ResultProcessor {
+  @Test
+  fun lowConfidenceMatch_isSkipped() {
+    assumeTrue(useExtensions)
+    val outputFile = tmpFolder.newFile("logs.txt")
+    outputFile.writeText("""
+      FAKE_FAILURE_a
+      """.trimIndent().padWithTestLogs())
+    val signal =
+      newProcessor(
+          config = ShellSentryConfig(knownIssues = emptyList(), minConfidence = 100),
+        )
+        .process("", 1, outputFile.toPath(), isAfterRetry = false)
+    check(signal is RetrySignal.Unknown)
+  }
+
+  private fun newProcessor(
+    extensions: List<ShellSentryExtension> = if (useExtensions) testExtensions else emptyList(),
+    config: ShellSentryConfig =
+      if (!useExtensions) ShellSentryConfig() else ShellSentryConfig(knownIssues = emptyList()),
+  ): ResultProcessor {
     return ResultProcessor(
       verbose = true,
       bugsnagKey = null,
-      config = ShellSentryConfig(),
-      echo = logs::add
+      config = config,
+      echo = logs::add,
+      extensions = extensions,
     )
   }
 

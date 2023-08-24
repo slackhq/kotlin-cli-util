@@ -46,9 +46,11 @@ internal class ResultProcessor(
   private val bugsnagKey: String?,
   private val config: ShellSentryConfig,
   private val echo: (String) -> Unit,
+  private val extensions: List<ShellSentryExtension> = emptyList(),
 ) {
 
-  fun process(logFile: Path, isAfterRetry: Boolean): RetrySignal {
+  @Suppress("LongMethod", "CyclomaticComplexMethod", "NestedBlockDepth", "ReturnCount")
+  fun process(command: String, exitCode: Int, logFile: Path, isAfterRetry: Boolean): RetrySignal {
     echo("Processing CI log from ${logFile.absolutePathString()}")
 
     val bugsnag: Bugsnag? by lazy { bugsnagKey?.let { key -> createBugsnag(key) } }
@@ -62,7 +64,7 @@ internal class ResultProcessor(
         // Report to bugsnag. Shared common Throwable but with different messages.
         bugsnag?.let {
           verboseEcho("Reporting to bugsnag: $retrySignal")
-          it.notify(IssueThrowable(issue), Severity.ERROR) { report ->
+          it.notify(KnownIssue(issue), Severity.ERROR) { report ->
             // Group by the throwable message
             report.setGroupingHash(issue.groupingHash)
             report.addToTab("Run Info", "After-Retry", isAfterRetry)
@@ -82,7 +84,42 @@ internal class ResultProcessor(
       }
     }
 
-    // TODO some day log these into bugsnag too?
+    echo("No matching issues from config.json")
+    if (extensions.isNotEmpty()) {
+      echo("Checking extensions")
+      for (extension in extensions) {
+        val result = extension.check(command, exitCode, isAfterRetry, logFile) ?: continue
+
+        verboseEcho(result.message)
+        verboseEcho(result.explanation)
+
+        if (
+          result.retrySignal != RetrySignal.Unknown && result.confidence >= config.minConfidence
+        ) {
+          // Report to bugsnag. Shared common Throwable but with different messages.
+          bugsnag?.let {
+            verboseEcho("Reporting to bugsnag: ${result.retrySignal}")
+            it.notify(result.throwableMaker(result.message), Severity.ERROR) { report ->
+              report.addToTab("Run Info", "After-Retry", isAfterRetry)
+              config.gradleEnterpriseServer?.let(logLinesReversed::parseBuildScan)?.let { scanLink
+                ->
+                report.addToTab("Run Info", "Build-Scan", scanLink)
+              }
+              report.addToTab("Extensions", "Explanation", result.explanation)
+            }
+          }
+            ?: run { verboseEcho("Skipping bugsnag reporting: ${result.retrySignal}") }
+
+          if (result.retrySignal is RetrySignal.Ack) {
+            echo("Acknowledging issue but cannot retry: ${result.message}")
+          } else {
+            echo("Found retry signal: ${result.retrySignal}")
+          }
+          return result.retrySignal
+        }
+      }
+    }
+
     echo("No actionable items found in ${logFile.name}")
     return RetrySignal.Unknown
   }

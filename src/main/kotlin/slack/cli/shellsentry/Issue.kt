@@ -84,9 +84,12 @@ constructor(
  * Base class for an issue that can be reported to Bugsnag. This is a [Throwable] for BugSnag
  * purposes but doesn't fill in a stacktrace.
  */
-internal class IssueThrowable(issue: Issue) : Throwable(issue.message) {
+public abstract class NoStacktraceThrowable(message: String) : Throwable(message) {
   override fun fillInStackTrace(): Throwable {
     // Do nothing, the stacktrace isn't relevant for these!
     return this
   }
 }
+
+/** Common [Throwable] for all [Issue]s. This is used for reporting to Bugsnag. */
+internal class KnownIssue(issue: Issue) : NoStacktraceThrowable(issue.message)
