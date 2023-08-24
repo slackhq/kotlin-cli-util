@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.2.1
+-----
+
+_2023-08-24_
+
+- Fix `ShellSentry.create(argv)` putting the `--parse-only` flag in the wrong place.
+
 2.2.0
 -----
 

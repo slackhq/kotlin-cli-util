@@ -136,7 +136,7 @@ public data class ShellSentry(
   public companion object {
     /** Creates a new instance with the given [argv] command line args as input. */
     public fun create(argv: Array<String>, echo: (String) -> Unit): ShellSentry {
-      val cli = ShellSentryCli().apply { main(argv + "--parse-only") }
+      val cli = ShellSentryCli().apply { main(listOf("--parse-only") + argv) }
       return create(cli, echo)
     }
 
