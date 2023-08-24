@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.2.0
+-----
+
+_2023-08-24_
+
+- **New**: Extract `ShellSentry` program and make the CLI just wrap this.
+- **New**: Add `ShellSentryExtension` to allow adding custom checkers (i.e. non-static/not from config.json) to `ShellSentry`. See the doc on its interface for more details.
+
 2.1.0
 -----
 
