@@ -2,7 +2,7 @@
 kotlin = "1.9.10"
 ktfmt = "0.44"
 jvmTarget = "11"
-moshix = "0.24.0"
+moshix = "0.24.2"
 moshi = "1.15.0"
 
 [plugins]
