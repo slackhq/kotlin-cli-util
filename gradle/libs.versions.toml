@@ -23,6 +23,6 @@ kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref =
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 okhttp = "com.squareup.okhttp3:okhttp:4.11.0"
 okio = "com.squareup.okio:okio:3.5.0"
-slf4jNop = "org.slf4j:slf4j-nop:2.0.7"
+slf4jNop = "org.slf4j:slf4j-nop:2.0.9"
 junit = "junit:junit:4.13.2"
 truth = "com.google.truth:truth:1.1.5"
