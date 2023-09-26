@@ -90,12 +90,22 @@ internal class ResultProcessor(
       for (extension in extensions) {
         val result = extension.check(command, exitCode, isAfterRetry, logFile) ?: continue
 
-        verboseEcho(result.message)
-        verboseEcho(result.explanation)
+        verboseEcho(
+          """
+            Recognized issue from extension ${extension::class.simpleName}
+            - ${result.message}
+            - ${result.explanation}
+            - Confidence: ${result.explanation}%
+          """
+            .trimIndent()
+        )
 
-        if (
-          result.retrySignal != RetrySignal.Unknown && result.confidence >= config.minConfidence
-        ) {
+        if (result.confidence < config.minConfidence) {
+          verboseEcho("Confidence ${result.confidence} is below threshold ${config.minConfidence}")
+          continue
+        }
+
+        if (result.retrySignal != RetrySignal.Unknown) {
           // Report to bugsnag. Shared common Throwable but with different messages.
           bugsnag?.let {
             verboseEcho("Reporting to bugsnag: ${result.retrySignal}")
@@ -108,7 +118,7 @@ internal class ResultProcessor(
               report.addToTab("Extensions", "Explanation", result.explanation)
             }
           }
-            ?: run { verboseEcho("Skipping bugsnag reporting: ${result.retrySignal}") }
+            ?: run { verboseEcho("Skipping bugsnag reporting.") }
 
           if (result.retrySignal is RetrySignal.Ack) {
             echo("Acknowledging issue but cannot retry: ${result.message}")
