@@ -87,6 +87,7 @@ internal class ResultProcessor(
     echo("No matching issues from config.json")
     if (extensions.isNotEmpty()) {
       echo("Checking extensions")
+      @Suppress("LoopWithTooManyJumpStatements")
       for (extension in extensions) {
         val result = extension.check(command, exitCode, isAfterRetry, logFile) ?: continue
 
