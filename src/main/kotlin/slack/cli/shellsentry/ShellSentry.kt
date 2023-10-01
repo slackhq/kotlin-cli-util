@@ -150,8 +150,7 @@ public data class ShellSentry(
         cli.configurationFile?.let {
           logger("Parsing config file '$it'")
           it.source().buffer().use { source -> moshi.adapter<ShellSentryConfig>().fromJson(source) }
-        }
-          ?: ShellSentryConfig()
+        } ?: ShellSentryConfig()
 
       // Temporary dir for command output
       val cacheDir = cli.projectDir.resolve("tmp/shellsentry")

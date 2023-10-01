@@ -72,8 +72,7 @@ internal class ResultProcessor(
               report.addToTab("Run Info", "Build-Scan", scanLink)
             }
           }
-        }
-          ?: run { verboseEcho("Skipping bugsnag reporting: $retrySignal") }
+        } ?: run { verboseEcho("Skipping bugsnag reporting: $retrySignal") }
 
         if (retrySignal is RetrySignal.Ack) {
           echo("Recognized known issue but cannot retry: ${issue.message}")
@@ -87,6 +86,7 @@ internal class ResultProcessor(
     echo("No matching issues from config.json")
     if (extensions.isNotEmpty()) {
       echo("Checking extensions")
+      @Suppress("LoopWithTooManyJumpStatements")
       for (extension in extensions) {
         val result = extension.check(command, exitCode, isAfterRetry, logFile) ?: continue
 
@@ -117,8 +117,7 @@ internal class ResultProcessor(
               }
               report.addToTab("Extensions", "Explanation", result.explanation)
             }
-          }
-            ?: run { verboseEcho("Skipping bugsnag reporting.") }
+          } ?: run { verboseEcho("Skipping bugsnag reporting.") }
 
           if (result.retrySignal is RetrySignal.Ack) {
             echo("Acknowledging issue but cannot retry: ${result.message}")
