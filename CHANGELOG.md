@@ -1,6 +1,19 @@
 Changelog
 =========
 
+2.3.0
+-----
+
+_2023-10-30_
+
+- Add new `LintBaselineMergerCli` for merging lint baseline files into a sarif output file.
+- Improve logging in `ResultProcessor` in ShellSentry.
+- Update OkHttp to `4.12.0`.
+- Update Bugsnag to `3.7.1`.
+- Update Clikt to `4.2.1`.
+- Update Okio to `3.6.0`.
+- Update MoshiX to `0.24.3`.
+
 2.2.1
 -----
 
