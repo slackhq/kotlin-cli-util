@@ -20,18 +20,29 @@ import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.path
-import com.squareup.moshi.JsonClass
-import com.squareup.moshi.JsonWriter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.adapter
 import com.tickaroo.tikxml.converter.htmlescape.StringEscapeUtils
+import io.github.detekt.sarif4k.ArtifactContent
+import io.github.detekt.sarif4k.ArtifactLocation
+import io.github.detekt.sarif4k.Level
+import io.github.detekt.sarif4k.Location
+import io.github.detekt.sarif4k.Message
+import io.github.detekt.sarif4k.PhysicalLocation
+import io.github.detekt.sarif4k.Region
+import io.github.detekt.sarif4k.Result
+import io.github.detekt.sarif4k.Run
+import io.github.detekt.sarif4k.SarifSchema210
+import io.github.detekt.sarif4k.Tool
+import io.github.detekt.sarif4k.ToolComponent
+import io.github.detekt.sarif4k.Version
 import java.nio.file.Path
+import kotlin.io.path.absolutePathString
 import kotlin.io.path.createFile
 import kotlin.io.path.createParentDirectories
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.name
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
+import kotlin.io.path.writeText
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -39,11 +50,10 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
-import okio.buffer
-import okio.sink
 import slack.cli.projectDirOption
 
 /** A CLI that merges lint baseline xml files into one. */
@@ -74,24 +84,44 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
         }
       }
 
-    if (verbose) println("Sorting issues")
-    val sortedIssues = issues.toSortedMap(LintIssues.LintIssue.COMPARATOR)
-
-    if (verbose) println("Merging ${sortedIssues.size} issues")
-    val simpleSarifOutput =
-      sortedIssues
-        .map { (issue, project) ->
-          SimpleSarifOutput.Location.fromLintIssue(issue, project, projectDir)
+    if (verbose) println("Merging ${issues.size} issues")
+    val idsToLocations =
+      issues.entries
+        .groupBy { (issue, _) -> issue.id }
+        .mapValues { (_, entries) ->
+          entries.map { (issue, projectPath) -> issue.toLocation(projectPath) }
         }
-        .let(::SimpleSarifOutput)
+        .toSortedMap()
 
     if (verbose) println("Writing to $outputFile")
     outputFile.deleteIfExists()
     outputFile.createParentDirectories()
     outputFile.createFile()
-    JsonWriter.of(outputFile.sink().buffer()).use { writer ->
-      Moshi.Builder().build().adapter<SimpleSarifOutput>().toJson(writer, simpleSarifOutput)
-    }
+    val outputSarif =
+      SarifSchema210(
+        version = Version.The210,
+        runs =
+          listOf(
+            Run(
+              tool = Tool(ToolComponent(name = "lint")),
+              results =
+                buildList {
+                  for ((id, locations) in idsToLocations) {
+                    add(
+                      Result(
+                        ruleID = id,
+                        level = Level.Error,
+                        locations =
+                          locations.sortedBy { it.physicalLocation?.artifactLocation?.uri },
+                        message = Message(text = "Lint issue $id")
+                      )
+                    )
+                  }
+                }
+            )
+          )
+      )
+    Json.encodeToString(SarifSchema210.serializer(), outputSarif).let { outputFile.writeText(it) }
   }
 
   /**
@@ -131,24 +161,12 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
       @Serializable(HtmlEscapeStringSerializer::class) val errorLine2: String,
       val location: LintLocation,
     ) {
-
-      companion object {
-        val COMPARATOR =
-          compareBy(LintIssue::id)
-            .thenComparing(compareBy(LintIssue::message))
-            .thenComparing(compareBy(LintIssue::errorLine1))
-            .thenComparing(compareBy(LintIssue::errorLine2))
-            .thenComparing(compareBy { it.location.file })
-            .thenComparing(compareBy { it.location.line })
-            .thenComparing(compareBy { it.location.column })
-      }
-
       @Serializable
       @XmlSerialName("location")
       data class LintLocation(
         @Serializable(HtmlEscapeStringSerializer::class) val file: String,
-        val line: Int?,
-        val column: Int?,
+        val line: Long?,
+        val column: Long?,
       )
     }
   }
@@ -171,42 +189,27 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
     }
   }
 
-  /**
-   * ```
-   * {
-   *   "locations": [
-   *     {
-   *       "physicalLocation": {
-   *         "artifactLocation": {
-   *           "uri": "services/emoji/impl/src/main/kotlin/slack/emoji/impl/repository/FrequentlyUsedEmojiManagerImplV2.kt",
-   *         },
-   *         }
-   *       }
-   *     ],
-   *     "ruleId": "VisibleForTests",
-   *   },
-   * },
-   * ```
-   */
-  @JsonClass(generateAdapter = true)
-  internal data class SimpleSarifOutput(val locations: List<Location>) {
-    @JsonClass(generateAdapter = true)
-    data class Location(val physicalLocation: PhysicalLocation, val ruleId: String) {
-      @JsonClass(generateAdapter = true)
-      data class PhysicalLocation(val artifactLocation: ArtifactLocation) {
-        @JsonClass(generateAdapter = true) data class ArtifactLocation(val uri: String)
-      }
-
-      companion object {
-        fun fromLintIssue(
-          issue: LintIssues.LintIssue,
-          projectDir: Path,
-          rootProjectDir: Path
-        ): Location {
-          val uri = projectDir.resolve(issue.location.file).relativeTo(rootProjectDir).toString()
-          return Location(PhysicalLocation(PhysicalLocation.ArtifactLocation(uri)), issue.id)
-        }
-      }
-    }
+  private fun LintIssues.LintIssue.toLocation(projectPath: Path): Location {
+    val uri = projectPath.resolve(location.file).relativeTo(projectDir).absolutePathString()
+    return Location(
+      physicalLocation =
+        PhysicalLocation(
+          artifactLocation = ArtifactLocation(uri = uri),
+          region =
+            Region(
+              startLine = location.line,
+              startColumn = location.column,
+              snippet =
+                ArtifactContent(
+                  text =
+                    """
+                      $errorLine1
+                      $errorLine2
+                    """
+                      .trimIndent()
+                )
+            )
+        )
+    )
   }
 }

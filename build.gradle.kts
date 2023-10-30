@@ -96,6 +96,7 @@ dependencies {
   implementation(libs.bugsnag)
   implementation(libs.moshi)
   implementation(libs.kotlin.reflect)
+  implementation(libs.sarif4k)
   // To silence this stupid log https://www.slf4j.org/codes.html#StaticLoggerBinder
   implementation(libs.slf4jNop)
   testImplementation(libs.junit)
