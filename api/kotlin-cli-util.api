@@ -42,10 +42,6 @@ public final class slack/cli/lint/LintBaselineMergerCli : com/github/ajalt/clikt
 	public fun run ()V
 }
 
-public final class slack/cli/lint/LintBaselineMergerCliKt {
-	public static final fun main ([Ljava/lang/String;)V
-}
-
 public final class slack/cli/shellsentry/AnalysisResult {
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lslack/cli/shellsentry/RetrySignal;ILkotlin/jvm/functions/Function1;)V
 	public final fun component1 ()Ljava/lang/String;
