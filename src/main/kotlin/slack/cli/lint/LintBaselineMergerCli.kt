@@ -77,7 +77,7 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
     if (verbose) println("Sorting issues")
     val sortedIssues = issues.toSortedMap(LintIssues.LintIssue.COMPARATOR)
 
-    println("Merging ${sortedIssues.size} issues")
+    if (verbose) println("Merging ${sortedIssues.size} issues")
     val simpleSarifOutput =
       sortedIssues
         .map { (issue, project) ->
