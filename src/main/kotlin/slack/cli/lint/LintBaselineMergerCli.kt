@@ -128,7 +128,8 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
 
   /**
    * ```
-   * <issues format="6" by="lint 8.2.0-alpha10" type="baseline" client="cli" dependencies="false" name="AGP (8.1.2)" variant="all" version="8.2.0-alpha10">
+   * <issues format="6" by="lint 8.2.0-alpha10" type="baseline" client="cli" dependencies="false"
+   *   name="AGP (8.1.2)" variant="all" version="8.2.0-alpha10">
    *     <issue
    *         id="DoNotMockDataClass"
    *         message="&apos;slack.model.account.Account&apos; is a data class, so mocking it should not be necessary"
