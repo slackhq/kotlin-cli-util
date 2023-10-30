@@ -55,6 +55,7 @@ import kotlinx.serialization.serializer
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import slack.cli.projectDirOption
+import slack.cli.skipBuildAndCacheDirs
 
 /** A CLI that merges lint baseline xml files into one. */
 public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baselines into one") {
@@ -73,6 +74,7 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
     projectDir
       .toFile()
       .walkTopDown()
+      .skipBuildAndCacheDirs()
       .map { it.toPath() }
       .filter { it.name == baselineFileName }
       .forEach { file ->
