@@ -26,6 +26,7 @@ plugins {
   alias(libs.plugins.spotless)
   alias(libs.plugins.binaryCompatibilityValidator)
   alias(libs.plugins.moshix)
+  alias(libs.plugins.kotlin.serialization)
 }
 
 spotless {
@@ -86,6 +87,9 @@ moshi { enableSealed.set(true) }
 
 dependencies {
   api(libs.clikt)
+  implementation(libs.tikxml.htmlEscape)
+  implementation(libs.kotlinx.serialization.core)
+  implementation(libs.xmlutil.serialization)
   implementation(libs.kotlinShell)
   implementation(libs.okio)
   implementation(libs.okhttp)
