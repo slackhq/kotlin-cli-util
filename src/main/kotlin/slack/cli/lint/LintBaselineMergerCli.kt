@@ -99,20 +99,19 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
         .toSortedMap()
 
     if (verbose) println("Gathering rules")
-    val rules = issues.keys
-      .map { issue ->
-        ReportingDescriptor(
-          id = issue.id,
-          name = issue.id,
-          shortDescription = MultiformatMessageString(text = issue.message),
-          fullDescription = MultiformatMessageString(text = issue.message),
-          defaultConfiguration = ReportingConfiguration(level = Level.Error)
-        )
-      }
-      .sortedBy { it.id }
-    val ruleIndices = rules.withIndex().associate { (index, rule) ->
-      rule.id to index.toLong()
-    }
+    val rules =
+      issues.keys
+        .map { issue ->
+          ReportingDescriptor(
+            id = issue.id,
+            name = issue.id,
+            shortDescription = MultiformatMessageString(text = issue.message),
+            fullDescription = MultiformatMessageString(text = issue.message),
+            defaultConfiguration = ReportingConfiguration(level = Level.Error)
+          )
+        }
+        .sortedBy { it.id }
+    val ruleIndices = rules.withIndex().associate { (index, rule) -> rule.id to index.toLong() }
 
     if (verbose) println("Writing to $outputFile")
     outputFile.deleteIfExists()
