@@ -78,23 +78,10 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
     prettyPrintIndent = "  "
   }
 
+  private val xml = XML { defaultPolicy { ignoreUnknownChildren() } }
+
   override fun run() {
-    val xml = XML { defaultPolicy { ignoreUnknownChildren() } }
-    val issues = mutableMapOf<LintIssues.LintIssue, Path>()
-    projectDir
-      .toFile()
-      .walkTopDown()
-      .skipBuildAndCacheDirs()
-      .map { it.toPath() }
-      .filter { it.name == baselineFileName }
-      .forEach { file ->
-        if (verbose) println("Parsing $file")
-        val lintIssues = xml.decodeFromString(serializer<LintIssues>(), file.readText())
-        for (issue in lintIssues.issues) {
-          if (verbose) println("Parsed $issue")
-          issues[issue] = file.parent
-        }
-      }
+    val issues = parseIssues()
 
     if (verbose) println("Merging ${issues.size} issues")
     val idsToLocations =
@@ -151,6 +138,26 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
       )
 
     json.encodeToString(SarifSchema210.serializer(), outputSarif).let { outputFile.writeText(it) }
+  }
+
+  private fun parseIssues(): Map<LintIssues.LintIssue, Path> {
+    val issues = mutableMapOf<LintIssues.LintIssue, Path>()
+    projectDir
+      .toFile()
+      .walkTopDown()
+      .skipBuildAndCacheDirs()
+      .map { it.toPath() }
+      .filter { it.name == baselineFileName }
+      .forEach { file ->
+        if (verbose) println("Parsing $file")
+        val lintIssues = xml.decodeFromString(serializer<LintIssues>(), file.readText())
+        for (issue in lintIssues.issues) {
+          if (verbose) println("Parsed $issue")
+          issues[issue] = file.parent
+        }
+      }
+
+    return issues
   }
 
   /**
