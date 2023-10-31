@@ -26,8 +26,11 @@ import io.github.detekt.sarif4k.ArtifactLocation
 import io.github.detekt.sarif4k.Level
 import io.github.detekt.sarif4k.Location
 import io.github.detekt.sarif4k.Message
+import io.github.detekt.sarif4k.MultiformatMessageString
 import io.github.detekt.sarif4k.PhysicalLocation
 import io.github.detekt.sarif4k.Region
+import io.github.detekt.sarif4k.ReportingConfiguration
+import io.github.detekt.sarif4k.ReportingDescriptor
 import io.github.detekt.sarif4k.Result
 import io.github.detekt.sarif4k.Run
 import io.github.detekt.sarif4k.SarifSchema210
@@ -95,6 +98,22 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
         }
         .toSortedMap()
 
+    if (verbose) println("Gathering rules")
+    val rules = issues.keys
+      .map { issue ->
+        ReportingDescriptor(
+          id = issue.id,
+          name = issue.id,
+          shortDescription = MultiformatMessageString(text = issue.message),
+          fullDescription = MultiformatMessageString(text = issue.message),
+          defaultConfiguration = ReportingConfiguration(level = Level.Error)
+        )
+      }
+      .sortedBy { it.id }
+    val ruleIndices = rules.withIndex().associate { (index, rule) ->
+      rule.id to index.toLong()
+    }
+
     if (verbose) println("Writing to $outputFile")
     outputFile.deleteIfExists()
     outputFile.createParentDirectories()
@@ -105,7 +124,7 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
         runs =
           listOf(
             Run(
-              tool = Tool(ToolComponent(name = "lint")),
+              tool = Tool(ToolComponent(name = "lint", rules = rules)),
               results =
                 buildList {
                   for ((id, locations) in idsToLocations) {
@@ -113,6 +132,7 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
                       Result(
                         ruleID = id,
                         level = Level.Error,
+                        ruleIndex = ruleIndices.getValue(id),
                         locations =
                           locations.sortedBy { it.physicalLocation?.artifactLocation?.uri },
                         message = Message(text = "Lint issue $id")
