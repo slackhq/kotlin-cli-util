@@ -142,7 +142,12 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
             )
           )
       )
-    Json.encodeToString(SarifSchema210.serializer(), outputSarif).let { outputFile.writeText(it) }
+    Json {
+        prettyPrint = true
+        prettyPrintIndent = "  "
+      }
+      .encodeToString(SarifSchema210.serializer(), outputSarif)
+      .let { outputFile.writeText(it) }
   }
 
   /**
