@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.3.1
+-----
+
+_2023-10-31_
+
+- Add `rules` to lint baseline merging output + pretty print.
+
 2.3.0
 -----
 
