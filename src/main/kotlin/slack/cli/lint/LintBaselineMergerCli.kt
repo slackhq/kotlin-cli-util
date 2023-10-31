@@ -46,6 +46,7 @@ import kotlin.io.path.name
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
 import kotlin.io.path.writeText
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -70,6 +71,12 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
   private val outputFile by option("--output-file", "-o").path(canBeDir = false).required()
 
   private val verbose by option("--verbose", "-v").flag()
+
+  @OptIn(ExperimentalSerializationApi::class)
+  private val json = Json {
+    prettyPrint = true
+    prettyPrintIndent = "  "
+  }
 
   override fun run() {
     val xml = XML { defaultPolicy { ignoreUnknownChildren() } }
@@ -142,12 +149,8 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
             )
           )
       )
-    Json {
-        prettyPrint = true
-        prettyPrintIndent = "  "
-      }
-      .encodeToString(SarifSchema210.serializer(), outputSarif)
-      .let { outputFile.writeText(it) }
+
+    json.encodeToString(SarifSchema210.serializer(), outputSarif).let { outputFile.writeText(it) }
   }
 
   /**
