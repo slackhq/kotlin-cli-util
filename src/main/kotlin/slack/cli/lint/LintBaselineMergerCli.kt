@@ -227,7 +227,7 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
   }
 
   private fun LintIssues.LintIssue.toLocation(projectPath: Path): Location {
-    val uri = projectPath.resolve(location.file).relativeTo(projectDir).absolutePathString()
+    val uri = projectPath.resolve(location.file).relativeTo(projectDir).toString()
     return Location(
       physicalLocation =
         PhysicalLocation(
@@ -249,4 +249,14 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
         )
     )
   }
+}
+
+public fun main() {
+  LintBaselineMergerCli().main(
+    arrayOf(
+      "--project-dir", "/Users/zacsweers/dev/slack/android3",
+      "--baseline-file-name", "lint-baseline.xml",
+      "--output-file", "/Users/zacsweers/dev/slack/oss/kotlin-cli-util/lint-baseline-merged.sarif",
+    )
+  )
 }
