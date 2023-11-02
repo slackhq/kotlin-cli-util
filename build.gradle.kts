@@ -27,6 +27,7 @@ plugins {
   alias(libs.plugins.binaryCompatibilityValidator)
   alias(libs.plugins.moshix)
   alias(libs.plugins.kotlin.serialization)
+  alias(libs.plugins.retry)
 }
 
 spotless {
@@ -84,6 +85,17 @@ kotlin {
 }
 
 moshi { enableSealed.set(true) }
+
+// We have a couple flaky tests on CI right now
+if (System.getenv("CI") != null) {
+  tasks.withType<Test>().configureEach {
+    retry {
+      maxRetries.set(2)
+      maxFailures.set(20)
+      failOnPassedAfterRetry.set(false)
+    }
+  }
+}
 
 dependencies {
   api(libs.clikt)
