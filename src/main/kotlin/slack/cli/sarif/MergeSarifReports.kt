@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2023 Slack Technologies, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package slack.cli.sarif
 
 import com.github.ajalt.clikt.core.CliktCommand
@@ -23,19 +38,19 @@ public class MergeSarifReports :
   private val filePrefix by option("--file-prefix").required()
   private val verbose by option("--verbose", "-v").flag()
   private val remapSrcRoots by
-  option(
-    "--remap-src-roots",
-    help =
-    "When enabled, remaps uri roots to include the subproject path (relative to the root project)."
-  )
-    .flag()
+    option(
+        "--remap-src-roots",
+        help =
+          "When enabled, remaps uri roots to include the subproject path (relative to the root project)."
+      )
+      .flag()
   private val removeUriPrefixes by
-  option(
-    "--remove-uri-prefixes",
-    help =
-    "When enabled, removes the root project directory from location uris such that they are only relative to the root project dir."
-  )
-    .flag()
+    option(
+        "--remove-uri-prefixes",
+        help =
+          "When enabled, removes the root project directory from location uris such that they are only relative to the root project dir."
+      )
+      .flag()
 
   private fun log(message: String) {
     if (verbose) {
@@ -131,44 +146,44 @@ public class MergeSarifReports :
     val modulePrefix = module.toRelativeString(projectDir.toFile())
     return copy(
       runs =
-      runs.map { run ->
-        val originalUri = run.originalURIBaseIDS!!.getValue(SRC_ROOT)
-        run.copy(
-          // Remap "%SRCROOT%" to be the root project dir.
-          originalURIBaseIDS =
-          mapOf(
-            SRC_ROOT to
-              originalUri.copy(
-                uri = "file://${projectDir
+        runs.map { run ->
+          val originalUri = run.originalURIBaseIDS!!.getValue(SRC_ROOT)
+          run.copy(
+            // Remap "%SRCROOT%" to be the root project dir.
+            originalURIBaseIDS =
+              mapOf(
+                SRC_ROOT to
+                  originalUri.copy(
+                    uri = "file://${projectDir
                   .toFile().canonicalPath}/"
-              )
-          ),
-          // Remap results to add the module prefix to the artifactLocation.uri.
-          results =
-          run.results?.map { result ->
-            result.copy(
-              locations =
-              result.locations?.map { location ->
-                location.copy(
-                  physicalLocation =
-                  location.physicalLocation?.copy(
-                    artifactLocation =
-                    location.physicalLocation
-                      ?.artifactLocation
-                      ?.copy(
-                        uri =
-                        location.physicalLocation
-                          ?.artifactLocation
-                          ?.uri
-                          ?.prefixPathWith(modulePrefix)
-                      )
                   )
+              ),
+            // Remap results to add the module prefix to the artifactLocation.uri.
+            results =
+              run.results?.map { result ->
+                result.copy(
+                  locations =
+                    result.locations?.map { location ->
+                      location.copy(
+                        physicalLocation =
+                          location.physicalLocation?.copy(
+                            artifactLocation =
+                              location.physicalLocation
+                                ?.artifactLocation
+                                ?.copy(
+                                  uri =
+                                    location.physicalLocation
+                                      ?.artifactLocation
+                                      ?.uri
+                                      ?.prefixPathWith(modulePrefix)
+                                )
+                          )
+                      )
+                    }
                 )
               }
-            )
-          }
-        )
-      }
+          )
+        }
     )
   }
 
@@ -176,34 +191,34 @@ public class MergeSarifReports :
   private fun SarifSchema210.remapUris(): SarifSchema210 {
     return copy(
       runs =
-      runs.map { run ->
-        run.copy(
-          results =
-          run.results?.map { result ->
-            result.copy(
-              locations =
-              result.locations?.map { location ->
-                location.copy(
-                  physicalLocation =
-                  location.physicalLocation?.let { physicalLocation ->
-                    physicalLocation.copy(
-                      artifactLocation =
-                      physicalLocation.artifactLocation?.let { artifactLocation ->
-                        artifactLocation.copy(
-                          uri =
-                          artifactLocation.uri
-                            ?.removePrefix(projectDir.absolutePathString())
-                            ?.removePrefix("/")
-                        )
-                      }
-                    )
-                  }
+        runs.map { run ->
+          run.copy(
+            results =
+              run.results?.map { result ->
+                result.copy(
+                  locations =
+                    result.locations?.map { location ->
+                      location.copy(
+                        physicalLocation =
+                          location.physicalLocation?.let { physicalLocation ->
+                            physicalLocation.copy(
+                              artifactLocation =
+                                physicalLocation.artifactLocation?.let { artifactLocation ->
+                                  artifactLocation.copy(
+                                    uri =
+                                      artifactLocation.uri
+                                        ?.removePrefix(projectDir.absolutePathString())
+                                        ?.removePrefix("/")
+                                  )
+                                }
+                            )
+                          }
+                      )
+                    }
                 )
               }
-            )
-          }
-        )
-      }
+          )
+        }
     )
   }
 
