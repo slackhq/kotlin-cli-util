@@ -222,23 +222,26 @@ public class MergeSarifReports :
     )
   }
 
+  private fun loadSarifs(inputs: List<File>): List<SarifSchema210> {
+    return inputs.map { sarifFile ->
+      log("Parsing $sarifFile")
+      val parsed = SarifSerializer.fromJson(sarifFile.readText())
+      if (parsed.runs.isEmpty() || parsed.runs[0].results.orEmpty().isEmpty()) {
+        return@map parsed
+      }
+      if (remapSrcRoots) {
+        parsed.remapSrcRoots(sarifFile)
+      } else if (removeUriPrefixes) {
+        parsed.remapUris()
+      } else {
+        parsed
+      }
+    }
+  }
+
   private fun merge(inputs: List<File>) {
     log("Parsing ${inputs.size} sarif files")
-    val sarifs =
-      inputs.map { sarifFile ->
-        log("Parsing $sarifFile")
-        val parsed = SarifSerializer.fromJson(sarifFile.readText())
-        if (parsed.runs.isEmpty() || parsed.runs[0].results.orEmpty().isEmpty()) {
-          return@map parsed
-        }
-        if (remapSrcRoots) {
-          parsed.remapSrcRoots(sarifFile)
-        } else if (removeUriPrefixes) {
-          parsed.remapUris()
-        } else {
-          parsed
-        }
-      }
+    val sarifs = loadSarifs(inputs)
 
     log("Merging ${inputs.size} sarif files")
     val sortedMergedRules =
