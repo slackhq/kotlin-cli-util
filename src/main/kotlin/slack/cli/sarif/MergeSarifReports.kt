@@ -48,7 +48,8 @@ public class MergeSarifReports :
     option(
         "--remove-uri-prefixes",
         help =
-          "When enabled, removes the root project directory from location uris such that they are only relative to the root project dir."
+          "When enabled, removes the root project directory from location uris such that they are only " +
+            "relative to the root project dir."
       )
       .flag()
 
