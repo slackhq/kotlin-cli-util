@@ -38,7 +38,6 @@ import io.github.detekt.sarif4k.Tool
 import io.github.detekt.sarif4k.ToolComponent
 import io.github.detekt.sarif4k.Version
 import java.nio.file.Path
-import kotlin.io.path.absolutePathString
 import kotlin.io.path.createFile
 import kotlin.io.path.createParentDirectories
 import kotlin.io.path.deleteIfExists
@@ -227,7 +226,7 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
   }
 
   private fun LintIssues.LintIssue.toLocation(projectPath: Path): Location {
-    val uri = projectPath.resolve(location.file).relativeTo(projectDir).absolutePathString()
+    val uri = projectPath.resolve(location.file).relativeTo(projectDir).toString()
     return Location(
       physicalLocation =
         PhysicalLocation(
