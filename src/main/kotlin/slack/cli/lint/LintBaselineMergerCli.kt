@@ -38,7 +38,6 @@ import io.github.detekt.sarif4k.Tool
 import io.github.detekt.sarif4k.ToolComponent
 import io.github.detekt.sarif4k.Version
 import java.nio.file.Path
-import kotlin.io.path.absolutePathString
 import kotlin.io.path.createFile
 import kotlin.io.path.createParentDirectories
 import kotlin.io.path.deleteIfExists
@@ -249,14 +248,4 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
         )
     )
   }
-}
-
-public fun main() {
-  LintBaselineMergerCli().main(
-    arrayOf(
-      "--project-dir", "/Users/zacsweers/dev/slack/android3",
-      "--baseline-file-name", "lint-baseline.xml",
-      "--output-file", "/Users/zacsweers/dev/slack/oss/kotlin-cli-util/lint-baseline-merged.sarif",
-    )
-  )
 }
