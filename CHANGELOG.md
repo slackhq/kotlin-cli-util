@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.4.0
+-----
+
+_2023-11-02_
+
+- **New**: Upstream `MergeSarifReports`, a CLI for merging (lint and detekt) sarif reports from project build directories. We use this in our CI to merge all the reports from all the modules into one report.
+- **Fix**: Only use relative paths in lint baseline merged sarifs.
+
 2.3.1
 -----
 
