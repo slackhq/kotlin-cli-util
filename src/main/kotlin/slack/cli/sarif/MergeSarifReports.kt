@@ -53,6 +53,14 @@ public class MergeSarifReports :
       )
       .flag()
 
+  private val allowEmpty by
+    option(
+        "--allow-empty",
+        help = "Flag to allow graceful exiting if no sarif files are found.",
+        envvar = "SARIF_MERGING_ALLOW_EMPTY"
+      )
+      .flag()
+
   private fun log(message: String) {
     if (verbose) {
       echo(message)
@@ -311,8 +319,13 @@ public class MergeSarifReports :
   override fun run() {
     val sarifFiles = findSarifFiles()
     if (sarifFiles.isEmpty()) {
-      log("No sarif files found! Did you run lint/detekt first?")
-      exitProcess(1)
+      if (allowEmpty) {
+        println("No sarif files found, skipping merging")
+        exitProcess(0)
+      } else {
+        System.err.println("No sarif files found! Did you run lint/detekt first?")
+        exitProcess(1)
+      }
     }
     merge(sarifFiles)
   }
