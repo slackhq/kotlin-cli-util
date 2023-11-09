@@ -26,8 +26,11 @@ import io.github.detekt.sarif4k.ArtifactLocation
 import io.github.detekt.sarif4k.Level
 import io.github.detekt.sarif4k.Location
 import io.github.detekt.sarif4k.Message
+import io.github.detekt.sarif4k.MultiformatMessageString
 import io.github.detekt.sarif4k.PhysicalLocation
 import io.github.detekt.sarif4k.Region
+import io.github.detekt.sarif4k.ReportingConfiguration
+import io.github.detekt.sarif4k.ReportingDescriptor
 import io.github.detekt.sarif4k.Result
 import io.github.detekt.sarif4k.Run
 import io.github.detekt.sarif4k.SarifSchema210
@@ -35,7 +38,6 @@ import io.github.detekt.sarif4k.Tool
 import io.github.detekt.sarif4k.ToolComponent
 import io.github.detekt.sarif4k.Version
 import java.nio.file.Path
-import kotlin.io.path.absolutePathString
 import kotlin.io.path.createFile
 import kotlin.io.path.createParentDirectories
 import kotlin.io.path.deleteIfExists
@@ -43,6 +45,7 @@ import kotlin.io.path.name
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
 import kotlin.io.path.writeText
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -68,8 +71,75 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
 
   private val verbose by option("--verbose", "-v").flag()
 
+  @OptIn(ExperimentalSerializationApi::class)
+  private val json = Json {
+    prettyPrint = true
+    prettyPrintIndent = "  "
+  }
+
+  private val xml = XML { defaultPolicy { ignoreUnknownChildren() } }
+
   override fun run() {
-    val xml = XML { defaultPolicy { ignoreUnknownChildren() } }
+    val issues = parseIssues()
+
+    if (verbose) println("Merging ${issues.size} issues")
+    val idsToLocations =
+      issues.entries
+        .groupBy { (issue, _) -> issue.id }
+        .mapValues { (_, entries) ->
+          entries.map { (issue, projectPath) -> issue.toLocation(projectPath) }
+        }
+        .toSortedMap()
+
+    if (verbose) println("Gathering rules")
+    val rules =
+      issues.keys
+        .map { issue ->
+          ReportingDescriptor(
+            id = issue.id,
+            name = issue.id,
+            shortDescription = MultiformatMessageString(text = issue.message),
+            fullDescription = MultiformatMessageString(text = issue.message),
+            defaultConfiguration = ReportingConfiguration(level = Level.Error)
+          )
+        }
+        .sortedBy { it.id }
+    val ruleIndices = rules.withIndex().associate { (index, rule) -> rule.id to index.toLong() }
+
+    if (verbose) println("Writing to $outputFile")
+    outputFile.deleteIfExists()
+    outputFile.createParentDirectories()
+    outputFile.createFile()
+    val outputSarif =
+      SarifSchema210(
+        version = Version.The210,
+        runs =
+          listOf(
+            Run(
+              tool = Tool(ToolComponent(name = "lint", rules = rules)),
+              results =
+                buildList {
+                  for ((id, locations) in idsToLocations) {
+                    add(
+                      Result(
+                        ruleID = id,
+                        level = Level.Error,
+                        ruleIndex = ruleIndices.getValue(id),
+                        locations =
+                          locations.sortedBy { it.physicalLocation?.artifactLocation?.uri },
+                        message = Message(text = "Lint issue $id")
+                      )
+                    )
+                  }
+                }
+            )
+          )
+      )
+
+    json.encodeToString(SarifSchema210.serializer(), outputSarif).let { outputFile.writeText(it) }
+  }
+
+  private fun parseIssues(): Map<LintIssues.LintIssue, Path> {
     val issues = mutableMapOf<LintIssues.LintIssue, Path>()
     projectDir
       .toFile()
@@ -86,44 +156,7 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
         }
       }
 
-    if (verbose) println("Merging ${issues.size} issues")
-    val idsToLocations =
-      issues.entries
-        .groupBy { (issue, _) -> issue.id }
-        .mapValues { (_, entries) ->
-          entries.map { (issue, projectPath) -> issue.toLocation(projectPath) }
-        }
-        .toSortedMap()
-
-    if (verbose) println("Writing to $outputFile")
-    outputFile.deleteIfExists()
-    outputFile.createParentDirectories()
-    outputFile.createFile()
-    val outputSarif =
-      SarifSchema210(
-        version = Version.The210,
-        runs =
-          listOf(
-            Run(
-              tool = Tool(ToolComponent(name = "lint")),
-              results =
-                buildList {
-                  for ((id, locations) in idsToLocations) {
-                    add(
-                      Result(
-                        ruleID = id,
-                        level = Level.Error,
-                        locations =
-                          locations.sortedBy { it.physicalLocation?.artifactLocation?.uri },
-                        message = Message(text = "Lint issue $id")
-                      )
-                    )
-                  }
-                }
-            )
-          )
-      )
-    Json.encodeToString(SarifSchema210.serializer(), outputSarif).let { outputFile.writeText(it) }
+    return issues
   }
 
   /**
@@ -193,7 +226,7 @@ public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baseline
   }
 
   private fun LintIssues.LintIssue.toLocation(projectPath: Path): Location {
-    val uri = projectPath.resolve(location.file).relativeTo(projectDir).absolutePathString()
+    val uri = projectPath.resolve(location.file).relativeTo(projectDir).toString()
     return Location(
       physicalLocation =
         PhysicalLocation(
