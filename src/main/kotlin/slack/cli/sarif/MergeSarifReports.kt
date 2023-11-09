@@ -335,18 +335,3 @@ public class MergeSarifReports :
     private const val SRC_ROOT = "%SRCROOT%"
   }
 }
-
-public fun main() {
-  MergeSarifReports()
-    .main(
-      arrayOf(
-        "--project-dir",
-        "/Users/zacsweers/dev/slack/slack-android-ng",
-        "--file-prefix",
-        "detekt",
-        "--remove-uri-prefixes",
-        "--output-file",
-        "build/reports/detekt-results-merged.sarif"
-      )
-    )
-}
