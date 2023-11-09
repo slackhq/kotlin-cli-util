@@ -1,6 +1,16 @@
 Changelog
 =========
 
+2.5.0
+-----
+
+_2023-11-09_
+
+- **Fix**: Strip leading `file://` path in sarif merging when `--remove-uri-prefixes` is specified.
+- Update to JVM target 17.
+- Update to Kotlin `1.9.20`.
+- Update to MoshiX `0.25.0`.
+
 2.4.0
 -----
 
