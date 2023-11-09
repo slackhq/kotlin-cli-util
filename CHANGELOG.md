@@ -7,6 +7,7 @@ Changelog
 _2023-11-09_
 
 - **Fix**: Strip leading `file://` path in sarif merging when `--remove-uri-prefixes` is specified.
+- **Enhancement**: Allow graceful handling of no sarif files when merging via `--allow-empty` flag.
 - Update to JVM target 17.
 - Update to Kotlin `1.9.20`.
 - Update to MoshiX `0.25.0`.
