@@ -216,6 +216,7 @@ public class MergeSarifReports :
                                   artifactLocation.copy(
                                     uri =
                                       artifactLocation.uri
+                                        ?.removePrefix("file://")
                                         ?.removePrefix(projectDir.absolutePathString())
                                         ?.removePrefix("/")
                                   )
