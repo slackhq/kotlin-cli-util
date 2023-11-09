@@ -216,6 +216,7 @@ public class MergeSarifReports :
                                   artifactLocation.copy(
                                     uri =
                                       artifactLocation.uri
+                                        ?.removePrefix("file://")
                                         ?.removePrefix(projectDir.absolutePathString())
                                         ?.removePrefix("/")
                                   )
@@ -333,4 +334,19 @@ public class MergeSarifReports :
   private companion object {
     private const val SRC_ROOT = "%SRCROOT%"
   }
+}
+
+public fun main() {
+  MergeSarifReports()
+    .main(
+      arrayOf(
+        "--project-dir",
+        "/Users/zacsweers/dev/slack/slack-android-ng",
+        "--file-prefix",
+        "detekt",
+        "--remove-uri-prefixes",
+        "--output-file",
+        "build/reports/detekt-results-merged.sarif"
+      )
+    )
 }
