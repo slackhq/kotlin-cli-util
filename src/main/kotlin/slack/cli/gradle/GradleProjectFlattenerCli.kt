@@ -73,6 +73,9 @@ public class GradleProjectFlattenerCli :
   private val verbose by
     option("--verbose", "-v", help = "If true, will print out more information.").flag()
 
+  private val force by
+    option("--force", "-f", help = "If true, force overwrite new projects.").flag()
+
   @ExperimentalPathApi
   override fun run() {
     val projectPaths =
@@ -91,15 +94,18 @@ public class GradleProjectFlattenerCli :
     val newPathMapping = mutableMapOf<String, String>()
     @Suppress("LoopWithTooManyJumpStatements")
     for (path in projectPaths) {
-      val realPath = projectDir.resolve(path.removePrefix(":").replace(":", File.separator))
+      val realPath =
+        projectDir.resolve(path.removePrefix(":").removeSuffix(":").replace(":", File.separator))
       if (strict) {
+        check(!path.endsWith(":")) { "Project paths cannot end with ':'" }
         check(realPath.exists()) { "Expected $realPath to exist." }
         check(realPath.isDirectory()) { "Expected $realPath to be a directory." }
       } else if (!realPath.exists()) {
         echo("Skipping $path as it doesn't exist", err = true)
         continue
       }
-      val newPath = projectDir.resolve(path.removePrefix(":").replace(":", projectDelimiter))
+      val newPath =
+        projectDir.resolve(path.removePrefix(":").removeSuffix(":").replace(":", projectDelimiter))
       if (newPath == realPath) {
         // Already top-level, move on
         continue
@@ -109,7 +115,7 @@ public class GradleProjectFlattenerCli :
         echo("Flattening $realPath to $newPath")
       }
       if (!dryRun) {
-        realPath.copyToRecursively(newPath, followLinks = false, overwrite = false)
+        realPath.copyToRecursively(newPath, followLinks = false, overwrite = force)
       }
     }
 
