@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2023 Slack Technologies, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package slack.cli.gradle
 
 import com.github.ajalt.clikt.core.CliktCommand
@@ -8,6 +23,7 @@ import com.github.ajalt.clikt.parameters.types.path
 import java.io.File
 import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.appendLines
+import kotlin.io.path.appendText
 import kotlin.io.path.copyToRecursively
 import kotlin.io.path.exists
 import kotlin.io.path.isDirectory
@@ -15,12 +31,13 @@ import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
 import slack.cli.dryRunOption
 import slack.cli.projectDirOption
-import kotlin.io.path.appendText
 
 /**
- * A CLI that flattens all gradle projects in a given directory to be top level while preserving their original project paths.
+ * A CLI that flattens all gradle projects in a given directory to be top level while preserving
+ * their original project paths.
  *
- * This is useful for flattening nested projects that use Dokka, which does not currently support easy doc gen for nested projects and end up with colliding names.
+ * This is useful for flattening nested projects that use Dokka, which does not currently support
+ * easy doc gen for nested projects and end up with colliding names.
  *
  * It's recommended to run `./gradlew clean` first before running this script to minimize work.
  */
