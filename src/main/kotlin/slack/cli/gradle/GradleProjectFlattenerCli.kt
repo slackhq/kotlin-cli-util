@@ -17,6 +17,7 @@ package slack.cli.gradle
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.default
+import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.path
@@ -61,35 +62,59 @@ public class GradleProjectFlattenerCli :
       .path(mustExist = true, canBeDir = false)
       .required()
 
-  private val projectDelimiter: String by option().default("--")
+  private val projectDelimiter by option().default("--")
 
   private val dryRun by dryRunOption()
+
+  private val strict by
+    option("--strict", help = "If true, will fail if any of the projects to flatten don't exist.")
+      .flag()
+
+  private val verbose by
+    option("--verbose", "-v", help = "If true, will print out more information.").flag()
 
   @ExperimentalPathApi
   override fun run() {
     val projectPaths =
-      settingsFile.readText().trim().removePrefix("include(").removeSuffix(")").split(",").map {
-        it.trim().removeSurrounding("\"")
-      }
+      settingsFile
+        .readText()
+        .trim()
+        .lines()
+        // Filter out commented lines
+        .filterNot { it.trimStart().startsWith("//") }
+        .joinToString("\n")
+        .removePrefix("include(")
+        .removeSuffix(")")
+        .split(",")
+        .map { it.trim().removeSurrounding("\"") }
 
     val newPathMapping = mutableMapOf<String, String>()
     for (path in projectPaths) {
       val realPath = projectDir.resolve(path.removePrefix(":").replace(":", File.separator))
-      check(realPath.exists()) { "Expected $realPath to exist." }
-      check(realPath.isDirectory()) { "Expected $realPath to be a directory." }
+      if (strict) {
+        check(realPath.exists()) { "Expected $realPath to exist." }
+        check(realPath.isDirectory()) { "Expected $realPath to be a directory." }
+      } else if (!realPath.exists()) {
+        echo("Skipping $path as it doesn't exist", err = true)
+        continue
+      }
       val newPath = projectDir.resolve(path.removePrefix(":").replace(":", projectDelimiter))
       if (newPath == realPath) {
         // Already top-level, move on
         continue
       }
       newPathMapping[path] = newPath.relativeTo(projectDir).toString()
-      echo("Flattening $realPath to $newPath")
+      if (verbose) {
+        echo("Flattening $realPath to $newPath")
+      }
       if (!dryRun) {
         realPath.copyToRecursively(newPath, followLinks = false, overwrite = false)
       }
     }
 
-    echo("Finished flattening projects. Updating settings file")
+    if (verbose) {
+      echo("Finished flattening projects. Updating settings file")
+    }
     val newPaths =
       projectPaths.mapNotNull { path ->
         // Point at their new paths
@@ -97,7 +122,12 @@ public class GradleProjectFlattenerCli :
         //   project(":libraries:compose-extensions:pull-refresh").projectDir =
         //     file("libraries--compose-extensions--pull-refresh")
         val newPath = newPathMapping[path] ?: return@mapNotNull null
-        "project(\"$path\").projectDir = file(\"$newPath\")".also { echo("+  $it") }
+        "project(\"$path\").projectDir = file(\"$newPath\")"
+          .also {
+            if (verbose) {
+              echo("+  $it")
+            }
+          }
       }
 
     if (!dryRun) {
