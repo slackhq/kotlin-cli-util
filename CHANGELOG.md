@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.5.1
+-----
+
+_2023-11-22_
+
+- **New**: Add `GradleProjectFlattenerCli` for flattening nested gradle projects to top-level projects.
+- Update coroutines to `1.6.1`.
+
 2.5.0
 -----
 
