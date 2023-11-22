@@ -17,8 +17,8 @@ package slack.cli.gradle
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.default
-import com.github.ajalt.clikt.parameters.options.defaultLazy
 import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.path
 import java.io.File
 import kotlin.io.path.ExperimentalPathApi
@@ -44,7 +44,8 @@ import slack.cli.projectDirOption
 public class GradleProjectFlattenerCli :
   CliktCommand(
     help =
-      "A CLI that flattens all gradle projects in a given directory to be top level while preserving their original project paths."
+      "A CLI that flattens all gradle projects in a given directory to be top level while " +
+        "preserving their original project paths."
   ) {
 
   private val projectDir by projectDirOption()
@@ -54,10 +55,11 @@ public class GradleProjectFlattenerCli :
         "--settings-file",
         "-s",
         help =
-          "The settings.gradle file to use. Defaults to settings.gradle.kts in the current directory. Note this file _must_ only have a single, top-level `include()` call with vararg project args."
+          "The settings.gradle file to use. Note this file _must_ only have a single, top-level `include()` call " +
+            "with vararg project args."
       )
       .path(mustExist = true, canBeDir = false)
-      .defaultLazy { projectDir.resolve("settings.gradle.kts") }
+      .required()
 
   private val projectDelimiter: String by option().default("--")
 
