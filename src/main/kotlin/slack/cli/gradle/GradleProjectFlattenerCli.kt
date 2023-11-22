@@ -89,6 +89,7 @@ public class GradleProjectFlattenerCli :
         .map { it.trim().removeSurrounding("\"") }
 
     val newPathMapping = mutableMapOf<String, String>()
+    @Suppress("LoopWithTooManyJumpStatements")
     for (path in projectPaths) {
       val realPath = projectDir.resolve(path.removePrefix(":").replace(":", File.separator))
       if (strict) {
