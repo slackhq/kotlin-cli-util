@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.9.20"
+kotlin = "1.9.21"
 kotlinx-serialization = "1.6.1"
 ktfmt = "0.46"
 jvmTarget = "17"
