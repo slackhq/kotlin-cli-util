@@ -42,6 +42,11 @@ public final class slack/cli/gradle/GradleProjectFlattenerCli : com/github/ajalt
 	public fun run ()V
 }
 
+public final class slack/cli/gradle/GradleSettingsVerifierCli : com/github/ajalt/clikt/core/CliktCommand {
+	public fun <init> ()V
+	public fun run ()V
+}
+
 public final class slack/cli/lint/LintBaselineMergerCli : com/github/ajalt/clikt/core/CliktCommand {
 	public fun <init> ()V
 	public fun run ()V
