@@ -27,6 +27,7 @@ import kotlin.io.path.name
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
 import slack.cli.projectDirOption
+import kotlin.system.exitProcess
 
 /** A CLI that verifies a given settings file has only valid projects. */
 public class GradleSettingsVerifierCli :
@@ -102,6 +103,7 @@ public class GradleSettingsVerifierCli :
     if (errors.isNotEmpty()) {
       echo("Errors found in '${settingsFile.name}'. Please fix or remove these.", err = true)
       echo(errors.joinToString(""), err = true)
+      exitProcess(1)
     }
   }
 }
