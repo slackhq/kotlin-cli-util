@@ -26,8 +26,8 @@ import kotlin.io.path.isDirectory
 import kotlin.io.path.name
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
-import slack.cli.projectDirOption
 import kotlin.system.exitProcess
+import slack.cli.projectDirOption
 
 /** A CLI that verifies a given settings file has only valid projects. */
 public class GradleSettingsVerifierCli :
