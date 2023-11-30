@@ -16,9 +16,11 @@
 package slack.cli.lint
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
+import com.github.ajalt.clikt.parameters.types.enum
 import com.github.ajalt.clikt.parameters.types.path
 import com.google.auto.service.AutoService
 import com.tickaroo.tikxml.converter.htmlescape.StringEscapeUtils
@@ -82,6 +84,27 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
 
   private val outputFile by option("--output-file", "-o").path(canBeDir = false).required()
 
+  private val messageTemplate by
+    option(
+        "--message-template",
+        "-m",
+        help =
+          "Template for messages with each issue. This message can optionally contain '{id}' in it to be replaced with the issue ID."
+      )
+      .default("Lint issue {id}")
+
+  private val level by
+    option(
+        "--level",
+        "-l",
+        help =
+          "Priority level. Defaults to Error. Options are ${
+    Level.entries.joinToString(separator = ", ", prefix = "[", postfix = "]", transform = Level::name)
+          }"
+      )
+      .enum<Level>()
+      .default(Level.Error)
+
   private val verbose by option("--verbose", "-v").flag()
 
   @OptIn(ExperimentalSerializationApi::class)
@@ -136,11 +159,11 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
                     add(
                       Result(
                         ruleID = id,
-                        level = Level.Error,
+                        level = level,
                         ruleIndex = ruleIndices.getValue(id),
                         locations =
                           locations.sortedBy { it.physicalLocation?.artifactLocation?.uri },
-                        message = Message(text = "Lint issue $id")
+                        message = Message(text = messageTemplate.replace("{id}", id))
                       )
                     )
                   }
