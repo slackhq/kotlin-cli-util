@@ -21,7 +21,9 @@ import com.github.ajalt.clikt.parameters.arguments.multiple
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.path
+import com.google.auto.service.AutoService
 import org.jetbrains.annotations.TestOnly
+import slack.cli.CommandFactory
 import slack.cli.projectDirOption
 
 /**
@@ -33,8 +35,19 @@ import slack.cli.projectDirOption
  * $ ./<binary> --bugsnag-key=1234 --verbose --configurationFile config.json ./gradlew build
  * ```
  */
-public class ShellSentryCli :
-  CliktCommand("Executes a command with Bugsnag tracing and retries as needed.") {
+public class ShellSentryCli : CliktCommand(DESCRIPTION) {
+
+  private companion object {
+    const val DESCRIPTION = "Executes a command with Bugsnag tracing and retries as needed."
+  }
+
+  @AutoService(CommandFactory::class)
+  public class Factory : CommandFactory {
+    override val key: String = "shell-sentry"
+    override val description: String = DESCRIPTION
+
+    override fun create(): CliktCommand = ShellSentryCli()
+  }
 
   internal val projectDir by projectDirOption()
 

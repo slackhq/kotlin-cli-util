@@ -20,6 +20,7 @@ import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.path
+import com.google.auto.service.AutoService
 import com.tickaroo.tikxml.converter.htmlescape.StringEscapeUtils
 import io.github.detekt.sarif4k.ArtifactContent
 import io.github.detekt.sarif4k.ArtifactLocation
@@ -57,11 +58,23 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
+import slack.cli.CommandFactory
 import slack.cli.projectDirOption
 import slack.cli.skipBuildAndCacheDirs
 
 /** A CLI that merges lint baseline xml files into one. */
-public class LintBaselineMergerCli : CliktCommand("Merges multiple lint baselines into one") {
+public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
+  private companion object {
+    const val DESCRIPTION = "Merges multiple lint baselines into one"
+  }
+
+  @AutoService(CommandFactory::class)
+  public class Factory : CommandFactory {
+    override val key: String = "merge-lint-baselines"
+    override val description: String = DESCRIPTION
+
+    override fun create(): CliktCommand = LintBaselineMergerCli()
+  }
 
   private val projectDir by projectDirOption()
 

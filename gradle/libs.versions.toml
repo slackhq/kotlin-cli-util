@@ -1,6 +1,7 @@
 [versions]
 kotlin = "1.9.21"
 kotlinx-serialization = "1.6.1"
+ksp = "1.9.21-1.0.15"
 ktfmt = "0.46"
 jvmTarget = "17"
 moshix = "0.25.1"
@@ -16,11 +17,14 @@ mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.25.3" }
 moshix = { id = "dev.zacsweers.moshix", version.ref = "moshix" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version = "6.22.0" }
 binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.13.2" }
 retry = { id = "org.gradle.test-retry", version = "1.5.7" }
 
 [libraries]
+autoService-annotations = "com.google.auto.service:auto-service-annotations:1.1.1"
+autoService-ksp = "dev.zacsweers.autoservice:auto-service-ksp:1.1.0"
 bugsnag = "com.bugsnag:bugsnag:3.7.1"
 clikt = "com.github.ajalt.clikt:clikt:4.2.1"
 kotlinShell = "eu.jrie.jetbrains:kotlin-shell-core:0.2.1"

@@ -21,6 +21,7 @@ import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.path
+import com.google.auto.service.AutoService
 import java.io.File
 import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.appendLines
@@ -30,6 +31,7 @@ import kotlin.io.path.exists
 import kotlin.io.path.isDirectory
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
+import slack.cli.CommandFactory
 import slack.cli.dryRunOption
 import slack.cli.projectDirOption
 
@@ -42,12 +44,21 @@ import slack.cli.projectDirOption
  *
  * It's recommended to run `./gradlew clean` first before running this script to minimize work.
  */
-public class GradleProjectFlattenerCli :
-  CliktCommand(
-    help =
+public class GradleProjectFlattenerCli : CliktCommand(help = DESCRIPTION) {
+
+  private companion object {
+    const val DESCRIPTION =
       "A CLI that flattens all gradle projects in a given directory to be top level while " +
         "preserving their original project paths."
-  ) {
+  }
+
+  @AutoService(CommandFactory::class)
+  public class Factory : CommandFactory {
+    override val key: String = "flatten-gradle-projects"
+    override val description: String = DESCRIPTION
+
+    override fun create(): CliktCommand = GradleProjectFlattenerCli()
+  }
 
   private val projectDir by projectDirOption()
 

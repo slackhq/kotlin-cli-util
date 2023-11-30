@@ -28,6 +28,7 @@ plugins {
   alias(libs.plugins.moshix)
   alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.retry)
+  alias(libs.plugins.ksp)
 }
 
 spotless {
@@ -98,7 +99,9 @@ if (System.getenv("CI") != null) {
 }
 
 dependencies {
+  ksp(libs.autoService.ksp)
   api(libs.clikt)
+  implementation(libs.autoService.annotations)
   implementation(libs.tikxml.htmlEscape)
   implementation(libs.kotlinx.serialization.core)
   implementation(libs.xmlutil.serialization)
