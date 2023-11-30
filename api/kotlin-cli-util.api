@@ -32,29 +32,72 @@ public final class slack/cli/CliktExtensionsKt {
 	public static synthetic fun projectDirOption$default (Lcom/github/ajalt/clikt/core/CliktCommand;[Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/github/ajalt/clikt/parameters/options/OptionDelegate;
 }
 
+public abstract interface class slack/cli/CommandFactory {
+	public abstract fun create ()Lcom/github/ajalt/clikt/core/CliktCommand;
+	public abstract fun getDescription ()Ljava/lang/String;
+	public abstract fun getKey ()Ljava/lang/String;
+}
+
+public final class slack/cli/CommandFactoryKt {
+	public static final fun runCommand ([Ljava/lang/String;Z)V
+	public static synthetic fun runCommand$default ([Ljava/lang/String;ZILjava/lang/Object;)V
+}
+
 public final class slack/cli/Toml {
 	public static final field INSTANCE Lslack/cli/Toml;
 	public final fun parseVersion (Ljava/io/File;)Ljava/util/Map;
 }
 
 public final class slack/cli/gradle/GradleProjectFlattenerCli : com/github/ajalt/clikt/core/CliktCommand {
+	public static final field DESCRIPTION Ljava/lang/String;
 	public fun <init> ()V
 	public fun run ()V
+}
+
+public final class slack/cli/gradle/GradleProjectFlattenerCli$Factory : slack/cli/CommandFactory {
+	public fun <init> ()V
+	public fun create ()Lcom/github/ajalt/clikt/core/CliktCommand;
+	public fun getDescription ()Ljava/lang/String;
+	public fun getKey ()Ljava/lang/String;
 }
 
 public final class slack/cli/gradle/GradleSettingsVerifierCli : com/github/ajalt/clikt/core/CliktCommand {
+	public static final field DESCRIPTION Ljava/lang/String;
 	public fun <init> ()V
 	public fun run ()V
+}
+
+public final class slack/cli/gradle/GradleSettingsVerifierCli$Factory : slack/cli/CommandFactory {
+	public fun <init> ()V
+	public fun create ()Lcom/github/ajalt/clikt/core/CliktCommand;
+	public fun getDescription ()Ljava/lang/String;
+	public fun getKey ()Ljava/lang/String;
 }
 
 public final class slack/cli/lint/LintBaselineMergerCli : com/github/ajalt/clikt/core/CliktCommand {
+	public static final field DESCRIPTION Ljava/lang/String;
 	public fun <init> ()V
 	public fun run ()V
 }
 
+public final class slack/cli/lint/LintBaselineMergerCli$Factory : slack/cli/CommandFactory {
+	public fun <init> ()V
+	public fun create ()Lcom/github/ajalt/clikt/core/CliktCommand;
+	public fun getDescription ()Ljava/lang/String;
+	public fun getKey ()Ljava/lang/String;
+}
+
 public final class slack/cli/sarif/MergeSarifReports : com/github/ajalt/clikt/core/CliktCommand {
+	public static final field DESCRIPTION Ljava/lang/String;
 	public fun <init> ()V
 	public fun run ()V
+}
+
+public final class slack/cli/sarif/MergeSarifReports$Factory : slack/cli/CommandFactory {
+	public fun <init> ()V
+	public fun create ()Lcom/github/ajalt/clikt/core/CliktCommand;
+	public fun getDescription ()Ljava/lang/String;
+	public fun getKey ()Ljava/lang/String;
 }
 
 public final class slack/cli/shellsentry/AnalysisResult {
@@ -181,8 +224,16 @@ public final class slack/cli/shellsentry/ShellSentry$Companion {
 }
 
 public final class slack/cli/shellsentry/ShellSentryCli : com/github/ajalt/clikt/core/CliktCommand {
+	public static final field DESCRIPTION Ljava/lang/String;
 	public fun <init> ()V
 	public fun run ()V
+}
+
+public final class slack/cli/shellsentry/ShellSentryCli$Factory : slack/cli/CommandFactory {
+	public fun <init> ()V
+	public fun create ()Lcom/github/ajalt/clikt/core/CliktCommand;
+	public fun getDescription ()Ljava/lang/String;
+	public fun getKey ()Ljava/lang/String;
 }
 
 public final class slack/cli/shellsentry/ShellSentryConfig {
