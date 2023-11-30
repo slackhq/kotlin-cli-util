@@ -24,17 +24,17 @@ import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.path
 import io.github.detekt.sarif4k.SarifSchema210
 import io.github.detekt.sarif4k.SarifSerializer
-import kotlin.io.path.absolutePathString
-import kotlin.system.exitProcess
-import slack.cli.projectDirOption
-import slack.cli.skipBuildAndCacheDirs
 import java.nio.file.Path
+import kotlin.io.path.absolutePathString
 import kotlin.io.path.createParentDirectories
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.exists
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
 import kotlin.io.path.writeText
+import kotlin.system.exitProcess
+import slack.cli.projectDirOption
+import slack.cli.skipBuildAndCacheDirs
 
 public class MergeSarifReports :
   CliktCommand(
@@ -44,7 +44,8 @@ public class MergeSarifReports :
   private val projectDir by projectDirOption()
   private val outputFile by option("--output-file").path().required()
   private val filePrefix by option("--file-prefix")
-  private val files by argument("--files").path(mustExist = true, canBeDir = false, mustBeReadable = true).multiple()
+  private val argFiles by
+    argument("--files").path(mustExist = true, canBeDir = false, mustBeReadable = true).multiple()
   private val verbose by option("--verbose", "-v").flag()
   private val remapSrcRoots by
     option(
@@ -99,28 +100,32 @@ public class MergeSarifReports :
   private fun String.prefixPathWith(prefix: String) = "$prefix/$this"
 
   private fun findSarifFiles(): List<Path> {
-    if (filePrefix == null && files.isEmpty()) {
+    if (filePrefix == null && argFiles.isEmpty()) {
       throw IllegalArgumentException("Must specify either --file-prefix or --files")
     }
 
     val files = mutableListOf<Path>()
 
-    files += files
+    files += argFiles
 
     filePrefix?.let { prefix ->
-      // Find build files first, this gives us an easy hook to then go looking in build/reports dirs.
-      // Otherwise we don't have a way to easily exclude populated build dirs that would take forever.
+      // Find build files first, this gives us an easy hook to then go looking in build/reports
+      // dirs.
+      // Otherwise we don't have a way to easily exclude populated build dirs that would take
+      // forever.
       val buildFiles = findBuildFiles()
 
       log("Finding sarif files")
-      files += buildFiles
-        .asSequence()
-        .flatMap { buildFile ->
+      files +=
+        buildFiles.asSequence().flatMap { buildFile ->
           val reportsDir = buildFile.parent.resolve("build/reports")
           if (reportsDir.exists()) {
-            reportsDir.toFile().walkTopDown().filter {
-              it.isFile && it.extension == "sarif" && it.nameWithoutExtension.startsWith(prefix)
-            }
+            reportsDir
+              .toFile()
+              .walkTopDown()
+              .filter {
+                it.isFile && it.extension == "sarif" && it.nameWithoutExtension.startsWith(prefix)
+              }
               .map { it.toPath() }
           } else {
             emptySequence()
