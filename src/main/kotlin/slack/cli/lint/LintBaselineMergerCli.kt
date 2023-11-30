@@ -89,7 +89,8 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
         "--message-template",
         "-m",
         help =
-          "Template for messages with each issue. This message can optionally contain '{id}' in it to be replaced with the issue ID."
+          "Template for messages with each issue. This message can optionally " +
+            "contain '{id}' in it to be replaced with the issue ID."
       )
       .default("Lint issue {id}")
 
