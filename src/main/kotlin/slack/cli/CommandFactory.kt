@@ -35,7 +35,7 @@ public fun runCommand(args: Array<String>, exitOnError: Boolean = true) {
   val commands = ServiceLoader.load(CommandFactory::class.java).associateBy { it.key }
 
   if (args.isEmpty()) {
-    println("Usage: kli <command> <args>")
+    println("Usage: <command> <args>")
     println("Available commands:")
     commands.forEach { (key, factory) -> println("  $key: ${factory.description}") }
     if (exitOnError) {
