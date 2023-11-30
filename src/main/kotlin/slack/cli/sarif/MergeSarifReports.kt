@@ -22,6 +22,7 @@ import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.path
+import com.google.auto.service.AutoService
 import io.github.detekt.sarif4k.SarifSchema210
 import io.github.detekt.sarif4k.SarifSerializer
 import java.nio.file.Path
@@ -33,13 +34,19 @@ import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
 import kotlin.io.path.writeText
 import kotlin.system.exitProcess
+import slack.cli.CommandFactory
 import slack.cli.projectDirOption
 import slack.cli.skipBuildAndCacheDirs
 
-public class MergeSarifReports :
-  CliktCommand(
-    help = "Merges all matching sarif reports into a single file for ease of uploading."
-  ) {
+public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
+
+  @AutoService(CommandFactory::class)
+  public class Factory : CommandFactory {
+    override val key: String = "merge-sarif-reports"
+    override val description: String = DESCRIPTION
+
+    override fun create(): CliktCommand = MergeSarifReports()
+  }
 
   private val projectDir by projectDirOption()
   private val outputFile by option("--output-file").path().required()
@@ -358,5 +365,7 @@ public class MergeSarifReports :
 
   private companion object {
     private const val SRC_ROOT = "%SRCROOT%"
+    const val DESCRIPTION =
+      "Merges all matching sarif reports into a single file for ease of uploading."
   }
 }

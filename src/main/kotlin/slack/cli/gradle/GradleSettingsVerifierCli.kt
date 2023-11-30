@@ -19,6 +19,7 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.path
+import com.google.auto.service.AutoService
 import java.io.File
 import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.exists
@@ -27,11 +28,23 @@ import kotlin.io.path.name
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
 import kotlin.system.exitProcess
+import slack.cli.CommandFactory
 import slack.cli.projectDirOption
 
 /** A CLI that verifies a given settings file has only valid projects. */
-public class GradleSettingsVerifierCli :
-  CliktCommand(help = "A CLI that verifies a given settings file has only valid projects.") {
+public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
+
+  private companion object {
+    const val DESCRIPTION = "A CLI that verifies a given settings file has only valid projects."
+  }
+
+  @AutoService(CommandFactory::class)
+  public class Factory : CommandFactory {
+    override val key: String = "verify-gradle-settings"
+    override val description: String = DESCRIPTION
+
+    override fun create(): CliktCommand = GradleSettingsVerifierCli()
+  }
 
   private val projectDir by projectDirOption()
 
