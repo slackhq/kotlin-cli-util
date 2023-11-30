@@ -100,8 +100,8 @@ public class MergeSarifReports :
   private fun String.prefixPathWith(prefix: String) = "$prefix/$this"
 
   private fun findSarifFiles(): List<Path> {
-    if (filePrefix == null && argFiles.isEmpty()) {
-      throw IllegalArgumentException("Must specify either --file-prefix or --files")
+    require(filePrefix != null || argFiles.isNotEmpty()) {
+      "Must specify either --file-prefix or pass files as arguments"
     }
 
     val files = mutableListOf<Path>()
