@@ -68,6 +68,13 @@ import slack.cli.skipBuildAndCacheDirs
 public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
   private companion object {
     const val DESCRIPTION = "Merges multiple lint baselines into one"
+    private val LEVEL_NAMES =
+      Level.entries.joinToString(
+        separator = ", ",
+        prefix = "[",
+        postfix = "]",
+        transform = Level::name
+      )
   }
 
   @AutoService(CommandFactory::class)
@@ -90,19 +97,13 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
         "-m",
         help =
           "Template for messages with each issue. This message can optionally " +
-            "contain '{id}' in it to be replaced with the issue ID."
+            "contain '{id}' in it to be replaced with the issue ID and '{message}' " +
+            "for the original message."
       )
-      .default("Lint issue {id}")
+      .default("{message}")
 
   private val level by
-    option(
-        "--level",
-        "-l",
-        help =
-          "Priority level. Defaults to Error. Options are ${
-    Level.entries.joinToString(separator = ", ", prefix = "[", postfix = "]", transform = Level::name)
-          }"
-      )
+    option("--level", "-l", help = "Priority level. Defaults to Error. Options are $LEVEL_NAMES")
       .enum<Level>()
       .default(Level.Error)
 
@@ -120,13 +121,6 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
     val issues = parseIssues()
 
     if (verbose) println("Merging ${issues.size} issues")
-    val idsToLocations =
-      issues.entries
-        .groupBy { (issue, _) -> issue.id }
-        .mapValues { (_, entries) ->
-          entries.map { (issue, projectPath) -> issue.toLocation(projectPath) }
-        }
-        .toSortedMap()
 
     if (verbose) println("Gathering rules")
     val rules =
@@ -155,20 +149,30 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
             Run(
               tool = Tool(ToolComponent(name = "lint", rules = rules)),
               results =
-                buildList {
-                  for ((id, locations) in idsToLocations) {
-                    add(
-                      Result(
-                        ruleID = id,
-                        level = level,
-                        ruleIndex = ruleIndices.getValue(id),
-                        locations =
-                          locations.sortedBy { it.physicalLocation?.artifactLocation?.uri },
-                        message = Message(text = messageTemplate.replace("{id}", id))
-                      )
+                issues.keys
+                  .sortedWith(
+                    compareBy(
+                      { it.id },
+                      { it.location.file },
+                      { it.location.line },
+                      { it.location.column }
+                    )
+                  )
+                  .map { key -> key to issues.getValue(key) }
+                  .map { (issue, projectPath) ->
+                    val id = issue.id
+                    Result(
+                      ruleID = id,
+                      level = level,
+                      ruleIndex = ruleIndices.getValue(id),
+                      locations = listOf(issue.toLocation(projectPath)),
+                      message =
+                        Message(
+                          text =
+                            messageTemplate.replace("{id}", id).replace("{message}", issue.message)
+                        )
                     )
                   }
-                }
             )
           )
       )
