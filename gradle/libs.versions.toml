@@ -1,9 +1,9 @@
 [versions]
-kotlin = "1.9.20"
+kotlin = "1.9.21"
 kotlinx-serialization = "1.6.1"
 ktfmt = "0.46"
 jvmTarget = "17"
-moshix = "0.25.0"
+moshix = "0.25.1"
 moshi = "1.15.0"
 tikxml = "0.8.15"
 xmlutil = "0.86.2"
@@ -18,7 +18,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 spotless = { id = "com.diffplug.spotless", version = "6.22.0" }
 binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.13.2" }
-retry = { id = "org.gradle.test-retry", version = "1.5.6" }
+retry = { id = "org.gradle.test-retry", version = "1.5.7" }
 
 [libraries]
 bugsnag = "com.bugsnag:bugsnag:3.7.1"

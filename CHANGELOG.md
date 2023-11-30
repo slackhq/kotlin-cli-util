@@ -1,6 +1,15 @@
 Changelog
 =========
 
+2.5.2
+-----
+
+_2023-11-27_
+
+- **New**: Add `GradleSettingsVerifierCli` for verifying simple settings.gradle files.
+- Update to Kotlin `1.9.21`.
+- Update to MoshiX `0.25.1`.
+
 2.5.1
 -----
 
