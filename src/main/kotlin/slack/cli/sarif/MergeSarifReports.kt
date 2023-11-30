@@ -16,17 +16,25 @@
 package slack.cli.sarif
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.arguments.argument
+import com.github.ajalt.clikt.parameters.arguments.multiple
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
-import com.github.ajalt.clikt.parameters.types.file
+import com.github.ajalt.clikt.parameters.types.path
 import io.github.detekt.sarif4k.SarifSchema210
 import io.github.detekt.sarif4k.SarifSerializer
-import java.io.File
 import kotlin.io.path.absolutePathString
 import kotlin.system.exitProcess
 import slack.cli.projectDirOption
 import slack.cli.skipBuildAndCacheDirs
+import java.nio.file.Path
+import kotlin.io.path.createParentDirectories
+import kotlin.io.path.deleteIfExists
+import kotlin.io.path.exists
+import kotlin.io.path.readText
+import kotlin.io.path.relativeTo
+import kotlin.io.path.writeText
 
 public class MergeSarifReports :
   CliktCommand(
@@ -34,8 +42,9 @@ public class MergeSarifReports :
   ) {
 
   private val projectDir by projectDirOption()
-  private val outputFile: File by option("--output-file").file().required()
-  private val filePrefix by option("--file-prefix").required()
+  private val outputFile by option("--output-file").path().required()
+  private val filePrefix by option("--file-prefix")
+  private val files by argument("--files").path(mustExist = true, canBeDir = false, mustBeReadable = true).multiple()
   private val verbose by option("--verbose", "-v").flag()
   private val remapSrcRoots by
     option(
@@ -68,13 +77,11 @@ public class MergeSarifReports :
   }
 
   private fun prepareOutput() {
-    if (outputFile.exists()) {
-      outputFile.delete()
-    }
-    outputFile.parentFile?.mkdirs()
+    outputFile.deleteIfExists()
+    outputFile.createParentDirectories()
   }
 
-  private fun findBuildFiles(): List<File> {
+  private fun findBuildFiles(): List<Path> {
     log("Finding build files in ${projectDir.toFile().canonicalFile}")
     val buildFiles =
       projectDir
@@ -83,6 +90,7 @@ public class MergeSarifReports :
         .walkTopDown()
         .skipBuildAndCacheDirs()
         .filter { it.name == "build.gradle.kts" }
+        .map { it.toPath() }
         .toList()
     log("${buildFiles.size} build files found")
     return buildFiles
@@ -90,25 +98,37 @@ public class MergeSarifReports :
 
   private fun String.prefixPathWith(prefix: String) = "$prefix/$this"
 
-  private fun findSarifFiles(): List<File> {
-    // Find build files first, this gives us an easy hook to then go looking in build/reports dirs.
-    // Otherwise we don't have a way to easily exclude populated build dirs that would take forever.
-    val buildFiles = findBuildFiles()
+  private fun findSarifFiles(): List<Path> {
+    if (filePrefix == null && files.isEmpty()) {
+      throw IllegalArgumentException("Must specify either --file-prefix or --files")
+    }
 
-    log("Finding sarif files")
-    return buildFiles
-      .asSequence()
-      .flatMap { buildFile ->
-        val reportsDir = File(buildFile.parentFile, "build/reports")
-        if (reportsDir.exists()) {
-          reportsDir.walkTopDown().filter {
-            it.isFile && it.extension == "sarif" && it.nameWithoutExtension.startsWith(filePrefix)
+    val files = mutableListOf<Path>()
+
+    files += files
+
+    filePrefix?.let { prefix ->
+      // Find build files first, this gives us an easy hook to then go looking in build/reports dirs.
+      // Otherwise we don't have a way to easily exclude populated build dirs that would take forever.
+      val buildFiles = findBuildFiles()
+
+      log("Finding sarif files")
+      files += buildFiles
+        .asSequence()
+        .flatMap { buildFile ->
+          val reportsDir = buildFile.parent.resolve("build/reports")
+          if (reportsDir.exists()) {
+            reportsDir.toFile().walkTopDown().filter {
+              it.isFile && it.extension == "sarif" && it.nameWithoutExtension.startsWith(prefix)
+            }
+              .map { it.toPath() }
+          } else {
+            emptySequence()
           }
-        } else {
-          emptySequence()
         }
-      }
-      .toList()
+    }
+
+    return files
   }
 
   /**
@@ -143,16 +163,16 @@ public class MergeSarifReports :
    * libraries/lib/src/main/java/com/example/app/LibActivity.kt
    * ```
    */
-  private fun SarifSchema210.remapSrcRoots(sarifFile: File): SarifSchema210 {
-    //   <module>/─────────────────────────────────┐
-    //       build/─────────────────────┐          │
-    //          reports/──────┐         │          │
-    //                        ▼         ▼          ▼
-    val module = sarifFile.parentFile.parentFile.parentFile
-    check(File(module, "build.gradle.kts").exists()) {
+  private fun SarifSchema210.remapSrcRoots(sarifFile: Path): SarifSchema210 {
+    //   <module>/─────────────────────────┐
+    //       build/─────────────────┐      │
+    //          reports/──────┐     │      │
+    //                        ▼     ▼      ▼
+    val module = sarifFile.parent.parent.parent
+    check(module.resolve("build.gradle.kts").exists()) {
       "Expected to find build.gradle.kts in $module"
     }
-    val modulePrefix = module.toRelativeString(projectDir.toFile())
+    val modulePrefix = module.relativeTo(projectDir).toString()
     return copy(
       runs =
         runs.map { run ->
@@ -232,7 +252,7 @@ public class MergeSarifReports :
     )
   }
 
-  private fun loadSarifs(inputs: List<File>): List<SarifSchema210> {
+  private fun loadSarifs(inputs: List<Path>): List<SarifSchema210> {
     return inputs.map { sarifFile ->
       log("Parsing $sarifFile")
       val parsed = SarifSerializer.fromJson(sarifFile.readText())
@@ -249,7 +269,7 @@ public class MergeSarifReports :
     }
   }
 
-  private fun merge(inputs: List<File>) {
+  private fun merge(inputs: List<Path>) {
     log("Parsing ${inputs.size} sarif files")
     val sarifs = loadSarifs(inputs)
 
