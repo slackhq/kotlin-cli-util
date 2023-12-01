@@ -1,6 +1,17 @@
 Changelog
 =========
 
+2.5.3
+-----
+
+_2023-12-01_
+
+- Update kotlinx-serialization to `1.6.2`.
+- Add files arg + use path APIs in sarif merging. This allows specifying a variable number of extra files args for manual merging of files.
+- Introduce `CommandFactory` to aggregate commands. You can invoke the `runCommand()` function with keys to known CLIs (check their sources for keys or run with no args to print the help details). This makes it easier to invoke any CLI from a single entrypoint.
+- Add `messageTemplate` and `level` options to lint baseline merger.
+- List issues individually in lint baseline merges + preserve messages.
+
 2.5.2
 -----
 
