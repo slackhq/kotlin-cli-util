@@ -20,7 +20,6 @@ import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
-import com.github.ajalt.clikt.parameters.types.enum
 import com.github.ajalt.clikt.parameters.types.path
 import com.google.auto.service.AutoService
 import com.tickaroo.tikxml.converter.htmlescape.StringEscapeUtils
@@ -62,19 +61,13 @@ import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import slack.cli.CommandFactory
 import slack.cli.projectDirOption
+import slack.cli.sarif.levelOption
 import slack.cli.skipBuildAndCacheDirs
 
 /** A CLI that merges lint baseline xml files into one. */
 public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
   private companion object {
     const val DESCRIPTION = "Merges multiple lint baselines into one"
-    private val LEVEL_NAMES =
-      Level.entries.joinToString(
-        separator = ", ",
-        prefix = "[",
-        postfix = "]",
-        transform = Level::name
-      )
   }
 
   @AutoService(CommandFactory::class)
@@ -102,10 +95,7 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
       )
       .default("{message}")
 
-  private val level by
-    option("--level", "-l", help = "Priority level. Defaults to Error. Options are $LEVEL_NAMES")
-      .enum<Level>()
-      .default(Level.Error)
+  private val level by levelOption().default(Level.Error)
 
   private val verbose by option("--verbose", "-v").flag()
 
