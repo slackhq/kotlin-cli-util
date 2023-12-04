@@ -21,6 +21,7 @@ import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.enum
 import io.github.detekt.sarif4k.Level
 import io.github.detekt.sarif4k.Result
+import java.util.Objects
 
 /**
  * A comparator used to sort instances of the Result class.
@@ -45,6 +46,34 @@ internal val RESULT_SORT_COMPARATOR = compareBy<Result>(
   { it.locations?.firstOrNull()?.physicalLocation?.region?.endColumn },
   { it.message.text },
 )
+
+/**
+ * Returns the identity hash code for the [Result] object. This seeks to create a hash code for results that point to
+ * the same issue+location, but not necessarily the same [Result.level]/[Result.message].
+ */
+internal val Result.identityHash: Int
+  get() = Objects.hash(
+    ruleID,
+    locations?.firstOrNull()?.physicalLocation?.artifactLocation?.uri,
+    locations?.firstOrNull()?.physicalLocation?.region?.startLine,
+    locations?.firstOrNull()?.physicalLocation?.region?.startColumn,
+    locations?.firstOrNull()?.physicalLocation?.region?.endLine,
+    locations?.firstOrNull()?.physicalLocation?.region?.endColumn,
+  )
+
+/**
+ * Returns the shallow hash code for the [Result] object. This seeks to create a hash code for results that include the
+ * [identityHash] but also differentiate if the [Result.level]/[Result.message] are different.
+ */
+internal val Result.shallowHash: Int
+  get() = Objects.hash(
+    ruleID,
+    locations?.firstOrNull()?.physicalLocation?.artifactLocation?.uri,
+    locations?.firstOrNull()?.physicalLocation?.region?.startLine,
+    locations?.firstOrNull()?.physicalLocation?.region?.startColumn,
+    locations?.firstOrNull()?.physicalLocation?.region?.endLine,
+    locations?.firstOrNull()?.physicalLocation?.region?.endColumn,
+  )
 
 private val LEVEL_NAMES =
   Level.entries.joinToString(separator = ", ", prefix = "[", postfix = "]", transform = Level::name)
