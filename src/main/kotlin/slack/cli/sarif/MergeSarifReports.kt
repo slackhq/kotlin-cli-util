@@ -284,63 +284,7 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
 
   private fun merge(inputs: List<Path>) {
     log("Parsing ${inputs.size} sarif files")
-    val sarifs = loadSarifs(inputs)
-
-    log("Merging ${inputs.size} sarif files")
-    val sortedMergedRules =
-      sarifs
-        .flatMap { it.runs.single().tool.driver.rules.orEmpty() }
-        .associateBy { it.id }
-        .toSortedMap()
-    val mergedResults =
-      sarifs
-        .flatMap { it.runs.single().results.orEmpty() }
-        // Some projects produce multiple reports for different variants, so we need to
-        // de-dupe.
-        .distinct()
-        .also { echo("Merged ${it.size} results") }
-
-    // Update rule.ruleIndex to match the index in rulesToAdd
-    val ruleIndicesById =
-      sortedMergedRules.entries.withIndex().associate { (index, entry) -> entry.key to index }
-    val correctedResults =
-      mergedResults
-        .map { result ->
-          val ruleId = result.ruleID
-          val ruleIndex = ruleIndicesById.getValue(ruleId)
-          result.copy(ruleIndex = ruleIndex.toLong())
-        }
-        .map {
-          if (level != null) {
-            it.copy(level = this.level)
-          } else {
-            it
-          }
-        }
-        .sortedWith(RESULT_SORT_COMPARATOR)
-
-    val sarifToUse =
-      if (removeUriPrefixes) {
-        // Just use the first if we don't care about originalUriBaseIDs
-        sarifs.first()
-      } else {
-        // Pick a sarif file to use as the base for the merged sarif file. We want one that has an
-        // `originalURIBaseIDS` too since parsing possibly uses this.
-        sarifs.find { it.runs.firstOrNull()?.originalURIBaseIDS?.isNotEmpty() == true }
-          ?: error("No sarif files had originalURIBaseIDS set, can't merge")
-      }
-
-    // Note: we don't sort these results by anything currently (location, etc), but maybe some day
-    // we should if it matters for caching
-    val runToCopy = sarifToUse.runs.single()
-    val mergedTool =
-      runToCopy.tool.copy(
-        driver = runToCopy.tool.driver.copy(rules = sortedMergedRules.values.toList())
-      )
-
-    val mergedSarif =
-      sarifToUse.copy(runs = listOf(runToCopy.copy(tool = mergedTool, results = correctedResults)))
-
+    val mergedSarif = loadSarifs(inputs).merge(levelOverride = level, log = ::log)
     log("Writing merged sarif to $outputFile")
     prepareOutput()
     outputFile.writeText(SarifSerializer.toJson(mergedSarif))

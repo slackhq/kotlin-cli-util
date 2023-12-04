@@ -21,6 +21,7 @@ import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.enum
 import io.github.detekt.sarif4k.Level
 import io.github.detekt.sarif4k.Result
+import io.github.detekt.sarif4k.SarifSchema210
 import io.github.detekt.sarif4k.Suppression
 import io.github.detekt.sarif4k.SuppressionKind
 import java.util.Objects
@@ -97,4 +98,62 @@ internal fun CliktCommand.levelOption(): NullableOption<Level, Level> {
       help = "Priority level. Defaults to Error. Options are $LEVEL_NAMES"
     )
     .enum<Level>()
+}
+
+internal fun List<SarifSchema210>.merge(
+  levelOverride: Level? = null,
+  removeUriPrefixes: Boolean = false,
+  log: (String) -> Unit,
+): SarifSchema210 {
+  log("Merging $size sarif files")
+  val sortedMergedRules =
+    flatMap { it.runs.single().tool.driver.rules.orEmpty() }
+      .associateBy { it.id }
+      .toSortedMap()
+  val mergedResults =
+    flatMap { it.runs.single().results.orEmpty() }
+      // Some projects produce multiple reports for different variants, so we need to
+      // de-dupe.
+      .distinct()
+      .also { log("Merged ${it.size} results") }
+
+  // Update rule.ruleIndex to match the index in rulesToAdd
+  val ruleIndicesById =
+    sortedMergedRules.entries.withIndex().associate { (index, entry) -> entry.key to index }
+  val correctedResults =
+    mergedResults
+      .map { result ->
+        val ruleId = result.ruleID
+        val ruleIndex = ruleIndicesById.getValue(ruleId)
+        result.copy(ruleIndex = ruleIndex.toLong())
+      }
+      .map {
+        if (levelOverride != null) {
+          it.copy(level = levelOverride)
+        } else {
+          it
+        }
+      }
+      .sortedWith(RESULT_SORT_COMPARATOR)
+
+  val sarifToUse =
+    if (removeUriPrefixes) {
+      // Just use the first if we don't care about originalUriBaseIDs
+      first()
+    } else {
+      // Pick a sarif file to use as the base for the merged sarif file. We want one that has an
+      // `originalURIBaseIDS` too since parsing possibly uses this.
+      find { it.runs.firstOrNull()?.originalURIBaseIDS?.isNotEmpty() == true }
+        ?: error("No sarif files had originalURIBaseIDS set, can't merge")
+    }
+
+  // Note: we don't sort these results by anything currently (location, etc), but maybe some day
+  // we should if it matters for caching
+  val runToCopy = sarifToUse.runs.single()
+  val mergedTool =
+    runToCopy.tool.copy(
+      driver = runToCopy.tool.driver.copy(rules = sortedMergedRules.values.toList())
+    )
+
+  return sarifToUse.copy(runs = listOf(runToCopy.copy(tool = mergedTool, results = correctedResults)))
 }
