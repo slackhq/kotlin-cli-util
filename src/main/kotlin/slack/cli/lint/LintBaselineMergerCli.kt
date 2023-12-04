@@ -36,6 +36,7 @@ import io.github.detekt.sarif4k.ReportingDescriptor
 import io.github.detekt.sarif4k.Result
 import io.github.detekt.sarif4k.Run
 import io.github.detekt.sarif4k.SarifSchema210
+import io.github.detekt.sarif4k.SarifSerializer
 import io.github.detekt.sarif4k.Tool
 import io.github.detekt.sarif4k.ToolComponent
 import io.github.detekt.sarif4k.Version
@@ -100,12 +101,6 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
 
   private val verbose by option("--verbose", "-v").flag()
 
-  @OptIn(ExperimentalSerializationApi::class)
-  private val json = Json {
-    prettyPrint = true
-    prettyPrintIndent = "  "
-  }
-
   private val xml = XML { defaultPolicy { ignoreUnknownChildren() } }
 
   override fun run() {
@@ -169,7 +164,7 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
           )
       )
 
-    json.encodeToString(SarifSchema210.serializer(), outputSarif).let { outputFile.writeText(it) }
+    SarifSerializer.toJson(outputSarif).let { outputFile.writeText(it) }
   }
 
   private fun parseIssues(): Map<LintIssues.LintIssue, Path> {
