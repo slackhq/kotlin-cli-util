@@ -23,6 +23,7 @@ import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.path
 import com.google.auto.service.AutoService
+import io.github.detekt.sarif4k.Result
 import io.github.detekt.sarif4k.SarifSchema210
 import io.github.detekt.sarif4k.SarifSerializer
 import java.nio.file.Path
@@ -317,18 +318,7 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
             it
           }
         }
-        .sortedWith(
-          compareBy(
-            { it.ruleIndex },
-            { it.ruleID },
-            { it.locations?.firstOrNull()?.physicalLocation?.artifactLocation?.uri },
-            { it.locations?.firstOrNull()?.physicalLocation?.region?.startLine },
-            { it.locations?.firstOrNull()?.physicalLocation?.region?.startColumn },
-            { it.locations?.firstOrNull()?.physicalLocation?.region?.endLine },
-            { it.locations?.firstOrNull()?.physicalLocation?.region?.endColumn },
-            { it.message.text },
-          )
-        )
+        .sortedWith(RESULT_SORT_COMPARATOR)
 
     val sarifToUse =
       if (removeUriPrefixes) {

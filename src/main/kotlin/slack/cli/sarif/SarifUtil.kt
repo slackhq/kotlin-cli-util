@@ -20,6 +20,31 @@ import com.github.ajalt.clikt.parameters.options.NullableOption
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.enum
 import io.github.detekt.sarif4k.Level
+import io.github.detekt.sarif4k.Result
+
+/**
+ * A comparator used to sort instances of the Result class.
+ *
+ * The comparison is done based on the following properties in the given order:
+ * - ruleIndex
+ * - ruleID
+ * - uri of the first physical location's artifact location
+ * - startLine of the first physical location's region
+ * - startColumn of the first physical location's region
+ * - endLine of the first physical location's region
+ * - endColumn of the first physical location's region
+ * - text of the message
+ */
+internal val RESULT_SORT_COMPARATOR = compareBy<Result>(
+  { it.ruleIndex },
+  { it.ruleID },
+  { it.locations?.firstOrNull()?.physicalLocation?.artifactLocation?.uri },
+  { it.locations?.firstOrNull()?.physicalLocation?.region?.startLine },
+  { it.locations?.firstOrNull()?.physicalLocation?.region?.startColumn },
+  { it.locations?.firstOrNull()?.physicalLocation?.region?.endLine },
+  { it.locations?.firstOrNull()?.physicalLocation?.region?.endColumn },
+  { it.message.text },
+)
 
 private val LEVEL_NAMES =
   Level.entries.joinToString(separator = ", ", prefix = "[", postfix = "]", transform = Level::name)
