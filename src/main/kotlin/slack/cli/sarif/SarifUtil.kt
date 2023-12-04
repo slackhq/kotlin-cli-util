@@ -21,7 +21,14 @@ import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.enum
 import io.github.detekt.sarif4k.Level
 import io.github.detekt.sarif4k.Result
+import io.github.detekt.sarif4k.Suppression
+import io.github.detekt.sarif4k.SuppressionKind
 import java.util.Objects
+
+internal val BASELINE_SUPPRESSION: Suppression = Suppression(
+  kind = SuppressionKind.External,
+  justification = "This issue was suppressed by the baseline"
+)
 
 /**
  * A comparator used to sort instances of the Result class.
