@@ -78,6 +78,8 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
       )
       .flag()
 
+  private val level by levelOption()
+
   private fun log(message: String) {
     if (verbose) {
       echo(message)
@@ -117,9 +119,8 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
 
     filePrefix?.let { prefix ->
       // Find build files first, this gives us an easy hook to then go looking in build/reports
-      // dirs.
-      // Otherwise we don't have a way to easily exclude populated build dirs that would take
-      // forever.
+      // dirs. Otherwise we don't have a way to easily exclude populated build dirs that would
+      // take forever.
       val buildFiles = findBuildFiles()
 
       log("Finding sarif files")
@@ -308,6 +309,13 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
           val ruleId = result.ruleID
           val ruleIndex = ruleIndicesById.getValue(ruleId)
           result.copy(ruleIndex = ruleIndex.toLong())
+        }
+        .map {
+          if (level != null) {
+            it.copy(level = this.level)
+          } else {
+            it
+          }
         }
         .sortedWith(
           compareBy(
