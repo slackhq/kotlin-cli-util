@@ -80,10 +80,6 @@ public final class slack/cli/lint/LintBaselineMergerCli : com/github/ajalt/clikt
 	public fun run ()V
 }
 
-public synthetic class slack/cli/lint/LintBaselineMergerCli$EntriesMappings {
-	public static final synthetic field entries$0 Lkotlin/enums/EnumEntries;
-}
-
 public final class slack/cli/lint/LintBaselineMergerCli$Factory : slack/cli/CommandFactory {
 	public fun <init> ()V
 	public fun create ()Lcom/github/ajalt/clikt/core/CliktCommand;
@@ -102,6 +98,10 @@ public final class slack/cli/sarif/MergeSarifReports$Factory : slack/cli/Command
 	public fun create ()Lcom/github/ajalt/clikt/core/CliktCommand;
 	public fun getDescription ()Ljava/lang/String;
 	public fun getKey ()Ljava/lang/String;
+}
+
+public synthetic class slack/cli/sarif/SarifUtilKt$EntriesMappings {
+	public static final synthetic field entries$0 Lkotlin/enums/EnumEntries;
 }
 
 public final class slack/cli/shellsentry/AnalysisResult {

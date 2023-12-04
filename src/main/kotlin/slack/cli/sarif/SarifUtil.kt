@@ -36,44 +36,49 @@ import java.util.Objects
  * - endColumn of the first physical location's region
  * - text of the message
  */
-internal val RESULT_SORT_COMPARATOR = compareBy<Result>(
-  { it.ruleIndex },
-  { it.ruleID },
-  { it.locations?.firstOrNull()?.physicalLocation?.artifactLocation?.uri },
-  { it.locations?.firstOrNull()?.physicalLocation?.region?.startLine },
-  { it.locations?.firstOrNull()?.physicalLocation?.region?.startColumn },
-  { it.locations?.firstOrNull()?.physicalLocation?.region?.endLine },
-  { it.locations?.firstOrNull()?.physicalLocation?.region?.endColumn },
-  { it.message.text },
-)
+internal val RESULT_SORT_COMPARATOR =
+  compareBy<Result>(
+    { it.ruleIndex },
+    { it.ruleID },
+    { it.locations?.firstOrNull()?.physicalLocation?.artifactLocation?.uri },
+    { it.locations?.firstOrNull()?.physicalLocation?.region?.startLine },
+    { it.locations?.firstOrNull()?.physicalLocation?.region?.startColumn },
+    { it.locations?.firstOrNull()?.physicalLocation?.region?.endLine },
+    { it.locations?.firstOrNull()?.physicalLocation?.region?.endColumn },
+    { it.message.text },
+  )
 
 /**
- * Returns the identity hash code for the [Result] object. This seeks to create a hash code for results that point to
- * the same issue+location, but not necessarily the same [Result.level]/[Result.message].
+ * Returns the identity hash code for the [Result] object. This seeks to create a hash code for
+ * results that point to the same issue+location, but not necessarily the same
+ * [Result.level]/[Result.message].
  */
 internal val Result.identityHash: Int
-  get() = Objects.hash(
-    ruleID,
-    locations?.firstOrNull()?.physicalLocation?.artifactLocation?.uri,
-    locations?.firstOrNull()?.physicalLocation?.region?.startLine,
-    locations?.firstOrNull()?.physicalLocation?.region?.startColumn,
-    locations?.firstOrNull()?.physicalLocation?.region?.endLine,
-    locations?.firstOrNull()?.physicalLocation?.region?.endColumn,
-  )
+  get() =
+    Objects.hash(
+      ruleID,
+      locations?.firstOrNull()?.physicalLocation?.artifactLocation?.uri,
+      locations?.firstOrNull()?.physicalLocation?.region?.startLine,
+      locations?.firstOrNull()?.physicalLocation?.region?.startColumn,
+      locations?.firstOrNull()?.physicalLocation?.region?.endLine,
+      locations?.firstOrNull()?.physicalLocation?.region?.endColumn,
+    )
 
 /**
- * Returns the shallow hash code for the [Result] object. This seeks to create a hash code for results that include the
- * [identityHash] but also differentiate if the [Result.level]/[Result.message] are different.
+ * Returns the shallow hash code for the [Result] object. This seeks to create a hash code for
+ * results that include the [identityHash] but also differentiate if the
+ * [Result.level]/[Result.message] are different.
  */
 internal val Result.shallowHash: Int
-  get() = Objects.hash(
-    ruleID,
-    locations?.firstOrNull()?.physicalLocation?.artifactLocation?.uri,
-    locations?.firstOrNull()?.physicalLocation?.region?.startLine,
-    locations?.firstOrNull()?.physicalLocation?.region?.startColumn,
-    locations?.firstOrNull()?.physicalLocation?.region?.endLine,
-    locations?.firstOrNull()?.physicalLocation?.region?.endColumn,
-  )
+  get() =
+    Objects.hash(
+      ruleID,
+      locations?.firstOrNull()?.physicalLocation?.artifactLocation?.uri,
+      locations?.firstOrNull()?.physicalLocation?.region?.startLine,
+      locations?.firstOrNull()?.physicalLocation?.region?.startColumn,
+      locations?.firstOrNull()?.physicalLocation?.region?.endLine,
+      locations?.firstOrNull()?.physicalLocation?.region?.endColumn,
+    )
 
 private val LEVEL_NAMES =
   Level.entries.joinToString(separator = ", ", prefix = "[", postfix = "]", transform = Level::name)

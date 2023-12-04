@@ -158,12 +158,13 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
                       level = level,
                       ruleIndex = ruleIndices.getValue(id),
                       locations = listOf(issue.toLocation(projectPath)),
-                      suppressions = listOf(
-                        Suppression(
-                          kind = SuppressionKind.External,
-                          justification = "This issue was suppressed by the baseline"
-                        )
-                      ),
+                      suppressions =
+                        listOf(
+                          Suppression(
+                            kind = SuppressionKind.External,
+                            justification = "This issue was suppressed by the baseline"
+                          )
+                        ),
                       message =
                         Message(
                           text =
