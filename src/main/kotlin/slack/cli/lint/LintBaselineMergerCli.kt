@@ -36,6 +36,8 @@ import io.github.detekt.sarif4k.ReportingDescriptor
 import io.github.detekt.sarif4k.Result
 import io.github.detekt.sarif4k.Run
 import io.github.detekt.sarif4k.SarifSchema210
+import io.github.detekt.sarif4k.Suppression
+import io.github.detekt.sarif4k.SuppressionKind
 import io.github.detekt.sarif4k.Tool
 import io.github.detekt.sarif4k.ToolComponent
 import io.github.detekt.sarif4k.Version
@@ -156,6 +158,12 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
                       level = level,
                       ruleIndex = ruleIndices.getValue(id),
                       locations = listOf(issue.toLocation(projectPath)),
+                      suppressions = listOf(
+                        Suppression(
+                          kind = SuppressionKind.External,
+                          justification = "This issue was suppressed by the baseline"
+                        )
+                      ),
                       message =
                         Message(
                           text =
