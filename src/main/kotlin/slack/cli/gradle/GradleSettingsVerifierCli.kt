@@ -87,6 +87,7 @@ public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
     return projectDir.resolve(gradlePath)
   }
 
+  @Suppress("LongMethod")
   @ExperimentalPathApi
   override fun run() {
     val implicitPaths = implicitPaths.associateWith { resolveProjectFromGradlePath(it) }
