@@ -1,6 +1,16 @@
 Changelog
 =========
 
+2.5.4
+-----
+
+_2023-12-05_
+
+- **Enhancement**: Validate all directories with build files match settings files in `GradleSettingsVerifierCli`.
+- **Enhancement**: Add `ApplyBaselinesToSarifs` CLI for updating or merging sarif results based on a given baseline. This has two modes (see their docs) for use with either a baseline of suppressed issues (i.e. detekt/lint baseline files) or a baseline of the base branch that it's updating from. This will mark the final output with `baselineData` and `suppressions` accordingly.
+- **Enhancement**: Mark merged lint baselines as suppressed.
+- **Enhancement**: Add a `level` option to lint baseline merging.
+
 2.5.3
 -----
 
