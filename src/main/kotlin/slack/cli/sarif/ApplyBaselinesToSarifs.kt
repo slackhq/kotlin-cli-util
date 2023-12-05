@@ -88,6 +88,7 @@ public class ApplyBaselinesToSarifs : CliktCommand(help = DESCRIPTION) {
     output.writeText(SarifSerializer.toJson(updatedSarif))
   }
 
+  @Suppress("LongMethod")
   private fun SarifSchema210.applyBaseline(baseline: SarifSchema210): SarifSchema210 {
     // Assume a single run for now
     val results = runs.first().results!!
