@@ -16,12 +16,17 @@
 package slack.cli.gradle
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.options.flag
+import com.github.ajalt.clikt.parameters.options.multiple
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.path
 import com.google.auto.service.AutoService
 import java.io.File
+import java.nio.file.Path
 import kotlin.io.path.ExperimentalPathApi
+import kotlin.io.path.absolute
+import kotlin.io.path.deleteRecursively
 import kotlin.io.path.exists
 import kotlin.io.path.isDirectory
 import kotlin.io.path.name
@@ -30,6 +35,7 @@ import kotlin.io.path.relativeTo
 import kotlin.system.exitProcess
 import slack.cli.CommandFactory
 import slack.cli.projectDirOption
+import slack.cli.skipBuildAndCacheDirs
 
 /** A CLI that verifies a given settings file has only valid projects. */
 public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
@@ -59,8 +65,52 @@ public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
       .path(mustExist = true, canBeDir = false)
       .required()
 
+  private val implicitPaths by
+    option(
+        "--implicit-path",
+        "-i",
+        help =
+          "Implicit project names that may not be present in the settings file but should be assumed present."
+      )
+      .multiple()
+
+  private val deleteUnIncludedPaths by
+    option(
+        "--delete-un-included-paths",
+        "-d",
+        help = "Delete any paths that are not included in the settings file."
+      )
+      .flag()
+
+  private fun resolveProjectFromGradlePath(relativePath: String): Path {
+    val gradlePath = relativePath.removePrefix(":").removeSuffix(":").replace(":", File.separator)
+    return projectDir.resolve(gradlePath)
+  }
+
   @ExperimentalPathApi
   override fun run() {
+    val implicitPaths = implicitPaths.associateWith { resolveProjectFromGradlePath(it) }
+    val projectsViaBuildFiles =
+      projectDir
+        .absolute()
+        .toFile()
+        .walkTopDown()
+        .skipBuildAndCacheDirs()
+        .filter { it.name == "build.gradle.kts" }
+        .associate {
+          val path = it.toPath()
+          // Get the gradle path relative to the root project dir as the key
+          val gradlePath =
+            ":" +
+              path.parent // project dir
+                .relativeTo(projectDir)
+                .toString()
+                .replace(File.separator, ":")
+          gradlePath to path
+        }
+        .filterValues { it.parent != projectDir }
+        .plus(implicitPaths)
+
     val projectPaths =
       settingsFile
         .readText()
@@ -71,14 +121,14 @@ public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
         .joinToString("\n")
         .removePrefix("include(")
         .removeSuffix(")")
-        .split(",")
+        .splitToSequence(",")
+        .associateBy { line -> line.trim().removeSuffix(",").removeSurrounding("\"") }
+        .plus(implicitPaths.mapValues { "<implicit>" })
 
     val errors = mutableListOf<String>()
     @Suppress("LoopWithTooManyJumpStatements")
-    for (line in projectPaths) {
-      val path = line.trim().removeSurrounding("\"")
-      val realPath =
-        projectDir.resolve(path.removePrefix(":").removeSuffix(":").replace(":", File.separator))
+    for ((gradlePath, line) in projectPaths) {
+      val realPath = resolveProjectFromGradlePath(gradlePath)
 
       fun reportError(message: String, column: Int) {
         errors += buildString {
@@ -89,7 +139,7 @@ public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
       }
 
       when {
-        path.endsWith(':') -> {
+        gradlePath.endsWith(':') -> {
           reportError("Project paths should not end with ':'", line.lastIndexOf(':') - 1)
         }
         !realPath.exists() -> {
@@ -109,6 +159,23 @@ public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
             "Expected '$realPath' to be a directory.",
             line.indexOfFirst { !it.isWhitespace() }
           )
+        }
+      }
+    }
+
+    for ((path, buildFile) in projectsViaBuildFiles) {
+      if (path !in projectPaths) {
+        val projectPath = buildFile.parent
+        if (deleteUnIncludedPaths) {
+          echo("Deleting un-included project '$path' at $projectPath")
+          projectPath.deleteRecursively()
+        } else {
+          errors += buildString {
+            appendLine("Project '$path' is present in the filesystem but not in the settings file.")
+            appendLine("Please add it to the settings file or delete it.")
+            appendLine("  Project dir:\t${projectPath.relativeTo(projectDir)}")
+            appendLine("  Build file:\t${buildFile.relativeTo(projectDir)}")
+          }
         }
       }
     }
