@@ -61,6 +61,7 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
           "When enabled, remaps uri roots to include the subproject path (relative to the root project)."
       )
       .flag()
+
   private val removeUriPrefixes by
     option(
         "--remove-uri-prefixes",
@@ -284,7 +285,9 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
 
   private fun merge(inputs: List<Path>) {
     log("Parsing ${inputs.size} sarif files")
-    val mergedSarif = loadSarifs(inputs).merge(levelOverride = level, log = ::log)
+    val mergedSarif =
+      loadSarifs(inputs)
+        .merge(levelOverride = level, removeUriPrefixes = removeUriPrefixes, log = ::log)
     log("Writing merged sarif to $outputFile")
     prepareOutput()
     outputFile.writeText(SarifSerializer.toJson(mergedSarif))
