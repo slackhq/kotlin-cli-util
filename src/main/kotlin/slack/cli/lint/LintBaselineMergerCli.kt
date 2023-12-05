@@ -20,7 +20,6 @@ import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
-import com.github.ajalt.clikt.parameters.types.enum
 import com.github.ajalt.clikt.parameters.types.path
 import com.google.auto.service.AutoService
 import com.tickaroo.tikxml.converter.htmlescape.StringEscapeUtils
@@ -37,6 +36,7 @@ import io.github.detekt.sarif4k.ReportingDescriptor
 import io.github.detekt.sarif4k.Result
 import io.github.detekt.sarif4k.Run
 import io.github.detekt.sarif4k.SarifSchema210
+import io.github.detekt.sarif4k.SarifSerializer
 import io.github.detekt.sarif4k.Tool
 import io.github.detekt.sarif4k.ToolComponent
 import io.github.detekt.sarif4k.Version
@@ -48,7 +48,6 @@ import kotlin.io.path.name
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
 import kotlin.io.path.writeText
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -56,25 +55,19 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import slack.cli.CommandFactory
 import slack.cli.projectDirOption
+import slack.cli.sarif.BASELINE_SUPPRESSION
+import slack.cli.sarif.levelOption
 import slack.cli.skipBuildAndCacheDirs
 
 /** A CLI that merges lint baseline xml files into one. */
 public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
   private companion object {
     const val DESCRIPTION = "Merges multiple lint baselines into one"
-    private val LEVEL_NAMES =
-      Level.entries.joinToString(
-        separator = ", ",
-        prefix = "[",
-        postfix = "]",
-        transform = Level::name
-      )
   }
 
   @AutoService(CommandFactory::class)
@@ -102,18 +95,9 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
       )
       .default("{message}")
 
-  private val level by
-    option("--level", "-l", help = "Priority level. Defaults to Error. Options are $LEVEL_NAMES")
-      .enum<Level>()
-      .default(Level.Error)
+  private val level by levelOption().default(Level.Error)
 
   private val verbose by option("--verbose", "-v").flag()
-
-  @OptIn(ExperimentalSerializationApi::class)
-  private val json = Json {
-    prettyPrint = true
-    prettyPrintIndent = "  "
-  }
 
   private val xml = XML { defaultPolicy { ignoreUnknownChildren() } }
 
@@ -166,6 +150,7 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
                       level = level,
                       ruleIndex = ruleIndices.getValue(id),
                       locations = listOf(issue.toLocation(projectPath)),
+                      suppressions = listOf(BASELINE_SUPPRESSION),
                       message =
                         Message(
                           text =
@@ -177,7 +162,7 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
           )
       )
 
-    json.encodeToString(SarifSchema210.serializer(), outputSarif).let { outputFile.writeText(it) }
+    SarifSerializer.toJson(outputSarif).let { outputFile.writeText(it) }
   }
 
   private fun parseIssues(): Map<LintIssues.LintIssue, Path> {
