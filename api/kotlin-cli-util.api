@@ -87,6 +87,19 @@ public final class slack/cli/lint/LintBaselineMergerCli$Factory : slack/cli/Comm
 	public fun getKey ()Ljava/lang/String;
 }
 
+public final class slack/cli/sarif/ApplyBaselinesToSarifs : com/github/ajalt/clikt/core/CliktCommand {
+	public static final field DESCRIPTION Ljava/lang/String;
+	public fun <init> ()V
+	public fun run ()V
+}
+
+public final class slack/cli/sarif/ApplyBaselinesToSarifs$Factory : slack/cli/CommandFactory {
+	public fun <init> ()V
+	public fun create ()Lcom/github/ajalt/clikt/core/CliktCommand;
+	public fun getDescription ()Ljava/lang/String;
+	public fun getKey ()Ljava/lang/String;
+}
+
 public final class slack/cli/sarif/MergeSarifReports : com/github/ajalt/clikt/core/CliktCommand {
 	public static final field DESCRIPTION Ljava/lang/String;
 	public fun <init> ()V

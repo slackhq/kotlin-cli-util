@@ -26,10 +26,11 @@ import io.github.detekt.sarif4k.Suppression
 import io.github.detekt.sarif4k.SuppressionKind
 import java.util.Objects
 
-internal val BASELINE_SUPPRESSION: Suppression = Suppression(
-  kind = SuppressionKind.External,
-  justification = "This issue was suppressed by the baseline"
-)
+internal val BASELINE_SUPPRESSION: Suppression =
+  Suppression(
+    kind = SuppressionKind.External,
+    justification = "This issue was suppressed by the baseline"
+  )
 
 /**
  * A comparator used to sort instances of the Result class.
@@ -100,6 +101,15 @@ internal fun CliktCommand.levelOption(): NullableOption<Level, Level> {
     .enum<Level>()
 }
 
+internal fun SarifSchema210.mergeWith(
+  other: SarifSchema210,
+  levelOverride: Level? = null,
+  removeUriPrefixes: Boolean = false,
+  log: (String) -> Unit,
+): SarifSchema210 {
+  return listOf(this, other).merge(levelOverride, removeUriPrefixes, log)
+}
+
 internal fun List<SarifSchema210>.merge(
   levelOverride: Level? = null,
   removeUriPrefixes: Boolean = false,
@@ -107,9 +117,7 @@ internal fun List<SarifSchema210>.merge(
 ): SarifSchema210 {
   log("Merging $size sarif files")
   val sortedMergedRules =
-    flatMap { it.runs.single().tool.driver.rules.orEmpty() }
-      .associateBy { it.id }
-      .toSortedMap()
+    flatMap { it.runs.single().tool.driver.rules.orEmpty() }.associateBy { it.id }.toSortedMap()
   val mergedResults =
     flatMap { it.runs.single().results.orEmpty() }
       // Some projects produce multiple reports for different variants, so we need to
@@ -155,5 +163,7 @@ internal fun List<SarifSchema210>.merge(
       driver = runToCopy.tool.driver.copy(rules = sortedMergedRules.values.toList())
     )
 
-  return sarifToUse.copy(runs = listOf(runToCopy.copy(tool = mergedTool, results = correctedResults)))
+  return sarifToUse.copy(
+    runs = listOf(runToCopy.copy(tool = mergedTool, results = correctedResults))
+  )
 }
