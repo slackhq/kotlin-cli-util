@@ -18,6 +18,14 @@
 package slack.cli
 
 import java.io.File
+import java.nio.file.FileVisitResult
+import java.nio.file.Path
+import kotlin.io.path.ExperimentalPathApi
+import kotlin.io.path.FileVisitorBuilder
+import kotlin.io.path.extension
+import kotlin.io.path.name
+import kotlin.io.path.nameWithoutExtension
+import kotlin.io.path.visitFileTree
 
 /**
  * Skips `build` and cache directories (starting with `.`, like `.gradle`) in [FileTreeWalks]
@@ -25,6 +33,38 @@ import java.io.File
  */
 public fun FileTreeWalk.skipBuildAndCacheDirs(): FileTreeWalk {
   return onEnter { dir -> !dir.name.startsWith(".") && dir.name != "build" }
+}
+
+/**
+ * Skips `build` and cache directories (starting with `.`, like `.gradle`) in [FileTreeWalks]
+ * [FileTreeWalk].
+ */
+@ExperimentalPathApi
+public fun FileVisitorBuilder.skipBuildAndCacheDirs() {
+  return onPreVisitDirectory { dir, _ ->
+    if (dir.name.startsWith(".") || dir.name == "build") {
+      FileVisitResult.SKIP_SUBTREE
+    } else {
+      FileVisitResult.CONTINUE
+    }
+  }
+}
+
+@OptIn(ExperimentalPathApi::class)
+public fun Path.walkEachFile(
+  maxDepth: Int = Int.MAX_VALUE,
+  followLinks: Boolean = false,
+  builderAction: FileVisitorBuilder.() -> Unit = {},
+): Sequence<Path> {
+  val files = mutableListOf<Path>()
+  visitFileTree(maxDepth, followLinks) {
+    builderAction()
+    onVisitFile { file, _ ->
+      files.add(file)
+      FileVisitResult.CONTINUE
+    }
+  }
+  return files.asSequence()
 }
 
 /** Filters by a specific [extension]. */
@@ -37,6 +77,23 @@ public fun Sequence<File>.filterByName(
   name: String,
   withoutExtension: Boolean = true
 ): Sequence<File> {
+  return if (withoutExtension) {
+    filter { it.nameWithoutExtension == name }
+  } else {
+    filter { it.name == name }
+  }
+}
+
+/** Filters by a specific [extension]. */
+public fun Sequence<Path>.filterByExtension(extension: String): Sequence<Path> {
+  return filter { it.extension == extension }
+}
+
+/** Filters by a specific [name]. */
+public fun Sequence<Path>.filterByName(
+  name: String,
+  withoutExtension: Boolean = true
+): Sequence<Path> {
   return if (withoutExtension) {
     filter { it.nameWithoutExtension == name }
   } else {

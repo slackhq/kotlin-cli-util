@@ -63,6 +63,8 @@ import slack.cli.projectDirOption
 import slack.cli.sarif.BASELINE_SUPPRESSION
 import slack.cli.sarif.levelOption
 import slack.cli.skipBuildAndCacheDirs
+import slack.cli.walkEachFile
+import kotlin.io.path.ExperimentalPathApi
 
 /** A CLI that merges lint baseline xml files into one. */
 public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
@@ -165,13 +167,13 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
     SarifSerializer.toJson(outputSarif).let { outputFile.writeText(it) }
   }
 
+  @OptIn(ExperimentalPathApi::class)
   private fun parseIssues(): Map<LintIssues.LintIssue, Path> {
     val issues = mutableMapOf<LintIssues.LintIssue, Path>()
     projectDir
-      .toFile()
-      .walkTopDown()
-      .skipBuildAndCacheDirs()
-      .map { it.toPath() }
+      .walkEachFile {
+        skipBuildAndCacheDirs()
+      }
       .filter { it.name == baselineFileName }
       .forEach { file ->
         if (verbose) println("Parsing $file")
