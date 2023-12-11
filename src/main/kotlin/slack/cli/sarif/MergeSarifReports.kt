@@ -26,25 +26,25 @@ import com.google.auto.service.AutoService
 import io.github.detekt.sarif4k.SarifSchema210
 import io.github.detekt.sarif4k.SarifSerializer
 import java.nio.file.Path
+import kotlin.io.path.ExperimentalPathApi
+import kotlin.io.path.absolute
 import kotlin.io.path.absolutePathString
 import kotlin.io.path.createParentDirectories
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.exists
+import kotlin.io.path.extension
+import kotlin.io.path.isRegularFile
+import kotlin.io.path.name
+import kotlin.io.path.nameWithoutExtension
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
+import kotlin.io.path.walk
 import kotlin.io.path.writeText
 import kotlin.system.exitProcess
 import slack.cli.CommandFactory
 import slack.cli.projectDirOption
 import slack.cli.skipBuildAndCacheDirs
 import slack.cli.walkEachFile
-import kotlin.io.path.ExperimentalPathApi
-import kotlin.io.path.absolute
-import kotlin.io.path.extension
-import kotlin.io.path.isRegularFile
-import kotlin.io.path.name
-import kotlin.io.path.nameWithoutExtension
-import kotlin.io.path.walk
 
 public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
 
@@ -106,9 +106,7 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
     val buildFiles =
       projectDir
         .absolute()
-        .walkEachFile {
-          skipBuildAndCacheDirs()
-        }
+        .walkEachFile { skipBuildAndCacheDirs() }
         .filter { it.name == "build.gradle.kts" }
         .toList()
     log("${buildFiles.size} build files found")
@@ -138,11 +136,11 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
         buildFiles.asSequence().flatMap { buildFile ->
           val reportsDir = buildFile.parent.resolve("build/reports")
           if (reportsDir.exists()) {
-            reportsDir
-              .walk()
-              .filter {
-                it.isRegularFile() && it.extension == "sarif" && it.nameWithoutExtension.startsWith(prefix)
-              }
+            reportsDir.walk().filter {
+              it.isRegularFile() &&
+                it.extension == "sarif" &&
+                it.nameWithoutExtension.startsWith(prefix)
+            }
           } else {
             emptySequence()
           }

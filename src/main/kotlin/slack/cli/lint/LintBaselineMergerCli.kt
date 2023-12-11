@@ -41,6 +41,7 @@ import io.github.detekt.sarif4k.Tool
 import io.github.detekt.sarif4k.ToolComponent
 import io.github.detekt.sarif4k.Version
 import java.nio.file.Path
+import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.createFile
 import kotlin.io.path.createParentDirectories
 import kotlin.io.path.deleteIfExists
@@ -64,7 +65,6 @@ import slack.cli.sarif.BASELINE_SUPPRESSION
 import slack.cli.sarif.levelOption
 import slack.cli.skipBuildAndCacheDirs
 import slack.cli.walkEachFile
-import kotlin.io.path.ExperimentalPathApi
 
 /** A CLI that merges lint baseline xml files into one. */
 public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
@@ -171,9 +171,7 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
   private fun parseIssues(): Map<LintIssues.LintIssue, Path> {
     val issues = mutableMapOf<LintIssues.LintIssue, Path>()
     projectDir
-      .walkEachFile {
-        skipBuildAndCacheDirs()
-      }
+      .walkEachFile { skipBuildAndCacheDirs() }
       .filter { it.name == baselineFileName }
       .forEach { file ->
         if (verbose) println("Parsing $file")
