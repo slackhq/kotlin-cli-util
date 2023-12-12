@@ -36,6 +36,7 @@ import kotlin.system.exitProcess
 import slack.cli.CommandFactory
 import slack.cli.projectDirOption
 import slack.cli.skipBuildAndCacheDirs
+import slack.cli.walkEachFile
 
 /** A CLI that verifies a given settings file has only valid projects. */
 public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
@@ -94,20 +95,16 @@ public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
     val projectsViaBuildFiles =
       projectDir
         .absolute()
-        .toFile()
-        .walkTopDown()
-        .skipBuildAndCacheDirs()
+        .walkEachFile { skipBuildAndCacheDirs() }
         .filter { it.name == "build.gradle.kts" }
-        .associate {
-          val path = it.toPath()
-          // Get the gradle path relative to the root project dir as the key
+        .associateBy { path -> // Get the gradle path relative to the root project dir as the key
           val gradlePath =
             ":" +
               path.parent // project dir
                 .relativeTo(projectDir)
                 .toString()
                 .replace(File.separator, ":")
-          gradlePath to path
+          gradlePath
         }
         .filterValues { it.parent != projectDir }
         .plus(implicitPaths)

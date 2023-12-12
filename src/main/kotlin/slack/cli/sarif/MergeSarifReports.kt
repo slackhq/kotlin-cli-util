@@ -26,17 +26,25 @@ import com.google.auto.service.AutoService
 import io.github.detekt.sarif4k.SarifSchema210
 import io.github.detekt.sarif4k.SarifSerializer
 import java.nio.file.Path
+import kotlin.io.path.ExperimentalPathApi
+import kotlin.io.path.absolute
 import kotlin.io.path.absolutePathString
 import kotlin.io.path.createParentDirectories
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.exists
+import kotlin.io.path.extension
+import kotlin.io.path.isRegularFile
+import kotlin.io.path.name
+import kotlin.io.path.nameWithoutExtension
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
+import kotlin.io.path.walk
 import kotlin.io.path.writeText
 import kotlin.system.exitProcess
 import slack.cli.CommandFactory
 import slack.cli.projectDirOption
 import slack.cli.skipBuildAndCacheDirs
+import slack.cli.walkEachFile
 
 public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
 
@@ -92,16 +100,14 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
     outputFile.createParentDirectories()
   }
 
+  @OptIn(ExperimentalPathApi::class)
   private fun findBuildFiles(): List<Path> {
     log("Finding build files in ${projectDir.toFile().canonicalFile}")
     val buildFiles =
       projectDir
-        .toFile()
-        .canonicalFile
-        .walkTopDown()
-        .skipBuildAndCacheDirs()
+        .absolute()
+        .walkEachFile { skipBuildAndCacheDirs() }
         .filter { it.name == "build.gradle.kts" }
-        .map { it.toPath() }
         .toList()
     log("${buildFiles.size} build files found")
     return buildFiles
@@ -109,6 +115,7 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
 
   private fun String.prefixPathWith(prefix: String) = "$prefix/$this"
 
+  @OptIn(ExperimentalPathApi::class)
   private fun findSarifFiles(): List<Path> {
     require(filePrefix != null || argFiles.isNotEmpty()) {
       "Must specify either --file-prefix or pass files as arguments"
@@ -129,13 +136,11 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
         buildFiles.asSequence().flatMap { buildFile ->
           val reportsDir = buildFile.parent.resolve("build/reports")
           if (reportsDir.exists()) {
-            reportsDir
-              .toFile()
-              .walkTopDown()
-              .filter {
-                it.isFile && it.extension == "sarif" && it.nameWithoutExtension.startsWith(prefix)
-              }
-              .map { it.toPath() }
+            reportsDir.walk().filter {
+              it.isRegularFile() &&
+                it.extension == "sarif" &&
+                it.nameWithoutExtension.startsWith(prefix)
+            }
           } else {
             emptySequence()
           }
