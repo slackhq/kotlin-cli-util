@@ -85,11 +85,13 @@ public fun Sequence<File>.filterByName(
 }
 
 /** Filters by a specific [extension]. */
+@JvmName("filterByExtensionPath")
 public fun Sequence<Path>.filterByExtension(extension: String): Sequence<Path> {
   return filter { it.extension == extension }
 }
 
 /** Filters by a specific [name]. */
+@JvmName("filterByNamePath")
 public fun Sequence<Path>.filterByName(
   name: String,
   withoutExtension: Boolean = true

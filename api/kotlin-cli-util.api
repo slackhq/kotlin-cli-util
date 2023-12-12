@@ -20,9 +20,15 @@ public final class slack/cli/AppleSiliconCompat$Arch$Companion {
 public final class slack/cli/CliUtilKt {
 	public static final fun cleanLineFormatting (Ljava/util/List;)Ljava/util/List;
 	public static final fun filterByExtension (Lkotlin/sequences/Sequence;Ljava/lang/String;)Lkotlin/sequences/Sequence;
+	public static final fun filterByExtensionPath (Lkotlin/sequences/Sequence;Ljava/lang/String;)Lkotlin/sequences/Sequence;
 	public static final fun filterByName (Lkotlin/sequences/Sequence;Ljava/lang/String;Z)Lkotlin/sequences/Sequence;
 	public static synthetic fun filterByName$default (Lkotlin/sequences/Sequence;Ljava/lang/String;ZILjava/lang/Object;)Lkotlin/sequences/Sequence;
+	public static final fun filterByNamePath (Lkotlin/sequences/Sequence;Ljava/lang/String;Z)Lkotlin/sequences/Sequence;
+	public static synthetic fun filterByNamePath$default (Lkotlin/sequences/Sequence;Ljava/lang/String;ZILjava/lang/Object;)Lkotlin/sequences/Sequence;
 	public static final fun skipBuildAndCacheDirs (Lkotlin/io/FileTreeWalk;)Lkotlin/io/FileTreeWalk;
+	public static final fun skipBuildAndCacheDirs (Lkotlin/io/path/FileVisitorBuilder;)V
+	public static final fun walkEachFile (Ljava/nio/file/Path;IZLkotlin/jvm/functions/Function1;)Lkotlin/sequences/Sequence;
+	public static synthetic fun walkEachFile$default (Ljava/nio/file/Path;IZLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lkotlin/sequences/Sequence;
 }
 
 public final class slack/cli/CliktExtensionsKt {
