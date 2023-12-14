@@ -366,6 +366,11 @@ public sealed interface DependsOn {
   public value class UnionArrayValue(public val value: List<DependsOnElement>) : DependsOn
 
   @Serializable public data object NullValue : DependsOn
+
+  public companion object {
+    public operator fun invoke(value: String): DependsOn = StringValue(value)
+    public operator fun invoke(value: List<DependsOnElement>): DependsOn = UnionArrayValue(value)
+  }
 }
 
 @Serializable
