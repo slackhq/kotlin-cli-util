@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2023 Slack Technologies, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 @file:UseSerializers(JsonObjectAsMapSerializer::class, JsonElementKamlSerializer::class)
 
 package slack.cli.buildkite
@@ -9,12 +24,15 @@ import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
 
 /*
- * Generated with https://app.quicktype.io/ using https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json.
+ * Generated with https://app.quicktype.io/ using
+ * https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json.
  *
  * Modifications after:
  * - Convert sealed classes to sealed interfaces
- * - Convert sealed subtypes to value classes or data objects. This is important for the yaml to actually serialize correctly, otherwise there will be intermediate "value" levels.
- * - Add @file:UseSerializers for JsonObjectAsMapSerializer and JsonElementKamlSerializer so that we can serialize the json types.
+ * - Convert sealed subtypes to value classes or data objects. This is important for the yaml to actually serialize
+ *   correctly, otherwise there will be intermediate "value" levels.
+ * - Add @file:UseSerializers for JsonObjectAsMapSerializer and JsonElementKamlSerializer so that we can serialize
+ *   the json types.
  * - Change ExitStatusUnion.DoubleValue to a LongValue as exit codes aren't doubles.
  * - Renames
  *   - `CommandStep` -> `ScriptStep`
@@ -55,28 +73,19 @@ public sealed interface Coordinate {
   @Serializable
   public value class AnythingArrayValue(public val value: JsonArray) : Coordinate
 
-  @JvmInline
-  @Serializable
-  public value class BoolValue(public val value: Boolean) : Coordinate
+  @JvmInline @Serializable public value class BoolValue(public val value: Boolean) : Coordinate
 
   @JvmInline
   @Serializable
   public value class CoordinateClassValue(public val value: CoordinateClass) : Coordinate
 
-  @JvmInline
-  @Serializable
-  public value class DoubleValue(public val value: Double) : Coordinate
+  @JvmInline @Serializable public value class DoubleValue(public val value: Double) : Coordinate
 
-  @JvmInline
-  @Serializable
-  public value class IntegerValue(public val value: Long) : Coordinate
+  @JvmInline @Serializable public value class IntegerValue(public val value: Long) : Coordinate
 
-  @JvmInline
-  @Serializable
-  public value class StringValue(public val value: String) : Coordinate
+  @JvmInline @Serializable public value class StringValue(public val value: String) : Coordinate
 
-  @Serializable
-  public data object NullValue : Coordinate
+  @Serializable public data object NullValue : Coordinate
 }
 
 @Serializable
@@ -85,9 +94,7 @@ public data class CoordinateClass(
   val env: JsonObject? = null,
   val notify: List<Notification>? = null,
 
-  /**
-   * A list of steps
-   */
+  /** A list of steps */
   val steps: List<GroupStep>,
 )
 
@@ -102,9 +109,7 @@ public sealed interface Agents {
   public value class StringArrayValue(public val value: List<String>) : Agents
 }
 
-/**
- * Array of notification options for this step
- */
+/** Array of notification options for this step */
 @Serializable
 public sealed interface Notification {
   @JvmInline
@@ -119,39 +124,24 @@ public sealed interface Notification {
 @Serializable
 public data class ExternalNotification(
   val email: String? = null,
-
-  @SerialName("if")
-  val notifyIf: String? = null,
-
-  @SerialName("basecamp_campfire")
-  val basecampCampfire: String? = null,
-
+  @SerialName("if") val notifyIf: String? = null,
+  @SerialName("basecamp_campfire") val basecampCampfire: String? = null,
   val slack: SlackNotification? = null,
   val webhook: String? = null,
-
-  @SerialName("pagerduty_change_event")
-  val pagerdutyChangeEvent: String? = null,
-
-  @SerialName("github_commit_status")
-  val githubCommitStatus: GithubCommitStatus? = null,
-
-  @SerialName("github_check")
-  val githubCheck: GithubCheck? = null,
+  @SerialName("pagerduty_change_event") val pagerdutyChangeEvent: String? = null,
+  @SerialName("github_commit_status") val githubCommitStatus: GithubCommitStatus? = null,
+  @SerialName("github_check") val githubCheck: GithubCheck? = null,
 )
 
 @Serializable
 public data class GithubCheck(
-  /**
-   * GitHub commit status name
-   */
+  /** GitHub commit status name */
   val context: String? = null,
 )
 
 @Serializable
 public data class GithubCommitStatus(
-  /**
-   * GitHub commit status name
-   */
+  /** GitHub commit status name */
   val context: String? = null,
 )
 
@@ -174,11 +164,8 @@ public data class MultiChannelMessage(
 
 @Serializable
 public enum class GithubNotification(public val value: String) {
-  @SerialName("github_check")
-  GithubCheck("github_check"),
-
-  @SerialName("github_commit_status")
-  GithubCommitStatus("github_commit_status");
+  @SerialName("github_check") GithubCheck("github_check"),
+  @SerialName("github_commit_status") GithubCommitStatus("github_commit_status")
 }
 
 @Serializable
@@ -187,192 +174,118 @@ public sealed interface GroupStep {
   @JvmInline
   public value class AnythingArrayValue(public val value: JsonArray) : GroupStep
 
-  @Serializable
-  @JvmInline
-  public value class BoolValue(public val value: Boolean) : GroupStep
+  @Serializable @JvmInline public value class BoolValue(public val value: Boolean) : GroupStep
 
-  @Serializable
-  @JvmInline
-  public value class DoubleValue(public val value: Double) : GroupStep
+  @Serializable @JvmInline public value class DoubleValue(public val value: Double) : GroupStep
 
-  @Serializable
-  @JvmInline
-  public value class IntegerValue(public val value: Long) : GroupStep
+  @Serializable @JvmInline public value class IntegerValue(public val value: Long) : GroupStep
 
   @Serializable
   @JvmInline
   public value class NestedBlockStepClassValue(public val value: NestedBlockStepClass) : GroupStep
 
-  @Serializable
-  @JvmInline
-  public value class StringValue(public val value: String) : GroupStep
+  @Serializable @JvmInline public value class StringValue(public val value: String) : GroupStep
 
-  @Serializable
-  public data object NullValue : GroupStep
+  @Serializable public data object NullValue : GroupStep
 }
 
-/**
- * Waits for previous steps to pass before continuing
- */
+/** Waits for previous steps to pass before continuing */
 @Serializable
 public data class NestedBlockStepClass(
-  @SerialName("allow_dependency_failure")
-  val allowDependencyFailure: Boolean? = null,
+  @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
 
-  /**
-   * The label of the block step
-   */
+  /** The label of the block step */
   val block: Block? = null,
 
-  /**
-   * The state that the build is set to when the build is blocked by this block step
-   */
-  @SerialName("blocked_state")
-  val blockedState: BlockedState? = null,
-
+  /** The state that the build is set to when the build is blocked by this block step */
+  @SerialName("blocked_state") val blockedState: BlockedState? = null,
   val branches: ArtifactPathsUnion? = null,
-
-  @SerialName("depends_on")
-  val dependsOn: DependsOn? = null,
-
+  @SerialName("depends_on") val dependsOn: DependsOn? = null,
   val fields: List<FieldElement>? = null,
   val id: String? = null,
   val identifier: String? = null,
-
-  @SerialName("if")
-  val stepIf: String? = null,
-
+  @SerialName("if") val stepIf: String? = null,
   val key: String? = null,
   val label: String? = null,
   val name: String? = null,
   val prompt: String? = null,
   val type: NestedBlockStepType? = null,
 
-  /**
-   * The label of the input step
-   */
+  /** The label of the input step */
   val input: Input? = null,
-
   val agents: Agents? = null,
 
-  /**
-   * The glob path/s of artifacts to upload once this step has finished running
-   */
-  @SerialName("artifact_paths")
-  val artifactPaths: ArtifactPathsUnion? = null,
+  /** The glob path/s of artifacts to upload once this step has finished running */
+  @SerialName("artifact_paths") val artifactPaths: ArtifactPathsUnion? = null,
+  @SerialName("cancel_on_build_failing") val cancelOnBuildFailing: Boolean? = null,
 
-  @SerialName("cancel_on_build_failing")
-  val cancelOnBuildFailing: Boolean? = null,
-
-  /**
-   * The commands to run on the agent
-   */
+  /** The commands to run on the agent */
   val command: Branches? = null,
 
-  /**
-   * The commands to run on the agent
-   */
+  /** The commands to run on the agent */
   val commands: Branches? = null,
 
   /**
-   * The maximum number of jobs created from this step that are allowed to run at the same
-   * time. If you use this attribute, you must also define concurrency_group.
+   * The maximum number of jobs created from this step that are allowed to run at the same time. If
+   * you use this attribute, you must also define concurrency_group.
    */
   val concurrency: Long? = null,
 
   /**
-   * A unique name for the concurrency group that you are creating with the concurrency
-   * attribute
+   * A unique name for the concurrency group that you are creating with the concurrency attribute
    */
-  @SerialName("concurrency_group")
-  val concurrencyGroup: String? = null,
+  @SerialName("concurrency_group") val concurrencyGroup: String? = null,
 
   /**
-   * Control command order, allowed values are 'ordered' (default) and 'eager'.  If you use
-   * this attribute, you must also define concurrency_group and concurrency.
+   * Control command order, allowed values are 'ordered' (default) and 'eager'. If you use this
+   * attribute, you must also define concurrency_group and concurrency.
    */
-  @SerialName("concurrency_method")
-  val concurrencyMethod: ConcurrencyMethod? = null,
-
+  @SerialName("concurrency_method") val concurrencyMethod: ConcurrencyMethod? = null,
   val env: JsonObject? = null,
   val matrix: MatrixUnion? = null,
 
-  /**
-   * Array of notification options for this step
-   */
+  /** Array of notification options for this step */
   val notify: List<Notification>? = null,
 
-  /**
-   * The number of parallel jobs that will be created based on this step
-   */
+  /** The number of parallel jobs that will be created based on this step */
   val parallelism: Long? = null,
-
   val plugins: Plugins? = null,
 
-  /**
-   * Priority of the job, higher priorities are assigned to agents
-   */
+  /** Priority of the job, higher priorities are assigned to agents */
   val priority: Long? = null,
 
-  /**
-   * The conditions for retrying this step.
-   */
+  /** The conditions for retrying this step. */
   val retry: Retry? = null,
 
-  /**
-   * The signature of the command step, generally injected by agents at pipeline upload
-   */
+  /** The signature of the command step, generally injected by agents at pipeline upload */
   val signature: Signature? = null,
-
   val skip: Skip? = null,
+  @SerialName("soft_fail") val softFail: SoftFail? = null,
 
-  @SerialName("soft_fail")
-  val softFail: SoftFail? = null,
-
-  /**
-   * The number of minutes to time out a job
-   */
-  @SerialName("timeout_in_minutes")
-  val timeoutInMinutes: Long? = null,
-
+  /** The number of minutes to time out a job */
+  @SerialName("timeout_in_minutes") val timeoutInMinutes: Long? = null,
   val script: ScriptStep? = null,
 
-  /**
-   * Continue to the next steps, even if the previous group of steps fail
-   */
-  @SerialName("continue_on_failure")
-  val continueOnFailure: Boolean? = null,
+  /** Continue to the next steps, even if the previous group of steps fail */
+  @SerialName("continue_on_failure") val continueOnFailure: Boolean? = null,
 
-  /**
-   * Waits for previous steps to pass before continuing
-   */
+  /** Waits for previous steps to pass before continuing */
   val wait: Wait? = null,
-
   val waiter: Wait? = null,
 
-  /**
-   * Whether to continue the build without waiting for the triggered step to complete
-   */
+  /** Whether to continue the build without waiting for the triggered step to complete */
   val async: Boolean? = null,
 
-  /**
-   * Properties of the build that will be created when the step is triggered
-   */
+  /** Properties of the build that will be created when the step is triggered */
   val build: Build? = null,
 
-  /**
-   * The slug of the pipeline to create a build
-   */
+  /** The slug of the pipeline to create a build */
   val trigger: Trigger? = null,
 
-  /**
-   * The name to give to this group of steps
-   */
+  /** The name to give to this group of steps */
   val group: String? = null,
 
-  /**
-   * A list of steps
-   */
+  /** A list of steps */
   val steps: List<Step>? = null,
 )
 
@@ -398,43 +311,26 @@ public sealed interface ArtifactPathsUnion {
 
 @Serializable
 public sealed interface Block {
-  @Serializable
-  @JvmInline
-  public value class BlockStepValue(public val value: BlockStep) : Block
+  @Serializable @JvmInline public value class BlockStepValue(public val value: BlockStep) : Block
 
-  @Serializable
-  @JvmInline
-  public value class StringValue(public val value: String) : Block
+  @Serializable @JvmInline public value class StringValue(public val value: String) : Block
 }
 
 @Serializable
 public data class BlockStep(
-  @SerialName("allow_dependency_failure")
-  val allowDependencyFailure: Boolean? = null,
+  @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
 
-  /**
-   * The label of the block step
-   */
+  /** The label of the block step */
   val block: String? = null,
 
-  /**
-   * The state that the build is set to when the build is blocked by this block step
-   */
-  @SerialName("blocked_state")
-  val blockedState: BlockedState? = null,
-
+  /** The state that the build is set to when the build is blocked by this block step */
+  @SerialName("blocked_state") val blockedState: BlockedState? = null,
   val branches: ArtifactPathsUnion? = null,
-
-  @SerialName("depends_on")
-  val dependsOn: DependsOn? = null,
-
+  @SerialName("depends_on") val dependsOn: DependsOn? = null,
   val fields: List<FieldElement>? = null,
   val id: String? = null,
   val identifier: String? = null,
-
-  @SerialName("if")
-  val blockStepIf: String? = null,
-
+  @SerialName("if") val blockStepIf: String? = null,
   val key: String? = null,
   val label: String? = null,
   val name: String? = null,
@@ -442,36 +338,24 @@ public data class BlockStep(
   val type: BlockType? = null,
 )
 
-/**
- * The state that the build is set to when the build is blocked by this block step
- */
+/** The state that the build is set to when the build is blocked by this block step */
 @Serializable
 public enum class BlockedState(public val value: String) {
-  @SerialName("failed")
-  Failed("failed"),
-
-  @SerialName("passed")
-  Passed("passed"),
-
-  @SerialName("running")
-  Running("running");
+  @SerialName("failed") Failed("failed"),
+  @SerialName("passed") Passed("passed"),
+  @SerialName("running") Running("running")
 }
 
-/**
- * The step keys for a step to depend on
- */
+/** The step keys for a step to depend on */
 @Serializable
 public sealed interface DependsOn {
-  @Serializable
-  @JvmInline
-  public value class StringValue(public val value: String) : DependsOn
+  @Serializable @JvmInline public value class StringValue(public val value: String) : DependsOn
 
   @Serializable
   @JvmInline
   public value class UnionArrayValue(public val value: List<DependsOnElement>) : DependsOn
 
-  @Serializable
-  public data object NullValue : DependsOn
+  @Serializable public data object NullValue : DependsOn
 }
 
 @Serializable
@@ -487,15 +371,11 @@ public sealed interface DependsOnElement {
 
 @Serializable
 public data class DependsOnClass(
-  @SerialName("allow_failure")
-  val allowFailure: Boolean? = null,
-
+  @SerialName("allow_failure") val allowFailure: Boolean? = null,
   val step: String? = null,
 )
 
-/**
- * A list of input fields required to be filled out before unblocking the step
- */
+/** A list of input fields required to be filled out before unblocking the step */
 @Serializable
 public data class FieldElement(
   /**
@@ -505,111 +385,72 @@ public data class FieldElement(
    */
   val default: ArtifactPathsUnion? = null,
 
-  /**
-   * The explanatory text that is shown after the label
-   */
+  /** The explanatory text that is shown after the label */
   val hint: String? = null,
 
-  /**
-   * The meta-data key that stores the field's input
-   */
+  /** The meta-data key that stores the field's input */
   val key: String,
 
-  /**
-   * Whether the field is required for form submission
-   */
+  /** Whether the field is required for form submission */
   val required: Boolean? = null,
 
-  /**
-   * The text input name
-   */
+  /** The text input name */
   val text: String? = null,
 
-  /**
-   * Whether more than one option may be selected
-   */
+  /** Whether more than one option may be selected */
   val multiple: Boolean? = null,
-
   val options: List<Option>? = null,
 
-  /**
-   * The text input name
-   */
+  /** The text input name */
   val select: String? = null,
 )
 
 @Serializable
 public data class Option(
-  /**
-   * The text displayed directly under the select field’s label
-   */
+  /** The text displayed directly under the select field’s label */
   val hint: String? = null,
 
-  /**
-   * The text displayed on the select list item
-   */
+  /** The text displayed on the select list item */
   val label: String,
 
-  /**
-   * Whether the field is required for form submission
-   */
+  /** Whether the field is required for form submission */
   val required: Boolean? = null,
 
-  /**
-   * The value to be stored as meta-data
-   */
+  /** The value to be stored as meta-data */
   val value: String,
 )
 
 @Serializable
 public enum class BlockType(public val value: String) {
-  @SerialName("block")
-  Block("block");
+  @SerialName("block") Block("block")
 }
 
-/**
- * Properties of the build that will be created when the step is triggered
- */
+/** Properties of the build that will be created when the step is triggered */
 @Serializable
 public data class Build(
-  /**
-   * The branch for the build
-   */
+  /** The branch for the build */
   val branch: String? = null,
 
-  /**
-   * The commit hash for the build
-   */
+  /** The commit hash for the build */
   val commit: String? = null,
-
   val env: JsonObject? = null,
   val label: String? = null,
 
-  /**
-   * The message for the build (supports emoji)
-   */
+  /** The message for the build (supports emoji) */
   val message: String? = null,
 
-  /**
-   * Meta-data for the build
-   */
-  @SerialName("meta_data")
-  val metaData: JsonObject? = null,
-
+  /** Meta-data for the build */
+  @SerialName("meta_data") val metaData: JsonObject? = null,
   val name: String? = null,
 
-  /**
-   * The slug of the pipeline to create a build
-   */
+  /** The slug of the pipeline to create a build */
   val trigger: String? = null,
-
   val type: BuildType? = null,
 )
 
 @Serializable
 public enum class BuildType(public val value: String) {
-  @SerialName("trigger")
-  Trigger("trigger");
+  @SerialName("trigger") Trigger("trigger")
 }
 
 @Serializable
@@ -622,126 +463,82 @@ public sealed interface Branches {
   @JvmInline
   public value class StringArrayValue(public val value: List<String>) : Branches
 
-  @Serializable
-  @JvmInline
-  public value class StringValue(public val value: String) : Branches
+  @Serializable @JvmInline public value class StringValue(public val value: String) : Branches
 }
 
 @Serializable
 public data class ScriptStep(
   val agents: Agents? = null,
+  @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
 
-  @SerialName("allow_dependency_failure")
-  val allowDependencyFailure: Boolean? = null,
-
-  /**
-   * The glob path/s of artifacts to upload once this step has finished running
-   */
-  @SerialName("artifact_paths")
-  val artifactPaths: ArtifactPathsUnion? = null,
-
+  /** The glob path/s of artifacts to upload once this step has finished running */
+  @SerialName("artifact_paths") val artifactPaths: ArtifactPathsUnion? = null,
   val branches: ArtifactPathsUnion? = null,
+  @SerialName("cancel_on_build_failing") val cancelOnBuildFailing: Boolean? = null,
 
-  @SerialName("cancel_on_build_failing")
-  val cancelOnBuildFailing: Boolean? = null,
-
-  /**
-   * The commands to run on the agent
-   */
+  /** The commands to run on the agent */
   val command: ArtifactPathsUnion? = null,
 
-  /**
-   * The commands to run on the agent
-   */
+  /** The commands to run on the agent */
   val commands: ArtifactPathsUnion? = null,
 
   /**
-   * The maximum number of jobs created from this step that are allowed to run at the same
-   * time. If you use this attribute, you must also define concurrency_group.
+   * The maximum number of jobs created from this step that are allowed to run at the same time. If
+   * you use this attribute, you must also define concurrency_group.
    */
   val concurrency: Long? = null,
 
   /**
-   * A unique name for the concurrency group that you are creating with the concurrency
-   * attribute
+   * A unique name for the concurrency group that you are creating with the concurrency attribute
    */
-  @SerialName("concurrency_group")
-  val concurrencyGroup: String? = null,
+  @SerialName("concurrency_group") val concurrencyGroup: String? = null,
 
   /**
-   * Control command order, allowed values are 'ordered' (default) and 'eager'.  If you use
-   * this attribute, you must also define concurrency_group and concurrency.
+   * Control command order, allowed values are 'ordered' (default) and 'eager'. If you use this
+   * attribute, you must also define concurrency_group and concurrency.
    */
-  @SerialName("concurrency_method")
-  val concurrencyMethod: ConcurrencyMethod? = null,
-
-  @SerialName("depends_on")
-  val dependsOn: DependsOn? = null,
-
+  @SerialName("concurrency_method") val concurrencyMethod: ConcurrencyMethod? = null,
+  @SerialName("depends_on") val dependsOn: DependsOn? = null,
   val env: JsonObject? = null,
   val id: String? = null,
   val identifier: String? = null,
-
-  @SerialName("if")
-  val commandStepIf: String? = null,
-
+  @SerialName("if") val commandStepIf: String? = null,
   val key: String? = null,
   val label: String? = null,
   val matrix: MatrixUnion? = null,
   val name: String? = null,
 
-  /**
-   * Array of notification options for this step
-   */
+  /** Array of notification options for this step */
   val notify: List<Notification>? = null,
 
-  /**
-   * The number of parallel jobs that will be created based on this step
-   */
+  /** The number of parallel jobs that will be created based on this step */
   val parallelism: Long? = null,
-
   val plugins: Plugins? = null,
 
-  /**
-   * Priority of the job, higher priorities are assigned to agents
-   */
+  /** Priority of the job, higher priorities are assigned to agents */
   val priority: Long? = null,
 
-  /**
-   * The conditions for retrying this step.
-   */
+  /** The conditions for retrying this step. */
   val retry: Retry? = null,
 
-  /**
-   * The signature of the command step, generally injected by agents at pipeline upload
-   */
+  /** The signature of the command step, generally injected by agents at pipeline upload */
   val signature: Signature? = null,
-
   val skip: Skip? = null,
+  @SerialName("soft_fail") val softFail: SoftFail? = null,
 
-  @SerialName("soft_fail")
-  val softFail: SoftFail? = null,
-
-  /**
-   * The number of minutes to time out a job
-   */
-  @SerialName("timeout_in_minutes")
-  val timeoutInMinutes: Long? = null,
-
+  /** The number of minutes to time out a job */
+  @SerialName("timeout_in_minutes") val timeoutInMinutes: Long? = null,
   val type: ScriptType? = null,
 )
 
 /**
- * Control command order, allowed values are 'ordered' (default) and 'eager'.  If you use
- * this attribute, you must also define concurrency_group and concurrency.
+ * Control command order, allowed values are 'ordered' (default) and 'eager'. If you use this
+ * attribute, you must also define concurrency_group and concurrency.
  */
 @Serializable
 public enum class ConcurrencyMethod(public val value: String) {
-  @SerialName("eager")
-  Eager("eager"),
-
-  @SerialName("ordered")
-  Ordered("ordered");
+  @SerialName("eager") Eager("eager"),
+  @SerialName("ordered") Ordered("ordered")
 }
 
 @Serializable
@@ -766,67 +563,41 @@ public sealed interface MatrixUnion {
  */
 @Serializable
 public sealed interface MatrixElement {
-  @Serializable
-  @JvmInline
-  public value class BoolValue(public val value: Boolean) : MatrixElement
+  @Serializable @JvmInline public value class BoolValue(public val value: Boolean) : MatrixElement
 
-  @Serializable
-  @JvmInline
-  public value class IntegerValue(public val value: Long) : MatrixElement
+  @Serializable @JvmInline public value class IntegerValue(public val value: Long) : MatrixElement
 
-  @Serializable
-  @JvmInline
-  public value class StringValue(public val value: String) : MatrixElement
+  @Serializable @JvmInline public value class StringValue(public val value: String) : MatrixElement
 }
 
-/**
- * Configuration for multi-dimension Build Matrix
- */
+/** Configuration for multi-dimension Build Matrix */
 @Serializable
 public data class MatrixClass(
-  /**
-   * List of Build Matrix adjustments
-   */
+  /** List of Build Matrix adjustments */
   val adjustments: List<Adjustment>? = null,
-
   val setup: Setup,
 )
 
-/**
- * An adjustment to a Build Matrix
- */
+/** An adjustment to a Build Matrix */
 @Serializable
 public data class Adjustment(
   val skip: Skip? = null,
-
-  @SerialName("soft_fail")
-  val softFail: SoftFail? = null,
-
+  @SerialName("soft_fail") val softFail: SoftFail? = null,
   val with: With,
 )
 
-/**
- * Whether this step should be skipped. You can specify a reason for using a string.
- */
+/** Whether this step should be skipped. You can specify a reason for using a string. */
 @Serializable
 public sealed interface Skip {
-  @Serializable
-  @JvmInline
-  public value class BoolValue(public val value: Boolean) : Skip
+  @Serializable @JvmInline public value class BoolValue(public val value: Boolean) : Skip
 
-  @Serializable
-  @JvmInline
-  public value class StringValue(public val value: String) : Skip
+  @Serializable @JvmInline public value class StringValue(public val value: String) : Skip
 }
 
-/**
- * The conditions for marking the step as a soft-fail.
- */
+/** The conditions for marking the step as a soft-fail. */
 @Serializable
 public sealed interface SoftFail {
-  @Serializable
-  @JvmInline
-  public value class BoolValue(public val value: Boolean) : SoftFail
+  @Serializable @JvmInline public value class BoolValue(public val value: Boolean) : SoftFail
 
   @Serializable
   @JvmInline
@@ -835,18 +606,13 @@ public sealed interface SoftFail {
 
 @Serializable
 public data class SoftFailElement(
-  /**
-   * The exit status number that will cause this job to soft-fail
-   */
-  @SerialName("exit_status")
-  val exitStatus: ExitStatusUnion? = null,
+  /** The exit status number that will cause this job to soft-fail */
+  @SerialName("exit_status") val exitStatus: ExitStatusUnion? = null,
 )
 
 @Serializable
 public sealed interface ExitStatusUnion {
-  @Serializable
-  @JvmInline
-  public value class LongValue(public val value: Long) : ExitStatusUnion
+  @Serializable @JvmInline public value class LongValue(public val value: Long) : ExitStatusUnion
 
   @Serializable
   @JvmInline
@@ -855,8 +621,7 @@ public sealed interface ExitStatusUnion {
 
 @Serializable
 public enum class ExitStatusEnum(public val value: String) {
-  @SerialName("*")
-  Empty("*");
+  @SerialName("*") Empty("*")
 }
 
 @Serializable
@@ -894,113 +659,77 @@ public sealed interface Plugins {
   public value class UnionArrayValue(public val value: List<Plugin>) : Plugins
 }
 
-/**
- * Array of plugins for this step
- */
+/** Array of plugins for this step */
 @Serializable
 public sealed interface Plugin {
   @Serializable
   @JvmInline
   public value class AnythingMapValue(public val value: JsonObject) : Plugin
 
-  @Serializable
-  @JvmInline
-  public value class StringValue(public val value: String) : Plugin
+  @Serializable @JvmInline public value class StringValue(public val value: String) : Plugin
 }
 
-/**
- * The conditions for retrying this step.
- */
+/** The conditions for retrying this step. */
 @Serializable
 public data class Retry(
   /**
-   * Whether to allow a job to retry automatically. If set to true, the retry conditions are
-   * set to the default value.
+   * Whether to allow a job to retry automatically. If set to true, the retry conditions are set to
+   * the default value.
    */
   val automatic: Automatic? = null,
 
-  /**
-   * Whether to allow a job to be retried manually
-   */
+  /** Whether to allow a job to be retried manually */
   val manual: ManualUnion? = null,
 )
 
 /**
- * Whether to allow a job to retry automatically. If set to true, the retry conditions are
- * set to the default value.
+ * Whether to allow a job to retry automatically. If set to true, the retry conditions are set to
+ * the default value.
  */
 @Serializable
 public sealed interface Automatic {
   @Serializable
   @JvmInline
-  public value class AutomaticElementArrayValue(public val value: List<AutomaticElement>) : Automatic
+  public value class AutomaticElementArrayValue(public val value: List<AutomaticElement>) :
+    Automatic
 
   @Serializable
   @JvmInline
   public value class AutomaticElementValue(public val value: AutomaticElement) : Automatic
 
-  @Serializable
-  @JvmInline
-  public value class BoolValue(public val value: Boolean) : Automatic
+  @Serializable @JvmInline public value class BoolValue(public val value: Boolean) : Automatic
 }
 
 @Serializable
 public data class AutomaticElement(
-  /**
-   * The exit status number that will cause this job to retry
-   */
-  @SerialName("exit_status")
-  val exitStatus: ExitStatusUnion? = null,
+  /** The exit status number that will cause this job to retry */
+  @SerialName("exit_status") val exitStatus: ExitStatusUnion? = null,
 
-  /**
-   * The number of times this job can be retried
-   */
+  /** The number of times this job can be retried */
   val limit: Long? = null,
 
-  /**
-   * The exit signal, if any, that may be retried
-   */
+  /** The exit signal, if any, that may be retried */
   val signal: String? = null,
 
-  /**
-   * The exit signal reason, if any, that may be retried
-   */
-  @SerialName("signal_reason")
-  val signalReason: SignalReason? = null,
+  /** The exit signal reason, if any, that may be retried */
+  @SerialName("signal_reason") val signalReason: SignalReason? = null,
 )
 
-/**
- * The exit signal reason, if any, that may be retried
- */
+/** The exit signal reason, if any, that may be retried */
 @Serializable
 public enum class SignalReason(public val value: String) {
-  @SerialName("agent_refused")
-  AgentRefused("agent_refused"),
-
-  @SerialName("agent_stop")
-  AgentStop("agent_stop"),
-
-  @SerialName("cancel")
-  Cancel("cancel"),
-
-  @SerialName("*")
-  Empty("*"),
-
-  @SerialName("none")
-  None("none"),
-
-  @SerialName("process_run_error")
-  ProcessRunError("process_run_error");
+  @SerialName("agent_refused") AgentRefused("agent_refused"),
+  @SerialName("agent_stop") AgentStop("agent_stop"),
+  @SerialName("cancel") Cancel("cancel"),
+  @SerialName("*") Empty("*"),
+  @SerialName("none") None("none"),
+  @SerialName("process_run_error") ProcessRunError("process_run_error")
 }
 
-/**
- * Whether to allow a job to be retried manually
- */
+/** Whether to allow a job to be retried manually */
 @Serializable
 public sealed interface ManualUnion {
-  @Serializable
-  @JvmInline
-  public value class BoolValue(public val value: Boolean) : ManualUnion
+  @Serializable @JvmInline public value class BoolValue(public val value: Boolean) : ManualUnion
 
   @Serializable
   @JvmInline
@@ -1009,91 +738,58 @@ public sealed interface ManualUnion {
 
 @Serializable
 public data class ManualClass(
-  /**
-   * Whether or not this job can be retried manually
-   */
+  /** Whether or not this job can be retried manually */
   val allowed: Boolean? = null,
 
-  /**
-   * Whether or not this job can be retried after it has passed
-   */
-  @SerialName("permit_on_passed")
-  val permitOnPassed: Boolean? = null,
+  /** Whether or not this job can be retried after it has passed */
+  @SerialName("permit_on_passed") val permitOnPassed: Boolean? = null,
 
   /**
-   * A string that will be displayed in a tooltip on the Retry button in Buildkite. This will
-   * only be displayed if the allowed attribute is set to false.
+   * A string that will be displayed in a tooltip on the Retry button in Buildkite. This will only
+   * be displayed if the allowed attribute is set to false.
    */
   val reason: String? = null,
 )
 
-/**
- * The signature of the command step, generally injected by agents at pipeline upload
- */
+/** The signature of the command step, generally injected by agents at pipeline upload */
 @Serializable
 public data class Signature(
-  /**
-   * The algorithm used to generate the signature
-   */
+  /** The algorithm used to generate the signature */
   val algorithm: String? = null,
 
-  /**
-   * The fields that were signed to form the signature value
-   */
-  @SerialName("signed_fields")
-  val signedFields: List<String>? = null,
+  /** The fields that were signed to form the signature value */
+  @SerialName("signed_fields") val signedFields: List<String>? = null,
 
-  /**
-   * The signature value, a JWS compact signature with a detached body
-   */
+  /** The signature value, a JWS compact signature with a detached body */
   val value: String? = null,
 )
 
 @Serializable
 public enum class ScriptType(public val value: String) {
-  @SerialName("command")
-  Command("command"),
-
-  @SerialName("commands")
-  Commands("commands"),
-
-  @SerialName("script")
-  Script("script");
+  @SerialName("command") Command("command"),
+  @SerialName("commands") Commands("commands"),
+  @SerialName("script") Script("script")
 }
 
 @Serializable
 public sealed interface Input {
-  @Serializable
-  @JvmInline
-  public value class InputStepValue(public val value: InputStep) : Input
+  @Serializable @JvmInline public value class InputStepValue(public val value: InputStep) : Input
 
-  @Serializable
-  @JvmInline
-  public value class StringValue(public val value: String) : Input
+  @Serializable @JvmInline public value class StringValue(public val value: String) : Input
 }
 
 @Serializable
 public data class InputStep(
-  @SerialName("allow_dependency_failure")
-  val allowDependencyFailure: Boolean? = null,
-
+  @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
   val branches: ArtifactPathsUnion? = null,
-
-  @SerialName("depends_on")
-  val dependsOn: DependsOn? = null,
-
+  @SerialName("depends_on") val dependsOn: DependsOn? = null,
   val fields: List<FieldElement>? = null,
   val id: String? = null,
   val identifier: String? = null,
+  @SerialName("if") val inputStepIf: String? = null,
 
-  @SerialName("if")
-  val inputStepIf: String? = null,
-
-  /**
-   * The label of the input step
-   */
+  /** The label of the input step */
   val input: String? = null,
-
   val key: String? = null,
   val label: String? = null,
   val name: String? = null,
@@ -1103,52 +799,34 @@ public data class InputStep(
 
 @Serializable
 public enum class InputType(public val value: String) {
-  @SerialName("input")
-  Input("input");
+  @SerialName("input") Input("input")
 }
 
 @Serializable
 public sealed interface Step {
-  @Serializable
-  @JvmInline
-  public value class EnumValue(public val value: StringStep) : Step
+  @Serializable @JvmInline public value class EnumValue(public val value: StringStep) : Step
 
   @Serializable
   @JvmInline
   public value class CommandStepValue(public val value: CommandStep) : Step
 }
 
-/**
- * Waits for previous steps to pass before continuing
- */
+/** Waits for previous steps to pass before continuing */
 @Serializable
 public data class CommandStep(
-  @SerialName("allow_dependency_failure")
-  val allowDependencyFailure: Boolean? = null,
+  @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
 
-  /**
-   * The label of the block step
-   */
+  /** The label of the block step */
   val block: String? = null,
 
-  /**
-   * The state that the build is set to when the build is blocked by this block step
-   */
-  @SerialName("blocked_state")
-  val blockedState: BlockedState? = null,
-
+  /** The state that the build is set to when the build is blocked by this block step */
+  @SerialName("blocked_state") val blockedState: BlockedState? = null,
   val branches: ArtifactPathsUnion? = null,
-
-  @SerialName("depends_on")
-  val dependsOn: DependsOn? = null,
-
+  @SerialName("depends_on") val dependsOn: DependsOn? = null,
   val fields: List<FieldElement>? = null,
   val id: String? = null,
   val identifier: String? = null,
-
-  @SerialName("if")
-  val stepIf: String? = null,
-
+  @SerialName("if") val stepIf: String? = null,
   val key: String? = null,
   val label: String? = null,
   val name: String? = null,
@@ -1156,127 +834,80 @@ public data class CommandStep(
   val type: StepType? = null,
   val agents: Agents? = null,
 
-  /**
-   * The glob path/s of artifacts to upload once this step has finished running
-   */
-  @SerialName("artifact_paths")
-  val artifactPaths: ArtifactPathsUnion? = null,
+  /** The glob path/s of artifacts to upload once this step has finished running */
+  @SerialName("artifact_paths") val artifactPaths: ArtifactPathsUnion? = null,
+  @SerialName("cancel_on_build_failing") val cancelOnBuildFailing: Boolean? = null,
 
-  @SerialName("cancel_on_build_failing")
-  val cancelOnBuildFailing: Boolean? = null,
-
-  /**
-   * The commands to run on the agent
-   */
+  /** The commands to run on the agent */
   val command: Branches? = null,
 
-  /**
-   * The commands to run on the agent
-   */
+  /** The commands to run on the agent */
   val commands: Branches? = null,
 
   /**
-   * The maximum number of jobs created from this step that are allowed to run at the same
-   * time. If you use this attribute, you must also define concurrency_group.
+   * The maximum number of jobs created from this step that are allowed to run at the same time. If
+   * you use this attribute, you must also define concurrency_group.
    */
   val concurrency: Long? = null,
 
   /**
-   * A unique name for the concurrency group that you are creating with the concurrency
-   * attribute
+   * A unique name for the concurrency group that you are creating with the concurrency attribute
    */
-  @SerialName("concurrency_group")
-  val concurrencyGroup: String? = null,
+  @SerialName("concurrency_group") val concurrencyGroup: String? = null,
 
   /**
-   * Control command order, allowed values are 'ordered' (default) and 'eager'.  If you use
-   * this attribute, you must also define concurrency_group and concurrency.
+   * Control command order, allowed values are 'ordered' (default) and 'eager'. If you use this
+   * attribute, you must also define concurrency_group and concurrency.
    */
-  @SerialName("concurrency_method")
-  val concurrencyMethod: ConcurrencyMethod? = null,
-
+  @SerialName("concurrency_method") val concurrencyMethod: ConcurrencyMethod? = null,
   val env: JsonObject? = null,
   val matrix: MatrixUnion? = null,
 
-  /**
-   * Array of notification options for this step
-   */
+  /** Array of notification options for this step */
   val notify: List<Notification>? = null,
 
-  /**
-   * The number of parallel jobs that will be created based on this step
-   */
+  /** The number of parallel jobs that will be created based on this step */
   val parallelism: Long? = null,
-
   val plugins: Plugins? = null,
 
-  /**
-   * Priority of the job, higher priorities are assigned to agents
-   */
+  /** Priority of the job, higher priorities are assigned to agents */
   val priority: Long? = null,
 
-  /**
-   * The conditions for retrying this step.
-   */
+  /** The conditions for retrying this step. */
   val retry: Retry? = null,
 
-  /**
-   * The signature of the command step, generally injected by agents at pipeline upload
-   */
+  /** The signature of the command step, generally injected by agents at pipeline upload */
   val signature: Signature? = null,
-
   val skip: Skip? = null,
+  @SerialName("soft_fail") val softFail: SoftFail? = null,
 
-  @SerialName("soft_fail")
-  val softFail: SoftFail? = null,
-
-  /**
-   * The number of minutes to time out a job
-   */
-  @SerialName("timeout_in_minutes")
-  val timeoutInMinutes: Long? = null,
-
+  /** The number of minutes to time out a job */
+  @SerialName("timeout_in_minutes") val timeoutInMinutes: Long? = null,
   val script: ScriptStep? = null,
 
-  /**
-   * Whether to continue the build without waiting for the triggered step to complete
-   */
+  /** Whether to continue the build without waiting for the triggered step to complete */
   val async: Boolean? = null,
 
-  /**
-   * Properties of the build that will be created when the step is triggered
-   */
+  /** Properties of the build that will be created when the step is triggered */
   val build: Build? = null,
 
-  /**
-   * The slug of the pipeline to create a build
-   */
+  /** The slug of the pipeline to create a build */
   val trigger: Trigger? = null,
 
-  /**
-   * The label of the input step
-   */
+  /** The label of the input step */
   val input: Input? = null,
 
-  /**
-   * Continue to the next steps, even if the previous group of steps fail
-   */
-  @SerialName("continue_on_failure")
-  val continueOnFailure: Boolean? = null,
+  /** Continue to the next steps, even if the previous group of steps fail */
+  @SerialName("continue_on_failure") val continueOnFailure: Boolean? = null,
 
-  /**
-   * Waits for previous steps to pass before continuing
-   */
+  /** Waits for previous steps to pass before continuing */
   val wait: Wait? = null,
-
   val waiter: Wait? = null,
 )
 
 @Serializable
 public sealed interface Trigger {
-  @Serializable
-  @JvmInline
-  public value class StringValue(public val value: String) : Trigger
+  @Serializable @JvmInline public value class StringValue(public val value: String) : Trigger
 
   @Serializable
   @JvmInline
@@ -1285,128 +916,73 @@ public sealed interface Trigger {
 
 @Serializable
 public data class TriggerStep(
-  @SerialName("allow_dependency_failure")
-  val allowDependencyFailure: Boolean? = null,
+  @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
 
-  /**
-   * Whether to continue the build without waiting for the triggered step to complete
-   */
+  /** Whether to continue the build without waiting for the triggered step to complete */
   val async: Boolean? = null,
-
   val branches: ArtifactPathsUnion? = null,
 
-  /**
-   * Properties of the build that will be created when the step is triggered
-   */
+  /** Properties of the build that will be created when the step is triggered */
   val build: Build? = null,
-
-  @SerialName("depends_on")
-  val dependsOn: DependsOn? = null,
-
+  @SerialName("depends_on") val dependsOn: DependsOn? = null,
   val id: String? = null,
   val identifier: String? = null,
-
-  @SerialName("if")
-  val triggerStepIf: String? = null,
-
+  @SerialName("if") val triggerStepIf: String? = null,
   val key: String? = null,
   val label: String? = null,
   val name: String? = null,
   val skip: Skip? = null,
+  @SerialName("soft_fail") val softFail: SoftFail? = null,
 
-  @SerialName("soft_fail")
-  val softFail: SoftFail? = null,
-
-  /**
-   * The slug of the pipeline to create a build
-   */
+  /** The slug of the pipeline to create a build */
   val trigger: String? = null,
-
   val type: BuildType? = null,
 )
 
 @Serializable
 public enum class StepType(public val value: String) {
-  @SerialName("block")
-  Block("block"),
-
-  @SerialName("command")
-  Command("command"),
-
-  @SerialName("commands")
-  Commands("commands"),
-
-  @SerialName("input")
-  Input("input"),
-
-  @SerialName("script")
-  Script("script"),
-
-  @SerialName("trigger")
-  Trigger("trigger"),
-
-  @SerialName("wait")
-  Wait("wait"),
-
-  @SerialName("waiter")
-  Waiter("waiter");
+  @SerialName("block") Block("block"),
+  @SerialName("command") Command("command"),
+  @SerialName("commands") Commands("commands"),
+  @SerialName("input") Input("input"),
+  @SerialName("script") Script("script"),
+  @SerialName("trigger") Trigger("trigger"),
+  @SerialName("wait") Wait("wait"),
+  @SerialName("waiter") Waiter("waiter")
 }
 
 @Serializable
 public sealed interface Wait {
-  @Serializable
-  @JvmInline
-  public value class StringValue(public val value: String) : Wait
+  @Serializable @JvmInline public value class StringValue(public val value: String) : Wait
 
-  @Serializable
-  @JvmInline
-  public value class WaitStepValue(public val value: WaitStep) : Wait
+  @Serializable @JvmInline public value class WaitStepValue(public val value: WaitStep) : Wait
 
-  @Serializable
-  public data object NullValue : Wait
+  @Serializable public data object NullValue : Wait
 }
 
-/**
- * Waits for previous steps to pass before continuing
- */
+/** Waits for previous steps to pass before continuing */
 @Serializable
 public data class WaitStep(
-  @SerialName("allow_dependency_failure")
-  val allowDependencyFailure: Boolean? = null,
+  @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
 
-  /**
-   * Continue to the next steps, even if the previous group of steps fail
-   */
-  @SerialName("continue_on_failure")
-  val continueOnFailure: Boolean? = null,
-
-  @SerialName("depends_on")
-  val dependsOn: DependsOn? = null,
-
+  /** Continue to the next steps, even if the previous group of steps fail */
+  @SerialName("continue_on_failure") val continueOnFailure: Boolean? = null,
+  @SerialName("depends_on") val dependsOn: DependsOn? = null,
   val id: String? = null,
   val identifier: String? = null,
-
-  @SerialName("if")
-  val waitStepIf: String? = null,
-
+  @SerialName("if") val waitStepIf: String? = null,
   val key: String? = null,
   val type: WaitType? = null,
 
-  /**
-   * Waits for previous steps to pass before continuing
-   */
+  /** Waits for previous steps to pass before continuing */
   val wait: String? = null,
-
   val waiter: String? = null,
 )
 
 @Serializable
 public enum class WaitType(public val value: String) {
-  @SerialName("wait")
-  Wait("wait"),
-
-  @SerialName("waiter")
-  Waiter("waiter");
+  @SerialName("wait") Wait("wait"),
+  @SerialName("waiter") Waiter("waiter")
 }
 
 /**
@@ -1416,45 +992,21 @@ public enum class WaitType(public val value: String) {
  */
 @Serializable
 public enum class StringStep(public val value: String) {
-  @SerialName("block")
-  Block("block"),
-
-  @SerialName("input")
-  Input("input"),
-
-  @SerialName("wait")
-  Wait("wait"),
-
-  @SerialName("waiter")
-  Waiter("waiter");
+  @SerialName("block") Block("block"),
+  @SerialName("input") Input("input"),
+  @SerialName("wait") Wait("wait"),
+  @SerialName("waiter") Waiter("waiter")
 }
 
 @Serializable
 public enum class NestedBlockStepType(public val value: String) {
-  @SerialName("block")
-  Block("block"),
-
-  @SerialName("command")
-  Command("command"),
-
-  @SerialName("commands")
-  Commands("commands"),
-
-  @SerialName("group")
-  Group("group"),
-
-  @SerialName("input")
-  Input("input"),
-
-  @SerialName("script")
-  Script("script"),
-
-  @SerialName("trigger")
-  Trigger("trigger"),
-
-  @SerialName("wait")
-  Wait("wait"),
-
-  @SerialName("waiter")
-  Waiter("waiter");
+  @SerialName("block") Block("block"),
+  @SerialName("command") Command("command"),
+  @SerialName("commands") Commands("commands"),
+  @SerialName("group") Group("group"),
+  @SerialName("input") Input("input"),
+  @SerialName("script") Script("script"),
+  @SerialName("trigger") Trigger("trigger"),
+  @SerialName("wait") Wait("wait"),
+  @SerialName("waiter") Waiter("waiter")
 }
