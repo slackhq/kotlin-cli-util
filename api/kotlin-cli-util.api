@@ -501,8 +501,8 @@ public final class slack/cli/buildkite/BuildType$Companion {
 public final class slack/cli/buildkite/CommandStep {
 	public static final field Companion Lslack/cli/buildkite/CommandStep$Companion;
 	public fun <init> ()V
-	public fun <init> (Ljava/lang/Boolean;Ljava/lang/String;Lslack/cli/buildkite/BlockedState;Lslack/cli/buildkite/SimpleStringValue;Lslack/cli/buildkite/DependsOn;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/StepType;Lslack/cli/buildkite/Agents;Lslack/cli/buildkite/SimpleStringValue;Ljava/lang/Boolean;Lslack/cli/buildkite/Commands;Lslack/cli/buildkite/Commands;Ljava/lang/Long;Ljava/lang/String;Lslack/cli/buildkite/ConcurrencyMethod;Lkotlinx/serialization/json/JsonObject;Lslack/cli/buildkite/MatrixUnion;Ljava/util/List;Ljava/lang/Long;Lslack/cli/buildkite/Plugins;Ljava/lang/Long;Lslack/cli/buildkite/Retry;Lslack/cli/buildkite/Signature;Lslack/cli/buildkite/Skip;Lslack/cli/buildkite/SoftFail;Ljava/lang/Long;Lslack/cli/buildkite/ScriptStep;Ljava/lang/Boolean;Lslack/cli/buildkite/Build;Lslack/cli/buildkite/Trigger;Lslack/cli/buildkite/Input;Ljava/lang/Boolean;Lslack/cli/buildkite/Wait;Lslack/cli/buildkite/Wait;)V
-	public synthetic fun <init> (Ljava/lang/Boolean;Ljava/lang/String;Lslack/cli/buildkite/BlockedState;Lslack/cli/buildkite/SimpleStringValue;Lslack/cli/buildkite/DependsOn;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/StepType;Lslack/cli/buildkite/Agents;Lslack/cli/buildkite/SimpleStringValue;Ljava/lang/Boolean;Lslack/cli/buildkite/Commands;Lslack/cli/buildkite/Commands;Ljava/lang/Long;Ljava/lang/String;Lslack/cli/buildkite/ConcurrencyMethod;Lkotlinx/serialization/json/JsonObject;Lslack/cli/buildkite/MatrixUnion;Ljava/util/List;Ljava/lang/Long;Lslack/cli/buildkite/Plugins;Ljava/lang/Long;Lslack/cli/buildkite/Retry;Lslack/cli/buildkite/Signature;Lslack/cli/buildkite/Skip;Lslack/cli/buildkite/SoftFail;Ljava/lang/Long;Lslack/cli/buildkite/ScriptStep;Ljava/lang/Boolean;Lslack/cli/buildkite/Build;Lslack/cli/buildkite/Trigger;Lslack/cli/buildkite/Input;Ljava/lang/Boolean;Lslack/cli/buildkite/Wait;Lslack/cli/buildkite/Wait;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/Boolean;Ljava/lang/String;Lslack/cli/buildkite/BlockedState;Lslack/cli/buildkite/SimpleStringValue;Lslack/cli/buildkite/DependsOn;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/StepType;Lslack/cli/buildkite/Agents;Lslack/cli/buildkite/SimpleStringValue;Ljava/lang/Boolean;Lslack/cli/buildkite/Commands;Lslack/cli/buildkite/Commands;Ljava/lang/Long;Ljava/lang/String;Lslack/cli/buildkite/ConcurrencyMethod;Ljava/util/Map;Lslack/cli/buildkite/MatrixUnion;Ljava/util/List;Ljava/lang/Long;Lslack/cli/buildkite/Plugins;Ljava/lang/Long;Lslack/cli/buildkite/Retry;Lslack/cli/buildkite/Signature;Lslack/cli/buildkite/Skip;Lslack/cli/buildkite/SoftFail;Ljava/lang/Long;Lslack/cli/buildkite/ScriptStep;Ljava/lang/Boolean;Lslack/cli/buildkite/Build;Lslack/cli/buildkite/Trigger;Lslack/cli/buildkite/Input;Ljava/lang/Boolean;Lslack/cli/buildkite/Wait;Lslack/cli/buildkite/Wait;)V
+	public synthetic fun <init> (Ljava/lang/Boolean;Ljava/lang/String;Lslack/cli/buildkite/BlockedState;Lslack/cli/buildkite/SimpleStringValue;Lslack/cli/buildkite/DependsOn;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/StepType;Lslack/cli/buildkite/Agents;Lslack/cli/buildkite/SimpleStringValue;Ljava/lang/Boolean;Lslack/cli/buildkite/Commands;Lslack/cli/buildkite/Commands;Ljava/lang/Long;Ljava/lang/String;Lslack/cli/buildkite/ConcurrencyMethod;Ljava/util/Map;Lslack/cli/buildkite/MatrixUnion;Ljava/util/List;Ljava/lang/Long;Lslack/cli/buildkite/Plugins;Ljava/lang/Long;Lslack/cli/buildkite/Retry;Lslack/cli/buildkite/Signature;Lslack/cli/buildkite/Skip;Lslack/cli/buildkite/SoftFail;Ljava/lang/Long;Lslack/cli/buildkite/ScriptStep;Ljava/lang/Boolean;Lslack/cli/buildkite/Build;Lslack/cli/buildkite/Trigger;Lslack/cli/buildkite/Input;Ljava/lang/Boolean;Lslack/cli/buildkite/Wait;Lslack/cli/buildkite/Wait;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/Boolean;
 	public final fun component10 ()Ljava/lang/String;
 	public final fun component11 ()Ljava/lang/String;
@@ -518,7 +518,7 @@ public final class slack/cli/buildkite/CommandStep {
 	public final fun component20 ()Ljava/lang/Long;
 	public final fun component21 ()Ljava/lang/String;
 	public final fun component22 ()Lslack/cli/buildkite/ConcurrencyMethod;
-	public final fun component23 ()Lkotlinx/serialization/json/JsonObject;
+	public final fun component23 ()Ljava/util/Map;
 	public final fun component24 ()Lslack/cli/buildkite/MatrixUnion;
 	public final fun component25 ()Ljava/util/List;
 	public final fun component26 ()Ljava/lang/Long;
@@ -544,8 +544,8 @@ public final class slack/cli/buildkite/CommandStep {
 	public final fun component7 ()Ljava/lang/String;
 	public final fun component8 ()Ljava/lang/String;
 	public final fun component9 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/Boolean;Ljava/lang/String;Lslack/cli/buildkite/BlockedState;Lslack/cli/buildkite/SimpleStringValue;Lslack/cli/buildkite/DependsOn;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/StepType;Lslack/cli/buildkite/Agents;Lslack/cli/buildkite/SimpleStringValue;Ljava/lang/Boolean;Lslack/cli/buildkite/Commands;Lslack/cli/buildkite/Commands;Ljava/lang/Long;Ljava/lang/String;Lslack/cli/buildkite/ConcurrencyMethod;Lkotlinx/serialization/json/JsonObject;Lslack/cli/buildkite/MatrixUnion;Ljava/util/List;Ljava/lang/Long;Lslack/cli/buildkite/Plugins;Ljava/lang/Long;Lslack/cli/buildkite/Retry;Lslack/cli/buildkite/Signature;Lslack/cli/buildkite/Skip;Lslack/cli/buildkite/SoftFail;Ljava/lang/Long;Lslack/cli/buildkite/ScriptStep;Ljava/lang/Boolean;Lslack/cli/buildkite/Build;Lslack/cli/buildkite/Trigger;Lslack/cli/buildkite/Input;Ljava/lang/Boolean;Lslack/cli/buildkite/Wait;Lslack/cli/buildkite/Wait;)Lslack/cli/buildkite/CommandStep;
-	public static synthetic fun copy$default (Lslack/cli/buildkite/CommandStep;Ljava/lang/Boolean;Ljava/lang/String;Lslack/cli/buildkite/BlockedState;Lslack/cli/buildkite/SimpleStringValue;Lslack/cli/buildkite/DependsOn;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/StepType;Lslack/cli/buildkite/Agents;Lslack/cli/buildkite/SimpleStringValue;Ljava/lang/Boolean;Lslack/cli/buildkite/Commands;Lslack/cli/buildkite/Commands;Ljava/lang/Long;Ljava/lang/String;Lslack/cli/buildkite/ConcurrencyMethod;Lkotlinx/serialization/json/JsonObject;Lslack/cli/buildkite/MatrixUnion;Ljava/util/List;Ljava/lang/Long;Lslack/cli/buildkite/Plugins;Ljava/lang/Long;Lslack/cli/buildkite/Retry;Lslack/cli/buildkite/Signature;Lslack/cli/buildkite/Skip;Lslack/cli/buildkite/SoftFail;Ljava/lang/Long;Lslack/cli/buildkite/ScriptStep;Ljava/lang/Boolean;Lslack/cli/buildkite/Build;Lslack/cli/buildkite/Trigger;Lslack/cli/buildkite/Input;Ljava/lang/Boolean;Lslack/cli/buildkite/Wait;Lslack/cli/buildkite/Wait;IILjava/lang/Object;)Lslack/cli/buildkite/CommandStep;
+	public final fun copy (Ljava/lang/Boolean;Ljava/lang/String;Lslack/cli/buildkite/BlockedState;Lslack/cli/buildkite/SimpleStringValue;Lslack/cli/buildkite/DependsOn;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/StepType;Lslack/cli/buildkite/Agents;Lslack/cli/buildkite/SimpleStringValue;Ljava/lang/Boolean;Lslack/cli/buildkite/Commands;Lslack/cli/buildkite/Commands;Ljava/lang/Long;Ljava/lang/String;Lslack/cli/buildkite/ConcurrencyMethod;Ljava/util/Map;Lslack/cli/buildkite/MatrixUnion;Ljava/util/List;Ljava/lang/Long;Lslack/cli/buildkite/Plugins;Ljava/lang/Long;Lslack/cli/buildkite/Retry;Lslack/cli/buildkite/Signature;Lslack/cli/buildkite/Skip;Lslack/cli/buildkite/SoftFail;Ljava/lang/Long;Lslack/cli/buildkite/ScriptStep;Ljava/lang/Boolean;Lslack/cli/buildkite/Build;Lslack/cli/buildkite/Trigger;Lslack/cli/buildkite/Input;Ljava/lang/Boolean;Lslack/cli/buildkite/Wait;Lslack/cli/buildkite/Wait;)Lslack/cli/buildkite/CommandStep;
+	public static synthetic fun copy$default (Lslack/cli/buildkite/CommandStep;Ljava/lang/Boolean;Ljava/lang/String;Lslack/cli/buildkite/BlockedState;Lslack/cli/buildkite/SimpleStringValue;Lslack/cli/buildkite/DependsOn;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/StepType;Lslack/cli/buildkite/Agents;Lslack/cli/buildkite/SimpleStringValue;Ljava/lang/Boolean;Lslack/cli/buildkite/Commands;Lslack/cli/buildkite/Commands;Ljava/lang/Long;Ljava/lang/String;Lslack/cli/buildkite/ConcurrencyMethod;Ljava/util/Map;Lslack/cli/buildkite/MatrixUnion;Ljava/util/List;Ljava/lang/Long;Lslack/cli/buildkite/Plugins;Ljava/lang/Long;Lslack/cli/buildkite/Retry;Lslack/cli/buildkite/Signature;Lslack/cli/buildkite/Skip;Lslack/cli/buildkite/SoftFail;Ljava/lang/Long;Lslack/cli/buildkite/ScriptStep;Ljava/lang/Boolean;Lslack/cli/buildkite/Build;Lslack/cli/buildkite/Trigger;Lslack/cli/buildkite/Input;Ljava/lang/Boolean;Lslack/cli/buildkite/Wait;Lslack/cli/buildkite/Wait;IILjava/lang/Object;)Lslack/cli/buildkite/CommandStep;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAgents ()Lslack/cli/buildkite/Agents;
 	public final fun getAllowDependencyFailure ()Ljava/lang/Boolean;
@@ -563,7 +563,7 @@ public final class slack/cli/buildkite/CommandStep {
 	public final fun getConcurrencyMethod ()Lslack/cli/buildkite/ConcurrencyMethod;
 	public final fun getContinueOnFailure ()Ljava/lang/Boolean;
 	public final fun getDependsOn ()Lslack/cli/buildkite/DependsOn;
-	public final fun getEnv ()Lkotlinx/serialization/json/JsonObject;
+	public final fun getEnv ()Ljava/util/Map;
 	public final fun getFields ()Ljava/util/List;
 	public final fun getId ()Ljava/lang/String;
 	public final fun getIdentifier ()Ljava/lang/String;
@@ -613,6 +613,7 @@ public abstract interface class slack/cli/buildkite/Commands {
 
 public final class slack/cli/buildkite/Commands$Companion {
 	public final fun multiple (Ljava/util/List;)Lslack/cli/buildkite/Commands;
+	public final fun multiple ([Ljava/lang/String;)Lslack/cli/buildkite/Commands;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 	public final fun single (Ljava/lang/String;)Lslack/cli/buildkite/Commands;
 	public final fun step (Lslack/cli/buildkite/ScriptStep;)Lslack/cli/buildkite/Commands;
@@ -722,11 +723,19 @@ public final class slack/cli/buildkite/ConcurrencyMethod$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class slack/cli/buildkite/Conditions {
+	public static final field INSTANCE Lslack/cli/buildkite/Conditions;
+	public static final field NOT_CANCELLING Ljava/lang/String;
+}
+
 public abstract interface class slack/cli/buildkite/DependsOn {
 	public static final field Companion Lslack/cli/buildkite/DependsOn$Companion;
 }
 
 public final class slack/cli/buildkite/DependsOn$Companion {
+	public final fun invoke (Ljava/lang/String;)Lslack/cli/buildkite/DependsOn;
+	public final fun invoke (Ljava/util/List;)Lslack/cli/buildkite/DependsOn;
+	public final fun invoke ([Ljava/lang/String;)Lslack/cli/buildkite/DependsOn;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -834,6 +843,8 @@ public abstract interface class slack/cli/buildkite/DependsOnElement {
 }
 
 public final class slack/cli/buildkite/DependsOnElement$Companion {
+	public final fun invoke (Ljava/lang/String;)Lslack/cli/buildkite/DependsOnElement;
+	public final fun invoke (Lslack/cli/buildkite/DependsOnClass;)Lslack/cli/buildkite/DependsOnElement;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -978,6 +989,17 @@ public final class slack/cli/buildkite/ExitStatusUnion$LongValue$$serializer : k
 
 public final class slack/cli/buildkite/ExitStatusUnion$LongValue$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class slack/cli/buildkite/ExtensionsKt {
+	public static final fun artifacts ([Ljava/lang/String;)Lslack/cli/buildkite/SimpleStringValue;
+	public static final fun coalesceToList (Lslack/cli/buildkite/SimpleStringValue;)Ljava/util/List;
+	public static final fun envMap ([Lkotlin/Pair;)Ljava/util/Map;
+	public static final fun githubStatusNotif (Ljava/lang/String;Ljava/lang/String;)Lslack/cli/buildkite/Notification;
+	public static synthetic fun githubStatusNotif$default (Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lslack/cli/buildkite/Notification;
+	public static final fun withAddedArtifacts (Lslack/cli/buildkite/CommandStep;[Ljava/lang/String;)Lslack/cli/buildkite/CommandStep;
+	public static final fun withAddedEnv (Lslack/cli/buildkite/CommandStep;[Lkotlin/Pair;)Lslack/cli/buildkite/CommandStep;
+	public static final fun withGithubStatus (Lslack/cli/buildkite/CommandStep;Ljava/lang/String;)Lslack/cli/buildkite/CommandStep;
 }
 
 public final class slack/cli/buildkite/ExternalNotification {
@@ -1171,6 +1193,36 @@ public final class slack/cli/buildkite/GroupStep$AnythingArrayValue$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class slack/cli/buildkite/GroupStep$BlockStepValue : slack/cli/buildkite/GroupStep {
+	public static final field Companion Lslack/cli/buildkite/GroupStep$BlockStepValue$Companion;
+	public static final synthetic fun box-impl (Lslack/cli/buildkite/BlockStep;)Lslack/cli/buildkite/GroupStep$BlockStepValue;
+	public static fun constructor-impl (Lslack/cli/buildkite/BlockStep;)Lslack/cli/buildkite/BlockStep;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Lslack/cli/buildkite/BlockStep;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Lslack/cli/buildkite/BlockStep;Lslack/cli/buildkite/BlockStep;)Z
+	public final fun getValue ()Lslack/cli/buildkite/BlockStep;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Lslack/cli/buildkite/BlockStep;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Lslack/cli/buildkite/BlockStep;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/BlockStep;
+}
+
+public final class slack/cli/buildkite/GroupStep$BlockStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lslack/cli/buildkite/GroupStep$BlockStepValue$$serializer;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize-22H-tes (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/BlockStep;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize-GRIPXFU (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/BlockStep;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class slack/cli/buildkite/GroupStep$BlockStepValue$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class slack/cli/buildkite/GroupStep$BoolValue : slack/cli/buildkite/GroupStep {
 	public static final field Companion Lslack/cli/buildkite/GroupStep$BoolValue$Companion;
 	public static final synthetic fun box-impl (Z)Lslack/cli/buildkite/GroupStep$BoolValue;
@@ -1201,12 +1253,45 @@ public final class slack/cli/buildkite/GroupStep$BoolValue$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class slack/cli/buildkite/GroupStep$CommandStepValue : slack/cli/buildkite/GroupStep {
+	public static final field Companion Lslack/cli/buildkite/GroupStep$CommandStepValue$Companion;
+	public static final synthetic fun box-impl (Lslack/cli/buildkite/CommandStep;)Lslack/cli/buildkite/GroupStep$CommandStepValue;
+	public static fun constructor-impl (Lslack/cli/buildkite/CommandStep;)Lslack/cli/buildkite/CommandStep;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Lslack/cli/buildkite/CommandStep;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Lslack/cli/buildkite/CommandStep;Lslack/cli/buildkite/CommandStep;)Z
+	public final fun getValue ()Lslack/cli/buildkite/CommandStep;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Lslack/cli/buildkite/CommandStep;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Lslack/cli/buildkite/CommandStep;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/CommandStep;
+}
+
+public final class slack/cli/buildkite/GroupStep$CommandStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lslack/cli/buildkite/GroupStep$CommandStepValue$$serializer;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize-ebTv7CI (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/CommandStep;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize-zS4vPzc (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/CommandStep;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class slack/cli/buildkite/GroupStep$CommandStepValue$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class slack/cli/buildkite/GroupStep$Companion {
 	public final fun invoke (D)Lslack/cli/buildkite/GroupStep;
 	public final fun invoke (J)Lslack/cli/buildkite/GroupStep;
 	public final fun invoke (Ljava/lang/String;)Lslack/cli/buildkite/GroupStep;
 	public final fun invoke (Lkotlinx/serialization/json/JsonArray;)Lslack/cli/buildkite/GroupStep;
+	public final fun invoke (Lslack/cli/buildkite/BlockStep;)Lslack/cli/buildkite/GroupStep;
+	public final fun invoke (Lslack/cli/buildkite/CommandStep;)Lslack/cli/buildkite/GroupStep;
 	public final fun invoke (Lslack/cli/buildkite/NestedBlockStepClass;)Lslack/cli/buildkite/GroupStep;
+	public final fun invoke (Lslack/cli/buildkite/Wait;)Lslack/cli/buildkite/GroupStep;
 	public final fun invoke (Z)Lslack/cli/buildkite/GroupStep;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
@@ -1336,6 +1421,36 @@ public final class slack/cli/buildkite/GroupStep$StringValue$$serializer : kotli
 }
 
 public final class slack/cli/buildkite/GroupStep$StringValue$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class slack/cli/buildkite/GroupStep$WaitStepValue : slack/cli/buildkite/GroupStep {
+	public static final field Companion Lslack/cli/buildkite/GroupStep$WaitStepValue$Companion;
+	public static final synthetic fun box-impl (Lslack/cli/buildkite/Wait;)Lslack/cli/buildkite/GroupStep$WaitStepValue;
+	public static fun constructor-impl (Lslack/cli/buildkite/Wait;)Lslack/cli/buildkite/Wait;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Lslack/cli/buildkite/Wait;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Lslack/cli/buildkite/Wait;Lslack/cli/buildkite/Wait;)Z
+	public final fun getValue ()Lslack/cli/buildkite/Wait;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Lslack/cli/buildkite/Wait;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Lslack/cli/buildkite/Wait;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/Wait;
+}
+
+public final class slack/cli/buildkite/GroupStep$WaitStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lslack/cli/buildkite/GroupStep$WaitStepValue$$serializer;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize-0SysLGE (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Wait;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize-364caGc (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Wait;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class slack/cli/buildkite/GroupStep$WaitStepValue$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -2153,6 +2268,8 @@ public final class slack/cli/buildkite/Plugin$AnythingMapValue$Companion {
 }
 
 public final class slack/cli/buildkite/Plugin$Companion {
+	public final fun invoke (Ljava/lang/String;)Lslack/cli/buildkite/Plugin;
+	public final fun invoke (Lkotlinx/serialization/json/JsonObject;)Lslack/cli/buildkite/Plugin;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -2513,6 +2630,7 @@ public abstract interface class slack/cli/buildkite/SimpleStringValue {
 public final class slack/cli/buildkite/SimpleStringValue$Companion {
 	public final fun invoke (Ljava/lang/String;)Lslack/cli/buildkite/SimpleStringValue;
 	public final fun invoke (Ljava/util/List;)Lslack/cli/buildkite/SimpleStringValue;
+	public final fun invoke ([Ljava/lang/String;)Lslack/cli/buildkite/SimpleStringValue;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -2847,6 +2965,7 @@ public final class slack/cli/buildkite/Step$CommandStepValue$Companion {
 
 public final class slack/cli/buildkite/Step$Companion {
 	public final fun invoke (Lslack/cli/buildkite/CommandStep;)Lslack/cli/buildkite/Step;
+	public final fun invoke (Lslack/cli/buildkite/InputStep;)Lslack/cli/buildkite/Step;
 	public final fun invoke (Lslack/cli/buildkite/StringStep;)Lslack/cli/buildkite/Step;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
@@ -2878,6 +2997,36 @@ public final class slack/cli/buildkite/Step$EnumValue$$serializer : kotlinx/seri
 }
 
 public final class slack/cli/buildkite/Step$EnumValue$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class slack/cli/buildkite/Step$InputStepValue : slack/cli/buildkite/Step {
+	public static final field Companion Lslack/cli/buildkite/Step$InputStepValue$Companion;
+	public static final synthetic fun box-impl (Lslack/cli/buildkite/InputStep;)Lslack/cli/buildkite/Step$InputStepValue;
+	public static fun constructor-impl (Lslack/cli/buildkite/InputStep;)Lslack/cli/buildkite/InputStep;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Lslack/cli/buildkite/InputStep;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Lslack/cli/buildkite/InputStep;Lslack/cli/buildkite/InputStep;)Z
+	public final fun getValue ()Lslack/cli/buildkite/InputStep;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Lslack/cli/buildkite/InputStep;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Lslack/cli/buildkite/InputStep;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/InputStep;
+}
+
+public final class slack/cli/buildkite/Step$InputStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lslack/cli/buildkite/Step$InputStepValue$$serializer;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize-nRnP7kM (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/InputStep;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize-Dj-jRdw (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/InputStep;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class slack/cli/buildkite/Step$InputStepValue$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -3121,20 +3270,20 @@ public final class slack/cli/buildkite/Wait$WaitStepValue$Companion {
 public final class slack/cli/buildkite/WaitStep {
 	public static final field Companion Lslack/cli/buildkite/WaitStep$Companion;
 	public fun <init> ()V
-	public fun <init> (Ljava/lang/Boolean;Ljava/lang/Boolean;Lslack/cli/buildkite/DependsOn;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/WaitType;Ljava/lang/String;Ljava/lang/String;)V
-	public synthetic fun <init> (Ljava/lang/Boolean;Ljava/lang/Boolean;Lslack/cli/buildkite/DependsOn;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/WaitType;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun component1 ()Ljava/lang/Boolean;
+	public fun <init> (Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Boolean;Lslack/cli/buildkite/DependsOn;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/WaitType;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Boolean;Lslack/cli/buildkite/DependsOn;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/WaitType;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
 	public final fun component10 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/lang/Boolean;
-	public final fun component3 ()Lslack/cli/buildkite/DependsOn;
-	public final fun component4 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/Boolean;
+	public final fun component4 ()Lslack/cli/buildkite/DependsOn;
 	public final fun component5 ()Ljava/lang/String;
 	public final fun component6 ()Ljava/lang/String;
 	public final fun component7 ()Ljava/lang/String;
-	public final fun component8 ()Lslack/cli/buildkite/WaitType;
-	public final fun component9 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/Boolean;Ljava/lang/Boolean;Lslack/cli/buildkite/DependsOn;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/WaitType;Ljava/lang/String;Ljava/lang/String;)Lslack/cli/buildkite/WaitStep;
-	public static synthetic fun copy$default (Lslack/cli/buildkite/WaitStep;Ljava/lang/Boolean;Ljava/lang/Boolean;Lslack/cli/buildkite/DependsOn;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/WaitType;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lslack/cli/buildkite/WaitStep;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Lslack/cli/buildkite/WaitType;
+	public final fun copy (Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Boolean;Lslack/cli/buildkite/DependsOn;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/WaitType;Ljava/lang/String;)Lslack/cli/buildkite/WaitStep;
+	public static synthetic fun copy$default (Lslack/cli/buildkite/WaitStep;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Boolean;Lslack/cli/buildkite/DependsOn;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lslack/cli/buildkite/WaitType;Ljava/lang/String;ILjava/lang/Object;)Lslack/cli/buildkite/WaitStep;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAllowDependencyFailure ()Ljava/lang/Boolean;
 	public final fun getContinueOnFailure ()Ljava/lang/Boolean;
