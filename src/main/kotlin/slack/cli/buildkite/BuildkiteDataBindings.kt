@@ -178,9 +178,7 @@ public sealed interface GroupStep {
   @JvmInline
   public value class NestedBlockStepClassValue(public val value: NestedBlockStepClass) : GroupStep
 
-  @Serializable
-  @JvmInline
-  public value class WaitStepValue(public val value: Wait) : GroupStep
+  @Serializable @JvmInline public value class WaitStepValue(public val value: Wait) : GroupStep
 
   @Serializable
   @JvmInline
@@ -209,7 +207,9 @@ public sealed interface GroupStep {
     public operator fun invoke(value: String): GroupStep = StringValue(value)
 
     public operator fun invoke(value: Wait): GroupStep = WaitStepValue(value)
+
     public operator fun invoke(value: BlockStep): GroupStep = BlockStepValue(value)
+
     public operator fun invoke(value: CommandStep): GroupStep = CommandStepValue(value)
   }
 }
@@ -335,7 +335,8 @@ public sealed interface SimpleStringValue {
 
     public operator fun invoke(value: String): SimpleStringValue = SingleValue(value)
 
-    public operator fun invoke(vararg values: String): SimpleStringValue = ListValue(values.toList())
+    public operator fun invoke(vararg values: String): SimpleStringValue =
+      ListValue(values.toList())
   }
 }
 
@@ -389,7 +390,10 @@ public sealed interface DependsOn {
 
   public companion object {
     public operator fun invoke(value: String): DependsOn = StringValue(value)
-    public operator fun invoke(vararg values: String): DependsOn = invoke(values.toList().map(DependsOnElement::invoke))
+
+    public operator fun invoke(vararg values: String): DependsOn =
+      invoke(values.toList().map(DependsOnElement::invoke))
+
     public operator fun invoke(value: List<DependsOnElement>): DependsOn = UnionArrayValue(value)
   }
 }
@@ -406,6 +410,7 @@ public sealed interface DependsOnElement {
 
   public companion object {
     public operator fun invoke(value: DependsOnClass): DependsOnElement = DependsOnClassValue(value)
+
     public operator fun invoke(value: String): DependsOnElement = StringValue(value)
   }
 }
@@ -510,6 +515,7 @@ public sealed interface Commands {
     public fun single(value: String): Commands = StringValue(value)
 
     public fun multiple(value: List<String>): Commands = StringArrayValue(value)
+
     public fun multiple(vararg values: String): Commands = StringArrayValue(values.toList())
 
     public fun step(value: ScriptStep): Commands = ScriptStepValue(value)
@@ -884,14 +890,13 @@ public sealed interface Step {
   @JvmInline
   public value class CommandStepValue(public val value: CommandStep) : Step
 
-  @Serializable
-  @JvmInline
-  public value class InputStepValue(public val value: InputStep) : Step
+  @Serializable @JvmInline public value class InputStepValue(public val value: InputStep) : Step
 
   public companion object {
     public operator fun invoke(value: StringStep): Step = EnumValue(value)
 
     public operator fun invoke(value: CommandStep): Step = CommandStepValue(value)
+
     public operator fun invoke(value: InputStep): Step = InputStepValue(value)
   }
 }
