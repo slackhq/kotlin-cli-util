@@ -35,6 +35,8 @@ import kotlinx.serialization.json.JsonObject
  *   the json types.
  * - Change ExitStatusUnion.DoubleValue to a LongValue as exit codes aren't doubles.
  * - Add invoke operators for all sealed interfaces to make it easier to construct the data classes.
+ * - Add GroupStep.WaitStepValue for inline Wait.
+ * - Add GroupStep.BlockStepValue for inline BlockStep.
  * - Renames
  *   - `CommandStep` -> `ScriptStep`
  *   - `PurpleStepValue` -> `CommandStepValue`
@@ -176,6 +178,18 @@ public sealed interface GroupStep {
   @JvmInline
   public value class NestedBlockStepClassValue(public val value: NestedBlockStepClass) : GroupStep
 
+  @Serializable
+  @JvmInline
+  public value class WaitStepValue(public val value: Wait) : GroupStep
+
+  @Serializable
+  @JvmInline
+  public value class BlockStepValue(public val value: BlockStep) : GroupStep
+
+  @Serializable
+  @JvmInline
+  public value class CommandStepValue(public val value: CommandStep) : GroupStep
+
   @Serializable @JvmInline public value class StringValue(public val value: String) : GroupStep
 
   @Serializable public data object NullValue : GroupStep
@@ -193,6 +207,10 @@ public sealed interface GroupStep {
       NestedBlockStepClassValue(value)
 
     public operator fun invoke(value: String): GroupStep = StringValue(value)
+
+    public operator fun invoke(value: Wait): GroupStep = WaitStepValue(value)
+    public operator fun invoke(value: BlockStep): GroupStep = BlockStepValue(value)
+    public operator fun invoke(value: CommandStep): GroupStep = CommandStepValue(value)
   }
 }
 
@@ -316,6 +334,8 @@ public sealed interface SimpleStringValue {
     public operator fun invoke(value: List<String>): SimpleStringValue = ListValue(value)
 
     public operator fun invoke(value: String): SimpleStringValue = SingleValue(value)
+
+    public operator fun invoke(vararg values: String): SimpleStringValue = ListValue(values.toList())
   }
 }
 
@@ -369,6 +389,7 @@ public sealed interface DependsOn {
 
   public companion object {
     public operator fun invoke(value: String): DependsOn = StringValue(value)
+    public operator fun invoke(vararg values: String): DependsOn = invoke(values.toList().map(DependsOnElement::invoke))
     public operator fun invoke(value: List<DependsOnElement>): DependsOn = UnionArrayValue(value)
   }
 }
@@ -382,6 +403,11 @@ public sealed interface DependsOnElement {
   @Serializable
   @JvmInline
   public value class StringValue(public val value: String) : DependsOnElement
+
+  public companion object {
+    public operator fun invoke(value: DependsOnClass): DependsOnElement = DependsOnClassValue(value)
+    public operator fun invoke(value: String): DependsOnElement = StringValue(value)
+  }
 }
 
 @Serializable
@@ -484,6 +510,7 @@ public sealed interface Commands {
     public fun single(value: String): Commands = StringValue(value)
 
     public fun multiple(value: List<String>): Commands = StringArrayValue(value)
+    public fun multiple(vararg values: String): Commands = StringArrayValue(values.toList())
 
     public fun step(value: ScriptStep): Commands = ScriptStepValue(value)
   }
@@ -708,6 +735,12 @@ public sealed interface Plugin {
   public value class AnythingMapValue(public val value: JsonObject) : Plugin
 
   @Serializable @JvmInline public value class StringValue(public val value: String) : Plugin
+
+  public companion object {
+    public operator fun invoke(value: JsonObject): Plugin = AnythingMapValue(value)
+
+    public operator fun invoke(value: String): Plugin = StringValue(value)
+  }
 }
 
 /** The conditions for retrying this step. */
@@ -851,10 +884,15 @@ public sealed interface Step {
   @JvmInline
   public value class CommandStepValue(public val value: CommandStep) : Step
 
+  @Serializable
+  @JvmInline
+  public value class InputStepValue(public val value: InputStep) : Step
+
   public companion object {
     public operator fun invoke(value: StringStep): Step = EnumValue(value)
 
     public operator fun invoke(value: CommandStep): Step = CommandStepValue(value)
+    public operator fun invoke(value: InputStep): Step = InputStepValue(value)
   }
 }
 
@@ -907,7 +945,7 @@ public data class CommandStep(
    * attribute, you must also define concurrency_group and concurrency.
    */
   @SerialName("concurrency_method") val concurrencyMethod: ConcurrencyMethod? = null,
-  val env: JsonObject? = null,
+  val env: Map<String, String>? = null,
   val matrix: MatrixUnion? = null,
 
   /** Array of notification options for this step */
@@ -1010,8 +1048,10 @@ public sealed interface Wait {
 /** Waits for previous steps to pass before continuing */
 @Serializable
 public data class WaitStep(
-  @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
 
+  /** Waits for previous steps to pass before continuing */
+  val wait: String? = null,
+  @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
   /** Continue to the next steps, even if the previous group of steps fail */
   @SerialName("continue_on_failure") val continueOnFailure: Boolean? = null,
   @SerialName("depends_on") val dependsOn: DependsOn? = null,
@@ -1020,9 +1060,6 @@ public data class WaitStep(
   @SerialName("if") val waitStepIf: String? = null,
   val key: String? = null,
   val type: WaitType? = null,
-
-  /** Waits for previous steps to pass before continuing */
-  val wait: String? = null,
   val waiter: String? = null,
 )
 

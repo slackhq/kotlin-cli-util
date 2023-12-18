@@ -23,30 +23,26 @@ public fun CommandStep.withAddedArtifacts(vararg newPaths: String): CommandStep 
   return copy(artifactPaths = SimpleStringValue((current + new).distinct()))
 }
 
-public fun envMap(vararg env: Pair<String, String>): JsonObject {
-  return JsonObject(
-    buildMap {
-      for ((key, value) in env) {
-        put(key, JsonPrimitive(value))
-      }
+public fun envMap(vararg env: Pair<String, String>): Map<String, String> {
+  return buildMap {
+    for ((key, value) in env) {
+      put(key, value)
     }
-  )
+  }
 }
 
 public fun CommandStep.withAddedEnv(
   vararg newEnv: Pair<String, String>
 ): CommandStep {
   return copy(
-    env = JsonObject(
-      buildMap {
-        for ((key, value) in env?.entries.orEmpty()) {
-          put(key, value)
-        }
-        for ((key, value) in newEnv) {
-          put(key, JsonPrimitive(value))
-        }
+    env = buildMap {
+      for ((key, value) in env?.entries.orEmpty()) {
+        put(key, value)
       }
-    )
+      for ((key, value) in newEnv) {
+        put(key, value)
+      }
+    }
   )
 }
 
