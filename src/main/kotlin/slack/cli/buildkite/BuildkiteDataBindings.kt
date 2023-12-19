@@ -34,6 +34,9 @@ import kotlinx.serialization.json.JsonObject
  * - Add @file:UseSerializers for JsonObjectAsMapSerializer and JsonElementKamlSerializer so that we can serialize
  *   the json types.
  * - Change ExitStatusUnion.DoubleValue to a LongValue as exit codes aren't doubles.
+ * - Add invoke operators for all sealed interfaces to make it easier to construct the data classes.
+ * - Add GroupStep.WaitStepValue for inline Wait.
+ * - Add GroupStep.BlockStepValue for inline BlockStep.
  * - Renames
  *   - `CommandStep` -> `ScriptStep`
  *   - `PurpleStepValue` -> `CommandStepValue`
@@ -50,6 +53,7 @@ import kotlinx.serialization.json.JsonObject
  *   - `NotifyElement` -> `Notification`
  *   - `NotifyElement.EnumValue` -> `NotifyElement.GitHub`
  *   - `NotifyClass` -> `ExternalNotification`
+ *   - `CoordinateClass` -> `Pipeline`
  *
  * - Consolidations
  *   - `IndigoSlack` -> X (SlackNotification)
@@ -68,34 +72,12 @@ import kotlinx.serialization.json.JsonObject
  */
 
 @Serializable
-public sealed interface Coordinate {
-  @JvmInline
-  @Serializable
-  public value class AnythingArrayValue(public val value: JsonArray) : Coordinate
-
-  @JvmInline @Serializable public value class BoolValue(public val value: Boolean) : Coordinate
-
-  @JvmInline
-  @Serializable
-  public value class CoordinateClassValue(public val value: CoordinateClass) : Coordinate
-
-  @JvmInline @Serializable public value class DoubleValue(public val value: Double) : Coordinate
-
-  @JvmInline @Serializable public value class IntegerValue(public val value: Long) : Coordinate
-
-  @JvmInline @Serializable public value class StringValue(public val value: String) : Coordinate
-
-  @Serializable public data object NullValue : Coordinate
-}
-
-@Serializable
-public data class CoordinateClass(
+public data class Pipeline(
+  /** A list of steps */
+  val steps: List<GroupStep>,
   val agents: Agents? = null,
   val env: JsonObject? = null,
   val notify: List<Notification>? = null,
-
-  /** A list of steps */
-  val steps: List<GroupStep>,
 )
 
 @Serializable
@@ -107,6 +89,12 @@ public sealed interface Agents {
   @JvmInline
   @Serializable
   public value class StringArrayValue(public val value: List<String>) : Agents
+
+  public companion object {
+    public operator fun invoke(value: JsonObject): Agents = AnythingMapValue(value)
+
+    public operator fun invoke(value: List<String>): Agents = StringArrayValue(value)
+  }
 }
 
 /** Array of notification options for this step */
@@ -119,6 +107,12 @@ public sealed interface Notification {
   @JvmInline
   @Serializable
   public value class External(public val value: ExternalNotification) : Notification
+
+  public companion object {
+    public operator fun invoke(value: GithubNotification): Notification = GitHub(value)
+
+    public operator fun invoke(value: ExternalNotification): Notification = External(value)
+  }
 }
 
 @Serializable
@@ -184,9 +178,40 @@ public sealed interface GroupStep {
   @JvmInline
   public value class NestedBlockStepClassValue(public val value: NestedBlockStepClass) : GroupStep
 
+  @Serializable @JvmInline public value class WaitStepValue(public val value: Wait) : GroupStep
+
+  @Serializable
+  @JvmInline
+  public value class BlockStepValue(public val value: BlockStep) : GroupStep
+
+  @Serializable
+  @JvmInline
+  public value class CommandStepValue(public val value: CommandStep) : GroupStep
+
   @Serializable @JvmInline public value class StringValue(public val value: String) : GroupStep
 
   @Serializable public data object NullValue : GroupStep
+
+  public companion object {
+    public operator fun invoke(value: JsonArray): GroupStep = AnythingArrayValue(value)
+
+    public operator fun invoke(value: Boolean): GroupStep = BoolValue(value)
+
+    public operator fun invoke(value: Double): GroupStep = DoubleValue(value)
+
+    public operator fun invoke(value: Long): GroupStep = IntegerValue(value)
+
+    public operator fun invoke(value: NestedBlockStepClass): GroupStep =
+      NestedBlockStepClassValue(value)
+
+    public operator fun invoke(value: String): GroupStep = StringValue(value)
+
+    public operator fun invoke(value: Wait): GroupStep = WaitStepValue(value)
+
+    public operator fun invoke(value: BlockStep): GroupStep = BlockStepValue(value)
+
+    public operator fun invoke(value: CommandStep): GroupStep = CommandStepValue(value)
+  }
 }
 
 /** Waits for previous steps to pass before continuing */
@@ -199,7 +224,7 @@ public data class NestedBlockStepClass(
 
   /** The state that the build is set to when the build is blocked by this block step */
   @SerialName("blocked_state") val blockedState: BlockedState? = null,
-  val branches: ArtifactPathsUnion? = null,
+  val branches: SimpleStringValue? = null,
   @SerialName("depends_on") val dependsOn: DependsOn? = null,
   val fields: List<FieldElement>? = null,
   val id: String? = null,
@@ -216,14 +241,14 @@ public data class NestedBlockStepClass(
   val agents: Agents? = null,
 
   /** The glob path/s of artifacts to upload once this step has finished running */
-  @SerialName("artifact_paths") val artifactPaths: ArtifactPathsUnion? = null,
+  @SerialName("artifact_paths") val artifactPaths: SimpleStringValue? = null,
   @SerialName("cancel_on_build_failing") val cancelOnBuildFailing: Boolean? = null,
 
   /** The commands to run on the agent */
-  val command: Branches? = null,
+  val command: Commands? = null,
 
   /** The commands to run on the agent */
-  val commands: Branches? = null,
+  val commands: Commands? = null,
 
   /**
    * The maximum number of jobs created from this step that are allowed to run at the same time. If
@@ -290,23 +315,29 @@ public data class NestedBlockStepClass(
 )
 
 /**
- * Which branches will include this step in their builds
- *
- * The value of the option(s) that will be pre-selected in the dropdown
- *
- * The glob path/s of artifacts to upload once this step has finished running
- *
- * The commands to run on the agent
+ * - Which branches will include this step in their builds
+ * - The value of the option(s) that will be pre-selected in the dropdown
+ * - The glob path/s of artifacts to upload once this step has finished running
+ * - The commands to run on the agent
  */
 @Serializable
-public sealed interface ArtifactPathsUnion {
+public sealed interface SimpleStringValue {
   @Serializable
   @JvmInline
-  public value class StringArrayValue(public val value: List<String>) : ArtifactPathsUnion
+  public value class ListValue(public val value: List<String>) : SimpleStringValue
 
   @Serializable
   @JvmInline
-  public value class StringValue(public val value: String) : ArtifactPathsUnion
+  public value class SingleValue(public val value: String) : SimpleStringValue
+
+  public companion object {
+    public operator fun invoke(value: List<String>): SimpleStringValue = ListValue(value)
+
+    public operator fun invoke(value: String): SimpleStringValue = SingleValue(value)
+
+    public operator fun invoke(vararg values: String): SimpleStringValue =
+      ListValue(values.toList())
+  }
 }
 
 @Serializable
@@ -325,7 +356,7 @@ public data class BlockStep(
 
   /** The state that the build is set to when the build is blocked by this block step */
   @SerialName("blocked_state") val blockedState: BlockedState? = null,
-  val branches: ArtifactPathsUnion? = null,
+  val branches: SimpleStringValue? = null,
   @SerialName("depends_on") val dependsOn: DependsOn? = null,
   val fields: List<FieldElement>? = null,
   val id: String? = null,
@@ -356,6 +387,15 @@ public sealed interface DependsOn {
   public value class UnionArrayValue(public val value: List<DependsOnElement>) : DependsOn
 
   @Serializable public data object NullValue : DependsOn
+
+  public companion object {
+    public operator fun invoke(value: String): DependsOn = StringValue(value)
+
+    public operator fun invoke(vararg values: String): DependsOn =
+      invoke(values.toList().map(DependsOnElement::invoke))
+
+    public operator fun invoke(value: List<DependsOnElement>): DependsOn = UnionArrayValue(value)
+  }
 }
 
 @Serializable
@@ -367,6 +407,12 @@ public sealed interface DependsOnElement {
   @Serializable
   @JvmInline
   public value class StringValue(public val value: String) : DependsOnElement
+
+  public companion object {
+    public operator fun invoke(value: DependsOnClass): DependsOnElement = DependsOnClassValue(value)
+
+    public operator fun invoke(value: String): DependsOnElement = StringValue(value)
+  }
 }
 
 @Serializable
@@ -383,7 +429,7 @@ public data class FieldElement(
    *
    * The value of the option(s) that will be pre-selected in the dropdown
    */
-  val default: ArtifactPathsUnion? = null,
+  val default: SimpleStringValue? = null,
 
   /** The explanatory text that is shown after the label */
   val hint: String? = null,
@@ -454,16 +500,26 @@ public enum class BuildType(public val value: String) {
 }
 
 @Serializable
-public sealed interface Branches {
+public sealed interface Commands {
   @Serializable
   @JvmInline
-  public value class CommandStepValue(public val value: ScriptStep) : Branches
+  public value class ScriptStepValue(public val value: ScriptStep) : Commands
 
   @Serializable
   @JvmInline
-  public value class StringArrayValue(public val value: List<String>) : Branches
+  public value class StringArrayValue(public val value: List<String>) : Commands
 
-  @Serializable @JvmInline public value class StringValue(public val value: String) : Branches
+  @Serializable @JvmInline public value class StringValue(public val value: String) : Commands
+
+  public companion object {
+    public fun single(value: String): Commands = StringValue(value)
+
+    public fun multiple(value: List<String>): Commands = StringArrayValue(value)
+
+    public fun multiple(vararg values: String): Commands = StringArrayValue(values.toList())
+
+    public fun step(value: ScriptStep): Commands = ScriptStepValue(value)
+  }
 }
 
 @Serializable
@@ -472,15 +528,15 @@ public data class ScriptStep(
   @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
 
   /** The glob path/s of artifacts to upload once this step has finished running */
-  @SerialName("artifact_paths") val artifactPaths: ArtifactPathsUnion? = null,
-  val branches: ArtifactPathsUnion? = null,
+  @SerialName("artifact_paths") val artifactPaths: SimpleStringValue? = null,
+  val branches: SimpleStringValue? = null,
   @SerialName("cancel_on_build_failing") val cancelOnBuildFailing: Boolean? = null,
 
   /** The commands to run on the agent */
-  val command: ArtifactPathsUnion? = null,
+  val command: SimpleStringValue? = null,
 
   /** The commands to run on the agent */
-  val commands: ArtifactPathsUnion? = null,
+  val commands: SimpleStringValue? = null,
 
   /**
    * The maximum number of jobs created from this step that are allowed to run at the same time. If
@@ -601,7 +657,13 @@ public sealed interface SoftFail {
 
   @Serializable
   @JvmInline
-  public value class SoftFailElementArrayValue(public val value: List<SoftFailElement>) : SoftFail
+  public value class Multiple(public val value: List<SoftFailElement>) : SoftFail
+
+  public companion object {
+    public operator fun invoke(value: Boolean): SoftFail = BoolValue(value)
+
+    public operator fun invoke(value: List<SoftFailElement>): SoftFail = Multiple(value)
+  }
 }
 
 @Serializable
@@ -617,6 +679,12 @@ public sealed interface ExitStatusUnion {
   @Serializable
   @JvmInline
   public value class EnumValue(public val value: ExitStatusEnum) : ExitStatusUnion
+
+  public companion object {
+    public operator fun invoke(value: Long): ExitStatusUnion = LongValue(value)
+
+    public operator fun invoke(value: ExitStatusEnum): ExitStatusUnion = EnumValue(value)
+  }
 }
 
 @Serializable
@@ -657,6 +725,12 @@ public sealed interface Plugins {
   @Serializable
   @JvmInline
   public value class UnionArrayValue(public val value: List<Plugin>) : Plugins
+
+  public companion object {
+    public operator fun invoke(value: JsonObject): Plugins = AnythingMapValue(value)
+
+    public operator fun invoke(value: List<Plugin>): Plugins = UnionArrayValue(value)
+  }
 }
 
 /** Array of plugins for this step */
@@ -667,6 +741,12 @@ public sealed interface Plugin {
   public value class AnythingMapValue(public val value: JsonObject) : Plugin
 
   @Serializable @JvmInline public value class StringValue(public val value: String) : Plugin
+
+  public companion object {
+    public operator fun invoke(value: JsonObject): Plugin = AnythingMapValue(value)
+
+    public operator fun invoke(value: String): Plugin = StringValue(value)
+  }
 }
 
 /** The conditions for retrying this step. */
@@ -781,7 +861,7 @@ public sealed interface Input {
 @Serializable
 public data class InputStep(
   @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
-  val branches: ArtifactPathsUnion? = null,
+  val branches: SimpleStringValue? = null,
   @SerialName("depends_on") val dependsOn: DependsOn? = null,
   val fields: List<FieldElement>? = null,
   val id: String? = null,
@@ -809,6 +889,16 @@ public sealed interface Step {
   @Serializable
   @JvmInline
   public value class CommandStepValue(public val value: CommandStep) : Step
+
+  @Serializable @JvmInline public value class InputStepValue(public val value: InputStep) : Step
+
+  public companion object {
+    public operator fun invoke(value: StringStep): Step = EnumValue(value)
+
+    public operator fun invoke(value: CommandStep): Step = CommandStepValue(value)
+
+    public operator fun invoke(value: InputStep): Step = InputStepValue(value)
+  }
 }
 
 /** Waits for previous steps to pass before continuing */
@@ -821,7 +911,7 @@ public data class CommandStep(
 
   /** The state that the build is set to when the build is blocked by this block step */
   @SerialName("blocked_state") val blockedState: BlockedState? = null,
-  val branches: ArtifactPathsUnion? = null,
+  val branches: SimpleStringValue? = null,
   @SerialName("depends_on") val dependsOn: DependsOn? = null,
   val fields: List<FieldElement>? = null,
   val id: String? = null,
@@ -835,14 +925,14 @@ public data class CommandStep(
   val agents: Agents? = null,
 
   /** The glob path/s of artifacts to upload once this step has finished running */
-  @SerialName("artifact_paths") val artifactPaths: ArtifactPathsUnion? = null,
+  @SerialName("artifact_paths") val artifactPaths: SimpleStringValue? = null,
   @SerialName("cancel_on_build_failing") val cancelOnBuildFailing: Boolean? = null,
 
   /** The commands to run on the agent */
-  val command: Branches? = null,
+  val command: Commands? = null,
 
   /** The commands to run on the agent */
-  val commands: Branches? = null,
+  val commands: Commands? = null,
 
   /**
    * The maximum number of jobs created from this step that are allowed to run at the same time. If
@@ -860,7 +950,7 @@ public data class CommandStep(
    * attribute, you must also define concurrency_group and concurrency.
    */
   @SerialName("concurrency_method") val concurrencyMethod: ConcurrencyMethod? = null,
-  val env: JsonObject? = null,
+  val env: Map<String, String>? = null,
   val matrix: MatrixUnion? = null,
 
   /** Array of notification options for this step */
@@ -920,7 +1010,7 @@ public data class TriggerStep(
 
   /** Whether to continue the build without waiting for the triggered step to complete */
   val async: Boolean? = null,
-  val branches: ArtifactPathsUnion? = null,
+  val branches: SimpleStringValue? = null,
 
   /** Properties of the build that will be created when the step is triggered */
   val build: Build? = null,
@@ -963,8 +1053,10 @@ public sealed interface Wait {
 /** Waits for previous steps to pass before continuing */
 @Serializable
 public data class WaitStep(
-  @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
 
+  /** Waits for previous steps to pass before continuing */
+  val wait: String? = null,
+  @SerialName("allow_dependency_failure") val allowDependencyFailure: Boolean? = null,
   /** Continue to the next steps, even if the previous group of steps fail */
   @SerialName("continue_on_failure") val continueOnFailure: Boolean? = null,
   @SerialName("depends_on") val dependsOn: DependsOn? = null,
@@ -973,9 +1065,6 @@ public data class WaitStep(
   @SerialName("if") val waitStepIf: String? = null,
   val key: String? = null,
   val type: WaitType? = null,
-
-  /** Waits for previous steps to pass before continuing */
-  val wait: String? = null,
   val waiter: String? = null,
 )
 
