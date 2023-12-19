@@ -1,6 +1,16 @@
 Changelog
 =========
 
+2.6.0
+-----
+
+_2023-12-18_
+
+- **New**: Add Buildkite Pipeline bindings under the `slack.cli.buildkite` package. Note this package is subject to API changes as we iterate on it. This is for use with generating dynamic buildkite pipelines.
+- **Enhancement**: Introduce more modern `Path` walking APIs with `FileVisitorBuilder.skipBuildAndCacheDirs()`, `Path.walkEachFile()`, `Sequence<Path>.filterByExtension(extension: String)`, and `Sequence<Path>.filterByName(name: String)` extensions.
+- Update xmlutil to `0.86.3`.
+- Update okio to `3.7.0`.
+
 2.5.4
 -----
 
