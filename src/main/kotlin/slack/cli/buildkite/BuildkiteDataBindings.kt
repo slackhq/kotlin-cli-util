@@ -167,26 +167,39 @@ public sealed interface GroupStep : Keyable {
   @Serializable
   @JvmInline
   public value class AnythingArrayValue(public val value: JsonArray) : GroupStep {
-    override val key: String? get() = null
-  }
-
-  @Serializable @JvmInline public value class BoolValue(public val value: Boolean) : GroupStep {
-    override val key: String? get() = null
-  }
-
-  @Serializable @JvmInline public value class DoubleValue(public val value: Double) : GroupStep {
-    override val key: String? get() = null
-  }
-
-  @Serializable @JvmInline public value class IntegerValue(public val value: Long) : GroupStep {
-    override val key: String? get() = null
+    override val key: String?
+      get() = null
   }
 
   @Serializable
   @JvmInline
-  public value class NestedBlockStepClassValue(public val value: NestedBlockStepClass) : GroupStep, Keyable by value
+  public value class BoolValue(public val value: Boolean) : GroupStep {
+    override val key: String?
+      get() = null
+  }
 
-  @Serializable @JvmInline public value class WaitStepValue(public val value: Wait) : GroupStep, Keyable by value
+  @Serializable
+  @JvmInline
+  public value class DoubleValue(public val value: Double) : GroupStep {
+    override val key: String?
+      get() = null
+  }
+
+  @Serializable
+  @JvmInline
+  public value class IntegerValue(public val value: Long) : GroupStep {
+    override val key: String?
+      get() = null
+  }
+
+  @Serializable
+  @JvmInline
+  public value class NestedBlockStepClassValue(public val value: NestedBlockStepClass) :
+    GroupStep, Keyable by value
+
+  @Serializable
+  @JvmInline
+  public value class WaitStepValue(public val value: Wait) : GroupStep, Keyable by value
 
   @Serializable
   @JvmInline
@@ -196,12 +209,17 @@ public sealed interface GroupStep : Keyable {
   @JvmInline
   public value class CommandStepValue(public val value: CommandStep) : GroupStep, Keyable by value
 
-  @Serializable @JvmInline public value class StringValue(public val value: String) : GroupStep {
-    override val key: String? get() = null
+  @Serializable
+  @JvmInline
+  public value class StringValue(public val value: String) : GroupStep {
+    override val key: String?
+      get() = null
   }
 
-  @Serializable public data object NullValue : GroupStep {
-    override val key: String? get() = null
+  @Serializable
+  public data object NullValue : GroupStep {
+    override val key: String?
+      get() = null
   }
 
   public companion object {
@@ -410,12 +428,16 @@ public sealed interface DependsOn {
 
     public operator fun invoke(value: Keyable): DependsOn = invoke(requireKey(value))
 
-    public operator fun invoke(vararg values: Keyable): DependsOn = invoke(*values.map { requireKey(it) }.toTypedArray())
+    public operator fun invoke(vararg values: Keyable): DependsOn =
+      invoke(*values.map { requireKey(it) }.toTypedArray())
 
-    public operator fun invoke(value: List<Keyable>): DependsOn = invoke(value.map { DependsOnElement.invoke(requireKey(it)) })
+    public operator fun invoke(value: List<Keyable>): DependsOn =
+      invoke(value.map { DependsOnElement.invoke(requireKey(it)) })
 
     private fun requireKey(keyable: Keyable): String {
-      return requireNotNull(keyable.key) { "Key for step must not be null to depend on it: $keyable" }
+      return requireNotNull(keyable.key) {
+        "Key for step must not be null to depend on it: $keyable"
+      }
     }
   }
 }
@@ -906,15 +928,20 @@ public enum class InputType(public val value: String) {
 
 @Serializable
 public sealed interface Step : Keyable {
-  @Serializable @JvmInline public value class EnumValue(public val value: StringStep) : Step {
-    override val key: String? get() = null
+  @Serializable
+  @JvmInline
+  public value class EnumValue(public val value: StringStep) : Step {
+    override val key: String?
+      get() = null
   }
 
   @Serializable
   @JvmInline
   public value class CommandStepValue(public val value: CommandStep) : Step, Keyable by value
 
-  @Serializable @JvmInline public value class InputStepValue(public val value: InputStep) : Step, Keyable by value
+  @Serializable
+  @JvmInline
+  public value class InputStepValue(public val value: InputStep) : Step, Keyable by value
 
   public companion object {
     public operator fun invoke(value: StringStep): Step = EnumValue(value)
@@ -1021,8 +1048,11 @@ public data class CommandStep(
 
 @Serializable
 public sealed interface Trigger : Keyable {
-  @Serializable @JvmInline public value class StringValue(public val value: String) : Trigger {
-    override val key: String? get() = null
+  @Serializable
+  @JvmInline
+  public value class StringValue(public val value: String) : Trigger {
+    override val key: String?
+      get() = null
   }
 
   @Serializable
@@ -1068,15 +1098,22 @@ public enum class StepType(public val value: String) {
 }
 
 @Serializable
-public sealed interface Wait: Keyable {
-  @Serializable @JvmInline public value class StringValue(public val value: String) : Wait {
-    override val key: String? get() = null
+public sealed interface Wait : Keyable {
+  @Serializable
+  @JvmInline
+  public value class StringValue(public val value: String) : Wait {
+    override val key: String?
+      get() = null
   }
 
-  @Serializable @JvmInline public value class WaitStepValue(public val value: WaitStep) : Wait, Keyable by value
+  @Serializable
+  @JvmInline
+  public value class WaitStepValue(public val value: WaitStep) : Wait, Keyable by value
 
-  @Serializable public data object NullValue : Wait {
-    override val key: String? get() = null
+  @Serializable
+  public data object NullValue : Wait {
+    override val key: String?
+      get() = null
   }
 }
 
