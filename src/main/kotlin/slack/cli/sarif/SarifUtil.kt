@@ -125,12 +125,12 @@ internal fun List<SarifSchema210>.merge(
       // Using the default distinct() function leaves duplicates, so using a custom selector
       .distinctBy {
         it.ruleID +
-        it.message +
-        it.locations?.first()?.physicalLocation?.artifactLocation?.uri +
-        it.locations?.first()?.physicalLocation?.region?.startLine +
-        it.locations?.first()?.physicalLocation?.region?.startColumn +
-        it.locations?.first()?.physicalLocation?.region?.endColumn +
-        it.locations?.first()?.physicalLocation?.region?.endLine
+          it.message +
+          it.locations?.first()?.physicalLocation?.artifactLocation?.uri +
+          it.locations?.first()?.physicalLocation?.region?.startLine +
+          it.locations?.first()?.physicalLocation?.region?.startColumn +
+          it.locations?.first()?.physicalLocation?.region?.endColumn +
+          it.locations?.first()?.physicalLocation?.region?.endLine
       }
       .also { log("Merged ${it.size} results") }
 
