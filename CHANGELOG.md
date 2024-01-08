@@ -1,6 +1,15 @@
 Changelog
 =========
 
+2.6.1
+-----
+
+_2024-01-08_
+
+- **Enhancement**: Mark a number of buildkite APIs as `Keyable` if they can have a `key: String` property.
+- Update Clikt to `4.2.2`.
+- Update to Kotlin `1.9.22`.
+
 2.6.0
 -----
 
