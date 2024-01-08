@@ -428,6 +428,7 @@ public sealed interface DependsOn {
 
     public operator fun invoke(value: Keyable): DependsOn = invoke(requireKey(value))
 
+    @Suppress("SpreadOperator")
     public operator fun invoke(vararg values: Keyable): DependsOn =
       invoke(*values.map { requireKey(it) }.toTypedArray())
 
