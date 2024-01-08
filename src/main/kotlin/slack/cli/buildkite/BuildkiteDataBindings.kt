@@ -432,6 +432,7 @@ public sealed interface DependsOn {
     public operator fun invoke(vararg values: Keyable): DependsOn =
       invoke(*values.map { requireKey(it) }.toTypedArray())
 
+    @JvmName("invokeKeyableList")
     public operator fun invoke(value: List<Keyable>): DependsOn =
       invoke(value.map { DependsOnElement.invoke(requireKey(it)) })
 
