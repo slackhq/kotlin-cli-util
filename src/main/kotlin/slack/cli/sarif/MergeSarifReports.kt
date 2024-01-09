@@ -318,3 +318,6 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
       "Merges all matching sarif reports into a single file for ease of uploading."
   }
 }
+
+// Enables running/debugging from IDE
+public fun main(args: Array<String>): Unit = MergeSarifReports().main(args)
