@@ -123,15 +123,7 @@ internal fun List<SarifSchema210>.merge(
       // Some projects produce multiple reports for different variants, so we need to
       // de-dupe.
       // Using the default distinct() function leaves duplicates, so using a custom selector
-      .distinctBy {
-        it.ruleID +
-          it.message +
-          it.locations?.first()?.physicalLocation?.artifactLocation?.uri +
-          it.locations?.first()?.physicalLocation?.region?.startLine +
-          it.locations?.first()?.physicalLocation?.region?.startColumn +
-          it.locations?.first()?.physicalLocation?.region?.endColumn +
-          it.locations?.first()?.physicalLocation?.region?.endLine
-      }
+      .distinctBy { RESULT_SORT_COMPARATOR }
       .also { log("Merged ${it.size} results") }
 
   // Update rule.ruleIndex to match the index in rulesToAdd
