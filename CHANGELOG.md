@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.6.2
+-----
+
+_2024-01-09_
+
+- **Bug Fix**: Use `discinctBy` when deduping sarif results
+
 2.6.1
 -----
 
