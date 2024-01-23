@@ -290,9 +290,14 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
 
   private fun merge(inputs: List<Path>) {
     log("Parsing ${inputs.size} sarif files")
+    val parsed = loadSarifs(inputs)
     val mergedSarif =
-      loadSarifs(inputs)
-        .merge(levelOverride = level, removeUriPrefixes = removeUriPrefixes, log = ::log)
+      when (parsed.size) {
+        0 -> error("No sarif files parsed. Consider using --allow-empty")
+        1 -> parsed[0]
+        else ->
+          parsed.merge(levelOverride = level, removeUriPrefixes = removeUriPrefixes, log = ::log)
+      }
     log("Writing merged sarif to $outputFile")
     prepareOutput()
     outputFile.writeText(SarifSerializer.toJson(mergedSarif))
