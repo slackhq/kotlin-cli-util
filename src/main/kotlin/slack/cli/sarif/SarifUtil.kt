@@ -116,9 +116,9 @@ internal fun List<SarifSchema210>.merge(
   removeUriPrefixes: Boolean = false,
   log: (String) -> Unit,
 ): SarifSchema210 {
+  check(isNotEmpty()) { "Must have at least one sarif file to merge!" }
+
   log("Merging $size sarif files")
-  val sortedMergedRules =
-    flatMap { it.runs.single().tool.driver.rules.orEmpty() }.associateBy { it.id }.toSortedMap()
   val mergedResults =
     flatMap { it.runs.single().results.orEmpty() }
       // Some projects produce multiple reports for different variants, so we need to
@@ -126,6 +126,14 @@ internal fun List<SarifSchema210>.merge(
       // Using the default distinct() function leaves duplicates, so using a custom selector
       .distinctBy { it.shallowHash }
       .also { log("Merged ${it.size} results") }
+
+  if (mergedResults.isEmpty()) {
+    // Nothing to do here, just return the first
+    return this[0]
+  }
+
+  val sortedMergedRules =
+    flatMap { it.runs.single().tool.driver.rules.orEmpty() }.associateBy { it.id }.toSortedMap()
 
   // Update rule.ruleIndex to match the index in rulesToAdd
   val ruleIndicesById =
