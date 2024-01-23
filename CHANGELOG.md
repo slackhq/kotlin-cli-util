@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.6.3
+-----
+
+_2024-01-23_
+
+- **Fix**: Handle sarif reports with no results in sarif merging.
+
 2.6.2
 -----
 
