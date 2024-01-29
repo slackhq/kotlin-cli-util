@@ -30,7 +30,7 @@ jobs:
           java-version: '20'
 
       - name: Build and test
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: check
 
