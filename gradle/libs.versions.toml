@@ -2,7 +2,7 @@
 kotlin = "1.9.22"
 kotlinx-serialization = "1.6.2"
 ksp = "1.9.22-1.0.17"
-ktfmt = "0.46"
+ktfmt = "0.47"
 jvmTarget = "17"
 moshix = "0.25.1"
 moshi = "1.15.0"
