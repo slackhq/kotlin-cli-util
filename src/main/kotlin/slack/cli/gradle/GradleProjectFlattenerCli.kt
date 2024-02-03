@@ -68,7 +68,7 @@ public class GradleProjectFlattenerCli : CliktCommand(help = DESCRIPTION) {
         "-s",
         help =
           "The settings.gradle file to use. Note this file _must_ only have a single, top-level `include()` call " +
-            "with vararg project args."
+            "with vararg project args.",
       )
       .path(mustExist = true, canBeDir = false)
       .required()

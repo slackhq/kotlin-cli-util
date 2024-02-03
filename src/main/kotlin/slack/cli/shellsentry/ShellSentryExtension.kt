@@ -52,7 +52,7 @@ public fun interface ShellSentryExtension {
     command: String,
     exitCode: Int,
     isAfterRetry: Boolean,
-    consoleOutput: Path
+    consoleOutput: Path,
   ): AnalysisResult?
 }
 
@@ -76,5 +76,5 @@ public data class AnalysisResult(
    * A function that takes the [message] and returns a [Throwable] for reporting to Bugsnag.
    * Consider subclassing [NoStacktraceThrowable] if needed.
    */
-  val throwableMaker: (message: String) -> Throwable
+  val throwableMaker: (message: String) -> Throwable,
 )

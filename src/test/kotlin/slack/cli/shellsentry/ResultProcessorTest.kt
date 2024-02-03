@@ -27,18 +27,13 @@ import org.junit.runners.Parameterized
 import org.junit.runners.Parameterized.Parameters
 
 @RunWith(Parameterized::class)
-class ResultProcessorTest(
-  private val useExtensions: Boolean,
-) {
+class ResultProcessorTest(private val useExtensions: Boolean) {
 
   companion object {
     @Parameters(name = "useExtensions = {0}")
     @JvmStatic
     fun data(): List<Array<Any>> {
-      return listOf(
-        arrayOf(true),
-        arrayOf(false),
-      )
+      return listOf(arrayOf(true), arrayOf(false))
     }
   }
 
@@ -47,19 +42,14 @@ class ResultProcessorTest(
   private val logs = ArrayDeque<String>()
 
   private val testExtensions =
-    listOf(
-        KnownIssues.ftlRateLimit,
-        KnownIssues.oom,
-        KnownIssues.fakeFailure,
-      )
-      .map { issue ->
-        ShellSentryExtension { _, _, _, consoleOutput ->
-          val signal = issue.check(consoleOutput.readLines(), logs::add)
-          // Give all these 75% confidence. Higher than the default, but not 100 so we can test
-          // higher confidence later
-          AnalysisResult(issue.message, issue.logMessage, signal, 75) { KnownIssue(issue) }
-        }
+    listOf(KnownIssues.ftlRateLimit, KnownIssues.oom, KnownIssues.fakeFailure).map { issue ->
+      ShellSentryExtension { _, _, _, consoleOutput ->
+        val signal = issue.check(consoleOutput.readLines(), logs::add)
+        // Give all these 75% confidence. Higher than the default, but not 100 so we can test
+        // higher confidence later
+        AnalysisResult(issue.message, issue.logMessage, signal, 75) { KnownIssue(issue) }
       }
+    }
 
   @Test
   fun testExecuteCommand() {
@@ -208,9 +198,7 @@ class ResultProcessorTest(
       FAKE_FAILURE_a
       """.trimIndent().padWithTestLogs())
     val signal =
-      newProcessor(
-          config = ShellSentryConfig(knownIssues = emptyList(), minConfidence = 100),
-        )
+      newProcessor(config = ShellSentryConfig(knownIssues = emptyList(), minConfidence = 100))
         .process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Unknown)
   }

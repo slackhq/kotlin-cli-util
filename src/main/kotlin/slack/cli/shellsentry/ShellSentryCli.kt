@@ -65,7 +65,7 @@ public class ShellSentryCli : CliktCommand(DESCRIPTION) {
   internal val noExit by
     option(
         "--no-exit",
-        help = "Instructs this CLI to not exit the process with the status code. Test only!"
+        help = "Instructs this CLI to not exit the process with the status code. Test only!",
       )
       .flag()
 

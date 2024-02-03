@@ -30,7 +30,7 @@ internal object KnownIssues {
       matchingText = listOf("FAKE FAILURE NOT REAL"),
       matchingPatterns = listOf(".*FAKE_FAILURE_[a-zA-Z].*".toRegex()),
       groupingHash = "fake-failure",
-      retrySignal = RetrySignal.Ack
+      retrySignal = RetrySignal.Ack,
     )
 
   val ftlRateLimit =
@@ -39,7 +39,7 @@ internal object KnownIssues {
       matchingText = listOf("429 Too Many Requests"),
       logMessage = "Detected FTL rate limit. Retrying in 1 minute.",
       groupingHash = "ftl-rate-limit",
-      retrySignal = RetrySignal.RetryDelayed(1.minutes)
+      retrySignal = RetrySignal.RetryDelayed(1.minutes),
     )
 
   val oom =
@@ -48,7 +48,7 @@ internal object KnownIssues {
       matchingText = listOf("Java heap space"),
       logMessage = "Detected OOM. Retrying immediately.",
       groupingHash = OOM_GROUPING_HASH,
-      retrySignal = RetrySignal.RetryImmediately
+      retrySignal = RetrySignal.RetryImmediately,
     )
 
   val ftlInfrastructureFailure =
@@ -57,7 +57,7 @@ internal object KnownIssues {
       matchingText = listOf("Infrastructure failure"),
       logMessage = "Detected inconclusive FTL infrastructure failure. Retrying immediately.",
       groupingHash = "ftl-infrastructure-failure",
-      retrySignal = RetrySignal.RetryImmediately
+      retrySignal = RetrySignal.RetryImmediately,
     )
 
   val flankTimeout =
@@ -66,7 +66,7 @@ internal object KnownIssues {
       groupingHash = "flank-timeout",
       matchingText = listOf("Canceling flank due to timeout"),
       logMessage = "Detected a flank timeout. Retrying immediately.",
-      retrySignal = RetrySignal.RetryImmediately
+      retrySignal = RetrySignal.RetryImmediately,
     )
 
   val r8Oom =
@@ -75,7 +75,7 @@ internal object KnownIssues {
       matchingText = listOf("Out of space in CodeCache"),
       logMessage = "Detected a OOM in R8. Retrying immediately.",
       groupingHash = OOM_GROUPING_HASH,
-      retrySignal = RetrySignal.RetryImmediately
+      retrySignal = RetrySignal.RetryImmediately,
     )
 
   val oomKilledByKernel =
@@ -84,7 +84,7 @@ internal object KnownIssues {
       groupingHash = OOM_GROUPING_HASH,
       matchingText = listOf("Gradle build daemon disappeared unexpectedly"),
       logMessage = "Detected a OOM that was killed by the kernel. Retrying immediately.",
-      retrySignal = RetrySignal.RetryImmediately
+      retrySignal = RetrySignal.RetryImmediately,
     )
 
   val bugsnagUploadFailed =
@@ -93,6 +93,6 @@ internal object KnownIssues {
       groupingHash = "bugsnag-upload-failure",
       matchingText = listOf("Bugsnag request failed to complete"),
       logMessage = "Detected bugsnag failed to upload. Retrying immediately.",
-      retrySignal = RetrySignal.RetryImmediately
+      retrySignal = RetrySignal.RetryImmediately,
     )
 }

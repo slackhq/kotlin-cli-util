@@ -61,7 +61,7 @@ public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
         "-s",
         help =
           "The settings.gradle file to use. Note this file _must_ only have a single, top-level `include()` call " +
-            "with vararg project args."
+            "with vararg project args.",
       )
       .path(mustExist = true, canBeDir = false)
       .required()
@@ -71,7 +71,7 @@ public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
         "--implicit-path",
         "-i",
         help =
-          "Implicit project names that may not be present in the settings file but should be assumed present."
+          "Implicit project names that may not be present in the settings file but should be assumed present.",
       )
       .multiple()
 
@@ -79,7 +79,7 @@ public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
     option(
         "--delete-un-included-paths",
         "-d",
-        help = "Delete any paths that are not included in the settings file."
+        help = "Delete any paths that are not included in the settings file.",
       )
       .flag()
 
@@ -143,19 +143,19 @@ public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
         !realPath.exists() -> {
           reportError(
             "Project dir '${realPath.relativeTo(projectDir)}' does not exist.",
-            line.indexOfFirst { !it.isWhitespace() }
+            line.indexOfFirst { !it.isWhitespace() },
           )
         }
         !realPath.resolve("build.gradle.kts").exists() -> {
           reportError(
             "Project build file '${realPath.relativeTo(projectDir).resolve("build.gradle.kts")}' does not exist.",
-            line.indexOfFirst { !it.isWhitespace() }
+            line.indexOfFirst { !it.isWhitespace() },
           )
         }
         !realPath.isDirectory() -> {
           reportError(
             "Expected '$realPath' to be a directory.",
-            line.indexOfFirst { !it.isWhitespace() }
+            line.indexOfFirst { !it.isWhitespace() },
           )
         }
       }

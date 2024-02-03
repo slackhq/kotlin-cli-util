@@ -29,7 +29,7 @@ import java.util.Objects
 internal val BASELINE_SUPPRESSION: Suppression =
   Suppression(
     kind = SuppressionKind.External,
-    justification = "This issue was suppressed by the baseline"
+    justification = "This issue was suppressed by the baseline",
   )
 
 /**
@@ -97,7 +97,7 @@ internal fun CliktCommand.levelOption(): NullableOption<Level, Level> {
   return option(
       "--level",
       "-l",
-      help = "Priority level. Defaults to Error. Options are $LEVEL_NAMES"
+      help = "Priority level. Defaults to Error. Options are $LEVEL_NAMES",
     )
     .enum<Level>()
 }

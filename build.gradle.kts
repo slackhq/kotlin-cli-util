@@ -52,7 +52,7 @@ spotless {
     endWithNewline()
     licenseHeaderFile(
       "spotless/spotless.kt",
-      "(import|plugins|buildscript|dependencies|pluginManagement)"
+      "(import|plugins|buildscript|dependencies|pluginManagement)",
     )
   }
 }

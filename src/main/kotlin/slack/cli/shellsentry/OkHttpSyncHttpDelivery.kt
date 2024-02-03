@@ -61,7 +61,7 @@ internal object OkHttpSyncHttpDelivery : HttpDelivery {
         if (!response.isSuccessful) {
           LOGGER.warn(
             "Error not reported to Bugsnag - got non-200 response code: {}",
-            response.code
+            response.code,
           )
         }
       }

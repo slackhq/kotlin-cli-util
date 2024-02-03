@@ -53,7 +53,7 @@ class ShellSentryConfigTest {
         ShellSentryConfig(
           CURRENT_VERSION,
           "https://gradle-enterprise.example.com",
-          listOf(KnownIssues.ftlRateLimit)
+          listOf(KnownIssues.ftlRateLimit),
         )
       )
   }
