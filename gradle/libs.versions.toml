@@ -1,10 +1,10 @@
 [versions]
-kotlin = "1.9.22"
+kotlin = "2.0.0-Beta3"
 kotlinx-serialization = "1.6.2"
-ksp = "1.9.22-1.0.17"
+ksp = "2.0.0-Beta3-1.0.17"
 ktfmt = "0.47"
 jvmTarget = "17"
-moshix = "0.25.1"
+moshix = "0.26.0-alpha01"
 moshi = "1.15.1"
 tikxml = "0.8.15"
 xmlutil = "0.86.3"
