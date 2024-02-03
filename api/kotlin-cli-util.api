@@ -3502,10 +3502,6 @@ public final class slack/cli/sarif/MergeSarifReports$Factory : slack/cli/Command
 	public fun getKey ()Ljava/lang/String;
 }
 
-public synthetic class slack/cli/sarif/SarifUtilKt$EntriesMappings {
-	public static final synthetic field entries$0 Lkotlin/enums/EnumEntries;
-}
-
 public final class slack/cli/shellsentry/AnalysisResult {
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lslack/cli/shellsentry/RetrySignal;ILkotlin/jvm/functions/Function1;)V
 	public final fun component1 ()Ljava/lang/String;

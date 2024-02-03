@@ -16,7 +16,7 @@
 @file:Suppress(
   "LongParameterList", // These are how many parameters are in Clikt options.
   "SpreadOperator", // Not spreading would change semantics.
-  "unused"
+  "unused",
 )
 
 package slack.cli
@@ -34,14 +34,14 @@ import java.nio.file.Paths
 /** A dry run option for [clikt commands][CliktCommand]. */
 public fun CliktCommand.dryRunOption(
   vararg names: String = arrayOf("--dry-run"),
-  help: String = "Runs this as a dry run, no modifications."
+  help: String = "Runs this as a dry run, no modifications.",
 ): OptionWithValues<Boolean, Boolean, Boolean> =
   option(names = names, help = help).flag(default = false)
 
 /** A project dir option for [clikt commands][CliktCommand]. */
 public fun CliktCommand.projectDirOption(
   vararg names: String = arrayOf("--project-dir"),
-  help: String = "The project directory. Defaults to the current working directory."
+  help: String = "The project directory. Defaults to the current working directory.",
 ): OptionDelegate<Path> =
   option(names = names, help = help).path(mustExist = true, canBeFile = false).defaultLazy {
     Paths.get("").toAbsolutePath()

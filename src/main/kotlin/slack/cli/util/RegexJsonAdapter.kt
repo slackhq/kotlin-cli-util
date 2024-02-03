@@ -24,9 +24,8 @@ import com.squareup.moshi.rawType
 import java.lang.reflect.Type
 
 /** A simple [Regex] adapter that converts Strings to a [Regex]. */
-internal class RegexJsonAdapter(
-  private val stringAdapter: JsonAdapter<String>,
-) : JsonAdapter<Regex>() {
+internal class RegexJsonAdapter(private val stringAdapter: JsonAdapter<String>) :
+  JsonAdapter<Regex>() {
   override fun fromJson(reader: JsonReader) = stringAdapter.fromJson(reader)!!.toRegex()
 
   override fun toJson(writer: JsonWriter, value: Regex?) {

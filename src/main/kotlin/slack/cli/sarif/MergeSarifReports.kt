@@ -66,7 +66,7 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
     option(
         "--remap-src-roots",
         help =
-          "When enabled, remaps uri roots to include the subproject path (relative to the root project)."
+          "When enabled, remaps uri roots to include the subproject path (relative to the root project).",
       )
       .flag()
 
@@ -75,7 +75,7 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
         "--remove-uri-prefixes",
         help =
           "When enabled, removes the root project directory from location uris such that they are only " +
-            "relative to the root project dir."
+            "relative to the root project dir.",
       )
       .flag()
 
@@ -83,7 +83,7 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
     option(
         "--allow-empty",
         help = "Flag to allow graceful exiting if no sarif files are found.",
-        envvar = "SARIF_MERGING_ALLOW_EMPTY"
+        envvar = "SARIF_MERGING_ALLOW_EMPTY",
       )
       .flag()
 
@@ -229,7 +229,7 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
                       )
                     }
                 )
-              }
+              },
           )
         }
     )

@@ -33,7 +33,7 @@ public data class ShellSentryConfig(
    * A minimum confidence level on a scale of [0-100] to accept. [AnalysisResult]s from
    * [ShellSentryExtension]s with lower confidence than this will be discarded.
    */
-  @Json(name = "min_confidence") val minConfidence: Int = 75
+  @Json(name = "min_confidence") val minConfidence: Int = 75,
 ) {
   init {
     check(version == CURRENT_VERSION) {

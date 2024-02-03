@@ -93,7 +93,7 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
         help =
           "Template for messages with each issue. This message can optionally " +
             "contain '{id}' in it to be replaced with the issue ID and '{message}' " +
-            "for the original message."
+            "for the original message.",
       )
       .default("{message}")
 
@@ -117,7 +117,7 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
             name = issue.id,
             shortDescription = MultiformatMessageString(text = issue.message),
             fullDescription = MultiformatMessageString(text = issue.message),
-            defaultConfiguration = ReportingConfiguration(level = Level.Error)
+            defaultConfiguration = ReportingConfiguration(level = Level.Error),
           )
         }
         .sortedBy { it.id }
@@ -141,7 +141,7 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
                       { it.id },
                       { it.location.file },
                       { it.location.line },
-                      { it.location.column }
+                      { it.location.column },
                     )
                   )
                   .map { key -> key to issues.getValue(key) }
@@ -157,11 +157,11 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
                         Message(
                           text =
                             messageTemplate.replace("{id}", id).replace("{message}", issue.message)
-                        )
+                        ),
                     )
-                  }
+                  },
             )
-          )
+          ),
       )
 
     SarifSerializer.toJson(outputSarif).let { outputFile.writeText(it) }
@@ -212,7 +212,7 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
     @Serializable(HtmlEscapeStringSerializer::class) val name: String,
     @Serializable(HtmlEscapeStringSerializer::class) val variant: String,
     @Serializable(HtmlEscapeStringSerializer::class) val version: String,
-    val issues: List<LintIssue>
+    val issues: List<LintIssue>,
   ) {
     @Serializable
     @XmlSerialName("issue")
@@ -269,8 +269,8 @@ public class LintBaselineMergerCli : CliktCommand(DESCRIPTION) {
                       $errorLine2
                     """
                       .trimIndent()
-                )
-            )
+                ),
+            ),
         )
     )
   }

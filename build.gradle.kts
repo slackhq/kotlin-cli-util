@@ -52,12 +52,12 @@ spotless {
     endWithNewline()
     licenseHeaderFile(
       "spotless/spotless.kt",
-      "(import|plugins|buildscript|dependencies|pluginManagement)"
+      "(import|plugins|buildscript|dependencies|pluginManagement)",
     )
   }
 }
 
-configure<JavaPluginExtension> { toolchain { languageVersion.set(JavaLanguageVersion.of(20)) } }
+configure<JavaPluginExtension> { toolchain { languageVersion.set(JavaLanguageVersion.of(21)) } }
 
 tasks.withType<JavaCompile>().configureEach {
   options.release.set(libs.versions.jvmTarget.get().toInt())

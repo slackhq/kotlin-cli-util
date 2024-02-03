@@ -64,17 +64,15 @@ public object Conditions {
 
 public fun githubStatusNotif(
   context: String,
-  notifyIf: String = Conditions.NOT_CANCELLING
+  notifyIf: String = Conditions.NOT_CANCELLING,
 ): Notification =
   Notification(
     ExternalNotification(
       githubCommitStatus = GithubCommitStatus(context = context),
-      notifyIf = notifyIf
+      notifyIf = notifyIf,
     )
   )
 
 public fun CommandStep.withGithubStatus(context: String): CommandStep {
-  return copy(
-    notify = listOf(githubStatusNotif(context)),
-  )
+  return copy(notify = listOf(githubStatusNotif(context)))
 }
