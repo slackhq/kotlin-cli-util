@@ -12,6 +12,10 @@ on:
   pull_request:
   merge_group:
 
+concurrency:
+  group: 'ci-${{ github.event.merge_group.head_ref || github.head_ref }}-${{ github.workflow }}'
+  cancel-in-progress: true
+
 jobs:
   build:
     # Necessary for ResultProcessorTest.testExecuteCommandWithStderr
