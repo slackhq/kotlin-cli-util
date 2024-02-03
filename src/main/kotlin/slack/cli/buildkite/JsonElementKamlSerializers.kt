@@ -53,7 +53,7 @@ internal object JsonObjectAsMapSerializer : KSerializer<JsonObject> {
     buildClassSerialDescriptor("JsonObjectAsMap") {
       element(
         "properties",
-        mapSerialDescriptor(String.serializer().descriptor, JsonElementKamlSerializer.descriptor)
+        mapSerialDescriptor(String.serializer().descriptor, JsonElementKamlSerializer.descriptor),
       )
     }
 
@@ -61,7 +61,7 @@ internal object JsonObjectAsMapSerializer : KSerializer<JsonObject> {
     val map = value.mapValues { it.value }
     encoder.encodeSerializableValue(
       MapSerializer(String.serializer(), JsonElementKamlSerializer),
-      map
+      map,
     )
   }
 
@@ -132,7 +132,7 @@ internal object JsonPrimitiveSerializer : KSerializer<JsonPrimitive> {
       throw JsonDecodingException(
         -1,
         "Unexpected JSON element, expected JsonPrimitive, had ${result::class}",
-        result.toString()
+        result.toString(),
       )
     }
     return result
@@ -205,7 +205,7 @@ private object JsonLiteralSerializer : KSerializer<JsonLiteral> {
       throw JsonDecodingException(
         -1,
         "Unexpected JSON element, expected JsonLiteral, had ${result::class}",
-        result.toString()
+        result.toString(),
       )
     }
     return result

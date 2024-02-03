@@ -75,7 +75,7 @@ public fun Sequence<File>.filterByExtension(extension: String): Sequence<File> {
 /** Filters by a specific [name]. */
 public fun Sequence<File>.filterByName(
   name: String,
-  withoutExtension: Boolean = true
+  withoutExtension: Boolean = true,
 ): Sequence<File> {
   return if (withoutExtension) {
     filter { it.nameWithoutExtension == name }
@@ -94,7 +94,7 @@ public fun Sequence<Path>.filterByExtension(extension: String): Sequence<Path> {
 @JvmName("filterByNamePath")
 public fun Sequence<Path>.filterByName(
   name: String,
-  withoutExtension: Boolean = true
+  withoutExtension: Boolean = true,
 ): Sequence<Path> {
   return if (withoutExtension) {
     filter { it.nameWithoutExtension == name }

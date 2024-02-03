@@ -130,13 +130,13 @@ public data class ExternalNotification(
 @Serializable
 public data class GithubCheck(
   /** GitHub commit status name */
-  val context: String? = null,
+  val context: String? = null
 )
 
 @Serializable
 public data class GithubCommitStatus(
   /** GitHub commit status name */
-  val context: String? = null,
+  val context: String? = null
 )
 
 @Serializable
@@ -715,7 +715,7 @@ public sealed interface SoftFail {
 @Serializable
 public data class SoftFailElement(
   /** The exit status number that will cause this job to soft-fail */
-  @SerialName("exit_status") val exitStatus: ExitStatusUnion? = null,
+  @SerialName("exit_status") val exitStatus: ExitStatusUnion? = null
 )
 
 @Serializable
@@ -764,9 +764,7 @@ public sealed interface Setup {
 public sealed interface Plugins {
   @Serializable
   @JvmInline
-  public value class AnythingMapValue(
-    public val value: JsonObject,
-  ) : Plugins
+  public value class AnythingMapValue(public val value: JsonObject) : Plugins
 
   @Serializable
   @JvmInline

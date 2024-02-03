@@ -40,7 +40,7 @@ class ShellSentryCliTest {
             "--config",
             configFile.absolutePath,
             "--",
-            args
+            args,
           )
         )
       }

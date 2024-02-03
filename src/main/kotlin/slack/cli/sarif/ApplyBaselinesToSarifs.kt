@@ -65,7 +65,7 @@ public class ApplyBaselinesToSarifs : CliktCommand(help = DESCRIPTION) {
         "--remove-uri-prefixes",
         help =
           "When enabled, removes the root project directory from location uris such that they are only " +
-            "relative to the root project dir."
+            "relative to the root project dir.",
       )
       .flag()
 
@@ -172,7 +172,7 @@ public class ApplyBaselinesToSarifs : CliktCommand(help = DESCRIPTION) {
         newCurrentSchema.mergeWith(
           absentResultsSchema,
           removeUriPrefixes = removeUriPrefixes,
-          log = ::echo
+          log = ::echo,
         )
       }
     }

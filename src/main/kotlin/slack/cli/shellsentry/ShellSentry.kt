@@ -53,7 +53,7 @@ public data class ShellSentry(
   private val debug: Boolean = false,
   private val noExit: Boolean = false,
   private val logger: (String) -> Unit = ::println,
-  private val extensions: List<ShellSentryExtension> = emptyList()
+  private val extensions: List<ShellSentryExtension> = emptyList(),
 ) {
 
   @Suppress("CyclomaticComplexMethod", "LongMethod")
@@ -94,7 +94,7 @@ public data class ShellSentry(
               command,
               secondResult.exitCode,
               secondResult.outputFile,
-              isAfterRetry = true
+              isAfterRetry = true,
             )
           }
         }
@@ -110,7 +110,7 @@ public data class ShellSentry(
               command,
               secondResult.exitCode,
               secondResult.outputFile,
-              isAfterRetry = true
+              isAfterRetry = true,
             )
           }
         }
@@ -143,7 +143,7 @@ public data class ShellSentry(
     /** Internal function to consolidate CLI args -> [ShellSentry] creation logic. */
     internal fun create(
       cli: ShellSentryCli,
-      logger: (String) -> Unit = { cli.echo(it) }
+      logger: (String) -> Unit = { cli.echo(it) },
     ): ShellSentry {
       val moshi = ProcessingUtil.newMoshi()
       val config =
@@ -165,7 +165,7 @@ public data class ShellSentry(
         bugsnagKey = cli.bugsnagKey,
         debug = cli.debug,
         noExit = cli.noExit,
-        logger = logger
+        logger = logger,
       )
     }
   }
