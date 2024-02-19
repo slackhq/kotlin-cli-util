@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.9.22"
-kotlinx-serialization = "1.6.2"
+kotlinx-serialization = "1.6.3"
 ksp = "1.9.22-1.0.17"
 ktfmt = "0.47"
 jvmTarget = "17"
