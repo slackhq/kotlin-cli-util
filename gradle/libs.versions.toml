@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.0.0-Beta4"
-kotlinx-serialization = "1.6.2"
+kotlinx-serialization = "1.6.3"
 ksp = "2.0.0-Beta4-1.0.17"
 ktfmt = "0.47"
 jvmTarget = "17"
@@ -11,9 +11,9 @@ xmlutil = "0.86.3"
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.5" }
-dokka = { id = "org.jetbrains.dokka", version = "1.9.10" }
-lint = { id = "com.android.lint", version = "8.1.2" }
-mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.27.0" }
+dokka = { id = "org.jetbrains.dokka", version = "1.9.20" }
+lint = { id = "com.android.lint", version = "8.3.1" }
+mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.28.0" }
 moshix = { id = "dev.zacsweers.moshix", version.ref = "moshix" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
@@ -32,11 +32,11 @@ kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref =
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 okhttp = "com.squareup.okhttp3:okhttp:4.12.0"
-okio = "com.squareup.okio:okio:3.7.0"
-sarif4k = "io.github.detekt.sarif4k:sarif4k:0.5.0"
-slf4jNop = "org.slf4j:slf4j-nop:2.0.11"
+okio = "com.squareup.okio:okio:3.9.0"
+sarif4k = "io.github.detekt.sarif4k:sarif4k:0.6.0"
+slf4jNop = "org.slf4j:slf4j-nop:2.0.12"
 junit = "junit:junit:4.13.2"
 tikxml-htmlEscape = { module = "com.tickaroo.tikxml:converter-htmlescape", version.ref = "tikxml" }
-truth = "com.google.truth:truth:1.3.0"
+truth = "com.google.truth:truth:1.4.2"
 xmlutil-core = { module = "io.github.pdvrieze.xmlutil:core", version.ref = "xmlutil" }
 xmlutil-serialization = { module = "io.github.pdvrieze.xmlutil:serialization", version.ref = "xmlutil" }
