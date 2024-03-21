@@ -89,7 +89,7 @@ moshi { enableSealed.set(true) }
 
 // We have a couple flaky tests on CI right now
 if (System.getenv("CI") != null) {
-  tasks.withType<Test>().configureEach {
+  tasks.test {
     retry {
       maxRetries.set(2)
       maxFailures.set(20)
