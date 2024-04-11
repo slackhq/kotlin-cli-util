@@ -85,9 +85,7 @@ kotlin {
   }
 }
 
-lint {
-  baseline = file("lint-baseline.xml")
-}
+lint { baseline = file("lint-baseline.xml") }
 
 moshi { enableSealed.set(true) }
 
