@@ -85,6 +85,10 @@ kotlin {
   }
 }
 
+lint {
+  baseline = file("lint-baseline.xml")
+}
+
 moshi { enableSealed.set(true) }
 
 // We have a couple flaky tests on CI right now
