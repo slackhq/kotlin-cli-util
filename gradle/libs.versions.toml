@@ -20,13 +20,13 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version = "6.25.0" }
 binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.14.0" }
-retry = { id = "org.gradle.test-retry", version = "1.5.8" }
+retry = { id = "org.gradle.test-retry", version = "1.5.9" }
 
 [libraries]
 autoService-annotations = "com.google.auto.service:auto-service-annotations:1.1.1"
 autoService-ksp = "dev.zacsweers.autoservice:auto-service-ksp:1.1.0"
 bugsnag = "com.bugsnag:bugsnag:3.7.1"
-clikt = "com.github.ajalt.clikt:clikt:4.3.0"
+clikt = "com.github.ajalt.clikt:clikt:4.4.0"
 kotlinShell = "eu.jrie.jetbrains:kotlin-shell-core:0.2.1"
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
@@ -34,7 +34,7 @@ moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 okhttp = "com.squareup.okhttp3:okhttp:4.12.0"
 okio = "com.squareup.okio:okio:3.9.0"
 sarif4k = "io.github.detekt.sarif4k:sarif4k:0.6.0"
-slf4jNop = "org.slf4j:slf4j-nop:2.0.12"
+slf4jNop = "org.slf4j:slf4j-nop:2.0.13"
 junit = "junit:junit:4.13.2"
 tikxml-htmlEscape = { module = "com.tickaroo.tikxml:converter-htmlescape", version.ref = "tikxml" }
 truth = "com.google.truth:truth:1.4.2"
