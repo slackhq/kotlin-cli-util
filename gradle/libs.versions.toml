@@ -1,7 +1,7 @@
 [versions]
-kotlin = "2.0.0-RC1"
+kotlin = "2.0.0-RC2"
 kotlinx-serialization = "1.6.3"
-ksp = "2.0.0-RC1-1.0.20"
+ksp = "2.0.0-RC2-1.0.20"
 ktfmt = "0.47"
 jvmTarget = "17"
 moshix = "0.26.0-alpha03"
