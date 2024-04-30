@@ -124,7 +124,9 @@ class ResultProcessorTest(private val useExtensions: Boolean) {
     outputFile.writeText(
       """
       ${KnownIssues.ftlRateLimit.matchingText}
-      """.trimIndent().padWithTestLogs()
+      """
+        .trimIndent()
+        .padWithTestLogs()
     )
     val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.RetryDelayed)
@@ -136,7 +138,9 @@ class ResultProcessorTest(private val useExtensions: Boolean) {
     outputFile.writeText(
       """
       ${KnownIssues.oom.matchingText}
-      """.trimIndent().padWithTestLogs()
+      """
+        .trimIndent()
+        .padWithTestLogs()
     )
     val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.RetryImmediately)
@@ -148,7 +152,9 @@ class ResultProcessorTest(private val useExtensions: Boolean) {
     outputFile.writeText(
       """
       ${KnownIssues.fakeFailure.matchingText}
-      """.trimIndent().padWithTestLogs()
+      """
+        .trimIndent()
+        .padWithTestLogs()
     )
     val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Ack)
@@ -157,9 +163,13 @@ class ResultProcessorTest(private val useExtensions: Boolean) {
   @Test
   fun matchingPattern_matches() {
     val outputFile = tmpFolder.newFile("logs.txt")
-    outputFile.writeText("""
+    outputFile.writeText(
+      """
       FAKE_FAILURE_a
-      """.trimIndent().padWithTestLogs())
+      """
+        .trimIndent()
+        .padWithTestLogs()
+    )
     val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Ack)
   }
@@ -167,9 +177,13 @@ class ResultProcessorTest(private val useExtensions: Boolean) {
   @Test
   fun matchingPattern_doesNotMatch() {
     val outputFile = tmpFolder.newFile("logs.txt")
-    outputFile.writeText("""
+    outputFile.writeText(
+      """
       FAKE_FAILURE-a
-      """.trimIndent().padWithTestLogs())
+      """
+        .trimIndent()
+        .padWithTestLogs()
+    )
     val signal = newProcessor().process("", 1, outputFile.toPath(), isAfterRetry = false)
     check(signal is RetrySignal.Unknown)
   }
@@ -183,7 +197,9 @@ class ResultProcessorTest(private val useExtensions: Boolean) {
       Publishing build scan...
       $scanUrl
 
-    """.trimIndent().padWithTestLogs()
+    """
+        .trimIndent()
+        .padWithTestLogs()
 
     // Assert in both directions they match
     assertThat(log.lines().parseBuildScan(url)).isEqualTo(scanUrl)
@@ -194,9 +210,13 @@ class ResultProcessorTest(private val useExtensions: Boolean) {
   fun lowConfidenceMatch_isSkipped() {
     assumeTrue(useExtensions)
     val outputFile = tmpFolder.newFile("logs.txt")
-    outputFile.writeText("""
+    outputFile.writeText(
+      """
       FAKE_FAILURE_a
-      """.trimIndent().padWithTestLogs())
+      """
+        .trimIndent()
+        .padWithTestLogs()
+    )
     val signal =
       newProcessor(config = ShellSentryConfig(knownIssues = emptyList(), minConfidence = 100))
         .process("", 1, outputFile.toPath(), isAfterRetry = false)
