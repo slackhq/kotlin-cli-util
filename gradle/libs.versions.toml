@@ -1,10 +1,10 @@
 [versions]
-kotlin = "2.0.0-RC2"
+kotlin = "2.0.0-RC3"
 kotlinx-serialization = "1.6.3"
-ksp = "2.0.0-RC2-1.0.20"
+ksp = "2.0.0-RC3-1.0.20"
 ktfmt = "0.47"
 jvmTarget = "17"
-moshix = "0.26.0-alpha03"
+moshix = "0.27.0-alpha01"
 moshi = "1.15.1"
 tikxml = "0.8.15"
 xmlutil = "0.86.3"
@@ -12,7 +12,7 @@ xmlutil = "0.86.3"
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.6" }
 dokka = { id = "org.jetbrains.dokka", version = "1.9.20" }
-lint = { id = "com.android.lint", version = "8.5.0-alpha04" }
+lint = { id = "com.android.lint", version = "8.5.0-beta01" }
 mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.28.0" }
 moshix = { id = "dev.zacsweers.moshix", version.ref = "moshix" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
