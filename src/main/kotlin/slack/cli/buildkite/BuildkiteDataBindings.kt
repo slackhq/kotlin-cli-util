@@ -159,7 +159,7 @@ public data class MultiChannelMessage(
 @Serializable
 public enum class GithubNotification(public val value: String) {
   @SerialName("github_check") GithubCheck("github_check"),
-  @SerialName("github_commit_status") GithubCommitStatus("github_commit_status")
+  @SerialName("github_commit_status") GithubCommitStatus("github_commit_status"),
 }
 
 @Serializable
@@ -404,7 +404,7 @@ public data class BlockStep(
 public enum class BlockedState(public val value: String) {
   @SerialName("failed") Failed("failed"),
   @SerialName("passed") Passed("passed"),
-  @SerialName("running") Running("running")
+  @SerialName("running") Running("running"),
 }
 
 /** The step keys for a step to depend on */
@@ -640,7 +640,7 @@ public data class ScriptStep(
 @Serializable
 public enum class ConcurrencyMethod(public val value: String) {
   @SerialName("eager") Eager("eager"),
-  @SerialName("ordered") Ordered("ordered")
+  @SerialName("ordered") Ordered("ordered"),
 }
 
 @Serializable
@@ -847,7 +847,7 @@ public enum class SignalReason(public val value: String) {
   @SerialName("cancel") Cancel("cancel"),
   @SerialName("*") Empty("*"),
   @SerialName("none") None("none"),
-  @SerialName("process_run_error") ProcessRunError("process_run_error")
+  @SerialName("process_run_error") ProcessRunError("process_run_error"),
 }
 
 /** Whether to allow a job to be retried manually */
@@ -892,7 +892,7 @@ public data class Signature(
 public enum class ScriptType(public val value: String) {
   @SerialName("command") Command("command"),
   @SerialName("commands") Commands("commands"),
-  @SerialName("script") Script("script")
+  @SerialName("script") Script("script"),
 }
 
 @Serializable
@@ -1094,7 +1094,7 @@ public enum class StepType(public val value: String) {
   @SerialName("script") Script("script"),
   @SerialName("trigger") Trigger("trigger"),
   @SerialName("wait") Wait("wait"),
-  @SerialName("waiter") Waiter("waiter")
+  @SerialName("waiter") Waiter("waiter"),
 }
 
 @Serializable
@@ -1138,7 +1138,7 @@ public data class WaitStep(
 @Serializable
 public enum class WaitType(public val value: String) {
   @SerialName("wait") Wait("wait"),
-  @SerialName("waiter") Waiter("waiter")
+  @SerialName("waiter") Waiter("waiter"),
 }
 
 /**
@@ -1151,7 +1151,7 @@ public enum class StringStep(public val value: String) {
   @SerialName("block") Block("block"),
   @SerialName("input") Input("input"),
   @SerialName("wait") Wait("wait"),
-  @SerialName("waiter") Waiter("waiter")
+  @SerialName("waiter") Waiter("waiter"),
 }
 
 @Serializable
@@ -1164,5 +1164,5 @@ public enum class NestedBlockStepType(public val value: String) {
   @SerialName("script") Script("script"),
   @SerialName("trigger") Trigger("trigger"),
   @SerialName("wait") Wait("wait"),
-  @SerialName("waiter") Waiter("waiter")
+  @SerialName("waiter") Waiter("waiter"),
 }

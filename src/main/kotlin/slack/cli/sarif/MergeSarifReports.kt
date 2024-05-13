@@ -202,7 +202,8 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
               mapOf(
                 SRC_ROOT to
                   originalUri.copy(
-                    uri = "file://${projectDir
+                    uri =
+                      "file://${projectDir
                   .toFile().canonicalPath}/"
                   )
               ),
