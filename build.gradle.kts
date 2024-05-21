@@ -66,7 +66,7 @@ tasks.withType<JavaCompile>().configureEach {
 tasks.withType<Detekt>().configureEach { jvmTarget = libs.versions.jvmTarget.get() }
 
 tasks.withType<DokkaTask>().configureEach {
-  outputDirectory.set(rootDir.resolve("../docs/0.x"))
+  outputDirectory.set(rootProject.layout.projectDirectory.dir("docs/2.x"))
   dokkaSourceSets.configureEach { skipDeprecated.set(true) }
 }
 
