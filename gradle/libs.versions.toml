@@ -7,7 +7,7 @@ jvmTarget = "17"
 moshix = "0.26.0"
 moshi = "1.15.1"
 tikxml = "0.8.15"
-xmlutil = "0.86.3"
+xmlutil = "0.90.0"
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.6" }
