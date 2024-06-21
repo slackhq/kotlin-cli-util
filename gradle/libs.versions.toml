@@ -13,7 +13,7 @@ xmlutil = "0.86.3"
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.6" }
 dokka = { id = "org.jetbrains.dokka", version = "1.9.20" }
 lint = { id = "com.android.lint", version = "8.4.1" }
-mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.28.0" }
+mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.29.0" }
 moshix = { id = "dev.zacsweers.moshix", version.ref = "moshix" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
