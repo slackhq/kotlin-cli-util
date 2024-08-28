@@ -71,14 +71,14 @@ public final class slack/cli/buildkite/Adjustment {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Adjustment$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Adjustment$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Adjustment$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Adjustment;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Adjustment;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Adjustment;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Adjustment;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -105,14 +105,14 @@ public final class slack/cli/buildkite/Agents$AnythingMapValue : slack/cli/build
 	public final synthetic fun unbox-impl ()Lkotlinx/serialization/json/JsonObject;
 }
 
-public final class slack/cli/buildkite/Agents$AnythingMapValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Agents$AnythingMapValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Agents$AnythingMapValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-88H1teY (Lkotlinx/serialization/encoding/Decoder;)Lkotlinx/serialization/json/JsonObject;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-88H1teY (Lkotlinx/serialization/encoding/Decoder;)Lkotlinx/serialization/json/JsonObject;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-NWeGYrM (Lkotlinx/serialization/encoding/Encoder;Lkotlinx/serialization/json/JsonObject;)V
+	public final fun serialize-NWeGYrM (Lkotlinx/serialization/encoding/Encoder;Lkotlinx/serialization/json/JsonObject;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -141,14 +141,14 @@ public final class slack/cli/buildkite/Agents$StringArrayValue : slack/cli/build
 	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
-public final class slack/cli/buildkite/Agents$StringArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Agents$StringArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Agents$StringArrayValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-yL1YTLs (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-yL1YTLs (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-vpgMBO0 (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public final fun serialize-vpgMBO0 (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -175,14 +175,14 @@ public final class slack/cli/buildkite/Automatic$AutomaticElementArrayValue : sl
 	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
-public final class slack/cli/buildkite/Automatic$AutomaticElementArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Automatic$AutomaticElementArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Automatic$AutomaticElementArrayValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-EjWX4Qk (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-EjWX4Qk (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-15etxmU (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public final fun serialize-15etxmU (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -205,14 +205,14 @@ public final class slack/cli/buildkite/Automatic$AutomaticElementValue : slack/c
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/AutomaticElement;
 }
 
-public final class slack/cli/buildkite/Automatic$AutomaticElementValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Automatic$AutomaticElementValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Automatic$AutomaticElementValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-iAjeF_E (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/AutomaticElement;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-iAjeF_E (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/AutomaticElement;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-amz_WbQ (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/AutomaticElement;)V
+	public final fun serialize-amz_WbQ (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/AutomaticElement;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -235,14 +235,14 @@ public final class slack/cli/buildkite/Automatic$BoolValue : slack/cli/buildkite
 	public final synthetic fun unbox-impl ()Z
 }
 
-public final class slack/cli/buildkite/Automatic$BoolValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Automatic$BoolValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Automatic$BoolValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-dGAKfjo (Lkotlinx/serialization/encoding/Decoder;)Z
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-dGAKfjo (Lkotlinx/serialization/encoding/Decoder;)Z
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-C6J_Amg (Lkotlinx/serialization/encoding/Encoder;Z)V
+	public final fun serialize-C6J_Amg (Lkotlinx/serialization/encoding/Encoder;Z)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -274,14 +274,14 @@ public final class slack/cli/buildkite/AutomaticElement {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/AutomaticElement$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/AutomaticElement$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/AutomaticElement$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/AutomaticElement;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/AutomaticElement;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/AutomaticElement;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/AutomaticElement;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -308,14 +308,14 @@ public final class slack/cli/buildkite/Block$BlockStepValue : slack/cli/buildkit
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/BlockStep;
 }
 
-public final class slack/cli/buildkite/Block$BlockStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Block$BlockStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Block$BlockStepValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-SviuT3U (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/BlockStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-SviuT3U (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/BlockStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-98Mh-7E (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/BlockStep;)V
+	public final fun serialize-98Mh-7E (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/BlockStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -342,14 +342,14 @@ public final class slack/cli/buildkite/Block$StringValue : slack/cli/buildkite/B
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Block$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Block$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Block$StringValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-IP15DKQ (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-IP15DKQ (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-EW0wJOY (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-EW0wJOY (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -397,14 +397,14 @@ public final class slack/cli/buildkite/BlockStep : slack/cli/buildkite/Keyable {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/BlockStep$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/BlockStep$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/BlockStep$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/BlockStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/BlockStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/BlockStep;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/BlockStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -470,14 +470,14 @@ public final class slack/cli/buildkite/Build {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Build$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Build$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Build$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Build;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Build;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Build;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Build;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -592,14 +592,14 @@ public final class slack/cli/buildkite/CommandStep : slack/cli/buildkite/Keyable
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/CommandStep$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/CommandStep$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/CommandStep$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/CommandStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/CommandStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/CommandStep;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/CommandStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -634,14 +634,14 @@ public final class slack/cli/buildkite/Commands$ScriptStepValue : slack/cli/buil
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/ScriptStep;
 }
 
-public final class slack/cli/buildkite/Commands$ScriptStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Commands$ScriptStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Commands$ScriptStepValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-tgCHI3g (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ScriptStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-tgCHI3g (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ScriptStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-ZwNP9CU (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ScriptStep;)V
+	public final fun serialize-ZwNP9CU (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ScriptStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -664,14 +664,14 @@ public final class slack/cli/buildkite/Commands$StringArrayValue : slack/cli/bui
 	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
-public final class slack/cli/buildkite/Commands$StringArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Commands$StringArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Commands$StringArrayValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-PRw5KzM (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-PRw5KzM (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-8R6Sw8U (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public final fun serialize-8R6Sw8U (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -694,14 +694,14 @@ public final class slack/cli/buildkite/Commands$StringValue : slack/cli/buildkit
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Commands$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Commands$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Commands$StringValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-9viahWg (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-9viahWg (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-ZzDh6Ws (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-ZzDh6Ws (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -765,14 +765,14 @@ public final class slack/cli/buildkite/DependsOn$StringValue : slack/cli/buildki
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/DependsOn$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/DependsOn$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/DependsOn$StringValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-7irApEM (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-7irApEM (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-m-QjXHk (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-m-QjXHk (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -795,14 +795,14 @@ public final class slack/cli/buildkite/DependsOn$UnionArrayValue : slack/cli/bui
 	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
-public final class slack/cli/buildkite/DependsOn$UnionArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/DependsOn$UnionArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/DependsOn$UnionArrayValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-hhXXsuE (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-hhXXsuE (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-vEFGDD0 (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public final fun serialize-vEFGDD0 (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -826,14 +826,14 @@ public final class slack/cli/buildkite/DependsOnClass {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/DependsOnClass$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/DependsOnClass$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/DependsOnClass$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/DependsOnClass;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/DependsOnClass;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/DependsOnClass;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/DependsOnClass;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -866,14 +866,14 @@ public final class slack/cli/buildkite/DependsOnElement$DependsOnClassValue : sl
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/DependsOnClass;
 }
 
-public final class slack/cli/buildkite/DependsOnElement$DependsOnClassValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/DependsOnElement$DependsOnClassValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/DependsOnElement$DependsOnClassValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-53WBT1k (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/DependsOnClass;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-53WBT1k (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/DependsOnClass;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-abr13So (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/DependsOnClass;)V
+	public final fun serialize-abr13So (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/DependsOnClass;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -896,14 +896,14 @@ public final class slack/cli/buildkite/DependsOnElement$StringValue : slack/cli/
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/DependsOnElement$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/DependsOnElement$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/DependsOnElement$StringValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-Ul24VtA (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-Ul24VtA (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-MjhSKtA (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-MjhSKtA (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -949,14 +949,14 @@ public final class slack/cli/buildkite/ExitStatusUnion$EnumValue : slack/cli/bui
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/ExitStatusEnum;
 }
 
-public final class slack/cli/buildkite/ExitStatusUnion$EnumValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/ExitStatusUnion$EnumValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/ExitStatusUnion$EnumValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-wKjWXLY (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ExitStatusEnum;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-wKjWXLY (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ExitStatusEnum;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-HwpGe44 (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ExitStatusEnum;)V
+	public final fun serialize-HwpGe44 (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ExitStatusEnum;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -979,14 +979,14 @@ public final class slack/cli/buildkite/ExitStatusUnion$LongValue : slack/cli/bui
 	public final synthetic fun unbox-impl ()J
 }
 
-public final class slack/cli/buildkite/ExitStatusUnion$LongValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/ExitStatusUnion$LongValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/ExitStatusUnion$LongValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-xdw9QEM (Lkotlinx/serialization/encoding/Decoder;)J
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-xdw9QEM (Lkotlinx/serialization/encoding/Decoder;)J
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-L2E46oo (Lkotlinx/serialization/encoding/Encoder;J)V
+	public final fun serialize-L2E46oo (Lkotlinx/serialization/encoding/Encoder;J)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1033,14 +1033,14 @@ public final class slack/cli/buildkite/ExternalNotification {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/ExternalNotification$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/ExternalNotification$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/ExternalNotification$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ExternalNotification;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ExternalNotification;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ExternalNotification;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ExternalNotification;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1075,14 +1075,14 @@ public final class slack/cli/buildkite/FieldElement {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/FieldElement$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/FieldElement$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/FieldElement$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/FieldElement;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/FieldElement;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/FieldElement;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/FieldElement;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1104,14 +1104,14 @@ public final class slack/cli/buildkite/GithubCheck {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/GithubCheck$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/GithubCheck$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/GithubCheck$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/GithubCheck;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/GithubCheck;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/GithubCheck;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/GithubCheck;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1133,14 +1133,14 @@ public final class slack/cli/buildkite/GithubCommitStatus {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/GithubCommitStatus$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/GithubCommitStatus$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/GithubCommitStatus$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/GithubCommitStatus;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/GithubCommitStatus;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/GithubCommitStatus;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/GithubCommitStatus;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1183,14 +1183,14 @@ public final class slack/cli/buildkite/GroupStep$AnythingArrayValue : slack/cli/
 	public final synthetic fun unbox-impl ()Lkotlinx/serialization/json/JsonArray;
 }
 
-public final class slack/cli/buildkite/GroupStep$AnythingArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/GroupStep$AnythingArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/GroupStep$AnythingArrayValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-qRXwjdY (Lkotlinx/serialization/encoding/Decoder;)Lkotlinx/serialization/json/JsonArray;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-qRXwjdY (Lkotlinx/serialization/encoding/Decoder;)Lkotlinx/serialization/json/JsonArray;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-aNrWfLU (Lkotlinx/serialization/encoding/Encoder;Lkotlinx/serialization/json/JsonArray;)V
+	public final fun serialize-aNrWfLU (Lkotlinx/serialization/encoding/Encoder;Lkotlinx/serialization/json/JsonArray;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1215,14 +1215,14 @@ public final class slack/cli/buildkite/GroupStep$BlockStepValue : slack/cli/buil
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/BlockStep;
 }
 
-public final class slack/cli/buildkite/GroupStep$BlockStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/GroupStep$BlockStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/GroupStep$BlockStepValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-22H-tes (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/BlockStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-22H-tes (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/BlockStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-GRIPXFU (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/BlockStep;)V
+	public final fun serialize-GRIPXFU (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/BlockStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1247,14 +1247,14 @@ public final class slack/cli/buildkite/GroupStep$BoolValue : slack/cli/buildkite
 	public final synthetic fun unbox-impl ()Z
 }
 
-public final class slack/cli/buildkite/GroupStep$BoolValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/GroupStep$BoolValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/GroupStep$BoolValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-KUsUk8Y (Lkotlinx/serialization/encoding/Decoder;)Z
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-KUsUk8Y (Lkotlinx/serialization/encoding/Decoder;)Z
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-xvfu3UQ (Lkotlinx/serialization/encoding/Encoder;Z)V
+	public final fun serialize-xvfu3UQ (Lkotlinx/serialization/encoding/Encoder;Z)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1279,14 +1279,14 @@ public final class slack/cli/buildkite/GroupStep$CommandStepValue : slack/cli/bu
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/CommandStep;
 }
 
-public final class slack/cli/buildkite/GroupStep$CommandStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/GroupStep$CommandStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/GroupStep$CommandStepValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-ebTv7CI (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/CommandStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-ebTv7CI (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/CommandStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-zS4vPzc (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/CommandStep;)V
+	public final fun serialize-zS4vPzc (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/CommandStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1324,14 +1324,14 @@ public final class slack/cli/buildkite/GroupStep$DoubleValue : slack/cli/buildki
 	public final synthetic fun unbox-impl ()D
 }
 
-public final class slack/cli/buildkite/GroupStep$DoubleValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/GroupStep$DoubleValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/GroupStep$DoubleValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-ZEOgiM0 (Lkotlinx/serialization/encoding/Decoder;)D
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-ZEOgiM0 (Lkotlinx/serialization/encoding/Decoder;)D
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-umXWtiY (Lkotlinx/serialization/encoding/Encoder;D)V
+	public final fun serialize-umXWtiY (Lkotlinx/serialization/encoding/Encoder;D)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1356,14 +1356,14 @@ public final class slack/cli/buildkite/GroupStep$IntegerValue : slack/cli/buildk
 	public final synthetic fun unbox-impl ()J
 }
 
-public final class slack/cli/buildkite/GroupStep$IntegerValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/GroupStep$IntegerValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/GroupStep$IntegerValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-NwnqJbE (Lkotlinx/serialization/encoding/Decoder;)J
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-NwnqJbE (Lkotlinx/serialization/encoding/Decoder;)J
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-_gE-OC0 (Lkotlinx/serialization/encoding/Encoder;J)V
+	public final fun serialize-_gE-OC0 (Lkotlinx/serialization/encoding/Encoder;J)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1388,14 +1388,14 @@ public final class slack/cli/buildkite/GroupStep$NestedBlockStepClassValue : sla
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/NestedBlockStepClass;
 }
 
-public final class slack/cli/buildkite/GroupStep$NestedBlockStepClassValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/GroupStep$NestedBlockStepClassValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/GroupStep$NestedBlockStepClassValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-U6lk7tM (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/NestedBlockStepClass;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-U6lk7tM (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/NestedBlockStepClass;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-g3RJlGk (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/NestedBlockStepClass;)V
+	public final fun serialize-g3RJlGk (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/NestedBlockStepClass;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1429,14 +1429,14 @@ public final class slack/cli/buildkite/GroupStep$StringValue : slack/cli/buildki
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/GroupStep$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/GroupStep$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/GroupStep$StringValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-mLhuDmo (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-mLhuDmo (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-RtEmyIE (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-RtEmyIE (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1461,14 +1461,14 @@ public final class slack/cli/buildkite/GroupStep$WaitStepValue : slack/cli/build
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/Wait;
 }
 
-public final class slack/cli/buildkite/GroupStep$WaitStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/GroupStep$WaitStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/GroupStep$WaitStepValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-0SysLGE (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Wait;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-0SysLGE (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Wait;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-364caGc (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Wait;)V
+	public final fun serialize-364caGc (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Wait;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1499,14 +1499,14 @@ public final class slack/cli/buildkite/Input$InputStepValue : slack/cli/buildkit
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/InputStep;
 }
 
-public final class slack/cli/buildkite/Input$InputStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Input$InputStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Input$InputStepValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-sd0zuIA (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/InputStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-sd0zuIA (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/InputStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-quaf-k4 (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/InputStep;)V
+	public final fun serialize-quaf-k4 (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/InputStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1529,14 +1529,14 @@ public final class slack/cli/buildkite/Input$StringValue : slack/cli/buildkite/I
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Input$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Input$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Input$StringValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-D7hCHBw (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-D7hCHBw (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-y8htZ8s (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-y8htZ8s (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1582,14 +1582,14 @@ public final class slack/cli/buildkite/InputStep : slack/cli/buildkite/Keyable {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/InputStep$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/InputStep$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/InputStep$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/InputStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/InputStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/InputStep;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/InputStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1677,14 +1677,14 @@ public final class slack/cli/buildkite/ManualClass {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/ManualClass$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/ManualClass$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/ManualClass$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ManualClass;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ManualClass;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ManualClass;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ManualClass;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1711,14 +1711,14 @@ public final class slack/cli/buildkite/ManualUnion$BoolValue : slack/cli/buildki
 	public final synthetic fun unbox-impl ()Z
 }
 
-public final class slack/cli/buildkite/ManualUnion$BoolValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/ManualUnion$BoolValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/ManualUnion$BoolValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-9Pk_uEg (Lkotlinx/serialization/encoding/Decoder;)Z
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-9Pk_uEg (Lkotlinx/serialization/encoding/Decoder;)Z
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-u5IHuYc (Lkotlinx/serialization/encoding/Encoder;Z)V
+	public final fun serialize-u5IHuYc (Lkotlinx/serialization/encoding/Encoder;Z)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1745,14 +1745,14 @@ public final class slack/cli/buildkite/ManualUnion$ManualClassValue : slack/cli/
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/ManualClass;
 }
 
-public final class slack/cli/buildkite/ManualUnion$ManualClassValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/ManualUnion$ManualClassValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/ManualUnion$ManualClassValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-u1jAcPM (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ManualClass;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-u1jAcPM (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ManualClass;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-4-N9-zU (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ManualClass;)V
+	public final fun serialize-4-N9-zU (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ManualClass;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1775,14 +1775,14 @@ public final class slack/cli/buildkite/MatrixClass {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/MatrixClass$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/MatrixClass$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/MatrixClass$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/MatrixClass;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/MatrixClass;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/MatrixClass;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/MatrixClass;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1809,14 +1809,14 @@ public final class slack/cli/buildkite/MatrixElement$BoolValue : slack/cli/build
 	public final synthetic fun unbox-impl ()Z
 }
 
-public final class slack/cli/buildkite/MatrixElement$BoolValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/MatrixElement$BoolValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/MatrixElement$BoolValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-SQm7sOw (Lkotlinx/serialization/encoding/Decoder;)Z
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-SQm7sOw (Lkotlinx/serialization/encoding/Decoder;)Z
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-Ffe4GHc (Lkotlinx/serialization/encoding/Encoder;Z)V
+	public final fun serialize-Ffe4GHc (Lkotlinx/serialization/encoding/Encoder;Z)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1843,14 +1843,14 @@ public final class slack/cli/buildkite/MatrixElement$IntegerValue : slack/cli/bu
 	public final synthetic fun unbox-impl ()J
 }
 
-public final class slack/cli/buildkite/MatrixElement$IntegerValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/MatrixElement$IntegerValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/MatrixElement$IntegerValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-wMGs4vc (Lkotlinx/serialization/encoding/Decoder;)J
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-wMGs4vc (Lkotlinx/serialization/encoding/Decoder;)J
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-dWl9K-U (Lkotlinx/serialization/encoding/Encoder;J)V
+	public final fun serialize-dWl9K-U (Lkotlinx/serialization/encoding/Encoder;J)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1873,14 +1873,14 @@ public final class slack/cli/buildkite/MatrixElement$StringValue : slack/cli/bui
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/MatrixElement$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/MatrixElement$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/MatrixElement$StringValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-eSv-ObI (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-eSv-ObI (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-Kc57Dlc (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-Kc57Dlc (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1911,14 +1911,14 @@ public final class slack/cli/buildkite/MatrixUnion$MatrixClassValue : slack/cli/
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/MatrixClass;
 }
 
-public final class slack/cli/buildkite/MatrixUnion$MatrixClassValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/MatrixUnion$MatrixClassValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/MatrixUnion$MatrixClassValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-76QkFME (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/MatrixClass;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-76QkFME (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/MatrixClass;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-aYWYIVY (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/MatrixClass;)V
+	public final fun serialize-aYWYIVY (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/MatrixClass;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1941,14 +1941,14 @@ public final class slack/cli/buildkite/MatrixUnion$UnionArrayValue : slack/cli/b
 	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
-public final class slack/cli/buildkite/MatrixUnion$UnionArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/MatrixUnion$UnionArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/MatrixUnion$UnionArrayValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-BO5kXhU (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-BO5kXhU (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-524cDbY (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public final fun serialize-524cDbY (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1972,14 +1972,14 @@ public final class slack/cli/buildkite/MultiChannelMessage {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/MultiChannelMessage$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/MultiChannelMessage$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/MultiChannelMessage$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/MultiChannelMessage;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/MultiChannelMessage;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/MultiChannelMessage;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/MultiChannelMessage;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2085,14 +2085,14 @@ public final class slack/cli/buildkite/NestedBlockStepClass : slack/cli/buildkit
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/NestedBlockStepClass$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/NestedBlockStepClass$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/NestedBlockStepClass$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/NestedBlockStepClass;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/NestedBlockStepClass;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/NestedBlockStepClass;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/NestedBlockStepClass;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2146,14 +2146,14 @@ public final class slack/cli/buildkite/Notification$External : slack/cli/buildki
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/ExternalNotification;
 }
 
-public final class slack/cli/buildkite/Notification$External$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Notification$External$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Notification$External$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-gHig-tI (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ExternalNotification;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-gHig-tI (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ExternalNotification;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-TCU2slI (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ExternalNotification;)V
+	public final fun serialize-TCU2slI (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ExternalNotification;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2176,14 +2176,14 @@ public final class slack/cli/buildkite/Notification$GitHub : slack/cli/buildkite
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/GithubNotification;
 }
 
-public final class slack/cli/buildkite/Notification$GitHub$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Notification$GitHub$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Notification$GitHub$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-BSh-iS8 (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/GithubNotification;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-BSh-iS8 (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/GithubNotification;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-rRLNq3g (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/GithubNotification;)V
+	public final fun serialize-rRLNq3g (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/GithubNotification;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2210,14 +2210,14 @@ public final class slack/cli/buildkite/Option {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Option$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Option$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Option$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Option;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Option;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Option;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Option;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2244,14 +2244,14 @@ public final class slack/cli/buildkite/Pipeline {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Pipeline$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Pipeline$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Pipeline$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Pipeline;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Pipeline;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Pipeline;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Pipeline;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2278,14 +2278,14 @@ public final class slack/cli/buildkite/Plugin$AnythingMapValue : slack/cli/build
 	public final synthetic fun unbox-impl ()Lkotlinx/serialization/json/JsonObject;
 }
 
-public final class slack/cli/buildkite/Plugin$AnythingMapValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Plugin$AnythingMapValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Plugin$AnythingMapValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-vnQoZzg (Lkotlinx/serialization/encoding/Decoder;)Lkotlinx/serialization/json/JsonObject;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-vnQoZzg (Lkotlinx/serialization/encoding/Decoder;)Lkotlinx/serialization/json/JsonObject;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-yL0GFKU (Lkotlinx/serialization/encoding/Encoder;Lkotlinx/serialization/json/JsonObject;)V
+	public final fun serialize-yL0GFKU (Lkotlinx/serialization/encoding/Encoder;Lkotlinx/serialization/json/JsonObject;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2314,14 +2314,14 @@ public final class slack/cli/buildkite/Plugin$StringValue : slack/cli/buildkite/
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Plugin$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Plugin$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Plugin$StringValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-r9ZQkqU (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-r9ZQkqU (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-1qT7MgY (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-1qT7MgY (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2348,14 +2348,14 @@ public final class slack/cli/buildkite/Plugins$AnythingMapValue : slack/cli/buil
 	public final synthetic fun unbox-impl ()Lkotlinx/serialization/json/JsonObject;
 }
 
-public final class slack/cli/buildkite/Plugins$AnythingMapValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Plugins$AnythingMapValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Plugins$AnythingMapValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-YLah0Mw (Lkotlinx/serialization/encoding/Decoder;)Lkotlinx/serialization/json/JsonObject;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-YLah0Mw (Lkotlinx/serialization/encoding/Decoder;)Lkotlinx/serialization/json/JsonObject;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-NqVaOe4 (Lkotlinx/serialization/encoding/Encoder;Lkotlinx/serialization/json/JsonObject;)V
+	public final fun serialize-NqVaOe4 (Lkotlinx/serialization/encoding/Encoder;Lkotlinx/serialization/json/JsonObject;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2384,14 +2384,14 @@ public final class slack/cli/buildkite/Plugins$UnionArrayValue : slack/cli/build
 	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
-public final class slack/cli/buildkite/Plugins$UnionArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Plugins$UnionArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Plugins$UnionArrayValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-I6rNBKM (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-I6rNBKM (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-nhnHsQM (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public final fun serialize-nhnHsQM (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2415,14 +2415,14 @@ public final class slack/cli/buildkite/Retry {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Retry$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Retry$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Retry$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Retry;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Retry;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Retry;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Retry;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2500,14 +2500,14 @@ public final class slack/cli/buildkite/ScriptStep : slack/cli/buildkite/Keyable 
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/ScriptStep$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/ScriptStep$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/ScriptStep$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ScriptStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/ScriptStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ScriptStep;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/ScriptStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2553,14 +2553,14 @@ public final class slack/cli/buildkite/Setup$UnionArrayMapValue : slack/cli/buil
 	public final synthetic fun unbox-impl ()Ljava/util/Map;
 }
 
-public final class slack/cli/buildkite/Setup$UnionArrayMapValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Setup$UnionArrayMapValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Setup$UnionArrayMapValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-OHYBdA8 (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/Map;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-OHYBdA8 (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/Map;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-5CX8W6c (Lkotlinx/serialization/encoding/Encoder;Ljava/util/Map;)V
+	public final fun serialize-5CX8W6c (Lkotlinx/serialization/encoding/Encoder;Ljava/util/Map;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2583,14 +2583,14 @@ public final class slack/cli/buildkite/Setup$UnionArrayValue : slack/cli/buildki
 	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
-public final class slack/cli/buildkite/Setup$UnionArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Setup$UnionArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Setup$UnionArrayValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-CV5GmyY (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-CV5GmyY (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-IeFPC2g (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public final fun serialize-IeFPC2g (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2634,14 +2634,14 @@ public final class slack/cli/buildkite/Signature {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Signature$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Signature$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Signature$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Signature;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/Signature;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Signature;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/Signature;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2675,14 +2675,14 @@ public final class slack/cli/buildkite/SimpleStringValue$ListValue : slack/cli/b
 	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
-public final class slack/cli/buildkite/SimpleStringValue$ListValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/SimpleStringValue$ListValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/SimpleStringValue$ListValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-z5tlUQY (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-z5tlUQY (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-6HeGX1w (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public final fun serialize-6HeGX1w (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2705,14 +2705,14 @@ public final class slack/cli/buildkite/SimpleStringValue$SingleValue : slack/cli
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/SimpleStringValue$SingleValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/SimpleStringValue$SingleValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/SimpleStringValue$SingleValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-CmwHVO0 (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-CmwHVO0 (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-M-rtQew (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-M-rtQew (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2739,14 +2739,14 @@ public final class slack/cli/buildkite/Skip$BoolValue : slack/cli/buildkite/Skip
 	public final synthetic fun unbox-impl ()Z
 }
 
-public final class slack/cli/buildkite/Skip$BoolValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Skip$BoolValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Skip$BoolValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-AdVXA18 (Lkotlinx/serialization/encoding/Decoder;)Z
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-AdVXA18 (Lkotlinx/serialization/encoding/Decoder;)Z
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-eREPiFQ (Lkotlinx/serialization/encoding/Encoder;Z)V
+	public final fun serialize-eREPiFQ (Lkotlinx/serialization/encoding/Encoder;Z)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2773,14 +2773,14 @@ public final class slack/cli/buildkite/Skip$StringValue : slack/cli/buildkite/Sk
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Skip$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Skip$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Skip$StringValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-KcQUjyk (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-KcQUjyk (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-snB6tvE (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-snB6tvE (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2811,14 +2811,14 @@ public final class slack/cli/buildkite/SlackNotification$Conversation : slack/cl
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/SlackNotification$Conversation$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/SlackNotification$Conversation$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/SlackNotification$Conversation$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-0n9NF-E (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-0n9NF-E (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-CHYHH9Y (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-CHYHH9Y (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2841,14 +2841,14 @@ public final class slack/cli/buildkite/SlackNotification$Multi : slack/cli/build
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/MultiChannelMessage;
 }
 
-public final class slack/cli/buildkite/SlackNotification$Multi$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/SlackNotification$Multi$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/SlackNotification$Multi$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-sHkDoJA (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/MultiChannelMessage;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-sHkDoJA (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/MultiChannelMessage;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-JekYaHY (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/MultiChannelMessage;)V
+	public final fun serialize-JekYaHY (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/MultiChannelMessage;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2875,14 +2875,14 @@ public final class slack/cli/buildkite/SoftFail$BoolValue : slack/cli/buildkite/
 	public final synthetic fun unbox-impl ()Z
 }
 
-public final class slack/cli/buildkite/SoftFail$BoolValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/SoftFail$BoolValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/SoftFail$BoolValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-P-1zX-A (Lkotlinx/serialization/encoding/Decoder;)Z
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-P-1zX-A (Lkotlinx/serialization/encoding/Decoder;)Z
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-1wSBwJg (Lkotlinx/serialization/encoding/Encoder;Z)V
+	public final fun serialize-1wSBwJg (Lkotlinx/serialization/encoding/Encoder;Z)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2911,14 +2911,14 @@ public final class slack/cli/buildkite/SoftFail$Multiple : slack/cli/buildkite/S
 	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
-public final class slack/cli/buildkite/SoftFail$Multiple$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/SoftFail$Multiple$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/SoftFail$Multiple$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-cVPNHQ4 (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-cVPNHQ4 (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-OCQPAFg (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public final fun serialize-OCQPAFg (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2940,14 +2940,14 @@ public final class slack/cli/buildkite/SoftFailElement {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/SoftFailElement$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/SoftFailElement$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/SoftFailElement$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/SoftFailElement;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/SoftFailElement;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/SoftFailElement;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/SoftFailElement;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -2976,14 +2976,14 @@ public final class slack/cli/buildkite/Step$CommandStepValue : slack/cli/buildki
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/CommandStep;
 }
 
-public final class slack/cli/buildkite/Step$CommandStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Step$CommandStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Step$CommandStepValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-1UrEYzk (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/CommandStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-1UrEYzk (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/CommandStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-f8W6DD4 (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/CommandStep;)V
+	public final fun serialize-f8W6DD4 (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/CommandStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -3015,14 +3015,14 @@ public final class slack/cli/buildkite/Step$EnumValue : slack/cli/buildkite/Step
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/StringStep;
 }
 
-public final class slack/cli/buildkite/Step$EnumValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Step$EnumValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Step$EnumValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-wpzNy3w (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/StringStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-wpzNy3w (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/StringStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-93maGSA (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/StringStep;)V
+	public final fun serialize-93maGSA (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/StringStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -3047,14 +3047,14 @@ public final class slack/cli/buildkite/Step$InputStepValue : slack/cli/buildkite
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/InputStep;
 }
 
-public final class slack/cli/buildkite/Step$InputStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Step$InputStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Step$InputStepValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-nRnP7kM (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/InputStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-nRnP7kM (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/InputStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-Dj-jRdw (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/InputStep;)V
+	public final fun serialize-Dj-jRdw (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/InputStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -3123,14 +3123,14 @@ public final class slack/cli/buildkite/Trigger$StringValue : slack/cli/buildkite
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Trigger$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Trigger$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Trigger$StringValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-QuW0248 (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-QuW0248 (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-4VE-bgg (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-4VE-bgg (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -3155,14 +3155,14 @@ public final class slack/cli/buildkite/Trigger$TriggerStepValue : slack/cli/buil
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/TriggerStep;
 }
 
-public final class slack/cli/buildkite/Trigger$TriggerStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Trigger$TriggerStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Trigger$TriggerStepValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-rsza954 (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/TriggerStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-rsza954 (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/TriggerStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-Oylv9YY (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/TriggerStep;)V
+	public final fun serialize-Oylv9YY (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/TriggerStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -3212,14 +3212,14 @@ public final class slack/cli/buildkite/TriggerStep : slack/cli/buildkite/Keyable
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/TriggerStep$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/TriggerStep$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/TriggerStep$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/TriggerStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/TriggerStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/TriggerStep;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/TriggerStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -3261,14 +3261,14 @@ public final class slack/cli/buildkite/Wait$StringValue : slack/cli/buildkite/Wa
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/Wait$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Wait$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Wait$StringValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-4NpL6Gw (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-4NpL6Gw (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-8HRsrWo (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-8HRsrWo (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -3293,14 +3293,14 @@ public final class slack/cli/buildkite/Wait$WaitStepValue : slack/cli/buildkite/
 	public final synthetic fun unbox-impl ()Lslack/cli/buildkite/WaitStep;
 }
 
-public final class slack/cli/buildkite/Wait$WaitStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/Wait$WaitStepValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/Wait$WaitStepValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-gJTLmPg (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/WaitStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-gJTLmPg (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/WaitStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-GHUWyTw (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/WaitStep;)V
+	public final fun serialize-GHUWyTw (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/WaitStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -3340,14 +3340,14 @@ public final class slack/cli/buildkite/WaitStep : slack/cli/buildkite/Keyable {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class slack/cli/buildkite/WaitStep$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/WaitStep$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/WaitStep$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/WaitStep;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lslack/cli/buildkite/WaitStep;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/WaitStep;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lslack/cli/buildkite/WaitStep;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -3392,14 +3392,14 @@ public final class slack/cli/buildkite/With$StringMapValue : slack/cli/buildkite
 	public final synthetic fun unbox-impl ()Ljava/util/Map;
 }
 
-public final class slack/cli/buildkite/With$StringMapValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/With$StringMapValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/With$StringMapValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-I7k-hrA (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/Map;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-I7k-hrA (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/Map;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-WCj2Q0U (Lkotlinx/serialization/encoding/Encoder;Ljava/util/Map;)V
+	public final fun serialize-WCj2Q0U (Lkotlinx/serialization/encoding/Encoder;Ljava/util/Map;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -3422,14 +3422,14 @@ public final class slack/cli/buildkite/With$UnionArrayValue : slack/cli/buildkit
 	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
-public final class slack/cli/buildkite/With$UnionArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public synthetic class slack/cli/buildkite/With$UnionArrayValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lslack/cli/buildkite/With$UnionArrayValue$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-jFSDh6g (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-jFSDh6g (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-XCvOTjU (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public final fun serialize-XCvOTjU (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 

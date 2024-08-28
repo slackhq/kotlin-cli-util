@@ -57,7 +57,7 @@ spotless {
   }
 }
 
-configure<JavaPluginExtension> { toolchain { languageVersion.set(JavaLanguageVersion.of(21)) } }
+configure<JavaPluginExtension> { toolchain { languageVersion.set(JavaLanguageVersion.of(22)) } }
 
 tasks.withType<JavaCompile>().configureEach {
   options.release.set(libs.versions.jvmTarget.get().toInt())
@@ -66,7 +66,7 @@ tasks.withType<JavaCompile>().configureEach {
 tasks.withType<Detekt>().configureEach { jvmTarget = libs.versions.jvmTarget.get() }
 
 tasks.withType<DokkaTask>().configureEach {
-  outputDirectory.set(rootDir.resolve("../docs/0.x"))
+  outputDirectory.set(rootProject.layout.projectDirectory.dir("docs/2.x"))
   dokkaSourceSets.configureEach { skipDeprecated.set(true) }
 }
 
@@ -85,11 +85,13 @@ kotlin {
   }
 }
 
+lint { baseline = file("lint-baseline.xml") }
+
 moshi { enableSealed.set(true) }
 
 // We have a couple flaky tests on CI right now
 if (System.getenv("CI") != null) {
-  tasks.withType<Test>().configureEach {
+  tasks.test {
     retry {
       maxRetries.set(2)
       maxFailures.set(20)
