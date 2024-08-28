@@ -13,18 +13,18 @@ xmlutil = "0.86.3"
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.6" }
 dokka = { id = "org.jetbrains.dokka", version = "1.9.20" }
 lint = { id = "com.android.lint", version = "8.4.1" }
-mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.28.0" }
+mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.29.0" }
 moshix = { id = "dev.zacsweers.moshix", version.ref = "moshix" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version = "6.25.0" }
-binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.14.0" }
+binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.16.3" }
 retry = { id = "org.gradle.test-retry", version = "1.5.10" }
 
 [libraries]
 autoService-annotations = "com.google.auto.service:auto-service-annotations:1.1.1"
-autoService-ksp = "dev.zacsweers.autoservice:auto-service-ksp:1.1.0"
+autoService-ksp = "dev.zacsweers.autoservice:auto-service-ksp:1.2.0"
 bugsnag = "com.bugsnag:bugsnag:3.7.1"
 clikt = "com.github.ajalt.clikt:clikt:4.4.0"
 kotlinShell = "eu.jrie.jetbrains:kotlin-shell-core:0.2.1"
@@ -37,6 +37,6 @@ sarif4k = "io.github.detekt.sarif4k:sarif4k:0.6.0"
 slf4jNop = "org.slf4j:slf4j-nop:2.0.13"
 junit = "junit:junit:4.13.2"
 tikxml-htmlEscape = { module = "com.tickaroo.tikxml:converter-htmlescape", version.ref = "tikxml" }
-truth = "com.google.truth:truth:1.4.2"
+truth = "com.google.truth:truth:1.4.4"
 xmlutil-core = { module = "io.github.pdvrieze.xmlutil:core", version.ref = "xmlutil" }
 xmlutil-serialization = { module = "io.github.pdvrieze.xmlutil:serialization", version.ref = "xmlutil" }
