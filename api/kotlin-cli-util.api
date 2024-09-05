@@ -25,6 +25,8 @@ public final class slack/cli/CliUtilKt {
 	public static synthetic fun filterByName$default (Lkotlin/sequences/Sequence;Ljava/lang/String;ZILjava/lang/Object;)Lkotlin/sequences/Sequence;
 	public static final fun filterByNamePath (Lkotlin/sequences/Sequence;Ljava/lang/String;Z)Lkotlin/sequences/Sequence;
 	public static synthetic fun filterByNamePath$default (Lkotlin/sequences/Sequence;Ljava/lang/String;ZILjava/lang/Object;)Lkotlin/sequences/Sequence;
+	public static final fun multipleSet (Lcom/github/ajalt/clikt/parameters/options/OptionWithValues;Ljava/util/Set;Z)Lcom/github/ajalt/clikt/parameters/options/OptionWithValues;
+	public static synthetic fun multipleSet$default (Lcom/github/ajalt/clikt/parameters/options/OptionWithValues;Ljava/util/Set;ZILjava/lang/Object;)Lcom/github/ajalt/clikt/parameters/options/OptionWithValues;
 	public static final fun skipBuildAndCacheDirs (Lkotlin/io/FileTreeWalk;)Lkotlin/io/FileTreeWalk;
 	public static final fun skipBuildAndCacheDirs (Lkotlin/io/path/FileVisitorBuilder;)V
 	public static final fun walkEachFile (Ljava/nio/file/Path;IZLkotlin/jvm/functions/Function1;)Lkotlin/sequences/Sequence;
@@ -47,6 +49,11 @@ public abstract interface class slack/cli/CommandFactory {
 public final class slack/cli/CommandFactoryKt {
 	public static final fun runCommand ([Ljava/lang/String;Z)V
 	public static synthetic fun runCommand$default ([Ljava/lang/String;ZILjava/lang/Object;)V
+}
+
+public final class slack/cli/Playground {
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
 }
 
 public final class slack/cli/Toml {
@@ -3457,6 +3464,21 @@ public final class slack/cli/gradle/GradleSettingsVerifierCli : com/github/ajalt
 }
 
 public final class slack/cli/gradle/GradleSettingsVerifierCli$Factory : slack/cli/CommandFactory {
+	public fun <init> ()V
+	public fun create ()Lcom/github/ajalt/clikt/core/CliktCommand;
+	public fun getDescription ()Ljava/lang/String;
+	public fun getKey ()Ljava/lang/String;
+}
+
+public final class slack/cli/gradle/GradleTestFixturesMigratorCli : com/github/ajalt/clikt/core/CliktCommand {
+	public static final field ANDROID_TEST_FIXTURES_BLOCK Ljava/lang/String;
+	public static final field DESCRIPTION Ljava/lang/String;
+	public static final field JAVA_FIXTURES_BLOCK Ljava/lang/String;
+	public fun <init> ()V
+	public fun run ()V
+}
+
+public final class slack/cli/gradle/GradleTestFixturesMigratorCli$Factory : slack/cli/CommandFactory {
 	public fun <init> ()V
 	public fun create ()Lcom/github/ajalt/clikt/core/CliktCommand;
 	public fun getDescription ()Ljava/lang/String;

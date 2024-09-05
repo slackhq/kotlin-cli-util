@@ -17,6 +17,10 @@
 
 package slack.cli
 
+import com.github.ajalt.clikt.core.MissingOption
+import com.github.ajalt.clikt.parameters.options.NullableOption
+import com.github.ajalt.clikt.parameters.options.OptionWithValues
+import com.github.ajalt.clikt.parameters.options.transformAll
 import java.io.File
 import java.nio.file.FileVisitResult
 import java.nio.file.Path
@@ -126,4 +130,32 @@ public fun List<String>.cleanLineFormatting(): List<String> {
 private fun List<String>.padNewline(): List<String> {
   val noEmpties = dropLastWhile { it.isBlank() }
   return noEmpties + ""
+}
+
+/**
+ * Make the option return a set of calls; each item in the set is the value of one call.
+ *
+ * If the option is never called, the set will be empty. This must be applied after all other
+ * transforms.
+ *
+ * ### Example:
+ * ```
+ * val opt: Set<Pair<Int, Int>> by option().int().pair().multipleSet()
+ * ```
+ *
+ * @param default The value to use if the option is not supplied. Defaults to an empty set.
+ * @param required If true, [default] is ignored and [MissingOption] will be thrown if no instances
+ *   of the option are present on the command line.
+ */
+public fun <EachT, ValueT> NullableOption<EachT, ValueT>.multipleSet(
+  default: Set<EachT> = emptySet(),
+  required: Boolean = false,
+): OptionWithValues<Set<EachT>, EachT, ValueT> {
+  return transformAll(showAsRequired = required) {
+    when {
+      it.isEmpty() && required -> throw MissingOption(option)
+      it.isEmpty() && !required -> default
+      else -> it
+    }.toSet()
+  }
 }
