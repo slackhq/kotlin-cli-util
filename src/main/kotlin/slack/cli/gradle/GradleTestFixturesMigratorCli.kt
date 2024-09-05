@@ -80,7 +80,8 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
     argument(
         "--targets",
         help =
-          "The gradle-style project paths to test-fixture projects to migrate. For example - :path:to:lib:test-fixtures",
+          "The gradle-style project paths to test-fixture projects to migrate. " +
+            "For example - :path:to:lib:test-fixtures",
       )
       .multiple()
 
@@ -118,7 +119,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
 
   internal data class TestFixtureTarget(val hostProject: Project, val testFixtureProject: Project)
 
-  @Suppress("LongMethod")
+  @Suppress("LongMethod", "CyclomaticComplexMethod", "NestedBlockDepth")
   @ExperimentalPathApi
   override fun run() {
     val targetSet = targets.toSet()
@@ -222,6 +223,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
         continue
       }
 
+      @Suppress("LoopWithTooManyJumpStatements")
       for ((i, line) in lines.withIndex()) {
         if (i < dependenciesIndex) continue
         if (line.isBlank()) continue
@@ -256,6 +258,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
     )
   }
 
+  @Suppress("ReturnCount")
   private fun Project.findHostProject(mapping: Map<Path, Project>): Project? {
     manualHostMapping[gradlePath]?.let {
       return mapping.getValue(it)
@@ -312,6 +315,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
     }
   }
 
+  @Suppress("LongMethod")
   private fun TestFixtureTarget.moveDependencies() {
     // Mapping of configuration to dependencies
     val dependencies = mutableMapOf<String, MutableSet<String>>()
