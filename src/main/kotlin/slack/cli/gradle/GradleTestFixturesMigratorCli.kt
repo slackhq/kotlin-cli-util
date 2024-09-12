@@ -317,6 +317,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
     }
   }
 
+  @Suppress("LongMethod", "CyclomaticComplexMethod", "NestedBlockDepth")
   private fun TestFixtureTarget.enableInBuildFile() {
     val text = hostProject.buildFile.readText()
     val lines = hostProject.buildFile.readLines().toMutableList()
@@ -401,7 +402,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
     }
   }
 
-  @Suppress("LongMethod")
+  @Suppress("LongMethod", "ReturnCount")
   private fun TestFixtureTarget.moveDependencies(): Long {
     var dependenciesMoved = 0L
     // Mapping of configuration to dependencies
