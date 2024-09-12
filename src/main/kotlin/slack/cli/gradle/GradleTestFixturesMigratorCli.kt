@@ -272,7 +272,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
       )
     }
 
-    echo(
+    val stats =
       """
         Migration complete!
         Projects migrated: ${migratableProjects.size}
@@ -282,7 +282,12 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
         Projects ignored: ${ignoredProjects.size}
       """
         .trimIndent()
-    )
+
+    echo(stats)
+    projectDir.resolve("stats.txt").apply {
+      createFile()
+      writeText(stats)
+    }
   }
 
   @Suppress("ReturnCount")
