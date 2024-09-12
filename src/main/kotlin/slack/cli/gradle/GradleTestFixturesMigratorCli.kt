@@ -202,7 +202,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
             }
           blackholeSink().buffer().outputStream().use { blackHole ->
             for ((source, new) in filesToMove) {
-              locMoved += source.useLines { it.count() }
+              locMoved += (projectDir.resolve(source)).useLines { it.count() }
               shellInProject {
                 val pipeline = pipeline { "git mv $source $new".process() pipe blackHole }
                 pipeline.join()
