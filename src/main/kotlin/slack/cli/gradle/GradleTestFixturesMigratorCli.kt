@@ -238,7 +238,13 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
         if (i < dependenciesIndex) continue
         if (line.isBlank()) continue
         for ((old, new) in allPathsToMigrate) {
-          if (old in line && line.contains("testImplementation(")) {
+          if ("($old)" in line) {
+            if (!line.contains("testImplementation(", ignoreCase = true)) {
+              echo(
+                "Suspicious non-test usage at ${project.buildFile.absolutePathString()}:${i + 1} ",
+                err = true,
+              )
+            }
             if (new == project.gradleAccessorPath) {
               // Same project, just remove this line
               lines[i] = ""
@@ -326,7 +332,6 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
 
     if (useSgpDsl) {
       if ("enableTestFixtures()" in hostProject.buildFile.readText()) {
-        echo("Already enabled in ${hostProject.gradlePath}")
         // already enabled, return
         return
       }
