@@ -240,7 +240,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
         if (i < dependenciesIndex) continue
         if (line.isBlank()) continue
         for ((old, new) in allPathsToMigrate) {
-          if (old in line) {
+          if (old in line && line.contains("testImplementation(")) {
             if (new == project.gradleAccessorPath) {
               // Same project, just remove this line
               lines[i] = ""
