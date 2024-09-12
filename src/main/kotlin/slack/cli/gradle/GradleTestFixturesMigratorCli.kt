@@ -62,8 +62,6 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
 
     const val ANDROID_TEST_FIXTURES_BLOCK = "android.testFixtures.enable = true"
     const val JAVA_FIXTURES_BLOCK = "`java-test-fixtures`"
-    val SGP_FIXTURES_REGEX =
-      Regex("slack\\s*\\{(?:.|\\n)*?features\\s*\\{(?:.|\\n)*?testFixtures\\(\\)\n")
     val POINTLESS_TEST_FIXTURE_CONFIGURATIONS = setOf("testImplementation")
   }
 
@@ -324,11 +322,10 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
 
   @Suppress("LongMethod", "CyclomaticComplexMethod", "NestedBlockDepth")
   private fun TestFixtureTarget.enableInBuildFile() {
-    val text = hostProject.buildFile.readText()
     val lines = hostProject.buildFile.readLines().toMutableList()
 
     if (useSgpDsl) {
-      if (text.matches(SGP_FIXTURES_REGEX)) {
+      if ("enableTestFixtures()" in hostProject.buildFile.readText()) {
         echo("Already enabled in ${hostProject.gradlePath}")
         // already enabled, return
         return
@@ -343,15 +340,15 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
           // No DSL at all, add one
           val endOfPluginsBlock = lines.indexOfFirst { it == "}" }
           check(endOfPluginsBlock != -1) { "No plugins block found in ${hostProject.gradlePath}" }
-          lines.add(endOfPluginsBlock + 1, "slack { features { testFixtures() } }")
+          lines.add(endOfPluginsBlock + 1, "slack { features { enableTestFixtures() } }")
         } else {
           if (!lines[slackBlock].endsWith("{")) {
             // There's other stuff on the line, split there and insert in between
             val (first, rest) = lines[slackBlock].split("slack {")
             lines[slackBlock] = "${first}slack {"
-            lines.addAll(slackBlock + 1, listOf("features { testFixtures() }", rest))
+            lines.addAll(slackBlock + 1, listOf("features { enableTestFixtures() }", rest))
           } else {
-            lines.add(slackBlock + 1, "features { testFixtures() }")
+            lines.add(slackBlock + 1, "features { enableTestFixtures() }")
           }
         }
       } else {
@@ -359,9 +356,9 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
           // There's other stuff on the line, split there and insert in between
           val (first, rest) = lines[featuresBlock].split("features {")
           lines[featuresBlock] = "${first}features {"
-          lines.addAll(featuresBlock + 1, listOf("testFixtures()", rest))
+          lines.addAll(featuresBlock + 1, listOf("enableTestFixtures()", rest))
         } else {
-          lines.add(featuresBlock + 1, "testFixtures()")
+          lines.add(featuresBlock + 1, "enableTestFixtures()")
         }
       }
       if (!dryRun) {
