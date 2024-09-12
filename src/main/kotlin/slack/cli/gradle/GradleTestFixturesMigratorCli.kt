@@ -18,6 +18,7 @@ package slack.cli.gradle
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.multiple
+import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.pair
 import com.google.auto.service.AutoService
@@ -61,6 +62,8 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
 
     const val ANDROID_TEST_FIXTURES_BLOCK = "android.testFixtures.enable = true"
     const val JAVA_FIXTURES_BLOCK = "`java-test-fixtures`"
+    val SGP_FIXTURES_REGEX =
+      Regex("slack\\s*\\{(?:.|\\n)*?features\\s*\\{(?:.|\\n)*?testFixtures\\(\\)\n")
     val POINTLESS_TEST_FIXTURE_CONFIGURATIONS = setOf("testImplementation")
   }
 
@@ -75,6 +78,8 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
   private val projectDir by projectDirOption()
 
   private val dryRun by dryRunOption()
+
+  private val useSgpDsl by option("--use-sgp").flag()
 
   private val targets by
     argument(
@@ -163,6 +168,9 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
 
     // Migrate test fixture sources and deps to their new host project
     for (migration in migratableProjects) {
+      if (useSgpDsl) {
+        migration.validate()
+      }
       migration.enableInBuildFile()
       migration.moveDependencies()
       migration.moveReadmeContents()
@@ -250,12 +258,14 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
 
     // Finally - remove them from settings.gradle.kts
     val refsToRemove = migratableProjects.mapTo(mutableSetOf()) { it.testFixtureProject.gradlePath }
-    settingsFile.writeText(
-      settingsFile
-        .readLines()
-        .filterNot { it.trim().removeSuffix(",").removeSurrounding("\"") in refsToRemove }
-        .joinToString("\n")
-    )
+    if (!dryRun) {
+      settingsFile.writeText(
+        settingsFile
+          .readLines()
+          .filterNot { it.trim().removeSuffix(",").removeSurrounding("\"") in refsToRemove }
+          .joinToString("\n")
+      )
+    }
   }
 
   @Suppress("ReturnCount")
@@ -276,42 +286,101 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
     return null
   }
 
+  @OptIn(ExperimentalPathApi::class)
+  private fun TestFixtureTarget.validate() {
+    // Test fixture projects cannot currently work with certain tools like KSP
+    val buildFile = testFixtureProject.buildFile.readText()
+    val incompatibleExpressions = setOf("dagger()", "ksp(", "ksp)")
+    for (expression in incompatibleExpressions) {
+      if (expression in buildFile) {
+        error(
+          "Incompatible test-fixtures build file found: file://${testFixtureProject.buildFile} "
+        )
+      }
+    }
+  }
+
   private fun TestFixtureTarget.enableInBuildFile() {
-    // TODO update this for slack feature DSL
-    // TODO detect if they use dagger
+    val text = hostProject.buildFile.readText()
     val lines = hostProject.buildFile.readLines().toMutableList()
 
-    if (lines.any { ANDROID_TEST_FIXTURES_BLOCK in it || JAVA_FIXTURES_BLOCK in it }) {
-      // already enabled, return
-      return
-    }
-
-    // If it's android, add android.testFixtures.enable = true after plugins
-    // If it's jvm, add `java-test-fixtures` to the end of the plugins block
-    val hostType = hostProject.type
-
-    val fixturesType = testFixtureProject.type
-
-    if (hostType == ProjectType.JVM && fixturesType == ProjectType.ANDROID) {
-      error(
-        "Cannot hoist Android fixtures in ${testFixtureProject.gradlePath} into JVM host ${hostProject.gradlePath}"
-      )
-    }
-
-    val endOfPlugins = lines.indexOfFirst { it == "}" }
-    check(endOfPlugins != -1) { error("Could not find end of plugins in ${hostProject.buildFile}") }
-    when (hostType) {
-      ProjectType.ANDROID -> {
-        lines.add(endOfPlugins + 1, "\n$ANDROID_TEST_FIXTURES_BLOCK")
+    if (useSgpDsl) {
+      if (text.matches(SGP_FIXTURES_REGEX)) {
+        println("Already enabled in ${hostProject.gradlePath}")
+        // already enabled, return
+        return
       }
-      ProjectType.JVM -> {
-        lines.add(endOfPlugins, JAVA_FIXTURES_BLOCK)
+      // Find the `features {` block if any
+      val featuresBlock =
+        lines.indexOfFirst { it.contains("features {") && !it.contains("android {") }
+      if (featuresBlock == -1) {
+        // No features block. Check for `slack {`
+        val slackBlock = lines.indexOfFirst { it.contains("slack {") }
+        if (slackBlock == -1) {
+          // No DSL at all, add one
+          val endOfPluginsBlock = lines.indexOfFirst { it == "}" }
+          check(endOfPluginsBlock != -1) { "No plugins block found in ${hostProject.gradlePath}" }
+          lines.add(endOfPluginsBlock + 1, "slack { features { testFixtures() } }")
+        } else {
+          if (!lines[slackBlock].endsWith("{")) {
+            // There's other stuff on the line, split there and insert in between
+            val (first, rest) = lines[slackBlock].split("slack {")
+            lines[slackBlock] = "${first}slack {"
+            lines.addAll(slackBlock + 1, listOf("features { testFixtures() }", rest))
+          } else {
+            lines.add(slackBlock + 1, "features { testFixtures() }")
+          }
+        }
+      } else {
+        if (!lines[featuresBlock].endsWith("{")) {
+          // There's other stuff on the line, split there and insert in between
+          val (first, rest) = lines[featuresBlock].split("features {")
+          lines[featuresBlock] = "${first}features {"
+          lines.addAll(featuresBlock + 1, listOf("testFixtures()", rest))
+        } else {
+          lines.add(featuresBlock + 1, "testFixtures()")
+        }
       }
-    }
-    if (!dryRun) {
-      hostProject.buildFile.writeText(lines.joinToString("\n"))
+      if (!dryRun) {
+        hostProject.buildFile.writeText(lines.joinToString("\n"))
+      } else {
+        println("Enabling test fixtures on project ${hostProject.gradlePath}")
+      }
     } else {
-      println("Enabling test fixtures on $hostType project ${hostProject.gradlePath}")
+      if (lines.any { ANDROID_TEST_FIXTURES_BLOCK in it || JAVA_FIXTURES_BLOCK in it }) {
+        // already enabled, return
+        return
+      }
+
+      // If it's android, add android.testFixtures.enable = true after plugins
+      // If it's jvm, add `java-test-fixtures` to the end of the plugins block
+      val hostType = hostProject.type
+
+      val fixturesType = testFixtureProject.type
+
+      if (hostType == ProjectType.JVM && fixturesType == ProjectType.ANDROID) {
+        error(
+          "Cannot hoist Android fixtures in ${testFixtureProject.gradlePath} into JVM host ${hostProject.gradlePath}"
+        )
+      }
+
+      val endOfPlugins = lines.indexOfFirst { it == "}" }
+      check(endOfPlugins != -1) {
+        error("Could not find end of plugins in ${hostProject.buildFile}")
+      }
+      when (hostType) {
+        ProjectType.ANDROID -> {
+          lines.add(endOfPlugins + 1, "\n$ANDROID_TEST_FIXTURES_BLOCK")
+        }
+        ProjectType.JVM -> {
+          lines.add(endOfPlugins, JAVA_FIXTURES_BLOCK)
+        }
+      }
+      if (!dryRun) {
+        hostProject.buildFile.writeText(lines.joinToString("\n"))
+      } else {
+        println("Enabling test fixtures on $hostType project ${hostProject.gradlePath}")
+      }
     }
   }
 
@@ -404,37 +473,40 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
     if (testFixtureProject.readme.notExists()) return
 
     if (hostProject.readme.notExists()) {
-      hostProject.readme.apply {
-        createFile()
-        writeText(
+      if (!dryRun) {
+        hostProject.readme.apply {
+          createFile()
+          writeText(
+            """
+            ${hostProject.path.name}
+            ${"=".repeat(hostProject.path.name.length)}
           """
-          ${hostProject.path.name}
-          ${"=".repeat(hostProject.path.name.length)}
-        """
-            .trimIndent()
-        )
-      }
-      shellInProject {
-        blackholeSink().buffer().outputStream().use { blackHole ->
-          val pipeline = pipeline {
-            "git add ${hostProject.readme.absolutePathString()}".process() pipe blackHole
+              .trimIndent()
+          )
+        }
+        shellInProject {
+          blackholeSink().buffer().outputStream().use { blackHole ->
+            val pipeline = pipeline {
+              "git add ${hostProject.readme.absolutePathString()}".process() pipe blackHole
+            }
+            pipeline.join()
           }
-          pipeline.join()
         }
       }
     }
 
     val testFixtureReadmeContent = testFixtureProject.readme.readText()
 
-    hostProject.readme.appendLines(
-      buildList {
-        add("")
-        add("")
-        addAll(testFixtureReadmeContent.lines())
-      }
-    )
-
-    hostProject.readme.writeText(hostProject.readme.readText().trim() + "\n")
+    if (!dryRun) {
+      hostProject.readme.appendLines(
+        buildList {
+          add("")
+          add("")
+          addAll(testFixtureReadmeContent.lines())
+        }
+      )
+      hostProject.readme.writeText(hostProject.readme.readText().trim() + "\n")
+    }
   }
 
   private val Project.type
