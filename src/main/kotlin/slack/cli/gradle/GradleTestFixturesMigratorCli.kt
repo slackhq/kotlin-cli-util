@@ -167,12 +167,14 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
         }
 
     // Migrate test fixture sources and deps to their new host project
+    var locMoved = 0L
+    var dependenciesMoved = 0L
     for (migration in migratableProjects) {
       if (useSgpDsl) {
         migration.validate()
       }
       migration.enableInBuildFile()
-      migration.moveDependencies()
+      dependenciesMoved += migration.moveDependencies()
       migration.moveReadmeContents()
 
       if (!dryRun) {
@@ -200,6 +202,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
             }
           blackholeSink().buffer().outputStream().use { blackHole ->
             for ((source, new) in filesToMove) {
+              locMoved += source.useLines { it.count() }
               shellInProject {
                 val pipeline = pipeline { "git mv $source $new".process() pipe blackHole }
                 pipeline.join()
@@ -210,10 +213,10 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
         migration.testFixtureProject.path.deleteRecursively()
         projectByPath.remove(migration.testFixtureProject.path)
       } else {
-        println(
+        echo(
           "Moving sourced from ${migration.testFixtureProject.gradlePath} to ${migration.hostProject.gradlePath}"
         )
-        println("Deleting test-fixture project ${migration.testFixtureProject.gradlePath}")
+        echo("Deleting test-fixture project ${migration.testFixtureProject.gradlePath}")
       }
     }
 
@@ -222,6 +225,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
         it.testFixtureProject.gradleAccessorPath to it.hostProject.gradleAccessorPath
       }
 
+    var updatedDependencyDeclarations = 0
     for (project in projectByPath.values) {
       var modified = false
       val lines = project.buildFile.readLines().toMutableList()
@@ -241,6 +245,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
               // Same project, just remove this line
               lines[i] = ""
             } else {
+              updatedDependencyDeclarations++
               lines[i] = line.replace(old, "testFixtures($new)")
             }
             modified = true
@@ -251,7 +256,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
         if (!dryRun) {
           project.buildFile.writeText(lines.joinToString("\n"))
         } else {
-          println("Updating references in ${project.buildFile}")
+          echo("Updating references in ${project.buildFile}")
         }
       }
     }
@@ -266,6 +271,18 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
           .joinToString("\n")
       )
     }
+
+    echo(
+      """
+        Migration complete!
+        Projects migrated: ${migratableProjects.size}
+        Dependency declarations updated: $updatedDependencyDeclarations
+        Lines of code moved: $locMoved
+        Dependencies moved: $dependenciesMoved
+        Projects ignored: ${ignoredProjects.size}
+      """
+        .trimIndent()
+    )
   }
 
   @Suppress("ReturnCount")
@@ -282,7 +299,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
     if (parentDir.resolve("src").exists()) {
       return mapping.getValue(parentDir)
     }
-    System.err.println("Could not resolve host project for '$gradlePath'")
+    echo("Could not resolve host project for '$gradlePath'", err = true)
     return null
   }
 
@@ -306,7 +323,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
 
     if (useSgpDsl) {
       if (text.matches(SGP_FIXTURES_REGEX)) {
-        println("Already enabled in ${hostProject.gradlePath}")
+        echo("Already enabled in ${hostProject.gradlePath}")
         // already enabled, return
         return
       }
@@ -344,7 +361,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
       if (!dryRun) {
         hostProject.buildFile.writeText(lines.joinToString("\n"))
       } else {
-        println("Enabling test fixtures on project ${hostProject.gradlePath}")
+        echo("Enabling test fixtures on project ${hostProject.gradlePath}")
       }
     } else {
       if (lines.any { ANDROID_TEST_FIXTURES_BLOCK in it || JAVA_FIXTURES_BLOCK in it }) {
@@ -379,13 +396,14 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
       if (!dryRun) {
         hostProject.buildFile.writeText(lines.joinToString("\n"))
       } else {
-        println("Enabling test fixtures on $hostType project ${hostProject.gradlePath}")
+        echo("Enabling test fixtures on $hostType project ${hostProject.gradlePath}")
       }
     }
   }
 
   @Suppress("LongMethod")
-  private fun TestFixtureTarget.moveDependencies() {
+  private fun TestFixtureTarget.moveDependencies(): Long {
+    var dependenciesMoved = 0L
     // Mapping of configuration to dependencies
     val dependencies = mutableMapOf<String, MutableSet<String>>()
     // Get dependencies from the test fixtures project
@@ -393,7 +411,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
     val dependenciesIndex = testFixtureLines.indexOfFirst { it.startsWith("dependencies {") }
     if (dependenciesIndex == -1) {
       // Nothing to do, no deps
-      return
+      return dependenciesMoved
     } else {
       val endOfDeps =
         testFixtureLines.subList(dependenciesIndex + 1, testFixtureLines.size).indexOfFirst {
@@ -419,8 +437,9 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
           // configuration(dependency)
           val trimmed = line.trim()
           if (trimmed.split(" ").size > 1) {
-            System.err.println(
-              "Could not parse dependency line '$line' in ${testFixtureProject.buildFile}"
+            echo(
+              "Could not parse dependency line '$line' in ${testFixtureProject.buildFile}",
+              err = true,
             )
             return@forEach
           }
@@ -430,7 +449,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
         }
     }
 
-    if (dependencies.isEmpty()) return
+    if (dependencies.isEmpty()) return dependenciesMoved
 
     val newDeps =
       dependencies
@@ -447,6 +466,8 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
         }
         .entries
         .flatMap { (configuration, deps) -> deps.map { "$configuration($it)" } }
+
+    dependenciesMoved += newDeps.size
 
     val hostLines = hostProject.buildFile.readLines().toMutableList()
     var hostDependenciesIndex = hostLines.indexOfFirst { it.startsWith("dependencies {") }
@@ -465,8 +486,10 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
     if (!dryRun) {
       hostProject.buildFile.writeText(hostLines.joinToString("\n"))
     } else {
-      println("Migrating test fixture dependencies to '${hostProject.gradlePath}'")
+      echo("Migrating test fixture dependencies to '${hostProject.gradlePath}'")
     }
+
+    return dependenciesMoved
   }
 
   private fun TestFixtureTarget.moveReadmeContents() {
