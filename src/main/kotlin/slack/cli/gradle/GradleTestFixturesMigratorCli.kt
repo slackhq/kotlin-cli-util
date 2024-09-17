@@ -143,14 +143,20 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
 
     val migratableProjects =
       projectByPath.values
+        .filter { it.buildFile.exists() }
         .filterNot { it.gradlePath in ignoredProjects }
         .mapNotNull { project ->
           if (
             project.gradlePath.endsWith(":test-fixtures") ||
               project.gradlePath.endsWith(":test-fixture")
           ) {
+            if (!project.buildFile.parent.resolve("src/main").exists()) {
+              echo("Test fixture project has no sources: ${project.gradlePath}", err = true)
+              return@mapNotNull null
+            }
             // Find the host project
             val hostProject = project.findHostProject(projectByPath) ?: return@mapNotNull null
+            if (!hostProject.buildFile.exists()) return@mapNotNull null
             TestFixtureTarget(hostProject, project)
           } else {
             null
@@ -288,8 +294,8 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
         .trimIndent()
 
     echo(stats)
-    projectDir.resolve("stats.txt").apply {
-      createFile()
+    projectDir.resolve("tmp/stats.txt").apply {
+      createParentDirectories()
       writeText(stats)
     }
   }
@@ -412,6 +418,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
   @Suppress("LongMethod", "ReturnCount")
   private fun TestFixtureTarget.moveDependencies(): Long {
     var dependenciesMoved = 0L
+    var hasTestOnlyDep = false
     // Mapping of configuration to dependencies
     val dependencies = mutableMapOf<String, MutableSet<String>>()
     // Get dependencies from the test fixtures project
@@ -454,7 +461,18 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
           val configuration = trimmed.substringBefore('(')
           val dependency = trimmed.removePrefix(configuration).removePrefix("(").removeSuffix(")")
           dependencies.getOrPut(configuration, ::mutableSetOf) += dependency
+          if (
+            dependency.contains("junit") ||
+              dependency.contains("truth") ||
+              dependency.contains("test")
+          ) {
+            hasTestOnlyDep = true
+          }
         }
+    }
+
+    if (!hasTestOnlyDep) {
+      echo("Test fixture project has no test deps: ${testFixtureProject.gradlePath}", err = true)
     }
 
     if (dependencies.isEmpty()) return dependenciesMoved
