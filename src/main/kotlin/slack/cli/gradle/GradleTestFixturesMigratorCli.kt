@@ -415,7 +415,7 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
     }
   }
 
-  @Suppress("LongMethod", "ReturnCount")
+  @Suppress("LongMethod", "ReturnCount", "CyclomaticComplexMethod")
   private fun TestFixtureTarget.moveDependencies(): Long {
     var dependenciesMoved = 0L
     var hasTestOnlyDep = false
