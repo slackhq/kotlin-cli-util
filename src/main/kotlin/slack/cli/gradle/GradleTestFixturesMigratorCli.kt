@@ -16,6 +16,7 @@
 package slack.cli.gradle
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.multiple
 import com.github.ajalt.clikt.parameters.options.flag
@@ -54,7 +55,7 @@ import slack.cli.skipBuildAndCacheDirs
 import slack.cli.walkEachFile
 
 /** @see DESCRIPTION */
-public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
+public class GradleTestFixturesMigratorCli : CliktCommand() {
 
   private companion object {
     const val DESCRIPTION =
@@ -72,6 +73,8 @@ public class GradleTestFixturesMigratorCli : CliktCommand(help = DESCRIPTION) {
 
     override fun create(): CliktCommand = GradleTestFixturesMigratorCli()
   }
+
+  override fun help(context: Context): String = DESCRIPTION
 
   private val projectDir by projectDirOption()
 

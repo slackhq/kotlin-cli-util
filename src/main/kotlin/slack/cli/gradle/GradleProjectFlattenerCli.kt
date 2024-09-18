@@ -16,6 +16,7 @@
 package slack.cli.gradle
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
@@ -44,7 +45,7 @@ import slack.cli.projectDirOption
  *
  * It's recommended to run `./gradlew clean` first before running this script to minimize work.
  */
-public class GradleProjectFlattenerCli : CliktCommand(help = DESCRIPTION) {
+public class GradleProjectFlattenerCli : CliktCommand() {
 
   private companion object {
     const val DESCRIPTION =
@@ -59,6 +60,8 @@ public class GradleProjectFlattenerCli : CliktCommand(help = DESCRIPTION) {
 
     override fun create(): CliktCommand = GradleProjectFlattenerCli()
   }
+
+  override fun help(context: Context): String = DESCRIPTION
 
   private val projectDir by projectDirOption()
 

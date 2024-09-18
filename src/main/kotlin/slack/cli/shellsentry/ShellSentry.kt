@@ -15,6 +15,7 @@
  */
 package slack.cli.shellsentry
 
+import com.github.ajalt.clikt.core.main
 import com.squareup.moshi.adapter
 import eu.jrie.jetbrains.kotlinshell.shell.shell
 import java.nio.file.Path
@@ -135,7 +136,7 @@ public data class ShellSentry(
 
   public companion object {
     /** Creates a new instance with the given [argv] command line args as input. */
-    public fun create(argv: Array<String>, echo: (String) -> Unit): ShellSentry {
+    public fun create(argv: List<String>, echo: (String) -> Unit): ShellSentry {
       val cli = ShellSentryCli().apply { main(listOf("--parse-only") + argv) }
       return create(cli, echo)
     }
