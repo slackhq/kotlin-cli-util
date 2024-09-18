@@ -47,6 +47,7 @@ import slack.cli.projectDirOption
 import slack.cli.skipBuildAndCacheDirs
 import slack.cli.walkEachFile
 
+@Suppress("TooManyFunctions")
 public class MergeSarifReports : CliktCommand() {
 
   @AutoService(CommandFactory::class)
