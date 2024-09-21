@@ -49,5 +49,5 @@ jobs:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SonatypeUsername }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SonatypePassword }}
         run: |
-          ./gradlew publish
+          ./gradlew publish -x dokkaHtml --no-configuration-cache
         if: success() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
