@@ -1,6 +1,22 @@
 Changelog
 =========
 
+3.0.0
+-----
+
+_2024-09-21_
+
+- **New**: Add `GradleTestFixturesMigratorCli` via `migrate-gradle-test-fixtures` command.
+- **New**: Add `multipleSet()` clikt extension.
+- **Breaking change**: Update to Clikt `5.0.0`.
+- Update to Kotlin `2.0.20`.
+- Update to Bugsnag `3.7.1`.
+- Update to Okio `3.9.1`.
+- Update to kotlinx-serialization `1.7.3`.
+- Update to xmlutil `0.90.1`.
+- Update to MoshiX `0.28.0`.
+- Update to slf4j-nop `2.0.16`.
+
 2.6.3
 -----
 
