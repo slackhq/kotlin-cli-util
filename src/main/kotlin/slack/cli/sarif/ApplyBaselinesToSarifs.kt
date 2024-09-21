@@ -16,6 +16,7 @@
 package slack.cli.sarif
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
@@ -31,7 +32,7 @@ import kotlin.system.exitProcess
 import slack.cli.CommandFactory
 
 /** A CLI that applies baselines data to a SARIF file. See the docs on [Mode] for more details. */
-public class ApplyBaselinesToSarifs : CliktCommand(help = DESCRIPTION) {
+public class ApplyBaselinesToSarifs : CliktCommand() {
 
   @AutoService(CommandFactory::class)
   public class Factory : CommandFactory {
@@ -44,6 +45,8 @@ public class ApplyBaselinesToSarifs : CliktCommand(help = DESCRIPTION) {
   private companion object {
     const val DESCRIPTION = "A CLI that applies baselines data to a SARIF file."
   }
+
+  override fun help(context: Context): String = DESCRIPTION
 
   private val baseline by
     option("--baseline", "-b", help = "The baseline SARIF file to use.")

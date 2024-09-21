@@ -15,6 +15,7 @@
  */
 package slack.cli.shellsentry
 
+import com.github.ajalt.clikt.core.parse
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test

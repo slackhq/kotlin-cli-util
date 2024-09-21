@@ -16,6 +16,7 @@
 package slack.cli.gradle
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.multiple
 import com.github.ajalt.clikt.parameters.options.option
@@ -39,7 +40,7 @@ import slack.cli.skipBuildAndCacheDirs
 import slack.cli.walkEachFile
 
 /** A CLI that verifies a given settings file has only valid projects. */
-public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
+public class GradleSettingsVerifierCli : CliktCommand() {
 
   private companion object {
     const val DESCRIPTION = "A CLI that verifies a given settings file has only valid projects."
@@ -52,6 +53,8 @@ public class GradleSettingsVerifierCli : CliktCommand(help = DESCRIPTION) {
 
     override fun create(): CliktCommand = GradleSettingsVerifierCli()
   }
+
+  override fun help(context: Context): String = DESCRIPTION
 
   private val projectDir by projectDirOption()
 

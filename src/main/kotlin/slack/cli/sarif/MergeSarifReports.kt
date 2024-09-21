@@ -16,6 +16,7 @@
 package slack.cli.sarif
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.multiple
 import com.github.ajalt.clikt.parameters.options.flag
@@ -46,7 +47,8 @@ import slack.cli.projectDirOption
 import slack.cli.skipBuildAndCacheDirs
 import slack.cli.walkEachFile
 
-public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
+@Suppress("TooManyFunctions")
+public class MergeSarifReports : CliktCommand() {
 
   @AutoService(CommandFactory::class)
   public class Factory : CommandFactory {
@@ -55,6 +57,8 @@ public class MergeSarifReports : CliktCommand(help = DESCRIPTION) {
 
     override fun create(): CliktCommand = MergeSarifReports()
   }
+
+  override fun help(context: Context): String = DESCRIPTION
 
   private val projectDir by projectDirOption()
   private val outputFile by option("--output-file").path().required()

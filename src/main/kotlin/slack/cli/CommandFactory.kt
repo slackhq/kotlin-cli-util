@@ -16,6 +16,7 @@
 package slack.cli
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.main
 import java.util.ServiceLoader
 import kotlin.system.exitProcess
 
@@ -31,7 +32,7 @@ public interface CommandFactory {
  * Primary entry point to run any command registered via [CommandFactory]. First argument should be
  * the command key and remaining arguments are passed to the created CLI.
  */
-public fun runCommand(args: Array<String>, exitOnError: Boolean = true) {
+public fun runCommand(args: List<String>, exitOnError: Boolean = true) {
   val commands = ServiceLoader.load(CommandFactory::class.java).associateBy { it.key }
 
   if (args.isEmpty()) {
@@ -46,8 +47,8 @@ public fun runCommand(args: Array<String>, exitOnError: Boolean = true) {
   val command = args[0]
   val commandArgs =
     when (args.size) {
-      1 -> emptyArray()
-      else -> args.sliceArray(1..args.lastIndex)
+      1 -> emptyList()
+      else -> args.subList(1, args.lastIndex)
     }
 
   commands[command]?.create()?.main(commandArgs) ?: error("Unknown command: '$command'")

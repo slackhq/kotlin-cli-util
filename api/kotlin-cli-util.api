@@ -47,8 +47,8 @@ public abstract interface class slack/cli/CommandFactory {
 }
 
 public final class slack/cli/CommandFactoryKt {
-	public static final fun runCommand ([Ljava/lang/String;Z)V
-	public static synthetic fun runCommand$default ([Ljava/lang/String;ZILjava/lang/Object;)V
+	public static final fun runCommand (Ljava/util/List;Z)V
+	public static synthetic fun runCommand$default (Ljava/util/List;ZILjava/lang/Object;)V
 }
 
 public final class slack/cli/Playground {
@@ -3447,6 +3447,7 @@ public final class slack/cli/buildkite/With$UnionArrayValue$Companion {
 public final class slack/cli/gradle/GradleProjectFlattenerCli : com/github/ajalt/clikt/core/CliktCommand {
 	public static final field DESCRIPTION Ljava/lang/String;
 	public fun <init> ()V
+	public fun help (Lcom/github/ajalt/clikt/core/Context;)Ljava/lang/String;
 	public fun run ()V
 }
 
@@ -3460,6 +3461,7 @@ public final class slack/cli/gradle/GradleProjectFlattenerCli$Factory : slack/cl
 public final class slack/cli/gradle/GradleSettingsVerifierCli : com/github/ajalt/clikt/core/CliktCommand {
 	public static final field DESCRIPTION Ljava/lang/String;
 	public fun <init> ()V
+	public fun help (Lcom/github/ajalt/clikt/core/Context;)Ljava/lang/String;
 	public fun run ()V
 }
 
@@ -3475,6 +3477,7 @@ public final class slack/cli/gradle/GradleTestFixturesMigratorCli : com/github/a
 	public static final field DESCRIPTION Ljava/lang/String;
 	public static final field JAVA_FIXTURES_BLOCK Ljava/lang/String;
 	public fun <init> ()V
+	public fun help (Lcom/github/ajalt/clikt/core/Context;)Ljava/lang/String;
 	public fun run ()V
 }
 
@@ -3501,6 +3504,7 @@ public final class slack/cli/lint/LintBaselineMergerCli$Factory : slack/cli/Comm
 public final class slack/cli/sarif/ApplyBaselinesToSarifs : com/github/ajalt/clikt/core/CliktCommand {
 	public static final field DESCRIPTION Ljava/lang/String;
 	public fun <init> ()V
+	public fun help (Lcom/github/ajalt/clikt/core/Context;)Ljava/lang/String;
 	public fun run ()V
 }
 
@@ -3514,6 +3518,7 @@ public final class slack/cli/sarif/ApplyBaselinesToSarifs$Factory : slack/cli/Co
 public final class slack/cli/sarif/MergeSarifReports : com/github/ajalt/clikt/core/CliktCommand {
 	public static final field DESCRIPTION Ljava/lang/String;
 	public fun <init> ()V
+	public fun help (Lcom/github/ajalt/clikt/core/Context;)Ljava/lang/String;
 	public fun run ()V
 }
 
@@ -3644,7 +3649,7 @@ public final class slack/cli/shellsentry/ShellSentry {
 }
 
 public final class slack/cli/shellsentry/ShellSentry$Companion {
-	public final fun create ([Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lslack/cli/shellsentry/ShellSentry;
+	public final fun create (Ljava/util/List;Lkotlin/jvm/functions/Function1;)Lslack/cli/shellsentry/ShellSentry;
 }
 
 public final class slack/cli/shellsentry/ShellSentryCli : com/github/ajalt/clikt/core/CliktCommand {
