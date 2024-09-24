@@ -48,7 +48,7 @@ public fun runCommand(args: List<String>, exitOnError: Boolean = true) {
   val commandArgs =
     when (args.size) {
       1 -> emptyList()
-      else -> args.subList(1, args.lastIndex)
+      else -> args.subList(1, args.size)
     }
 
   commands[command]?.create()?.main(commandArgs) ?: error("Unknown command: '$command'")
