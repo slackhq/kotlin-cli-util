@@ -1,6 +1,13 @@
 Changelog
 =========
 
+3.0.1
+-----
+
+_2024-09-24_
+
+* **Fix**: Fix wrong end index used in slicing `CommandFactory` args.
+
 3.0.0
 -----
 
