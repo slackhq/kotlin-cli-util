@@ -1,3 +1,9 @@
+# ⚠️ ARCHIVED
+
+This project has moved to a new home! https://github.com/slackhq/foundry/tree/main/tools/cli
+
+---
+
 # Kotlin CLI Utils
 
 A repo containing basic CLI utilities for Kotlin.
